@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>apa.ecosystem</groupId>
+        <artifactId>net.virtualtrain</artifactId>
+        <version>1.0.0</version>
+        <!-- <relativePath>../brilliance/pom.xml</relativePath> -->
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>brilliance-manager</artifactId>
+    <packaging>jar</packaging>
+    <name>Asia Brilliance - Business Manager</name>
+    <description>Module that contains all managers and Visual Objects to be used in the other projects.  
+    </description>
+
+	<dependencies>
+		<dependency>
+			<groupId>apa.ecosystem</groupId>
+			<artifactId>brilliance-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>apa.ecosystem</groupId>
+			<artifactId>brilliance-service-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		</dependency>
+		<!--
+		<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>5.2.5.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-base</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+		-->
+	</dependencies>
+</project>

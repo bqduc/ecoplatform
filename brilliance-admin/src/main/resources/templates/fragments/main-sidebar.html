@@ -1,0 +1,270 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+        </div>
+        <div class="pull-left info">
+            <p>Bui Quy Duc</p>
+            <a href="#"><i class="fa fa-circle text-success"></i><span th:text="#{label.online}">Online</span></a>
+        </div>
+    </div>
+    <!-- search form -->
+    <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+    </form>
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+        <li class="header" ><span th:text="#{label.mainNavigation}">MAIN NAVIGATION</span></li>
+        <li class="treeview">
+          <a href="#">
+          	<i class="fa fa-dashboard"></i> <span th:text="#{label.dashboard}">Dashboard</span>
+                <span class="pull-right-container">
+	          <i class="fa fa-angle-left pull-right"></i>
+	        	</span>
+            </a>
+            <ul class="treeview-menu">
+                <!-- <li><a href="/dashboard1" th:text="#{label.dashboard1}"><i class="fa fa-circle-o"></i> Dashboard 1</a></li> -->
+                <li><a href="/dashboard2" th:text="#{label.dashboard2}"><i class="fa fa-circle-o"></i> Dashboard 2</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+					<a href="#">
+						<i class="fa fa-user-secret"></i>
+            <span th:text="#{label.connection}">Client Connection Options</span>
+            <span class="pull-right-container">
+          <span class="label label-primary pull-right">4</span></span>
+          </a>
+          <ul class="treeview-menu">
+          	<li sec:authorize="isAuthenticated()">
+							<a href="#">
+								<i class="fa fa-circle-o"></i>
+								<span th:text="#{nav.menu.admin}">Administration</span>
+              	<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+              </a>
+              <ul class="treeview-menu">
+              	<li sec:authorize="isAuthenticated()"><a href="/module/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.modules}">Modules</span></a></li>
+              	<li sec:authorize="isAuthenticated()"><a href="/authority/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.roles}">Roles</span></a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelTwo}">Level Two</span></a></li>
+                        <li>
+                            <a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelTwo}">Level Two</span>
+                                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelThree}">Level Three</span></a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelThree}">Level Three</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+            </li>
+
+            <li><a href="/book/list"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.books}">Books</span></a></li>
+            <li><a href="/measureUnit/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.measureUnits}">Measure Units</span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/store/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.stores}">Stores/Shops</span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/client/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.clients}">Clients</span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/catalog/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.catalogs}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/department/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.departments}">Departments</span></a></li>
+            <!-- <li sec:authorize="isAuthenticated()"><a href="/department/viewSearchDepartment/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.departments}">Departments</span></a></li> -->
+            <li sec:authorize="isAuthenticated()"><a href="/category/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.categories}">Categories</span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/product/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.products}">Products</span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/project/"><i class="fa fa-circle-o"></i><span th:text="#{nav.menu.project}">Projects</span></a></li>
+		        <!--
+		        <li sec:authorize="isAuthenticated()"><a href="/book/list"><i class="fa fa-circle-o">&nbsp;<span th:text="#{label.referenceBooks}">Reference Books</span></i></a></li>
+		        <li sec:authorize="!isAuthenticated()"><a href="/auth/login"><i class="fa fa-circle-o">&nbsp;<span th:text="#{label.login}">Login</span></i></a></li>
+		        <li sec:authorize="!isAuthenticated()"><a href="/clientLogin"><i class="fa fa-circle-o">&nbsp;<span th:text="#{label.login}">Client Login</span></i></a></li>
+          	-->
+            
+          </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span th:text="#{label.control.layoutOptions}"></span>
+                <span class="pull-right-container">
+          <span class="label label-primary pull-right">4</span>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href="/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href="/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                <li><a href="/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span th:text="#{label.widgets}"></span>
+                <span class="pull-right-container">
+          <span class="label label-primary pull-right">2</span>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/pages/widgets.html"><i class="fa fa-circle-o"></i>Original</a></li>
+                <li><a href="/pages/widgets/epwidgets.html"><i class="fa fa-circle-o"></i>ep Widgets</a></li>
+            </ul>
+        </li>
+        <!-- <li>
+            <a href="/pages/widgets.html">
+                <i class="fa fa-th"></i> <span th:text="#{label.widgets}">Widgets</span>
+                <span class="pull-right-container"></span>
+            </a>
+            <a href="/pages/epwidgets.html">
+                <i class="fa fa-th"></i> <span th:text="#{label.widgets}">Widgets</span>
+                <span class="pull-right-container">
+          <small class="label pull-right bg-green">new</small>
+        </span>
+            </a>
+        </li> -->
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-pie-chart"></i>
+                <span th:text="#{label.charts}">Charts</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i><span th:text="#{label.chartJS}">ChartJS</span></a></li>
+                <li><a href="/pages/charts/morris.html"><i class="fa fa-circle-o"></i><span th:text="#{label.chartMorris}">Morris</span></a></li>
+                <li><a href="/pages/charts/flot.html"><i class="fa fa-circle-o"></i><span th:text="#{label.chartFlot}">Flot</span></a></li>
+                <li><a href="/pages/charts/inline.html"><i class="fa fa-circle-o"></i><span th:text="#{label.chartInline}">Inline charts</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span th:text="#{label.uiElements}">UI Elements</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/pages/UI/general.html"><i class="fa fa-circle-o"></i><span th:text="#{label.uiGeneral}">General</a></li>
+                <li><a href="/pages/UI/icons.html"><i class="fa fa-circle-o"></i><span th:text="#{label.uiIcons}">Icons</a></li>
+                <li><a href="/pages/UI/buttons.html"><i class="fa fa-circle-o"></i><span th:text="#{label.uiButtons}">Buttons</a></li>
+                <li><a href="/pages/UI/sliders.html"><i class="fa fa-circle-o"></i><span th:text="#{label.uiSliders}">Sliders</a></li>
+                <li><a href="/pages/UI/timeline.html"><i class="fa fa-circle-o"></i><span th:text="#{label.uiTimeline}">Timeline</a></li>
+                <li><a href="/pages/UI/modals.html"><i class="fa fa-circle-o"></i><span th:text="#{label.uiModals}">Modals</span></a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i><span th:text="#{label.forms}">Forms</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/pages/forms/general.html"><i class="fa fa-circle-o"></i><span th:text="#{label.generalElements}">General Elements</span></a></li>
+                <li><a href="/pages/forms/advanced.html"><i class="fa fa-circle-o"></i><span th:text="#{label.advancedElements}">Advanced Elements</span></a></li>
+                <li><a href="/pages/forms/advanced2.html"><i class="fa fa-circle-o"></i><span th:text="#{label.advancedElements}">Ext Advanced Elements</span></a></li>
+                <li><a href="/pages/forms/editors.html"><i class="fa fa-circle-o"></i><span th:text="#{label.editors}">Editors</span></a></li>
+                <li><a href="/pages/forms/editor.html"><i class="fa fa-circle-o"></i><span th:text="#{label.editors}">Editor</span></a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-table"></i><span th:text="#{label.tables}">Tables</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/pages/tables/simple.html"><i class="fa fa-circle-o"></i><span th:text="#{label.simpleTables}">Simple tables</span></a></li>
+                <li><a href="/pages/tables/data.html"><i class="fa fa-circle-o"></i><span th:text="#{label.dataTables}">Data tables</span></a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/calendar">
+                <i class="fa fa-calendar"></i><span th:text="#{label.calendar}">Calendar</span>
+                <span class="pull-right-container">
+          <small class="label pull-right bg-red">3</small>
+          <small class="label pull-right bg-blue">17</small>
+        </span>
+            </a>
+        </li>
+        <li>
+            <a href="/pages/mailbox/mailbox.html">
+                <i class="fa fa-envelope"></i><span th:text="#{label.mailbox}">Mailbox</span>
+                <span class="pull-right-container">
+          <small class="label pull-right bg-yellow">12</small>
+          <small class="label pull-right bg-green">16</small>
+          <small class="label pull-right bg-red">5</small>
+        </span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-folder"></i><span th:text="#{label.examples}">Examples</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/invoice.html"><i class="fa fa-circle-o"></i><span th:text="#{label.invoice}">Invoice</span></a></li>
+                <li><a href="/profile.html"><i class="fa fa-circle-o"></i><span th:text="#{label.profile}">Profile</span></a></li>
+                <!--
+                <li><a href="/login2"><i class="fa fa-circle-o"></i>Login</a></li>
+                <li sec:authorize="false eq isAuthenticated()"><a href="/auth/login"><i class="fa fa-circle-o"></i>Login</a></li>
+                 -->
+                <li><a href="/register.html"><i class="fa fa-circle-o"></i><span th:text="#{label.register}">Register</span></a></li>
+                <li><a href="/pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i><span th:text="#{label.lockScreen}">Lockscreen</span></a></li>
+                <li><a href="/pages/examples/404.html"><i class="fa fa-circle-o"></i><span th:text="#{label.error404}">404 Error</span></a></li>
+                <li><a href="/pages/examples/500.html"><i class="fa fa-circle-o"></i><span th:text="#{label.error500}">500 Error</span></a></li>
+                <li><a href="/pages/examples/blank.html"><i class="fa fa-circle-o"></i><span th:text="#{label.blankPage}">Blank Page</span></a></li>
+                <li><a href="/pages/examples/pace.html"><i class="fa fa-circle-o"></i><span th:text="#{label.pacePage}">Pace Page</span></a></li>
+                <li><a href="/pages/examples/pureBlankPage.html"><i class="fa fa-circle-o"></i><span th:text="#{label.blankPage}">Pure Blank Page</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-share"></i><span th:text="#{label.multilevels}">Multilevel</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelOne}">Level One</span></a></li>
+                <li>
+                    <a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelTwo}">Level Two</span>
+                        <span class="pull-right-container">
+              					<i class="fa fa-angle-left pull-right"></i>
+            					</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelTwo}">Level Two</span></a></li>
+                        <li>
+                            <a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelTwo}">Level Two</span>
+                                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelThree}">Level Three</span></a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelThree}">Level Three</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-circle-o"></i><span th:text="#{label.levelOne}">Level One</span></a></li>
+            </ul>
+        </li>
+        <li><a href="documentation/index.html"><i class="fa fa-book"></i><span th:text="#{label.documentation}">Documentation</span></a></li>
+        <li class="header">LABELS</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i><span th:text="#{label.important}">Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i><span th:text="#{label.warning}">Warning</span></a></li>
+        <li><a href="/pages/privacyPolicy/terms.html"><i class="fa fa-circle-o text-aqua"></i><span th:text="#{label.information}">Information</span></a></li>
+    </ul>
+</section>
+<!-- /.sidebar -->

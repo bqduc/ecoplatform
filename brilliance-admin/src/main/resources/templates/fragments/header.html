@@ -1,0 +1,305 @@
+<!-- Logo -->
+<a href="/" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini" th:utext="#{label.app.shortTitle}">PE</span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg" th:utext="#{label.app.title}"><b>P</b>latformaaaaa <b>E</b>cosystemsaaaa</span>
+</a>
+<!-- Header Navbar: style can be found in header.less -->
+<nav class="navbar navbar-static-top">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+    </a>
+
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+        	<!-- Localization part -->
+					<li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-language"></i>
+                    <span class="label label-success">3</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header"><span th:text="#{label.haveLaguages(3)}">You can touch in 3 languages</span></li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li><!-- start message -->
+                                <a href="?lang=vi">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/Vietnam.png" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{lang.vi}" id="app-locale-vietnamese">Vietnamese</h4>
+                                    <p th:text="#{label.language.vietnamese}" id="app-locale-vietnamese-info">Display all literals, text, notifications in Vietnamese language</p>
+                                </a>
+                            </li>
+                            <!-- end message -->
+                            <li>
+                                <a href="?lang=en">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/United-States.png" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{lang.en}" id="app-locale-english">English</h4>
+                                    <p th:text="#{label.language.english}" id="app-locale-english-info">Display all literals, text, notifications in English language</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?lang=fr">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/France.png" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{lang.fr}" id="app-locale-french">French</h4>
+                                    <p th:text="#{label.language.french}" id="app-locale-french-info">Display all literals, text, notifications in French language</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <!-- End of localization -->
+            <!-- Messages: style can be found in dropdown.less-->
+            <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="label label-success">4</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header"><span th:text="#{label.haveMessages(5)}">You have 4 messages</span></li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li><!-- start message -->
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{label.supportTeam}">
+                                        Support Team 
+                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                    </h4>
+                                    <p th:text="#{label.sampleMessage}">Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <!-- end message -->
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{label.adminDesignTeam}">
+                                        AdminLTE Design Team
+                                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                    </h4>
+                                    <p th:text="#{label.sampleMessage}">Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{label.developers}">
+                                        Developers
+                                        <small><i class="fa fa-clock-o"></i> Today</small>
+                                    </h4>
+                                    <p th:text="#{label.sampleMessage}">Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{label.salesDepartment}">
+                                        Sales Department
+                                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                    </h4>
+                                    <p th:text="#{label.sampleMessage}">Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{label.reviewers}">
+                                        Reviewers
+                                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                    </h4>
+                                    <p th:text="#{label.sampleMessage}">Why not buy a new awesome theme?</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#"><span th:text="#{label.seeAllMessages}">See All Messages</span></a></li>
+                </ul>
+            </li>
+            <!-- Notifications: style can be found in dropdown.less -->
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="label label-warning">10</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header"><span th:text="#{label.notifications(10)}">You have 10 notifications</span></li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-users text-aqua"></i><span th:text="#{label.todayNewMembersJoined(7)}">5 new members joined today</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-warning text-yellow"></i><span th:text="#{label.veryLongDescription}">Very long description here that may not fit into the
+                                    page and may cause design problems</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-users text-red"></i><span th:text="#{label.newMemberJoined(5)}">5 new members joined</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-shopping-cart text-green"></i><span th:text="#{label.salesMade(27)}">25 sales made</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user text-red"></i><span th:text="#{label.changedYourUsername}">You changed your username</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#" th:text="#{label.viewAllNotifications}">View all</a></li>
+                </ul>
+            </li>
+            <!-- Tasks: style can be found in dropdown.less -->
+            <li class="dropdown tasks-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-flag-o"></i>
+                    <span class="label label-danger">9</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header"><span th:text="#{label.tasks(19)}">You have 9 tasks</span></li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3 th:text="#{label.designButtons}">
+                                        Design some buttons
+                                        <small class="pull-right">20%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3 th:text="#{label.haveMessages}">
+                                        Create a nice theme
+                                        <small class="pull-right">40%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">40% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3 th:text="#{label.tasksToDo}">
+                                        Some task I need to do
+                                        <small class="pull-right">60%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <h3 th:text="#{label.makeBeautifulTransitions}">
+                                        Make beautiful transitions
+                                        <small class="pull-right">80%</small>
+                                    </h3>
+                                    <div class="progress xs">
+                                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="sr-only">80% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- end task item -->
+                        </ul>
+                    </li>
+                    <li class="footer">
+                        <a href="#"><span th:text="#{label.viewAlltasks}">View all tasks</span></a>
+                    </li>
+                </ul>
+            </li>
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="/dist/img/businessWoman.png" class="user-image" alt="User Image">
+                    <span class="hidden-xs" th:text="#{label.clientUserCorner}">Alexander Pierce</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                        <img src="/dist/img/businessWoman.png" class="img-circle" alt="User Image">
+												<p th:if="${session.authenticatedUser != null}">
+													<span th:if="${session.authenticatedUser != null}" th:text="${session.authenticatedUser.displayName}">Authenticated user</span><br>
+													<span th:if="${session.authenticatedUser != null}" th:text="#{label.user.memberSince(${session.authenticatedUser.displayIssueDate})}">Member since</span>
+												</p>
+												<p th:if="${session.authenticatedUser == null}">
+													<span th:text="#{label.anonymousClientUser}">Anonymous client user</span>
+												</p>
+                    </li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <a href="#" th:text="#{label.user.followers}">Followers</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#" th:text="#{label.user.sales}">Sales</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#" th:text="#{label.user.friends}">Friends</a>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left" sec:authorize="isAuthenticated()">
+                            <a href="/auth/myClientProfile" class="btn btn-default btn-flat" th:text="#{label.user.profile}">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="/auth/clientLogout" class="btn btn-default btn-flat" th:text="#{label.signOut}" sec:authorize="isAuthenticated()">Sign out</a>
+                            <a href="/login" class="btn btn-default btn-flat" th:text="#{label.signIn}" sec:authorize="!isAuthenticated()" th:if="${session.authenticated=='show login'}">Sign In</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+            <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>

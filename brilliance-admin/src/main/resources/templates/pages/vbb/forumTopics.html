@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+	<script th:src="@{/js/vbbFunctions.js}" type="text/javascript"></script>
+	<title th:text="#{label.forum.definitions}"></title>
+</head>
+<body>
+<section layout:fragment="header">
+	<h1 th:text="#{label.forum.definitions}"></h1>
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+    <li class="active" th:text="#{label.forum.definitions}"></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="box-tools pull-right" >
+                <a href="/forum/create" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+<!-- Search section -->
+	<form>
+		<div class="listBlock">
+			<div class="search-block">
+				&nbsp;<label for="searchPattern" th:text="Search"></label>
+				<input type="text" id="searchPattern" name="searchPattern"/>&nbsp;
+				<button id="searchButton" name="searchButton" onclick="retrieveSearchObjects()" type="button" th:text="search">Search button</button>
+			</div>
+			<!-- Results block -->
+			<div id="resultsBlock">
+			</div>
+		</div>
+	</form>
+<!-- End of search section -->
+				<div th:each="fetchedObject : ${fetchedObjects}">
+					<div class="box-group" id="accordionx">
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordionx" th:href="@{'#collapse' + ${fetchedObject.id}}">
+                      <i class="fa fa-minus"></i>
+                      </a>&nbsp;&nbsp;<span th:text="${fetchedObject.name}"></span>
+                    </h4>
+                    <a th:href="@{'/forum/' + ${fetchedObject.id}}" sec:authorize="isAuthenticated()">
+                      	<span th:text="${fetchedObject.name}"></span></a>
+                  </div>
+                  <div th:id="@{'collapse' + ${fetchedObject.id}}" class="panel-collapse collapse in">
+                    <div class="box-body">
+             	        <div class="box-body no-padding" th:unless="${#lists.isEmpty(fetchedObject.topics)}">
+							            <table class="table table-striped">
+							                <tr th:each="row : ${fetchedObject.topics}">
+							                		<td><a th:href="${'/thread/listTopicThreads/' + row.id}" th:text="${row.name}"></a></td>
+							                    <td>&nbsp;</td>
+							                    <td>&nbsp;</td>
+							                </tr>
+							            </table>
+							        </div>
+                    </div>
+                  </div>
+                </div>
+					</div>
+				</div> 
+    </div>
+</div>
+</body>
+</html>

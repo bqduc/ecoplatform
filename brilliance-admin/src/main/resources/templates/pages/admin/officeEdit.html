@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title th:text="#{label.employee.definitions}"></title>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+	
+	<!-- <script src="/js/jquery.autocomplete.min.js" th:src="@{/js/jquery.autocomplete.min.js}"></script>	 -->
+	<link rel="stylesheet" href="/static/css/main-autocomplete.css"/>
+
+	<link rel="stylesheet" th:href="@{~/static/css/bootstrap.css}"/>
+
+<!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script> -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+<script>
+$(function() {
+	$("#issueDate").datepicker({autoclose: true});
+		/* $("#address").autocomplete({
+        source : function(request, response) {
+            $.ajax({
+                url : "/department/get_tag_list",
+                data : {
+                    input : request.term
+                },
+                success : function(data) {
+                    response(data);
+                }
+            });
+        }
+    }); */
+	
+	/* $( "#parent" ).autocomplete({
+		  source: '/department/getParents',
+		  minLength: 2,
+		  delimiter: ",",
+		  success: function(response) {
+				return {
+					  //must convert json to javascript object before process
+					  suggestions: $.map($.parseJSON(response), function(item) {
+
+					      return { value: item.name, data: item.id };
+					   })
+
+					 };
+		}
+	}); */
+	
+	//attach autocomplete
+   /*  $("#tagQuery").autocomplete({    	
+    	minLength: 1,
+    	delay: 500,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON("/department/get_tag_list", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.code+"-"+item.tagName,
+                        // following property gets entered in the textbox
+                        value: item.tagName,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                //$("#tagQuery").value = $("#tagQuery").defaultValue
+                var defValue = $("#tagQuery").prop('defaultValue');
+                $("#tagQuery").val(ui.item.value);
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.value);
+                $("#tagQuery").blur();
+                return false; 
+            }
+    	}
+    	  	
+    }); */
+
+    $("#parentCode").autocomplete({    	
+    	minLength: 1,
+    	delay: 500,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON("/employee/suggest", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.code,
+                        // following property gets entered in the textbox
+                        valueName: item.name,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.valueName);
+                $("#parentCode").blur();
+                return false; 
+            }
+    	}
+    	  	
+    });
+	
+    $("#parentName").autocomplete({    	
+    	minLength: 3,
+    	delay: 200,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON("/employee/suggest", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.name,
+                        // following property gets entered in the textbox
+                        valueName: item.name,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.valueName);
+                $("#parentCode").blur();
+                return false; 
+            }
+    	}
+    	  	
+    });
+	
+	/*
+	$('#parent').autocomplete({
+		serviceUrl: '${pageContext.request.contextPath}/getParents',
+		paramName: "contextSearch",
+	  source: function(response) {
+			console.log(response);
+	  }
+
+	 });
+	*/
+});
+</script>
+</head>
+
+<body>
+	<section layout:fragment="header">
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+      <li><a href="/employee/"><i class="fa fa-dashboard"></i><span th:text="#{label.employee.definitions}"></span></a></li>
+      <li class="active" th:text="#{label.employee.definition}"></li>
+    </ol>
+	</section>
+	<div layout:fragment="content" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div>
+			<div class="nav-tabs-custom">
+	      <ul class="nav nav-tabs">
+	      	<li class="active"><a href="#detailsTabPane" data-toggle="tab"><span th:text="#{label.contact.details}"></span></a></li>
+	      	<li><a href="#activityTabPane" data-toggle="tab"><span th:text="#{label.contact.activity}"></span></a></li>
+	      	<li><a href="#casesTabPane" data-toggle="tab"><span th:text="#{label.contact.cases}"></span></a></li>
+	      	<li><a href="#ordersTabPane" data-toggle="tab"><span th:text="#{label.contact.orders}"></span></a></li>
+	      	<li><a href="#eventBookingsTabPane" data-toggle="tab"><span th:text="#{label.contact.eventBookings}"></span></a></li>
+	      	<li><a href="#subscriptionsTabPane" data-toggle="tab"><span th:text="#{label.contact.subscriptions}"></span></a></li>
+	      	<li><a href="#campainsReceivedTabPane" data-toggle="tab"><span th:text="#{label.contact.campainsReceived}"></span></a></li>
+	      	<li><a href="#appointmentsTabPane" data-toggle="tab" ><span th:text="#{label.contact.appointments}"></span></a></li>
+	        <li><a href="#hierarchyTabPane" data-toggle="tab"><span th:text="#{label.contact.hierarchy}"></span></a></li>
+	        <li><a href="#timelineTabPane" data-toggle="tab"><span th:text="#{label.contact.timeline}"></span></a></li>
+	        <li><a href="#dataAdminTabPane" data-toggle="tab"><span th:text="#{label.dataadmin.object}"></span></a></li>
+	        <li><a href="#settingsTabPane" data-toggle="tab"><span th:text="#{label.general.settings}"></span></a></li>
+          <li class="dropdown">
+             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+               <span th:text="#{label.general.more}"></span><span class="caret"></span>
+             </a>
+             <ul class="dropdown-menu">
+               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span th:text="#{label.contact.opportunities}"></span></a></li>
+               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span th:text="#{label.contact.anniversaryDates}"></span></a></li>
+               <li role="presentation" class="divider"></li>
+               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span th:text="#{label.contact.relationships}"></span></a></li>
+               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span th:text="#{label.contact.personalDetails}"></span></a></li>
+               <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span th:text="#{label.contact.companyDetails}"></span></a></li>
+             </ul>
+          </li>
+	      </ul>
+	      <div class="tab-content">
+	      	<div class="active tab-pane" id="detailsTabPane">
+	      		<form class="form-horizontal" action="#" th:object="${fetchedObject}" enctype="multipart/form-data" method="post" th:action="@{/employee/create}">
+							<div th:if="${message}">
+								<div id="message" th:class="${message.type}" th:text="${message.message}">Message area</div>
+							</div>
+								
+							<div class="form-group" th:if="${fetchedObject.id}">
+							  <div class="row">
+							  <label for="inputId" class="col-sm-2 control-label" th:text="#{label.general.id}"></label>
+								
+							  <div class="col-sm-1">
+							    <input type="text" class="form-control" id="inputId" th:field="*{id}" disabled="disabled" size="15">
+							  </div>
+							  </div>
+							</div>
+				
+				      <div class="form-group">
+							  <div class="row">
+				           <label for="inputCode" class="col-sm-2 control-label" th:text="#{label.general.code} + '*'"></label>
+				
+				           <div class="col-sm-2">
+				             <input type="text" class="form-control" id="inputCode" th:placeholder="#{label.general.code}" th:field="*{code}" required="required">
+				             <div th:if="${#fields.hasErrors('code')}" th:errors="*{code}" th:class="error"></div>
+				           </div>
+				           </div>
+				         </div>
+				         <div class="form-group">
+							  <div class="row">
+				           <label for="inputFirstName" class="col-sm-2 control-label" th:text="#{label.employee.firstName} + '*'"></label>
+				
+				           <div class="col-sm-5">
+				             <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" th:field="*{name}" th:placeholder="#{label.general.name}" />
+				             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></div>
+				           </div>
+				           </div>
+				         </div>
+				        <div class="form-group">
+							  	<div class="row">
+				          	<label for="inputLastName" class="col-sm-2 control-label" th:text="#{label.employee.lastName}"></label>
+				
+										<div class="col-sm-5">
+										  <input type="text" class="form-control" id="inputLastName" name="lastName" th:field="*{lastName}" th:placeholder="#{label.employee.lastName}">
+										  <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="error"></div>
+										</div>
+									</div>
+								</div>
+				        <div class="form-group">
+							  	<div class="row">
+				          	<label for="inputEmail" class="col-sm-2 control-label" th:text="#{label.employee.email}"></label>
+				
+										<div class="col-sm-5">
+										  <input type="text" class="form-control" id="inputEmail" name="email" th:field="*{email}" th:placeholder="#{label.employee.email}">
+										  <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="error"></div>
+										</div>
+									</div>
+								</div>
+				        <div class="form-group">
+							  	<div class="row">
+										<label for="dateOfBirth" class="col-sm-2 control-label" th:text="#{label.contact.dateOfBirth}"></label>
+				
+					          <div class="col-sm-2">
+					          	<input type="text" class="form-control"  id="dateOfBirth" th:field="*{dateOfBirth}" th:placeholder="#{label.contact.dateOfBirth}" />
+					           	<div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Date of birth error</div>
+					        	</div>
+				         	</div>
+				        </div>
+				        <div class="form-group">
+							  	<div class="row">
+										<label for="issueDate" class="col-sm-2 control-label" th:text="#{label.general.issueDate}"></label>
+				
+					          <div class="col-sm-2">
+					          	<input type="text" class="form-control"  id="issueDate" th:field="*{issueDate}" th:placeholder="#{label.general.issueDate}" />
+					           	<div th:if="${#fields.hasErrors('issueDate')}" th:errors="*{issueDate}">Date of issue error</div>
+					        	</div>
+				         	</div>
+				        </div>
+				         
+				        <div class="form-group">
+							  	<div class="row">
+					          <label for="objectDescription" class="col-sm-2 control-label" th:text="#{label.general.description}"></label>
+				
+					          <div class="col-sm-9">
+					            <textarea class="ckeditor" rows="8" id="objectDescription" th:field="*{description}"></textarea>
+											<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+					          </div>
+				          </div>
+				         </div>
+				         <div class="form-group">
+				         		<div class="col-sm-offset-2 col-sm-10">
+											<button type="submit" class="btn btn-success " th:text="#{label.general.save}" style="width: 100px"></button>				
+											<button type="reset" class="btn btn-primary" th:text="#{label.general.reset}" style="width: 100px"></button>
+											<a id="btnCancel" href="browse.html" th:href="@{/employee/}" class="btn btn-primary" th:text="#{label.general.cancel}" style="width: 100px"></a>
+				         		</div>
+				         </div>
+								<input type="hidden" th:field="*{id}" /> 
+							</form>
+	      	</div>
+	      	<div class="tab-pane" id="activityTabPane">
+	      		<label>Contact Activities</label>
+	      	</div>
+	      	<div class="tab-pane" id="casesTabPane">
+	      		<label>Contact Cases</label>
+	      	</div>
+	      	<div class="tab-pane" id="ordersTabPane">
+	      		<label>Contact Orders</label>
+	      	</div>
+	      	<div class="tab-pane" id="eventBookingsTabPane">
+	      		<label>Contact Event Bookings</label>
+	      	</div>
+	      	<div class="tab-pane" id="subscriptionsTabPane">
+	      		<label>Contact Subscriptions</label>
+	      	</div>
+	      	<div class="tab-pane" id="campainsReceivedTabPane">
+	      		<label>Contact Campaigns Received</label>
+	      	</div>
+	      	<div class="tab-pane" id="appointmentsTabPane">
+	      		<label>Contact Appointments</label>
+	      	</div>
+	      	<div class="tab-pane" id="hierarchyTabPane">
+	      		<label>Contact Hierarchy</label>
+	      	</div>
+	      	<div class="tab-pane" id="timelineTabPane">
+	      		<label>Timeline</label>
+	      	</div>
+	      	<div class="tab-pane" id="dataAdminTabPane">
+                <!-- The timeline -->
+                <ul class="timeline timeline-inverse">
+                  <!-- timeline time label -->
+                  <li class="time-label">
+                        <span class="bg-red">
+                          19 Dec. 2017
+                        </span>
+                  </li>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-envelope bg-blue"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i>12:45</span>
+
+                      <h3 class="timeline-header"><a href="#">Support Team</a> deploy employee data</h3>
+
+                      <div class="timeline-body">
+                        This shows the extended capabilities of Data Security
+												 incorporated into a more complex network environment. It shows an
+												 extra Data Security server and several additional agents deployed
+												 for businesses with larger transaction volumes and numbers of users. Such a deployment is su
+												ited for large organizations with multiple Internet egress points distributed over 
+												multiple geographical locations. Very large deployments can have multiple Data Security servers and protectors.
+                      </div>
+                      <div class="timeline-footer">
+                      	<a class="btn btn-primary btn-xs" href="/dataAdmin/importEmployees">Perform</a>
+                      	<a class="btn btn-primary btn-xs" href="/dataAdmin/importCatalogues">Import Catalogs</a>
+                        <a class="btn btn-primary btn-xs">Read more</a>
+                        <a class="btn btn-danger btn-xs">Delete</a>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-envelope bg-blue"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+
+                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+
+                      <div class="timeline-body">
+                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                        quora plaxo ideeli hulu weebly balihoo...
+                      </div>
+                      <div class="timeline-footer">
+                        <a class="btn btn-primary btn-xs">Read more</a>
+                        <a class="btn btn-danger btn-xs">Delete</a>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-user bg-aqua"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+
+                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
+                      </h3>
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-comments bg-yellow"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+
+                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+
+                      <div class="timeline-body">
+                        Take me to your leader!
+                        Switzerland is small and neutral!
+                        We are more like Germany, ambitious and misunderstood!
+                      </div>
+                      <div class="timeline-footer">
+                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+                  <!-- timeline time label -->
+                  <li class="time-label">
+                        <span class="bg-green">
+                          3 Jan. 2014
+                        </span>
+                  </li>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-camera bg-purple"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+
+                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+
+                      <div class="timeline-body">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                      </div>
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+                  <li>
+                    <i class="fa fa-clock-o bg-gray"></i>
+                  </li>
+                </ul>
+              </div>
+          <div class="tab-pane" id="settingsTabPane">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-1 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-1 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+	      </div>
+			</div>
+		</div>
+		<br/>
+			<!-- <h3 th:text="${fetchedObject.id == null}? #{label.department.definition(#{label.general.addNew}, #{label.object.department})}:#{label.department.definition(#{label.general.updateExisting}, #{label.object.department})}" ></h3> -->
+	</div>
+</body>
+</html>

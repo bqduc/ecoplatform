@@ -1,0 +1,78 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+  <title th:text="#{label.info.units}"></title>
+	<script th:src="@{/js/functions.js}" type="text/javascript"></script>
+</head>
+<body>
+<section layout:fragment="header">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+    <li class="active" th:text="#{label.info.units}"></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.filters}"></h3>
+		  <div class="box-tools pull-right">
+	    	<a href="/measureUnit/create" type="button" class="btn btn-box-tool"sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa fa-plus-circle"></i></a>
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+		<form>
+			<div class="listBlock">
+				<div class="search-block">
+					<label for="searchSurname" th:text="#{label.general.filterValue}"></label>
+					<input type="text" id="searchPattern" name="searchPattern"/>
+				</div>
+			</div>
+		</form>
+		</div>
+		<div class="box-footer clearfix">
+		  <a href="javascript:retrieveMeasureUnits()" class="btn btn-sm btn-info btn-flat pull-left" style="width: 80px"><span th:text="#{label.general.search}"></span></a>
+		</div>
+	</div>
+
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.results}"></h3>
+		  <div class="box-tools pull-right">
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<div id="resultsBlock">
+				<!-- Results block -->
+			</div>
+			<div class="box">
+				<div th:fragment="resultsList" th:unless="${#lists.isEmpty(fetchedObjects)}" class="box-body no-padding">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th th:text="#{label.general.code}"></th>
+								<th th:text="#{label.general.name}"></th>
+								<th th:text="#{label.general.parent}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="row : ${fetchedObjects}">
+						    <td><a th:href="${'/measureUnit/' + row.id}" th:text="${row.code}"></a></td>
+						    <td><a th:href="${'/measureUnit/' + row.id}" th:text="${row.name}"></a></td>
+						    <td><a th:if="${row.parent}" th:href="${'/measureUnit/' + row.parent.id}" th:text="${row.parent.name}"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+###############################################################################
+# Copyright 2016, Julius Krah                                                 #
+# by the @authors tag. See the LICENCE in the distribution for a              #
+# full listing of individual contributors.                                    #
+#                                                                             #
+# Licensed under the Apache License, Version 2.0 (the "License");             #
+# you may not use this file except in compliance with the License.            #
+# You may obtain a copy of the License at                                     #
+# http://www.apache.org/licenses/LICENSE-2.0                                  #
+# Unless required by applicable law or agreed to in writing, software         #
+# distributed under the License is distributed on an "AS IS" BASIS,           #
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    #
+# See the License for the specific language governing permissions and         #
+# limitations under the License.                                              #
+###############################################################################
+
+
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: spring-profiles
+  thymeleaf:
+    mode: HTML
+    cache: false
+  jackson:
+    serialization:
+      indent-output: true
+      write-dates-as-timestamps: false
+      # write-date-timestamps-as-nanoseconds: false
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+      initialization-fail-fast: true
+      connection-timeout: 250
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      use-new-id-generator-mappings: true
+      ddl-auto: none
+  messages:
+    basename: i18n/messages
+    fallback-to-system-locale: true
+  h2:
+    console:
+      enabled: false
+  mail:
+    default-encoding: UTF-8
+    host: smtp.mail.yahoo.com
+    password: null
+    port: 587
+    protocol: smtp
+    username: null
+    properties:
+      mail.smtp.auth: true
+  mvc:
+    locale: en_US
+security:
+  basic:
+    enabled: false
+  user:
+    name: julius
+    password: password
+logging:
+  level:
+    root: info
+    com.jipasoft: debug
+    com.zaxxer.hikari: warn

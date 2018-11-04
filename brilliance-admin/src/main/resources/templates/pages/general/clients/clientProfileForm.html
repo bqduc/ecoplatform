@@ -1,0 +1,66 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title th:text="#{label.client.definition}"></title>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+<script>
+$(function() {
+	$("#publicationDate").datepicker({autoclose: true});
+});
+</script>
+</head>
+<body>
+<section layout:fragment="header">
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+        <li><a href="/client/"><i class="fa fa-dashboard"></i><span th:text="#{label.client.definitions}">Clients</span></a></li>
+        <li class="active"><span th:text="#{label.client.definition}">Client definition</span></li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <form data-toggle="validator" role="form" th:object="${fetchedObject}" th:action="@{/client/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="form-group">
+                    <label for="Firstname" th:text="#{label.client.firstName}"></label>
+                    <input type="text" required="true" class="form-control" th:field="*{fullName}" id="firstname" />
+                </div>
+                <div class="form-group">
+                    <label for="Lastname" th:text="#{label.client.address}"></label>
+                    <input type="text" required="true" class="form-control" th:field="*{address}" id="address" />
+                </div>
+                <div class="form-group">
+                    <label for="phones" th:text="#{label.client.phones}"></label>
+                    <input type="text" required="true" class="form-control" th:field="*{phones}" id="phones" />
+                </div>
+                <div class="form-group">
+                  <label for="publicationDate" th:text="#{label.general.issueDate}"></label>
+                	<input type="text" name="publicationDate" 
+						        th:value="${fetchedObject.issueDate}?${#dates.format(fetchedObject.issueDate, 'dd/MM/yyyy')}:''" 
+						        placeholder="dd/MM/yyyy" id="publicationDate"/>
+                </div>
+                <div class="form-group">
+                    <label for="description" th:text="#{label.general.description}"></label>
+                    <textarea cols="60" rows="5" id="notes" th:field="*{notes}" class="ckeditor"></textarea>
+                </div>
+            </div>
+            <div class="box-footer">
+							<a sec:authorize="hasRole('ROLE_ADMIN')" id="save" th:href="@{/client/save/{id}(id=${fetchedObject.id})}" class="btn btn-primary" th:text="#{label.general.save}"></a> 
+							<a sec:authorize="hasRole('ROLE_ADMIN')" id="delete" href="#" th:href="@{/client/delete/{id}(id=${fetchedObject.id})}" class="btn btn-danger" th:text="#{label.general.delete}"></a>
+							<a id="cancel" href="#" th:href="@{/client/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
+            </div>
+        </form>
+    </div>
+</div>
+	<!-- Bootstrap-Datepicker JavaScript-->
+	<!-- As shown here {@link http://eternicode.github.io/bootstrap-datepicker/?markup=input&format=yyyy-mm-dd&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&keyboardNavigation=on&forceParse=on#sandbox} -->
+	<script src="/static/js/bootstrap-datepicker.min.js" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+</body>
+</html>

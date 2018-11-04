@@ -1,0 +1,129 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+	<title th:text="#{label.office.definitions}"></title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+	<script th:src="@{/js/app/admin/officeUtility.js}" type="text/javascript"></script>
+</head>
+<body>
+<!-- <c:set var="representante"><spring:message code="label.office.object"/></c:set> -->
+<section layout:fragment="header">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+    <li class="active" th:text="#{label.office.definitions}"></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+	<div class="box box-solid collapsed-box">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.filters}"></h3>
+		  <div class="box-tools pull-right">
+	    	<a href="/office/create" type="button" class="btn btn-box-tool"sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa fa-plus-circle"></i></a>
+	    	<a href="/office/import" type="button" class="btn btn-box-tool"sec:authorize="hasRole('ROLE_ADMIN')" th:attr="title=#{label.general.import}"><i class="fa fa-arrow-left"></i></a>
+	    	<a href="/office/export" type="button" class="btn btn-box-tool"sec:authorize="hasRole('ROLE_ADMIN')" th:attr="title=#{label.general.export}"><i class="fa fa-arrow-right"></i></a>
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<form id="search-form">
+				<div class="row">
+					<div class="col-sm-2 form-group">
+						<label for="search-term"th:text="#{label.search.keyword}">Search term:</label>
+						<input type="text" class="form-control" id="search-term" th:placeholder="#{label.search.keyword}"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="search-location" th:text="#{label.search.location}">Location:</label>
+						<input type="text" class="form-control" id="search-location" th:placeholder="#{label.search.location}"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="search-distance" th:text="#{label.search.distance}">Distance:</label>
+						<input type="number" class="form-control" id="search-distance" th:placeholder="#{label.search.distance}"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="search-platform" th:text="#{label.search.platform}">Platform:</label>
+						<select class="form-control" id="search-platform">
+							<option value="newsletter">newsletter</option>
+							<option value="jobs">jobs</option>
+						</select>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="page" th:text="#{label.search.page}">Page:</label>
+						<input type="number" class="form-control" id="page" placeholder="Page" value="0"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="page-size" th:text="#{label.search.pageSize}">Page size:</label>
+						<input type="number" class="form-control" id="page-size" placeholder="Page size" value="20"></input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 form-group">
+						<label for="from-date" th:text="#{label.search.fromDate}"></label>
+						<input type="text" id="from-date" class="form-control" th:placeholder="#{label.search.fromDate}"/>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="to-date" th:text="#{label.search.toDate}"></label>
+						<input type="text" id="to-date" class="form-control" th:placeholder="#{label.search.toDate}"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-1">
+						<input type="submit" class="form-control btn btn-sm btn-info btn-flat" id="searchObjects" th:attr="value=#{label.general.search}"></input>
+		  			<!-- <a href="javascript:searchCatalogues()" class="btn btn-sm btn-info btn-flat pull-left" style="width: 80px"><span th:text="#{label.general.search}"></span></a> -->
+					</div>
+				</div>
+			</form>
+		
+		</div>
+	</div>
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.results}"></h3>
+		  <div class="box-tools pull-right">
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<table id="bizObjectsTable" class="display">
+       <thead>
+            <tr>
+                <th th:text="#{label.general.id}"></th>
+								<th th:text="#{label.general.code}"></th>
+								<th th:text="#{label.office.firstName}"></th>
+                <th th:text="#{label.office.lastName}"></th>
+                <th th:text="#{label.office.email}"></th>
+                <th th:text="#{label.office.phone}"></th>
+                <th th:text="#{label.office.phone}"></th>
+                <th th:text="#{label.office.status}"></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th th:text="#{label.general.id}"></th>
+								<th th:text="#{label.general.code}"></th>
+								<th th:text="#{label.office.firstName}"></th>
+                <th th:text="#{label.office.lastName}"></th>
+                <th th:text="#{label.office.email}"></th>
+                <th th:text="#{label.office.phone}"></th>
+                <th th:text="#{label.office.phone}"></th>
+                <th th:text="#{label.office.status}"></th>
+            </tr>
+        </tfoot>
+    </table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

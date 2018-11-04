@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+	<script th:src="@{/js/vbbFunctions.js}" type="text/javascript"></script>
+	<title th:text="#{label.thread.definitions}"></title>
+</head>
+<body>
+<section layout:fragment="header">
+	<h1 th:text="#{label.thread.definitions}"></h1>
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+    <li><a href="/forum"><span th:text="#{label.forum.definitions}"></span></a></li>
+    <li class="active" th:text="#{label.thread.definitions}"></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+	<div class="box">
+  	<div class="box-header with-border">
+	    <h3 class="box-title"><span th:text="#{label.thread.definitions}"></span></h3>
+	    <div class="box-tools pull-right" sec:authorize="hasRole('ROLE_ADMIN')">
+	        <a href="/forum/create" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+	        <br clear="all" />
+	    </div>
+    </div>
+<!-- Search section -->
+	<form>
+		<div class="listBlock">
+			<div class="search-block">
+				<label for="searchPattern" th:text="search"></label>&nbsp;
+				<input type="text" id="searchPattern" name="searchPattern"/>&nbsp;
+				<button id="searchButton" name="searchButton" onclick="retrieveSearchObjects()" type="button" th:text="search"></button>
+			</div>
+			<!-- Results block -->
+			<div id="resultsBlock">
+			</div>
+		</div>
+	</form>
+<!-- End of search section -->
+	<div class="box-body no-padding" th:unless="${#lists.isEmpty(fetchedObjects)}">
+		<table class="table table-striped">
+	  	<tr>
+				<th th:text="#{label.vbb.priority}"></th>
+				<th th:text="#{label.vbb.threadStarter} + ': ' + ${fetchedMasterObject.name}"></th>
+	    	<th th:text="#{label.vbb.rating}"></th>
+				<th th:text="#{label.vbb.lastPost}"></th>
+				<th th:text="#{label.vbb.replies}"></th>
+				<th th:text="#{label.vbb.views}"></th>
+	    </tr>
+	        <tr th:each="row : ${fetchedObjects}">
+	            <td><img src="/dist/img/vbb/thread.gif" class="user-image" alt="User Image"></td>
+	            <td><a th:href="${'/forum/' + row.id}" th:text="${row.name}"></a></td>
+	            <td align="right"><img th:src="${'/dist/img/vbb/rating_' + row.rating + '.gif'}" class="user-image" alt="User Image"></td>
+	            <td><a th:href="${'/forum/' + row.id}" th:text="${row.lastPost}?${#dates.format(row.lastPost, 'dd/MM/yyyy')}:''"></a></td>
+	            <td><a th:href="${'/forum/' + row.id}" th:text="${#numbers.formatInteger(row.replies, 3, 'COMMA')}"></a></td>
+	            <td><a th:href="${'/forum/' + row.id}" th:text="${#numbers.formatInteger(row.views, 3, 'COMMA')}"></a></td>
+	        </tr>
+	    </table>
+	</div>
+        <div th:if="${endIndex gt 0}">
+	        <div class="box-footer clearfix">
+	            <ul class="pagination pagination-sm no-margin pull-right">
+	                <li><a href="/forum/list/1"><span th:text="#{label.general.first}">First</span></a></li>
+	                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+	                    <a th:href="${'/forum/list/' + p}" th:text="${p}"></a>
+	                </li>
+	                <li><a th:href="${'/forum/list/' + endIndex}"><span th:text="#{label.general.last}">Last</span></a></li>
+	            </ul>
+	        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

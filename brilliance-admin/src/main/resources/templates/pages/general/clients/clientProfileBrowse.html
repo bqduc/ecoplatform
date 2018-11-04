@@ -1,0 +1,125 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+    <title th:text="#{label.client.definitions}"></title>
+    <script th:src="@{/app-js/clientProfileScripts.js}" type="text/javascript"></script>
+</head>
+<body>
+<section layout:fragment="header">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+    <li class="active" th:text="#{label.client.definitions}"></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.filters}"></h3>
+		  <div class="box-tools pull-right">
+	    	<a href="/client/create" type="button" class="btn btn-box-tool"sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa fa-plus-circle"></i></a>
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+		<form>
+			<div class="listBlock">
+				<div class="search-block">
+					<label for="searchPattern" th:text="#{label.general.filterValue}"></label>
+					<input type="text" id="searchPattern" name="searchPattern"/>
+				</div>
+			</div>
+		</form>
+		</div>
+		<div class="box-footer clearfix">
+		  <a href="javascript:performSearchObjects()" class="btn btn-sm btn-info btn-flat pull-left" style="width: 80px"><span th:text="#{label.general.search}"></span></a>
+		</div>
+	</div>
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.results}"></h3>
+		  <div class="box-tools pull-right">
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<div id="resultsBlock">
+				<!-- Results block -->
+			</div>
+			<div class="box">
+				<div th:fragment="resultsList" th:unless="${#lists.isEmpty(fetchedObjects)}" class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th th:text="#{label.general.id}"></th>
+                    <th th:text="#{label.general.name}"></th>
+                    <th th:text="#{label.client.address}"></th>
+                    <th th:text="#{label.client.phones}"></th>
+                    <th th:text="#{label.general.action}"></th>
+                </tr>
+                <tr th:each="row : ${fetchedObjects}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.fullName}"></td>
+                    <td th:text="${row.address}"></td>
+                    <td th:text="${row.phones}"></td>
+                    <td>
+                        <a th:href="${'/client/edit/' + row.id}"><span th:text="#{label.general.edit}"></span></a> -
+                        <a th:href="${'/client/delete/' + row.id}"><span th:text="#{label.general.delete}"></span></a>
+                    </td>
+                </tr>
+            </table>
+			<!-- Pagination -->
+        <div th:if="${endIndex gt 0}">
+	        <div class="box-footer clearfix">
+	            <ul class="pagination pagination-sm no-margin pull-right">
+	                <li><a href="/client/list/1"><span th:text="#{label.general.first}"></span></a></li>
+	                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+	                    <a th:href="${'/client/list/' + p}" th:text="${p}"></a>
+	                </li>
+	                <li><a th:href="${'/client/list/' + endIndex}"><span th:text="#{label.general.last}"></span></a></li>
+	            </ul>
+	        </div>
+        </div>
+			<!-- End of pagination -->
+				</div>
+			</div>
+			    <!-- Pagination Bar -->
+	    <!-- <div th:fragment='paginationbar'>
+	        <div>
+	            <ul class='pagination pagination-centered'>
+	                <li th:class="${page.firstPage}?'disabled':''">
+	                <span th:if='${page.firstPage}'>← First</span>
+	                <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>← First</a>
+	                </li>
+	                <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+	                <span th:if='${not page.hasPreviousPage}'>«</span>
+	                <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}' title='Go to previous page'>«</a>
+	                </li>
+	                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+	                <span th:if='${item.current}' th:text='${item.number}'>1</span>
+	                <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span th:text='${item.number}'>1</span></a>
+	                </li>
+	                <li th:class="${page.hasNextPage}? '' : 'disabled'">
+	                <span th:if='${not page.hasNextPage}'>»</span>
+	                <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}' title='Go to next page'>»</a>
+	                </li>
+	                <li th:class="${page.lastPage}? 'disabled' : ''">
+	                <span th:if='${page.lastPage}'>Last →</span>
+	                <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last →</a>
+	                </li>
+	            </ul>
+	        </div>
+			</div> -->
+			<!--End of pagination-->
+
+
+
+			
+		</div>
+	</div>
+</div>
+</body>
+</html>

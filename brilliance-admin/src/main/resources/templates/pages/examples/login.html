@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+  <title>AdminLTE 2 | Log in</title>
+	<meta th:name="_csrf" th:content="${_csrf.token}">
+	<meta th:name="_csrf_header" th:content="${_csrf.headerName}">
+</head>
+<body class="hold-transition login-page">
+<section layout:fragment="header">
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Login</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+	<form class="form-narrow form-horizontal" method="post" th:method="post" th:action="@{/auth/login}" th:fragment="loginForm">
+		<fieldset>
+			<legend th:text="#{user.login}">Login</legend>
+			<th:block th:if="${param.error}">
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">&times;</button>
+					<span th:inline="text">[[#{login.error}]]</span>
+				</div>
+			</th:block>
+			<th:block th:if="${param.logout}">
+				<div class="alert alert-success alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">&times;</button>
+					<span th:inline="text">[[#{login.logout}]]</span>
+				</div>
+			</th:block>
+			<div class="form-group">
+				<label for="username" class="col-lg-2 control-label"
+					th:text="#{user.login}">Login</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="username"
+						name="login" placeholder="Username"
+						th:placeholder="#{user.login}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-lg-2 control-label"
+					th:text="#{user.password}">Password</label>
+				<div class="col-lg-10">
+					<input type="password" class="form-control" id="password"
+						name="password" placeholder="Password"
+						th:placeholder="#{user.password}" data-toggle="tooltip"
+						data-th-title="#{data.title}" data-trigger="manual" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-lg-10">
+					<button type="submit" class="btn btn-default"
+						th:text="#{home.login}">Signin</button>
+				</div>
+			</div>
+		</fieldset>
+<!-- 
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+      </div>
+ -->      
+    </form>
+</div>
+</body>
+</html>

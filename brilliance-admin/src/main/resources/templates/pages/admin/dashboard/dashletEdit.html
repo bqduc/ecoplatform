@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title th:text="#{label.dashlet.definitions}"></title>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+	
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+
+<script>
+function moveElements(srcElId, destElId, moveAll){
+	var currentOption;
+
+	var srcOptionSpec = '#' + srcElId + ' option';
+	var options = $(srcOptionSpec);
+
+	if (true==moveAll||'true'==moveAll){
+		$.map(options ,function(optionEl) {
+			currentOption = new Option(optionEl.text, optionEl.value);
+			$(currentOption).html(optionEl.text);
+			$('#' + destElId).append(currentOption);
+		});
+
+		$('#' + srcElId).empty();
+	} else {
+		$('#' + srcElId + ' :selected').each(function(i, el) {
+			currentOption = new Option($(el).text(), $(el).val());
+			$(currentOption).html($(el).text());
+			$('#' + destElId).append(currentOption);
+		});
+		
+		$('#' + srcElId).find('option:selected').remove().end();
+	}
+}
+
+function selectAllAccessedAuthorities(){
+	$('#accessedAuthorities option').prop('selected', true);
+}
+
+function assignSelectedAuthorities(){
+	moveElements('authorities', 'accessedAuthorities', false);
+}
+
+function assignAllAuthorities(){
+	moveElements('authorities', 'accessedAuthorities', true);
+}
+
+function revokeSelectedAuthorities(){
+	moveElements('accessedAuthorities', 'authorities', false);
+}
+
+function revokeAllAuthorities(){
+	moveElements('accessedAuthorities', 'authorities', true);
+}
+
+$(function() {
+	var bizUserUri = "/adminDashlet/";
+    $("#parentCode").autocomplete({    	
+    	minLength: 3,
+    	delay: 500,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON(bizUserUri + "suggest", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.code,
+                        // following property gets entered in the textbox
+                        valueName: item.name,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.valueName);
+                $("#parentCode").blur();
+                return false; 
+            }
+    	}
+    	  	
+    });
+	
+    $("#parentName").autocomplete({    	
+    	minLength: 3,
+    	delay: 200,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON(bizUserUri + "suggest", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.name,
+                        // following property gets entered in the textbox
+                        valueName: item.name,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.valueName);
+                $("#parentCode").blur();
+                return false; 
+            }
+    	}
+    	  	
+    });
+});
+</script>
+</head>
+
+<body>
+	<section layout:fragment="header">
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+      <li><a href="/adminDashlet/"><i class="fa fa-dashboard"></i><span th:text="#{label.dashlet.definitions}"></span></a></li>
+      <li class="active" th:text="#{label.dashlet.definition}"></li>
+    </ol>
+	</section>
+	<div layout:fragment="content" sec:authorize="hasRole('ROLE_ADMIN')">
+		<form action="#" th:object="${fetchedObject}" enctype="multipart/form-data" method="post" th:action="@{/adminDashlet/create}">
+			<div th:if="${message}">
+				<div id="message" th:class="${message.type}" th:text="${message.message}">Message area</div>
+			</div>
+
+      <div class="form-group">
+			  <div class="row">
+           <label for="inputCode" class="col-sm-2 control-label" th:text="#{label.general.code} + '*'"></label>
+
+           <div class="col-sm-2">
+             <input type="text" class="form-control" readonly="readonly" id="inputName" th:placeholder="#{label.general.code}" th:field="*{serial}" required="required">
+             <div th:if="${#fields.hasErrors('serial')}" th:errors="*{serial}" th:class="error"></div>
+           </div>
+           </div>
+         </div>
+         <div class="form-group">
+				  <div class="row">
+	           <label for="inputEmail" class="col-sm-2 control-label" th:text="#{label.general.name} + '*'"></label>
+	
+	           <div class="col-sm-5">
+	             <input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:placeholder="#{label.general.name}" />
+	             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></div>
+	           </div>
+           </div>
+         </div>
+         <div class="form-group">
+				  <div class="row">
+	           <label for="inputName" class="col-sm-2 control-label" th:text="#{label.general.translatedName}"></label>
+	
+	           <div class="col-sm-5">
+	             <input type="text" class="form-control" id="translatedName" name="translatedName" th:field="*{translatedName}" th:placeholder="#{label.general.translatedName}">
+	             <div th:if="${#fields.hasErrors('translatedName')}" th:errors="*{translatedName}" th:class="error"></div>
+	           </div>
+           </div>
+         </div>
+				<div class="form-group">
+				  <div class="row">
+	        	<label for="inputAccessURI" class="col-sm-2 control-label" th:text="#{label.dashlet.accessUri} + '*'"></label>
+
+	          <div class="col-sm-5">
+							<input type="text" class="form-control" id="inputAccessURI" name="inputAccessURI" th:field="*{accessURI}" th:placeholder="#{label.dashlet.accessUri}" />
+							<div th:if="${#fields.hasErrors('accessURI')}" th:errors="*{accessURI}" th:class="error"></div>
+	        	</div>
+        	</div>
+        </div>
+				<div class="form-group">
+				  <div class="row">
+	        	<label for="inputAccessURI" class="col-sm-2 control-label" th:text="#{label.dashlet.accessRole} + '*'"></label>
+
+	          <div class="col-sm-7">
+	          	<table style="width: 100%">
+	          		<tr>
+	          			<td style="width: 48%">
+										<!-- <select class="form-control" th:field="*{{accessedAuthorities}}" multiple="multiple" id="accessedAuthorities" name="accessedAuthorities">
+										    <option th:each="part : ${accessedAuthorities}"
+										            th:value="${part.id}"
+										            th:text="${part.displayName}">Part name</option>
+										</select> -->	
+										<select class="form-control" th:field="*{{accessedAuthorities}}" multiple="multiple"  id="accessedAuthorities" name="accessedAuthorities">
+										    <option th:each="part : *{accessedAuthorities}"
+										            th:value="${{part}}"
+										            th:text="${part.displayName}">Part name</option>
+										</select>
+	          			</td>
+	          			<td align="center">
+	          				<i class="fa fa-angle-left" onclick="javascript:assignSelectedAuthorities();"></i><br>
+	          				<i class="fa fa-angle-double-left" onclick="javascript:assignAllAuthorities();"></i><br>
+	          				<i class="fa fa-angle-right" onclick="javascript:revokeSelectedAuthorities();"></i><br>
+	          				<i class="fa fa-angle-double-right" onclick="javascript:revokeAllAuthorities();"></i>
+									</td>
+	          			<td style="width: 48%">
+										<select class="form-control" multiple="multiple" id="authorities" name="authorities">
+										    <option th:each="part : ${authorityList}"
+										            th:value="${part.id}"
+										            th:text="${part.displayName}">Part name</option>
+										</select>							
+									</td>
+	          		</tr>
+	          	</table>
+							
+							<!-- <div class="checkbox" th:each="au : ${authorityList}">
+                <label> 
+                    <input type="checkbox" id="present" name="present" 
+                    th:text="${au.displayName}" th:value="${au.id}"></input> 
+                    <input type="hidden" id="au" name="au" th:value="${au.id}" />
+                </label>
+            	</div> -->
+	        	</div>
+        	</div>
+        </div>
+				<div class="form-group">
+				  <div class="row">
+				    <label for="nom" class="col-sm-2 control-label" th:text="#{label.general.parent}"><span class="important">*</span></label>
+				    <div class="col-sm-2">
+				        <input type="text" name="parentCode" id="parentCode" class="form-control" th:placeholder="#{label.general.parentCode}" th:field="*{parent.serial}" >
+				    </div>
+				    <div class="col-sm-5">
+				      <input type="text" name="parentName" id="parentName" class="form-control" th:placeholder="#{label.general.parentName}" th:field="*{parent.name}" dir="ltr">
+				    </div>
+			    </div>
+				</div>
+        <div class="form-group">
+				  <div class="row">
+				    <label for="nom" class="col-sm-2 control-label" th:text="#{label.dashlet.dashboard}"><span class="important">*</span></label>
+				    <div class="col-sm-2">
+				        <input type="text" name="dashboardCode" id="dashboardCode" class="form-control" th:placeholder="#{label.dashboard.serial}" th:field="*{dashboard.serial}" >
+				    </div>
+				    <div class="col-sm-5">
+				      <input type="text" name="dashboardName" id="dashboardName" class="form-control" th:placeholder="#{label.dashboard.name}" th:field="*{dashboard.name}" dir="ltr">
+				    </div>
+			    </div>
+				</div>
+        <div class="form-group">
+			  	<div class="row">
+	          <label for="inputSkills" class="col-sm-2 control-label" th:text="#{label.general.description}"></label>
+
+	          <div class="col-sm-10">
+	            <textarea class="ckeditor" cols="60" rows="8" id="objectDescription" th:field="*{notes}"></textarea>
+							<div th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></div>
+	          </div>
+          </div>
+         </div>
+         <!-- <div class="form-group">
+           <div class="col-sm-offset-2 col-sm-10">
+             <div class="checkbox">
+               <label>
+                 <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+               </label>
+             </div>
+           </div>
+         </div> -->
+         <div class="form-group">
+         		<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-success " th:text="#{label.general.save}" style="width: 100px" onclick="javascript:selectAllAccessedAuthorities()"></button>				
+							<button type="reset" class="btn btn-primary" th:text="#{label.general.reset}" style="width: 100px"></button>
+							<a id="btnCancel" href="browse.html" th:href="@{/adminDashlet/}" class="btn btn-primary" th:text="#{label.general.cancel}" style="width: 100px"></a>
+         		</div>
+         </div>
+
+				<input type="hidden" th:field="*{id}" /> 
+				<input type="hidden" th:field="*{dashboard.id}" >
+			</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Spring IO Platform is the parent of the generated application to
+    be able to use Spring Boot and all its default configuration -->
+		
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<!--version>1.5.9.RELEASE</version-->
+		<version>1.5.11.RELEASE</version>
+		<relativePath/> 
+	</parent>
+
+		<groupId>apa.ecosystem</groupId>
+		<artifactId>net.virtualtrain</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Parent - Pom Aggregator</name>
+    <description>This pom is a maven aggregator that contains all application modules. Also, include all
+    common dependencies needed by more than one module. Dependencies are defined without version because
+    this project has defined Spring IO Platform as parent.</description>
+
+    <properties>
+			<maven.test.skip>true</maven.test.skip>
+			<hibernate.version>5.2.5.Final</hibernate.version>
+			<java.version>1.8</java.version>
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+			<thymeleaf-layout-dialect.version>2.1.2</thymeleaf-layout-dialect.version>
+			<thymeleaf-extras-springsecurity4.version>3.0.1.RELEASE</thymeleaf-extras-springsecurity4.version>
+
+			<commons-io.version>2.4</commons-io.version>
+			<commons-lang.version>2.6</commons-lang.version>
+
+
+			<jodatime-thymeleaf.version>1.3</jodatime-thymeleaf.version>
+			<thymeleaf-extras.version>2.1.2.RELEASE</thymeleaf-extras.version>
+
+			<start-class>net.vpx.config.Application</start-class>
+
+			<spring.social.version>1.1.0.BUILD-SNAPSHOT</spring.social.version>
+			<spring.social.facebook.version>1.1.0.BUILD-SNAPSHOT</spring.social.facebook.version>
+			<spring.social.twitter.version>1.1.0.BUILD-SNAPSHOT</spring.social.twitter.version>
+    </properties>
+
+    <modules>
+			<module>powertrain-core</module>
+			<module>powertrain-common</module>
+      <module>powertrain-model</module>
+      <module>powertrain-repository</module>
+      <module>powertrain-service-api</module>
+      <module>powertrain-service-impl</module>
+			<module>powertrain-webadmin</module>
+    </modules>
+
+	<dependencies>
+      <!-- Spring Boot dependencies -->
+      <dependency>
+			  <groupId>org.springframework.boot</groupId>
+			  <artifactId>spring-boot-starter</artifactId>
+		  </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+		  <dependency>
+			  <groupId>org.springframework.boot</groupId>
+			  <artifactId>spring-boot-starter-test</artifactId>
+			  <scope>test</scope>
+		  </dependency>
+			
+			<dependency>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+					<version>1.1.0.Final</version>
+			</dependency>
+			
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-base</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
+

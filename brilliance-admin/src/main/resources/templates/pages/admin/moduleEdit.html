@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title th:text="#{label.role.definition}"></title>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+	
+	<script src="/static/js/jquery.autocomplete.min.js" th:src="@{/js/jquery.autocomplete.min.js}"></script>	
+	<link rel="stylesheet" href="/static/css/main-autocomplete.css"/>
+
+<!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+<script>
+$(function() {
+    $("#parentName").autocomplete({    	
+    	minLength: 3,
+    	delay: 200,
+    	//define callback to format results 
+      source: function (request, response) {
+      	$.getJSON("/module/suggest", request, function(result) {                
+        	response($.map(result, function(item) {                	
+          	return {
+                      // following property gets displayed in drop down
+                      label: item.name,
+                      // following property gets entered in the textbox
+                      valueName: item.name,
+                      valueId: item.id
+                    }
+                }));
+        	}); 
+    	},
+
+    	//define select handler
+    	select : function(event, ui) {
+	      if (ui.item) {       
+	      	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+	      	event.preventDefault();
+	        $("#parentId").val(ui.item.valueId);
+	        $("#parentName").val(ui.item.valueName);
+	        return false; 
+	      }
+    	}
+    	  	
+    });
+});
+</script>
+</head>
+
+<body>
+	<section layout:fragment="header">
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+      <li><a href="/module/"><i class="fa fa-dashboard"></i><span th:text="#{label.role.definitions}"></span></a></li>
+      <li class="active" th:text="#{label.module.definition}"></li>
+    </ol>
+	</section>
+	<div layout:fragment="content" sec:authorize="hasRole('ROLE_ADMIN')">
+			<form action="#" th:object="${fetchedObject}" enctype="multipart/form-data" method="post" th:action="@{/module/create}">
+				<div th:if="${message}">
+					<div id="message" th:class="${message.type}" th:text="${message.message}">Message area</div>
+				</div>
+				<table border="0" style="width: 100%">
+					<tr th:if="${fetchedObject.id}">
+						<td><label for="id" th:text="#{label.general.id}"></label></td>
+						<td><input type="text" id="id" size="15" th:field="*{id}" disabled="disabled" /></td>
+					</tr>
+					<tr>
+						<td><label for="name" th:text="#{label.general.name} + '*'"></label></td>
+						<td><input type="text" id="name" size="60" th:field="*{name}" required="required" />
+							<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="objectDescription" th:text="#{label.general.description} + '*'"></label></td>
+						<td><textarea class="ckeditor" cols="60" rows="8" id="objectDescription" th:field="*{description}"></textarea>
+							<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="parentName" th:text="#{label.general.parent}"></label></td>
+						<td>
+							<input name="parentName" id="parentName" th:field="*{parent.name}" class="ui-autocomplete-input ui-corner-all" style="width: 250px" />
+							<input name="parentId" id="parentId" th:field="*{parent.id}" type="hidden"/>
+						</td>
+					</tr>
+				</table>
+
+				<input type="hidden" th:field="*{id}" /> 
+				<br/>
+				<div>
+					<button type="submit" class="btn btn-success " th:text="#{label.general.save}"></button>				
+					<button type="reset" class="btn btn-primary" th:text="#{label.general.reset}"></button>
+					<a id="btnCancel" th:href="@{/module/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
+				</div>
+			</form>
+	</div>
+</body>
+</html>

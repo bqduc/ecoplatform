@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title th:utext="#{label.app.pureTitle}"></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css"/>
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+    <a href="/" th:utext="#{label.app.title}"></a>
+  	</div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg" th:text="#{label.register.signinPrompt}">Sign in to start your session</p>
+
+        <div th:if="${param.error}">
+            <div class="callout callout-danger">
+                <p th:utext="#{label.loginError}">Login failed, please try again./Usuário ou senha estão inválidos.</p>
+            </div>
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" name="username" th:placeholder="#{label.placeholder.login}"/>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" name="password" th:placeholder="#{label.placeholder.password}"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" th:text="#{label.signIn}">Login</button>
+                </div>
+		        <div class="col-xs-5" style="margin-top: -4px; text-align: right;">
+		          <a href="#" th:text="#{label.register.forgotPassword}">I forgot my password</a>
+		    			<a href="/auth/register" class="text-center" th:text="#{label.register.header}">Register a new membership</a>
+		        </div>
+            </div>
+        </form>
+        <div class="box">
+            <div class="box-body">
+              <a class="btn btn-block btn-social btn-facebook">
+                <i class="fa fa-facebook"></i><span th:text="#{label.socialSignUp('Facebook')}"></span>
+              </a>
+              <a class="btn btn-block btn-social btn-flickr">
+                <i class="fa fa-flickr"></i><span th:text="#{label.socialSignUp('Flickr')}"></span>
+              </a>
+              <a class="btn btn-block btn-social btn-google">
+                <i class="fa fa-google-plus"></i><span th:text="#{label.socialSignUp('Google')}"></span>
+              </a>
+              <a class="btn btn-block btn-social btn-yahoo">
+                <i class="fa fa-yahoo"></i><span th:text="#{label.socialSignUp('Yahoo')}"></span>
+              </a>
+              <a class="btn btn-block btn-social btn-instagram">
+                <i class="fa fa-instagram"></i><span th:text="#{label.socialSignUp('Instagram')}"></span>
+              </a>
+              <a class="btn btn-block btn-social btn-linkedin">
+                <i class="fa fa-linkedin"></i><span th:text="#{label.socialSignUp('LinkedIn')}"></span> 
+              </a>
+              <a class="btn btn-block btn-social btn-twitter">
+                <i class="fa fa-twitter"></i><span th:text="#{label.socialSignUp('Twitter')}"></span>
+              </a>
+              <!-- <br>
+              <div class="text-center">
+                <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-social-icon btn-flickr"><i class="fa fa-flickr"></i></a>
+                <a class="btn btn-social-icon btn-yahoo"><i class="fa fa-yahoo"></i></a>
+                <a class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+                <a class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+              </div> -->
+            </div>
+          </div>
+    </div>
+</div>
+
+<!-- jQuery 2.2.0 -->
+<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+</body>
+</html>

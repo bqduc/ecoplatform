@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+    <title th:text="#{label.role.definitions}"></title>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    
+</head>
+<body>
+<section layout:fragment="header">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+    <li class="active" th:text="#{label.role.definitions}">Modules</li>
+  </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"><span th:text="#{label.role.definitions}">List of modules</span></h3>
+            <div class="box-tools pull-right" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/authority/create" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+
+        <div class="box-body no-padding" th:unless="${#lists.isEmpty(fetchedObjects)}">
+            <table class="table table-striped">
+                <tr>
+                    <th th:text="#{label.general.id}"></th>
+										<th th:text="#{label.general.name}"></th>
+                    <th th:text="#{label.general.parent}"></th>
+                    <th th:text="#{label.general.description}"></th>
+                </tr>
+                <tr th:each="row : ${fetchedObjects}">
+                    <td><a th:href="${'/authority/' + row.id}" th:text="${row.id}"></a></td>
+                    <td><a th:href="${'/authority/' + row.id}" th:text="${row.name}"></a></td>
+                    <td><a th:if="${row.parent}" th:href="${'/authority/' + row.parent.id}" th:text="${row.parent.name}"></a></td>
+                    <td th:utext="${row.description}"></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${endIndex gt 0}">
+	        <div class="box-footer clearfix">
+	            <ul class="pagination pagination-sm no-margin pull-right">
+	                <li><a href="/authority/list/1"><span th:text="#{label.general.first}">First</span></a></li>
+	                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+	                    <a th:href="${'/authority/list/' + p}" th:text="${p}"></a>
+	                </li>
+	                <li><a th:href="${'/authority/list/' + endIndex}"><span th:text="#{label.general.last}">Last</span></a></li>
+	            </ul>
+	        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

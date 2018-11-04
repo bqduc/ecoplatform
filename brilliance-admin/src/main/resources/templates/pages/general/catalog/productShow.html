@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Main style sheet -->
+<link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" media="screen" />
+
+<!-- Bootstrap 3 -->
+<link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" media="screen" />
+	<title th:text="#{label.product.definition}"></title>
+</head>
+<body>
+	<section layout:fragment="header">
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+      <li><a href="/product/"><i class="fa fa-dashboard"></i><span th:text="#{label.product.definitions}">Products</span></a></li>
+      <li class="active" th:text="#{label.product.definition}">Product</li>
+    </ol>
+	</section>
+<div layout:fragment="content">
+
+		<div id="message" th:if="${message}" th:class="${message.type}" 
+			th:text="${message.message}">Message area</div>
+		
+		<table class="table table-striped table-bordered">
+			<tr>
+				<td th:text="#{label.general.id}"></td>
+				<td th:text="${fetchedObject.id}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.code}"></td>
+				<td th:text="${fetchedObject.code}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.name}"></td>
+				<td th:text="${fetchedObject.name}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.longName}"></td>
+				<td th:text="${fetchedObject.longName}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.issueDate}"></td>
+				<td th:text="${fetchedObject.issueDate}?${#dates.format(fetchedObject.issueDate, 'dd/MM/yyyy')}:'N/A'"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.photo}"></td>
+				<td><img th:src="@{/product/photo/{id}(id=${fetchedObject.id})}"></img></td>
+			</tr>
+			<!-- <tr>
+				<td th:text="#{label.general.code}"></td>
+				<td th:text="${fetchedObject.license}"></td>
+			</tr>
+			-->
+			<tr>
+				<td th:text="#{label.product.category}"></td>
+				<td th:text="${fetchedObject.category != null} ? ${fetchedObject.category.name} : 'N/A'"></td>
+			</tr> 
+			<tr>
+				<td th:text="#{label.general.description}"></td>
+				<td th:utext="${fetchedObject.description}"></td>
+			</tr>
+		</table>
+
+		<div>
+			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnEdit" th:href="@{/product/update/{id}(id=${fetchedObject.id})}" class="btn btn-primary" th:text="#{label.general.edit}"></a> 
+			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnDelete" href="#" th:href="@{/product/delete/{id}(id=${fetchedObject.id})}" class="btn btn-danger" th:text="#{label.general.delete}"></a>
+			<a id="btnCancel" th:href="@{/product/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
+		</div>
+	</div>
+</body>
+</html>
+
+

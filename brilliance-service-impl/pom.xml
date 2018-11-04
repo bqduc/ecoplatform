@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>apa.ecosystem</groupId>
+        <artifactId>net.virtualtrain</artifactId>
+        <version>1.0.0</version>
+        <!-- <relativePath>../brilliance/pom.xml</relativePath> -->
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>brilliance-service-impl</artifactId>
+    <packaging>jar</packaging>
+    <name>Asia Brilliance - Service Implementation</name>
+    <description>Module that contains services implementation defined on Service API module. Depends of Repository Module and Service API Module.</description>    
+
+    <dependencies>
+
+      <!-- Project Modules -->
+      <dependency>
+        <groupId>apa.ecosystem</groupId>
+        <artifactId>brilliance-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>apa.ecosystem</groupId>
+        <artifactId>brilliance-repository</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>apa.ecosystem</groupId>
+        <artifactId>brilliance-service-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.16</version>
+		</dependency>
+		<dependency>
+			<groupId>com.monitorjbl</groupId>
+			<artifactId>xlsx-streamer</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>22.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.inject</groupId>
+		    <artifactId>javax.inject</artifactId>
+		    <version>1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+	<!--	
+    <dependency>
+        <groupId>io.springlets</groupId>
+        <artifactId>springlets-boot-starter-data-jpa</artifactId>
+        <version>1.1.0.RELEASE</version>
+    </dependency>
+    <dependency>
+        <groupId>com.querydsl</groupId>
+        <artifactId>querydsl-jpa</artifactId>
+        <version>4.0.7</version>
+    </dependency>
+    -->		
+
+	</dependencies>
+
+    
+</project>

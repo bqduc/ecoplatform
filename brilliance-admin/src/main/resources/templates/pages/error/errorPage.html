@@ -1,0 +1,73 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+	<title th:text="#{label.error.page}"></title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<section layout:fragment="header">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+    <li><i class="active"></i><span th:text="#{label.error.definitions}"></span></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+	<div class="box box-info">
+		<div class="box-body">
+			<table class="display" style="width: 100%">
+       <thead>
+            <tr>
+                <th th:text="#{label.error.type}"></th>
+				<th th:text="#{label.error.value}"></th>
+            </tr>
+        </thead>
+        <tbody>
+		    <tr>
+		        <td th:text="#{label.error.date}"></td>
+		        <td th:text="${timestamp}"/>
+		    </tr>
+		    <tr>
+		        <td th:text="#{label.error.path}">Path</td>
+		        <td th:text="${path}"/>
+		    </tr>
+		    <tr>
+		        <td th:text="#{label.error.code}">Error</td>
+		        <td th:text="${error}"/>
+		    </tr>
+		    <tr>
+		        <td th:text="#{label.error.status}">Status</td>
+		        <td th:text="${status}"/>
+		    </tr>
+		    <tr>
+		        <td th:text="#{label.error.message}">Message</td>
+		        <td th:text="${message}"/>
+		    </tr>
+		    <tr>
+		        <td th:text="#{label.error.exception}">Exception</td>
+		        <td th:text="${exception}"/>
+		    </tr>
+		    <tr>
+		        <td th:text="#{label.error.trace}">Trace</td>
+		        <td>
+		            <pre th:text="${trace}"></pre>
+		        </td>
+		    </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+            	<th th:text="#{label.error.footer}" colspan="2" style="text-align: center;"></th>
+            </tr>
+        </tfoot>
+    </table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

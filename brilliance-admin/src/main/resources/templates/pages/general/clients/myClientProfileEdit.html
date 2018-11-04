@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title th:text="#{label.client.definition}">Cadastro de Cliente</title>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+<script>
+$(function() {
+	$("#publicationDate").datepicker({autoclose: true});
+});
+</script>
+</head>
+<body>
+<section layout:fragment="header">
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+        <li><a href="/client/"><i class="fa fa-dashboard"></i><span th:text="#{label.client.definitions}">Clients</span></a></li>
+        <li class="active"><span th:text="#{label.client.definition}">Client definition</span></li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"><span th:text="#{label.client.definition}">Client definition</span></h3>
+            <div class="box-tools pull-right">
+                <a href="/client/" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${fetchedObject}" th:action="@{/client/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="form-group">
+                    <label for="Firstname" th:text="#{label.client.firstName}">Nome</label>
+                    <input type="text" required="true" class="form-control" th:field="*{fullName}" id="firstname" />
+                </div>
+                <div class="form-group">
+                    <label for="Lastname" th:text="#{label.client.lastName}">Sobrenome</label>
+                    <input type="text" required="true" class="form-control" th:field="*{address}" id="address" />
+                </div>
+                <div class="form-group">
+                    <label for="phones" th:text="#{label.client.phones}">Sobrenome</label>
+                    <input type="text" required="true" class="form-control" th:field="*{phones}" id="phones" />
+                </div>
+                <div class="form-group">
+                  <label for="publicationDate" th:text="#{label.general.issueDate}">Issue date</label>
+                	<input type="text" name="publicationDate" 
+						        th:value="${fetchedObject.issueDate}?${#dates.format(fetchedObject.issueDate, 'dd/MM/yyyy')}:''" 
+						        placeholder="dd/MM/yyyy" id="publicationDate"/>
+                </div>
+                <div class="form-group">
+                    <label for="address" th:text="#{label.client.address}">Address</label>
+                    <textarea cols="60" rows="8" id="description" th:field="*{address}" class="ckeditor">Book Description textarea</textarea>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="cancel" class="btn btn-primary">Back to list</button>
+            </div>
+        </form>
+    </div>
+</div>
+	<!-- Bootstrap-Datepicker JavaScript-->
+	<!-- As shown here {@link http://eternicode.github.io/bootstrap-datepicker/?markup=input&format=yyyy-mm-dd&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&keyboardNavigation=on&forceParse=on#sandbox} -->
+	<script src="/static/js/bootstrap-datepicker.min.js" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+</body>
+</html>

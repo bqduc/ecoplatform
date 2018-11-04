@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+	<title th:text="#{label.systems.page}"></title>
+</head>
+<body>
+<section layout:fragment="header">
+	<h1 th:text="#{label.system.definition}"></h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><span th:text="#{label.system.definition}"></span></li>
+      </ol>
+</section>
+<div layout:fragment="content">
+	<h1>System configuration content page goes there!!</h1>
+	<!-- Main content page goes here. Small boxes (Stat box)......... -->
+</div>
+</body>
+</html>

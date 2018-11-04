@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+	<title th:text="#{label.page.terms}"></title>
+</head>
+<body>
+<section layout:fragment="header">
+	<h1 th:text="#{label.page.terms}"></h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Terms Page</li>
+      </ol>
+</section>
+<div layout:fragment="content">
+	
+	<!-- Main content page goes here. Small boxes (Stat box)......... -->
+</div>
+</body>
+</html>

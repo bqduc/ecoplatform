@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title th:text="#{label.book.pageTitle}">Reference books</title>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="../../static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="../../static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+<script>
+$(function() {
+	$("#issueDate").datepicker({autoclose: true});
+});
+</script>
+</head>
+<body>
+<section layout:fragment="header">
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+        <li><a href="/book/list"><i class="fa fa-dashboard"></i><span th:text="#{label.books}">Books</span></a></li>
+        <li class="active" th:text="#{label.book}">Book</li>
+      </ol>
+</section>
+<div layout:fragment="content">
+	<!-- Main content page goes here. Small boxes (Stat box)......... -->
+	<div class="container">
+			<h3 th:text="(${fetchedObject.id == null}? #{label.general.addNew}: #{label.general.updateExisting})+' ' +#{label.object.book}">Form Title</h3>
+
+			<form action="#" th:object="${fetchedObject}" enctype="multipart/form-data" method="post" th:action="@{/create}" class="form-horizontal">
+				<div th:if="${message}">
+					<div id="message" th:class="${message.type}" th:text="${message.message}">Message area</div>
+				</div>
+				<div class="box-body">
+                <div class="form-group">
+                  <label for="objectId" class="col-sm-2 control-label" th:text="#{label.general.id}">Object Id</label>
+
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" id="objectId" readonly="readonly" th:field="*{id}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label" th:text="#{label.general.name} + '*'">Name</label>
+
+                  <div class="col-sm-6">
+										<input type="text" id="name" size="15" th:field="*{name}" required="required" class="form-control" />
+										<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label" th:text="#{label.book.publisher}">publisher</label>
+
+                  <div class="col-sm-6">
+										<input type="text" id="publisher" size="15" th:field="*{publisher}" class="form-control" />
+										<div th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}" th:class="error"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="dateOfPublication" class="col-sm-2 control-label" th:text="#{label.book.printPublicationDate}">Password</label>
+
+                  <div class="col-sm-2">
+										<input type="text" name="dateOfPublication" id="dateOfPublication" class="form-control"
+					        		th:value="${fetchedObject.dateOfPublication}?${#dates.format(fetchedObject.dateOfPublication, 'dd/MM/yyyy')}:''" 
+					        		placeholder="dd/MM/yyyy" />
+										<div th:if="${#fields.hasErrors('dateOfPublication')}" th:errors="*{dateOfPublication}">Date of Publication Error</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="file" class="col-sm-2 control-label" th:text="#{label.book.photo}">Photo</label>
+
+                  <div class="col-sm-8">
+										<input name="file" type="file" style="color:transparent;"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="name" class="col-sm-2 control-label" th:text="#{label.general.description}">Description</label>
+
+                  <div class="col-sm-10">
+										<textarea class="ckeditor" cols="60" rows="8" id="bookDescription" th:field="*{description}">Book Description textarea</textarea>
+										<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Book Description Error</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                	<label for="name" class="col-sm-2 control-label"></label>
+                	<div class="col-sm-6">
+											<button type="submit" class="btn btn-success " th:text="#{label.general.save}"></button>				
+											<button type="reset" class="btn btn-primary" th:text="#{label.general.reset}"></button>
+											<a id="btnCancel" href="browse.html" th:href="@{/book/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
+                	</div>
+                </div>
+              </div>
+				<input type="hidden" th:field="*{id}" /> <input type="hidden" th:field="*{version}" />
+	
+			</form>
+	</div>
+</div>
+</body>
+</html>

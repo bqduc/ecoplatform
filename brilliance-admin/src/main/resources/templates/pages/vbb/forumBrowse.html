@@ -1,0 +1,126 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sd="http://www.thymeleaf.org/spring-data" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="layout">
+<head>
+	<script src="/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+	<script src="/plugins/jQueryUI/jquery-ui.min.js" th:src="@{/plugins/jQueryUI/jquery-ui.min.js}"></script>
+	<script th:src="@{/js/vbbFunctions.js}" type="text/javascript"></script>
+	<title th:text="#{label.forum.definitions}"></title>
+</head>
+<body>
+<section layout:fragment="header">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}">Home</span></a></li>
+    <li class="active" th:text="#{label.forum.definitions}"></li>
+  </ol>
+</section>
+<div layout:fragment="content">
+	<div class="box box-solid collapsed-box">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.filters}"></h3>
+		  <div class="box-tools pull-right">
+	    	<a href="/catalog/create" type="button" class="btn btn-box-tool" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa fa-plus-circle"></i></a>
+	    	<a href="/forum/import" type="button" class="btn btn-box-tool" sec:authorize="hasRole('ROLE_ADMIN')" th:attr="title=#{label.general.import}"><i class="fa fa-arrow-left"></i></a>
+	    	<a href="/catalog/export" type="button" class="btn btn-box-tool" sec:authorize="hasRole('ROLE_ADMIN')" th:attr="title=#{label.general.export}"><i class="fa fa-arrow-right"></i></a>
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+		  </div>
+		</div>
+		<div class="box-body"style="display: none;" >
+			<form id="search-form">
+				<div class="row">
+					<div class="col-sm-2 form-group">
+						<label for="search-term" th:text="#{label.search.keyword}">Search term:</label>
+						<input type="text" class="form-control" id="search-term" th:placeholder="#{label.search.keyword}"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="search-location" th:text="#{label.search.location}">Location:</label>
+						<input type="text" class="form-control" id="search-location" th:placeholder="#{label.search.location}"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="search-distance" th:text="#{label.search.distance}">Distance:</label>
+						<input type="number" class="form-control" id="search-distance" th:placeholder="#{label.search.distance}"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="search-platform" th:text="#{label.search.platform}">Platform:</label>
+						<select class="form-control" id="search-platform">
+							<option value="newsletter">newsletter</option>
+							<option value="jobs">jobs</option>
+						</select>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="page" th:text="#{label.search.page}">Page:</label>
+						<input type="number" class="form-control" id="page" placeholder="Page" value="0"></input>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="page-size" th:text="#{label.search.pageSize}">Page size:</label>
+						<input type="number" class="form-control" id="page-size" placeholder="Page size" value="20"></input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2 form-group">
+						<label for="from-date" th:text="#{label.search.fromDate}"></label>
+						<input type="text" id="from-date" class="form-control" th:placeholder="#{label.search.fromDate}"/>
+					</div>
+					<div class="col-sm-2 form-group">
+						<label for="to-date" th:text="#{label.search.toDate}"></label>
+						<input type="text" id="to-date" class="form-control" th:placeholder="#{label.search.toDate}"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-1">
+						<input type="submit" class="form-control btn btn-sm btn-info btn-flat" id="submit" th:attr="value=#{label.general.search}"></input>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="box box-info">
+		<div class="box-header with-border">
+		  <h3 class="box-title" th:text="#{label.general.results}"></h3>
+		  <div class="box-tools pull-right">
+		    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		  </div>
+		</div>
+		<div class="box-body">
+			<table class="table table-striped">
+         		<tr>
+            	<th width="5%" th:text="#{label.vbb.priority}">&nbsp;</th>
+             		<th width="66%" th:text="#{label.vbb.forum}"></th>
+                 <th width="15%" th:text="#{label.vbb.lastPost}"></th>
+                 <th width="7%" th:text="#{label.vbb.threads}"></th>
+                 <th width="7%" th:text="#{label.vbb.posts}"></th>
+             </tr>
+         </table>
+				<div th:each="fetchedObject : ${fetchedObjects}">
+					<div class="box-group" id="accordionx">
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordionx" th:href="@{'#collapse' + ${fetchedObject.id}}">
+                      <i class="fa fa-minus"></i>
+                      </a>&nbsp;&nbsp;<span th:text="${fetchedObject.name}"></span>
+                    </h4>
+                  </div>
+                  <div th:id="@{'collapse' + ${fetchedObject.id}}" class="panel-collapse collapse in">
+             	        <div class="box-body no-padding" th:unless="${#lists.isEmpty(fetchedObject.topics)}">
+							            <table class="table table-striped">
+							                <tr th:each="row : ${fetchedObject.topics}">
+							                    <td width="2%"><img src="/dist/img/vbb/forum_link.gif" class="user-image" alt="User Image"></td>
+							                		<td width="83%"><a th:href="${'/thread/listTopicThreads/' + row.id}" th:text="${row.name}"></a></td>
+							                    <td width="5%">&nbsp;</td>
+							                    <td width="5%" align="right" th:text="${@uiUtility.formatNumber(row.threads)}"></td>
+							                    <td width="5%" align="right" th:text="${@uiUtility.formatNumber(row.posts)}"></td>
+							                </tr>
+							            </table>
+							        </div>
+                  </div>
+                </div>
+					</div>
+				</div> 
+		</div>
+	</div>
+</div>
+</body>
+</html>
