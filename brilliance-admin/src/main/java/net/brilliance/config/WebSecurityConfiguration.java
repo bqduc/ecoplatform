@@ -129,6 +129,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   	unauthorizedMatchers.add("/thread/**");
   	unauthorizedMatchers.add("/post/**");
   	unauthorizedMatchers.add("/topic/**");
+
+  	unauthorizedMatchers.add("/auth/register/**");
+  	
   	return unauthorizedMatchers.toArray(new String[0]);
   }
 

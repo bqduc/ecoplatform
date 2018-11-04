@@ -45,17 +45,7 @@ public class GlobalDataRepositoryManager extends BaseComponent{
 
 	public void initializeGlobalData() throws EcosysException {
 		cLog.info("Enter GlobalDataRepositoryManager::initializeGlobalData()");
-		try {
-			performInitializeGlobalMasterData();
-
-			/*globalServicesHelper.initDefaultComponents();
-			cLog.info("Master default master data for authentication is initialized!");
-
-			systemSequenceManager.initializeSystemSequence();
-			cLog.info("System sequence initialize is done!");*/
-		} catch (Exception e) {
-			cLog.error("Initialized start up component. ", e);
-		}
+		performInitializeGlobalMasterData();
 		cLog.info("Leave GlobalDataRepositoryManager::initializeGlobalData()");
 	}
 
