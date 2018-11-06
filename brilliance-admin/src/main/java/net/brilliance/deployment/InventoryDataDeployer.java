@@ -14,12 +14,14 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import net.brilliance.common.CommonConstants;
 import net.brilliance.common.ListUtility;
 import net.brilliance.common.logging.GlobalLoggerFactory;
 import net.brilliance.domain.entity.config.Item;
 import net.brilliance.domain.entity.config.Language;
 import net.brilliance.domain.entity.config.LocalizedItem;
 import net.brilliance.exceptions.EcosysException;
+import net.brilliance.framework.component.ComponentBase;
 import net.brilliance.model.Bucket;
 import net.brilliance.service.api.invt.ItemService;
 import net.brilliance.service.api.invt.LanguageService;
@@ -30,7 +32,12 @@ import net.brilliance.service.helper.GlobalDataServiceHelper;
  *
  */
 @Component
-public class InventoryDataDeployer {
+public class InventoryDataDeployer extends ComponentBase {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5439039826537936572L;
+
 	private final Logger logger = GlobalLoggerFactory.getLogger(this.getClass());
 
 	@Inject
@@ -48,9 +55,18 @@ public class InventoryDataDeployer {
 	private final static String[] sheetIds = new String[]{"languages", "items", "localized-items"}; 
 
 	@Async
-	public void deployData(Object arg){
-		Bucket bucket = loadConfigurationData("/config/data/data-catalog.xlsx", sheetIds, new int[]{1, 1, 1});
-		deployDataItems(bucket);
+	public void asyncDeployConstructionData(Map<?, ?> contextParams) throws EcosysException {
+		System.out.println("Enter InventoryDataDeployer::asyncDeployConstructionData .....");
+		for (int idx = 0; idx < CommonConstants.DUMMY_LARGE_COUNT; idx++){
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Enter InventoryDataDeployer::asyncDeployConstructionData .....");
+		/*Bucket bucket = loadConfigurationData("/config/data/data-catalog.xlsx", sheetIds, new int[]{1, 1, 1});
+		deployDataItems(bucket);*/
 	}
 
 	private void deployLanguages(List<List<String>> languageStrings){
@@ -109,7 +125,7 @@ public class InventoryDataDeployer {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void deployDataItems(Bucket dataBucket){
+	protected void deployDataItems(Bucket dataBucket){
 		logger.info("Enter deploy default inventory items.");
 		try {
 			//Deploy languages

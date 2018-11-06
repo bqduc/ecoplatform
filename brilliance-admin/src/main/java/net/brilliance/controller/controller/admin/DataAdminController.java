@@ -107,7 +107,7 @@ public class DataAdminController extends BaseController {
 		cLog.info("Enter deploy data.");
 		try {
 			doListLocalizedItems();
-			inventoryDataDeployer.deployData(null);
+			inventoryDataDeployer.asyncDeployConstructionData(null);
 		} catch (Exception e) {
 			cLog.error(CommonUtility.getStackTrace(e));
 		}

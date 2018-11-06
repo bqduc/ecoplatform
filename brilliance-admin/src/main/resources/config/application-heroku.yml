@@ -43,7 +43,7 @@ spring:
     email: ducbuiquy@gmail.com
 
 quartz:
-  enabled: false
+  enabled: true
 
 spring.user.email: ducbuiquy@gmail.com
 

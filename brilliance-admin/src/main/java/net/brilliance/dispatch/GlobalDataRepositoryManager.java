@@ -22,7 +22,7 @@ import net.brilliance.service.api.config.ConfigurationService;
  *
  */
 @Component
-public class GlobalDataRepositoryManager extends BaseComponent{
+public class GlobalDataRepositoryManager extends BaseComponent {
 	/**
 	 * 
 	 */

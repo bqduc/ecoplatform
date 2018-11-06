@@ -16,7 +16,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.domain.entity.admin.Authority;
-import net.brilliance.framework.manager.ComponentBase;
+import net.brilliance.framework.component.ComponentBase;
 import net.brilliance.manager.auth.AuthenticationServiceManager;
 
 /**

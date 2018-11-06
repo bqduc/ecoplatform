@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import net.brilliance.async.DataConfigurationDispatcher;
 import net.brilliance.async.ResourcesDispatcher;
 import net.brilliance.deployment.InventoryDataDeployer;
+import net.brilliance.dispatch.GlobalDataRepositoryManager;
+import net.brilliance.framework.logging.CommonLoggingService;
 
 /**
  * @author ducbq
@@ -21,6 +23,9 @@ import net.brilliance.deployment.InventoryDataDeployer;
  */
 @Component
 public class ApplicationPostConstruct implements ApplicationListener<ApplicationReadyEvent> {
+	@Inject 
+	protected CommonLoggingService cLogger;
+
 	@Inject 
 	private DataConfigurationDispatcher dataConfigurationDispatcher;
 	
@@ -30,15 +35,20 @@ public class ApplicationPostConstruct implements ApplicationListener<Application
 	@Inject 
 	private InventoryDataDeployer inventoryDataDeployer;
 
+	@Inject 
+	private GlobalDataRepositoryManager globalDataRepositoryManager;
+
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
-		System.out.println("Fired onApplicationEvent at: " + Calendar.getInstance().getTime());
-		dataConfigurationDispatcher.onPostConstruct(null);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		resourcesDispatcher.onPostConstruct(null);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-		//inventoryDataDeployer.deployData(null);
+		System.out.println("Fired on application ready event at: " + Calendar.getInstance().getTime());
+		try {
+			dataConfigurationDispatcher.asyncDeployConstructionData(null);
+			resourcesDispatcher.asyncDeployConstructionData(null);
+			inventoryDataDeployer.asyncDeployConstructionData(null);
+			globalDataRepositoryManager.initializeGlobalData();
+		} catch (Exception e) {
+			cLogger.error(e);
+		}
 	}
 
 }
