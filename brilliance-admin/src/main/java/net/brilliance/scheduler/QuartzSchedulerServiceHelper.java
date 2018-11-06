@@ -84,13 +84,13 @@ public class QuartzSchedulerServiceHelper {
 		}
 
 		JobDefinition[] jobs = new JobDefinition[]{
-				JobDefinition.getInstance(defaultJobCategory, DayEndJob.class.getName(), DayEndJob.class.getSimpleName(), "0/5 * * * * ?", "Job run at the end of every day"),
-				JobDefinition.getInstance(defaultJobCategory, MonthEndJob.class.getName(), MonthEndJob.class.getSimpleName(), "0/6 * * * * ?", "Job run at the end of every month"),
-				JobDefinition.getInstance(defaultJobCategory, YearEndJob.class.getName(), YearEndJob.class.getSimpleName(), "0/7 * * * * ?", "Job run at the end of every year"),
-				JobDefinition.getInstance(defaultJobCategory, FeedAlertJob.class.getName(), FeedAlertJob.class.getSimpleName(), "0/8 * * * * ?", "Job run to send alert for feeding."),
-				JobDefinition.getInstance(defaultJobCategory, ClientExpirationJob.class.getName(), ClientExpirationJob.class.getSimpleName(), "0/9 * * * * ?", "Job run to scan and make expiration to expired clients"),
-				JobDefinition.getInstance(defaultJobCategory, FoodSynchronizeJob.class.getName(), FoodSynchronizeJob.class.getSimpleName(), "0/11 * * * * ?", "Job run to synchronize food data"),
-				JobDefinition.getInstance(defaultJobCategory, GeneralLedgeReconcileJob.class.getName(), GeneralLedgeReconcileJob.class.getSimpleName(), "0/12 * * * * ?", "Job run to reconcile the general ledger entities")
+				JobDefinition.getInstance(defaultJobCategory, DayEndJob.class.getName(), DayEndJob.class.getSimpleName(), "0/15 * * * * ?", "Job run at the end of every day"),
+				JobDefinition.getInstance(defaultJobCategory, MonthEndJob.class.getName(), MonthEndJob.class.getSimpleName(), "0/16 * * * * ?", "Job run at the end of every month"),
+				JobDefinition.getInstance(defaultJobCategory, YearEndJob.class.getName(), YearEndJob.class.getSimpleName(), "0/17 * * * * ?", "Job run at the end of every year"),
+				JobDefinition.getInstance(defaultJobCategory, FeedAlertJob.class.getName(), FeedAlertJob.class.getSimpleName(), "0/18 * * * * ?", "Job run to send alert for feeding."),
+				JobDefinition.getInstance(defaultJobCategory, ClientExpirationJob.class.getName(), ClientExpirationJob.class.getSimpleName(), "0/19 * * * * ?", "Job run to scan and make expiration to expired clients"),
+				JobDefinition.getInstance(defaultJobCategory, FoodSynchronizeJob.class.getName(), FoodSynchronizeJob.class.getSimpleName(), "0/20 * * * * ?", "Job run to synchronize food data"),
+				JobDefinition.getInstance(defaultJobCategory, GeneralLedgeReconcileJob.class.getName(), GeneralLedgeReconcileJob.class.getSimpleName(), "0/21 * * * * ?", "Job run to reconcile the general ledger entities")
 		};
 		return Arrays.asList(jobs);
 	}
