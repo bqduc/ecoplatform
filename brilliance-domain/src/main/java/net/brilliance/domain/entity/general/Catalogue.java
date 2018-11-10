@@ -32,9 +32,11 @@ import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import net.brilliance.framework.entity.BaseObject;
 import net.brilliance.framework.global.GlobalConstants;
 
@@ -48,6 +50,8 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Table(name = "catalogue")
 @EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Catalogue extends BaseObject {
 	private static final long serialVersionUID = -2698272402571269128L;
 
