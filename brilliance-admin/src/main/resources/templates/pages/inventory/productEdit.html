@@ -12,18 +12,7 @@
 	<!-- CKEditor JavaScript -->
 	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
 	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
-	
-	<!-- <script src="/js/jquery.autocomplete.min.js" th:src="@{/js/jquery.autocomplete.min.js}"></script>	 -->
-	<!-- <link rel="stylesheet" href="/static/css/main-autocomplete.css"/>
-
-	<link rel="stylesheet" th:href="@{~/static/css/bootstrap.css}"/> -->
-
-<!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script> -->
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-<!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
 <script>
 $(function() {
 	$("#dateOfIssued").datepicker({autoclose: true});
@@ -195,13 +184,15 @@ $(function() {
 		<div>
 			<div class="nav-tabs-custom">
 	      <ul class="nav nav-tabs">
-	      	<li class="active"><a href="#detailsTabPane" data-toggle="tab"><span th:text="#{label.product.details}"></span></a></li>
-	      	<li><a href="#businessActivitiesTabPane" data-toggle="tab"><span th:text="#{label.product.activity}"></span></a></li>
-	      	<li><a href="#casesTabPane" data-toggle="tab"><span th:text="#{label.product.cases}"></span></a></li>
+	      	<li class="active"><a href="#generalInfoTabPane" data-toggle="tab"><span th:text="#{label.product.generalInformation}"></span></a></li>
+	      	<li><a href="#imagesTabPane" data-toggle="tab"><span th:text="#{label.product.images}"></span></a></li>
+	      	<li><a href="#displayOptionsTabPane" data-toggle="tab"><span th:text="#{label.product.displayOptions}"></span></a></li>
+	      	<li><a href="#detailsTabPane" data-toggle="tab"><span th:text="#{label.product.details}"></span></a></li>
+	      	<li><a href="#identifiersTabPane" data-toggle="tab"><span th:text="#{label.product.identifiers}"></span></a></li>
 	      	<li><a href="#ordersTabPane" data-toggle="tab"><span th:text="#{label.product.orders}"></span></a></li>
 	      	<li><a href="#eventBookingsTabPane" data-toggle="tab"><span th:text="#{label.product.eventBookings}"></span></a></li>
 	      	<li><a href="#subscriptionsTabPane" data-toggle="tab"><span th:text="#{label.product.subscriptions}"></span></a></li>
-	      	<li><a href="#customerComplaintsTabPane" data-toggle="tab"><span th:text="#{label.product.customerComplaints}"></span></a></li>
+	      	<li><a href="#feedbackTabPane" data-toggle="tab"><span th:text="#{label.product.feedback}"></span></a></li>
 	      	<li><a href="#appointmentsTabPane" data-toggle="tab" ><span th:text="#{label.product.appointments}"></span></a></li>
 	        <li><a href="#hierarchyTabPane" data-toggle="tab"><span th:text="#{label.product.hierarchy}"></span></a></li>
 	        <li><a href="#timelineTabPane" data-toggle="tab"><span th:text="#{label.product.timeline}"></span></a></li>
@@ -220,9 +211,10 @@ $(function() {
                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span th:text="#{label.product.stocking}"></span></a></li>
              </ul>
           </li>
+	      	<li><a href="#relatedTabPane" data-toggle="tab"><span th:text="#{label.product.related}"></span></a></li>
 	      </ul>
 	      <div class="tab-content">
-	      	<div class="active tab-pane" id="detailsTabPane">
+	      	<div class="active tab-pane" id="generalInfoTabPane">
 	      		<form class="form-horizontal" action="#" th:object="${fetchedObject}" enctype="multipart/form-data" method="post" th:action="@{/product/create}">
 							<div th:if="${message}">
 								<div id="message" th:class="${message.type}" th:text="${message.message}">Message area</div>
@@ -281,8 +273,8 @@ $(function() {
 										<label for="dateOfManufacturing" class="col-sm-2 control-label" th:text="#{label.product.dateOfManufacturing}"></label>
 				
 					          <div class="col-sm-2">
-					          	<input type="text" class="form-control"  id="dateOfManufacturing" th:field="*{dateOfManufacturing}" th:placeholder="#{label.product.dateOfManufacturing}" />
-					           	<div th:if="${#fields.hasErrors('dateOfManufacturing')}" th:errors="*{dateOfManufacturing}">Date of manufacturing error</div>
+					          	<input type="text" class="form-control"  id="dateOfManufacturing" th:field="*{manufacturingDate}" th:placeholder="#{label.product.dateOfManufacturing}" />
+					           	<div th:if="${#fields.hasErrors('manufacturingDate')}" th:errors="*{manufacturingDate}">Date of manufacturing error</div>
 					        	</div>
 				         	</div>
 				        </div>
@@ -317,11 +309,137 @@ $(function() {
 								<input type="hidden" th:field="*{id}" /> 
 							</form>
 	      	</div>
-	      	<div class="tab-pane" id="businessActivitiesTabPane">
-	      		<label>Business Activities</label>
+	      	<div class="tab-pane" id="imagesTabPane">
+						<div class="row">
+						        <div class="col-md-4">
+						          <!-- Widget: user widget style 1 -->
+						          <div class="box box-widget widget-user-2">
+						            <!-- Add the bg color to the header using any of the bg-* classes -->
+						            <div class="widget-user-header bg-yellow">
+						              <div class="widget-user-image">
+						                <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+						              </div>
+						              <!-- /.widget-user-image -->
+						              <h3 class="widget-user-username">Nadia Carmichael</h3>
+						              <h5 class="widget-user-desc">Lead Developer</h5>
+						            </div>
+						            <div class="box-footer no-padding">
+						              <ul class="nav nav-stacked">
+						                <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
+						                <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
+						                <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
+						                <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+						              </ul>
+						            </div>
+						          </div>
+						          <!-- /.widget-user -->
+						        </div>
+						        <!-- /.col -->
+						        <div class="col-md-4">
+						          <!-- Widget: user widget style 1 -->
+						          <div class="box box-widget widget-user">
+						            <!-- Add the bg color to the header using any of the bg-* classes -->
+						            <div class="widget-user-header bg-aqua-active">
+						              <h3 class="widget-user-username">Alexander Pierce</h3>
+						              <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+						            </div>
+						            <div class="widget-user-image">
+						              <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+						            </div>
+						            <div class="box-footer">
+						              <div class="row">
+						                <div class="col-sm-4 border-right">
+						                  <div class="description-block">
+						                    <h5 class="description-header">3,200</h5>
+						                    <span class="description-text">SALES</span>
+						                  </div>
+						                  <!-- /.description-block -->
+						                </div>
+						                <!-- /.col -->
+						                <div class="col-sm-4 border-right">
+						                  <div class="description-block">
+						                    <h5 class="description-header">13,000</h5>
+						                    <span class="description-text">FOLLOWERS</span>
+						                  </div>
+						                  <!-- /.description-block -->
+						                </div>
+						                <!-- /.col -->
+						                <div class="col-sm-4">
+						                  <div class="description-block">
+						                    <h5 class="description-header">35</h5>
+						                    <span class="description-text">PRODUCTS</span>
+						                  </div>
+						                  <!-- /.description-block -->
+						                </div>
+						                <!-- /.col -->
+						              </div>
+						              <!-- /.row -->
+						            </div>
+						          </div>
+						          <!-- /.widget-user -->
+						        </div>
+						        <!-- /.col -->
+						        <div class="col-md-4">
+						          <!-- Widget: user widget style 1 -->
+						          <div class="box box-widget widget-user">
+						            <!-- Add the bg color to the header using any of the bg-* classes -->
+						            <div class="widget-user-header bg-black" style="background: url('../dist/img/photo1.png') center center;">
+						              <h3 class="widget-user-username">Elizabeth Pierce</h3>
+						              <h5 class="widget-user-desc">Web Designer</h5>
+						            </div>
+						            <div class="widget-user-image">
+						              <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
+						            </div>
+						            <div class="box-footer">
+						              <div class="row">
+						                <div class="col-sm-4 border-right">
+						                  <div class="description-block">
+						                    <h5 class="description-header">3,200</h5>
+						                    <span class="description-text">SALES</span>
+						                  </div>
+						                  <!-- /.description-block -->
+						                </div>
+						                <!-- /.col -->
+						                <div class="col-sm-4 border-right">
+						                  <div class="description-block">
+						                    <h5 class="description-header">13,000</h5>
+						                    <span class="description-text">FOLLOWERS</span>
+						                  </div>
+						                  <!-- /.description-block -->
+						                </div>
+						                <!-- /.col -->
+						                <div class="col-sm-4">
+						                  <div class="description-block">
+						                    <h5 class="description-header">35</h5>
+						                    <span class="description-text">PRODUCTS</span>
+						                  </div>
+						                  <!-- /.description-block -->
+						                </div>
+						                <!-- /.col -->
+						              </div>
+						              <!-- /.row -->
+						            </div>
+						          </div>
+						          <!-- /.widget-user -->
+						        </div>
+						        <!-- /.col -->
+						      </div>
+      	      	</div>
+	      	<div class="tab-pane" id="detailsTabPane">
+	      		<label>Product detailed information pane. </label>
 	      	</div>
-	      	<div class="tab-pane" id="casesTabPane">
-	      		<label>Business Cases</label>
+	      	<div class="tab-pane" id="displayOptionsTabPane">
+            <div class="box-body">
+              <img class="img-responsive pad" src="../dist/img/photo2.png" alt="Photo">
+
+              <p>I took this photo this morning. What do you guys think?</p>
+              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+              <span class="pull-right text-muted">127 likes - 3 comments</span>
+            </div>
+	      	</div>
+	      	<div class="tab-pane" id="identifiersTabPane">
+	      		<label>Product identifiers pane</label>
 	      	</div>
 	      	<div class="tab-pane" id="ordersTabPane">
 	      		<label>Supplier Orders</label>
@@ -332,14 +450,34 @@ $(function() {
 	      	<div class="tab-pane" id="subscriptionsTabPane">
 	      		<label>Customer Subscriptions</label>
 	      	</div>
-	      	<div class="tab-pane" id="customerComplaintsTabPane">
-	      		<label>Customer Complaints</label>
+	      	<div class="tab-pane" id="feedbackTabPane">
+	      		<label>Customer feedback, complaints, re-open tickets</label>
 	      	</div>
 	      	<div class="tab-pane" id="appointmentsTabPane">
 	      		<label>Customer Appointments</label>
 	      	</div>
 	      	<div class="tab-pane" id="hierarchyTabPane">
 	      		<label>Product Hierarchy</label>
+	      		<ul data-widget="tree">
+					  <li><a href="#">Same Level</a></li>
+					  <li class="treeview">
+					    <a href="#">Hierarchy approach</a>
+					    <ul class="treeview-menu">
+					      <li><a href="#">Sub level 1</a>
+							    <ul class="treeview-menu">
+							      <li><a href="#">Sub level 1.1</a></li>
+							      <li><a href="#">Sub level 1.2</a></li>
+							    </ul>
+					      </li>
+					      <li><a href="#">Sub level 2</a>
+							    <ul class="treeview-menu">
+							      <li><a href="#">Sub level 2.1</a></li>
+							      <li><a href="#">Sub level 2.2</a></li>
+							    </ul>
+					      </li>
+					    </ul>
+					  </li>
+					</ul>
 	      	</div>
 	      	<div class="tab-pane" id="timelineTabPane">
                 <!-- The timeline -->

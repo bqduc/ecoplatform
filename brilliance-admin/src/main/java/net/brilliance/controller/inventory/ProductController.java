@@ -1,7 +1,5 @@
 package net.brilliance.controller.inventory;
 
-import java.io.InputStream;
-
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Page;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
@@ -69,7 +68,7 @@ public class ProductController extends BaseController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String showCreateForm(Model model) {
-		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, new Contact());
+		model.addAttribute(CommonConstants.FETCHED_OBJECT, new Product());
 		return PAGE_CONTEXT_EDIT;
 	}
 

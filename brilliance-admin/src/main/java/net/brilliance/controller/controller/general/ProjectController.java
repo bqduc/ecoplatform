@@ -71,6 +71,9 @@ public class ProjectController extends BaseController {
 		int current = page.getNumber() + 1; 
 		int begin = Math.max(1, current - CommonConstants.DEFAULT_PAGE_SIZE); 
 		int end = Math.min(begin + CommonConstants.DEFAULT_PAGE_SIZE, page.getTotalPages());
+		if (begin > end){
+			end = begin;
+		}
 		model.addAttribute(ControllerConstants.FETCHED_OBJECTS, page); 
 		model.addAttribute("beginIndex", begin); 
 		model.addAttribute("endIndex", end); 

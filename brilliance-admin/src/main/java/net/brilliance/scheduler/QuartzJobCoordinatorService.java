@@ -25,34 +25,34 @@ public class QuartzJobCoordinatorService {
 	private ClientProfileService clientProfileManager;
 	*/
 	public void processData() {
-		cLog.info("Process data in quartz job coordinator !");
+		//cLog.info("Process data in quartz job coordinator !");
 	}
 
 	public void processFoodSynchronized() {
-		cLog.info("Synchronized food!");
+		//cLog.info("Synchronized food!");
 	}
 
 	public void processDayEnd() {
-		cLog.info("Day end data reconcile!");
+		//cLog.info("Day end data reconcile!");
 	}
 
 	public void processMonthEnd() {
-		cLog.info("Month end data reconcile!");
+		//cLog.info("Month end data reconcile!");
 	}
 
 	public void processGeneralLedgerData() {
-		cLog.info("General ledger data reconcile!");
+		//cLog.info("General ledger data reconcile!");
 	}
 
 	public void processClientExpired() {
-		cLog.info("Client expiration process! ");
+		//cLog.info("Client expiration process! ");
 	}
 
 	public void processFeedAlert() {
-		cLog.info("Feed alert fired! ");
+		//cLog.info("Feed alert fired! ");
 	}
 
 	public void processYearEnd() {
-		cLog.info("Year end job fired! ");
+		//cLog.info("Year end job fired! ");
 	}
 }

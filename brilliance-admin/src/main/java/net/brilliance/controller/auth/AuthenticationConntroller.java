@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,27 +76,29 @@ public class AuthenticationConntroller extends BaseController {
 	@Inject
 	private SecruityServiceACL secruityServiceACL;
 
-	@GetMapping({ "/myClientProfile" })
-	public String viewClientProfilePage(Model model, HttpServletRequest request, HttpServletResponse response) {
+	@GetMapping({ "/clientLoginProfile" })
+	public String viewClientLoginProfilePage(Model model, HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		ClientProfile myClientProfile = null;
+		ClientProfile clientProfile = null;
 		try {
 			if (CommonUtility.isEmpty(auth)){
 				//Return to the error page here.
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-				return PAGE_CONTEXT_CLIENTS_PREFIX + "myClientProfileShow";
+				return PAGE_CONTEXT_CLIENTS_PREFIX + "clientProfileView";
 			}
 
 			if (auth.getPrincipal() instanceof UserAccount){
-				myClientProfile = clientServicesHelper.getClient((UserAccount)auth.getPrincipal());
+				clientProfile = clientServicesHelper.getClient((UserAccount)auth.getPrincipal());
+			}else if (auth.getPrincipal() instanceof User){
+				clientProfile = clientServicesHelper.getClient(((User)auth.getPrincipal()).getUsername());
 			}else if (auth.getPrincipal() instanceof String){
-				myClientProfile = clientServicesHelper.getClient((String)auth.getPrincipal());
+				clientProfile = clientServicesHelper.getClient((String)auth.getPrincipal());
 			}
-			model.addAttribute(ControllerConstants.FETCHED_OBJECT, myClientProfile);
+			model.addAttribute(ControllerConstants.FETCHED_OBJECT, clientProfile);
 		} catch (Exception e) {
 			log.error("viewClientProfilePage", e);
 		}
-		return PAGE_CONTEXT_CLIENTS_PREFIX + "myClientProfileShow";
+		return PAGE_CONTEXT_CLIENTS_PREFIX + "clientProfileView";
 	}
 
 	@GetMapping({ "/clientLogin" })

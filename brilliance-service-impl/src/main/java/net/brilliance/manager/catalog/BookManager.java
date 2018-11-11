@@ -63,7 +63,7 @@ public class BookManager {
 	 * Restore the original set of books to the database.
 	 */
 	public void restoreDefaultBooks() {
-		ClassPathResource resource = new ClassPathResource("/config/liquibase/books.csv");
+		ClassPathResource resource = new ClassPathResource("/config/liquibase/data/books.csv");
 
 		BufferedReader br = null;
 

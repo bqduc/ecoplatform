@@ -287,7 +287,7 @@
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left" sec:authorize="isAuthenticated()">
-                            <a href="/auth/myClientProfile" class="btn btn-default btn-flat" th:text="#{label.user.profile}">Profile</a>
+                            <a href="/auth/clientLoginProfile" class="btn btn-default btn-flat" th:text="#{label.user.profile}">Profile</a>
                         </div>
                         <div class="pull-right">
                             <a href="/auth/clientLogout" class="btn btn-default btn-flat" th:text="#{label.signOut}" sec:authorize="isAuthenticated()">Sign out</a>
