@@ -8,10 +8,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 import net.brilliance.common.CommonConstants;
+import net.brilliance.deployment.GlobalDeploymentManager;
 import net.brilliance.domain.entity.config.Configuration;
 import net.brilliance.exceptions.EcosysException;
 import net.brilliance.framework.component.BaseComponent;
 import net.brilliance.framework.global.GlobalAppConstants;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.manager.auth.AuthenticationServiceManager;
 import net.brilliance.manager.configuration.ConfigurationManager;
 import net.brilliance.manager.system.SystemSequenceManager;
@@ -43,16 +45,22 @@ public class GlobalDataRepositoryManager extends BaseComponent {
 	@Inject 
 	private ConfigurationManager configurationManager;
 
+	@Inject 
+	private GlobalDeploymentManager globalDeploymentManager;
+
 	public void initializeGlobalData() throws EcosysException {
 		cLog.info("Enter GlobalDataRepositoryManager::initializeGlobalData()");
-		performInitializeGlobalMasterData();
+		this.performInitializeGlobalMasterData();
 		cLog.info("Leave GlobalDataRepositoryManager::initializeGlobalData()");
 	}
 
 	protected void performInitializeGlobalMasterData() throws EcosysException {
 		cLog.info("Enter GlobalServicesHelper::initDefaultComponents(): Initializing the default components....");
 		Configuration mdxConfig = null;
+		ExecutionContext executionContext = ExecutionContext.builder().build();
 		try {
+			globalDeploymentManager.deploy(executionContext);
+
 			mdxConfig = configurationService.getOne(GlobalAppConstants.GLOBAL_MASTER_DATA_INITIALIZE);
 			if (null != mdxConfig && CommonConstants.TRUE_STRING.equalsIgnoreCase(mdxConfig.getValue()) ){
 				cLog.info("The global data was initialized already. ");

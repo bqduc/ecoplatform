@@ -39,6 +39,7 @@ import net.brilliance.common.logging.GlobalLoggerFactory;
 import net.brilliance.domain.entity.general.Project;
 import net.brilliance.framework.manager.AbstractServiceManager;
 import net.brilliance.framework.repository.JBaseRepository;
+import net.brilliance.model.base.IDataContainer;
 import net.brilliance.officesuite.GlobalOfficeSuiteRepository;
 import net.brilliance.officesuite.model.SpreadsheetContainer;
 import net.brilliance.officesuite.model.SpreadsheetDocDataContainer;
@@ -53,6 +54,11 @@ import net.brilliance.repository.general.catalog.ProjectRepository;
 @Service
 @Transactional
 public class ProjectServiceManager extends AbstractServiceManager<Project, Long> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7294531852060556543L;
+
 	final Logger logger = GlobalLoggerFactory.getLogger(this.getClass());
 
 	private final static int IDX_LICENSE = 0;
@@ -183,5 +189,9 @@ public class ProjectServiceManager extends AbstractServiceManager<Project, Long>
 			this.logger.info(CommonUtility.getStackTrace(e));
 		}
 		return projects;
+	}
+
+	private IDataContainer getDataFromCsv(){
+		return null;
 	}
 }

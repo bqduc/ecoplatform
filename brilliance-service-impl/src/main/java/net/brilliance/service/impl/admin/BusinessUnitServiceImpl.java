@@ -13,7 +13,7 @@ import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.admin.BusinessUnitRepository;
-import net.brilliance.repository.specification.admin.BusinessUnitSpecifications;
+import net.brilliance.repository.specification.admin.BusinessUnitRepositorySpec;
 import net.brilliance.service.api.ObjectNotFoundException;
 import net.brilliance.service.api.admin.BusinessUnitService;
 
@@ -68,6 +68,6 @@ public class BusinessUnitServiceImpl extends GenericServiceImpl<BusinessUnit, Lo
 
 	@Override
 	public Page<BusinessUnit> getObjects(SearchParameter searchParameter) {
-		return this.repository.findAll(BusinessUnitSpecifications.buildSpecification(searchParameter), searchParameter.getPageable());
+		return this.repository.findAll(BusinessUnitRepositorySpec.buildSpecification(searchParameter), searchParameter.getPageable());
 	}
 }

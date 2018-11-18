@@ -20,8 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.brilliance.common.CommonConstants;
 import net.brilliance.common.ListUtility;
+import net.brilliance.exceptions.ExecutionContextException;
 import net.brilliance.framework.entity.BaseObject;
 import net.brilliance.framework.manager.BaseManager;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.specifications.predicator.BrilliancePredicator;
@@ -175,5 +177,9 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
 		Page<EntityType> pagedEntities = doGetObjects(searchParameter);
 		//Perform additional operations here
 		return pagedEntities;
+	}
+
+	public ExecutionContext deploy(ExecutionContext executionContext) throws ExecutionContextException {
+		return executionContext;
 	}
 }

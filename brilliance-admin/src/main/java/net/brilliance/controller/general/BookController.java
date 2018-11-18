@@ -41,10 +41,12 @@ import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.domain.entity.general.Book;
 import net.brilliance.domain.entity.stock.Store;
 import net.brilliance.framework.model.SearchParameter;
+import net.brilliance.helper.GlobalDataServicesRepository;
 import net.brilliance.manager.catalog.BookManager;
 import net.brilliance.manager.catalog.BookServiceManager;
 import net.brilliance.manager.contact.ClientProfileManager;
 import net.brilliance.manager.stock.StoreManager;
+import net.brilliance.model.base.IDataContainer;
 import net.brilliance.officesuite.spreadsheet.StreamingReader;
 import net.brilliance.service.helper.GlobalDataServiceHelper;
 import net.brilliance.util.ImageUtil;
@@ -97,6 +99,15 @@ public class BookController extends BaseController{
 		
 		logger.info("Listing books");
 
+		IDataContainer<String> stringDataContainer = null;
+		try {
+			stringDataContainer = GlobalDataServicesRepository.builder().build().readCsvFile("/config/liquibase/data/books.csv", true, "~");
+			System.out.println(stringDataContainer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
 		//System.out.println("Client profile service bean: " + clientProfileService.getAll());
 
 		List<Book> books = bookService.findAll();

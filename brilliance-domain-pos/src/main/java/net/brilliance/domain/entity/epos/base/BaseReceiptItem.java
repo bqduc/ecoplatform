@@ -20,7 +20,7 @@ package net.brilliance.domain.entity.epos.base;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.domain.entity.epos.InventoryItem;
+import net.brilliance.domain.entity.epos.InventoryItemPos;
 import net.brilliance.domain.entity.epos.Receipt;
 import net.brilliance.framework.entity.BaseObject;
 
@@ -79,7 +79,7 @@ public abstract class BaseReceiptItem extends BaseObject {
 	protected java.lang.Boolean inventoryDeductable;
 
 	// many to one
-	private InventoryItem inventoryItem;
+	private InventoryItemPos inventoryItem;
 	private Receipt recepie;
 
 	/**
@@ -119,7 +119,7 @@ public abstract class BaseReceiptItem extends BaseObject {
 	/**
 	 * Return the value associated with the column: INVENTORY_ITEM
 	 */
-	public InventoryItem getInventoryItem() {
+	public InventoryItemPos getInventoryItem() {
 		return inventoryItem;
 	}
 
@@ -129,7 +129,7 @@ public abstract class BaseReceiptItem extends BaseObject {
 	 * @param inventoryItem
 	 *          the INVENTORY_ITEM value
 	 */
-	public void setInventoryItem(InventoryItem inventoryItem) {
+	public void setInventoryItem(InventoryItemPos inventoryItem) {
 		this.inventoryItem = inventoryItem;
 	}
 

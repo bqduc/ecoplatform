@@ -213,4 +213,7 @@ public interface CommonConstants {
 	final static String CONFIGURED_CONTROLLER = "configuredController";
 
 	final static String AUTHORITY_LIST = "authorityList";
+
+	final static String DEPLOYMENT_DATA_KEY = "deployedData";
+	final static String DEPLOYMENT_DATA_MODEL_KEY = "deployedDataModel";
 }

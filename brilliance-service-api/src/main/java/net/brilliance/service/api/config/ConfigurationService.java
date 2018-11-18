@@ -1,5 +1,7 @@
 package net.brilliance.service.api.config;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import net.brilliance.domain.entity.config.Configuration;
@@ -28,4 +30,13 @@ public interface ConfigurationService extends GenericService<Configuration, Long
 	 * @return The pageable Configurations
 	 */
 	Page<Configuration> getObjects(SearchParameter searchParameter);
+
+	/**
+	 * Get one Configurations with the provided group.
+	 * 
+	 * @param group
+	 *            The search group
+	 * @return The pageable Configurations
+	 */
+	List<Configuration> getByGroup(String group);
 }

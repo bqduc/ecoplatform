@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import net.brilliance.exceptions.ExecutionContextException;
 import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
 
 public interface GenericService<T extends BaseObject, K extends Serializable>{
@@ -36,4 +38,6 @@ public interface GenericService<T extends BaseObject, K extends Serializable>{
 	Page<T> search(Map<String, Object> parameters);
 
 	List<T> imports(Map<Object, Object> parameters);
+
+	ExecutionContext deploy(ExecutionContext executionContext) throws ExecutionContextException;
 }

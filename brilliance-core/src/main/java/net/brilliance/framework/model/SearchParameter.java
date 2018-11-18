@@ -124,4 +124,12 @@ public class SearchParameter {
 		this.parameterMap = parameterMap;
 		return this;
 	}
+
+	public void put(String key, Object value){
+		this.parameterMap.put(key, value);
+	}
+
+	public Object get(String key){
+		return this.parameterMap.get(key);
+	}
 }

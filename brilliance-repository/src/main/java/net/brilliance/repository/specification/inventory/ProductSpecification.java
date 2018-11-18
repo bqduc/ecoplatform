@@ -17,10 +17,6 @@ import net.brilliance.framework.specifications.BrillianceSpecifications;
  */
 @Builder
 public class ProductSpecification extends BrillianceSpecifications<Product, SearchSpecRequestBase>{
-	/*private final static String fieldCode = "code";
-	private final static String fieldDateOfIssueTo = "dateOfIssueTo";
-	private final static String fieldDateOfIssueFrom = "dateOfIssueFrom";*/
-
 	public static Specification<Product> buildSpecification(final SearchParameter searchParameter) {
 		return ProductSpecification
 				.builder()

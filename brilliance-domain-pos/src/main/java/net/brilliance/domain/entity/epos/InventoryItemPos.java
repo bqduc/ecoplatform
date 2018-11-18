@@ -31,17 +31,17 @@ import net.brilliance.domain.entity.epos.base.BaseInventoryItem;
 @Entity
 @Table(name = "vpos_inventory_item")
 @EqualsAndHashCode(callSuper = true)
-public class InventoryItem extends BaseInventoryItem {
+public class InventoryItemPos extends BaseInventoryItem {
 	private static final long serialVersionUID = 1L;
 
-	public InventoryItem () {
+	public InventoryItemPos () {
 		super();
 	}
 
 	/**
 	 * Constructor for primary key
 	 */
-	public InventoryItem (Long id) {
+	public InventoryItemPos (Long id) {
 		super(id);
 	}
 
@@ -50,14 +50,14 @@ public class InventoryItem extends BaseInventoryItem {
 		return getName();
 	}
 	
-	public static InventoryItem fromCSV(String csvLine) {
+	public static InventoryItemPos fromCSV(String csvLine) {
 		if(StringUtils.isEmpty(csvLine)) {
 			return null;
 		}
 		
 		String[] strings = csvLine.split(","); //$NON-NLS-1$
 		
-		InventoryItem inventoryItem = new InventoryItem();
+		InventoryItemPos inventoryItem = new InventoryItemPos();
 		
 		int index = 0;
 		

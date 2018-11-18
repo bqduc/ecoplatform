@@ -105,7 +105,7 @@ public class WebSpringApplication extends WebMvcConfigurerAdapter {
 		SpringApplication app = new SpringApplication(WebSpringApplication.class);
 		ConfigurableApplicationContext  configAppContext = app.run(args);
 
-		/*GlobalDataRepositoryManager globalDataRepositoryManager = null;
+		GlobalDataRepositoryManager globalDataRepositoryManager = null;
 		try {
 			logger.info("Start initialize the global data");
 			globalDataRepositoryManager = configAppContext.getBean(GlobalDataRepositoryManager.class);
@@ -113,7 +113,7 @@ public class WebSpringApplication extends WebMvcConfigurerAdapter {
 			logger.info("The global data is initialization is done. ");
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-		}*/
+		}
 	}
 
 	/**

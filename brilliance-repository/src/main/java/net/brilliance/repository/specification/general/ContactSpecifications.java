@@ -58,12 +58,11 @@ public class ContactSpecifications {
 		return new Specification<Contact>() {
 			@Override
 			public Predicate toPredicate(Root<Contact> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				if (CommonUtility.isEmpty(searchParameter.getParameterMap())) {
+				/*if (CommonUtility.isEmpty(searchParameter.getParameterMap())) {
 					throw new IllegalStateException("At least one parameter should be provided to construct complex query");
-				}
-
+				}*/
 				List<Predicate> predicates = ListUtility.createArrayList();
-				if (!searchParameter.getParameterMap().isEmpty()){
+				if (CommonUtility.isNotEmpty(searchParameter.getParameterMap())){
 					predicates.add(builder.and(builder.like(root.get(fieldFirstName), containsWildcard((String)searchParameter.getParameterMap().get(fieldFirstName)))));
 					if (CommonUtility.isNotEmpty(searchParameter.getParameterMap().get(fieldLastName))){
 						predicates.add(builder.and(builder.like(root.get(fieldLastName), containsWildcard((String)searchParameter.getParameterMap().get(fieldLastName)))));

@@ -9,17 +9,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import net.brilliance.model.base.DataList;
+
 /**
  * @author ducbq
  *
  */
 public class ListUtility {
+	public static <T> DataList<T> createDataList(){
+		return new DataList<T>();
+	}
+
 	public static <T> List<T> createArrayList(){
 		return new ArrayList<T>();
 	}

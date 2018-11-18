@@ -45,7 +45,7 @@ public class ApplicationPostConstruct implements ApplicationListener<Application
 			dataConfigurationDispatcher.asyncDeployConstructionData(null);
 			resourcesDispatcher.asyncDeployConstructionData(null);
 			inventoryDataDeployer.asyncDeployConstructionData(null);
-			globalDataRepositoryManager.initializeGlobalData();
+			//globalDataRepositoryManager.initializeGlobalData();
 		} catch (Exception e) {
 			cLogger.error(e);
 		}

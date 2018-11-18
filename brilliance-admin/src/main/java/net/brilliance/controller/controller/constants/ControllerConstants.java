@@ -63,6 +63,8 @@ public final class ControllerConstants implements CommonConstants{
 	public static final String REQUEST_URI_OFFICE = "/office";
 	public static final String REQUEST_URI_BUSINESS_UNIT = "/businessUnit";
 
+	public static final String URI_ENTERPRISE_UNIT = "/enterpriseUnit";
+
 	public static final String REQUEST_URI_BACKGROUND_JOB = "/backjob";
 	public static final String REQUEST_URI_JOB_CATEGORY = "/jobCategory";
 
@@ -70,4 +72,6 @@ public final class ControllerConstants implements CommonConstants{
 	public static final String REQUEST_ADMIN_DASHLET = "/adminDashlet";
 
 	public static final String REQ_MAPPING_ENTERPRISE = "/enterprise";
+
+	public static final String URI_INVENTORY_ENTRY = "/inventoryEntry";
 }

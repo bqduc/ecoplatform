@@ -1,5 +1,7 @@
 package net.brilliance.service.impl.config;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.config.ConfigurationRepository;
+import net.brilliance.repository.specification.dmx.ConfigurationRepoSpecification;
 import net.brilliance.service.api.ObjectNotFoundException;
 import net.brilliance.service.api.config.ConfigurationService;
 
@@ -41,8 +44,11 @@ public class ConfigurationServiceImpl extends GenericServiceImpl<Configuration, 
 
 	@Override
 	public Page<Configuration> getObjects(SearchParameter searchParameter) {
-		Page<Configuration> pagedObjects = ListUtility.createPageable(this.repository.findAll(), searchParameter.getPageable());
-		//Perform additional operations here
-		return pagedObjects;
+		return this.repository.findAll(ConfigurationRepoSpecification.buildSpecification(searchParameter), searchParameter.getPageable());
+	}
+
+	@Override
+	public List<Configuration> getByGroup(String group) {
+		return this.repository.findByGroup(group);
 	}
 }

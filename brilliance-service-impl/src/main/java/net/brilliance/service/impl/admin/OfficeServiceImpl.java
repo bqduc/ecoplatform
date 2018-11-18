@@ -13,7 +13,7 @@ import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.admin.OfficeRepository;
-import net.brilliance.repository.specification.admin.OfficeSpecifications;
+import net.brilliance.repository.specification.admin.OfficeRepositorySpec;
 import net.brilliance.service.api.ObjectNotFoundException;
 import net.brilliance.service.api.admin.OfficeService;
 
@@ -89,6 +89,6 @@ public class OfficeServiceImpl extends GenericServiceImpl<Office, Long> implemen
 
 	@Override
 	public Page<Office> getObjects(SearchParameter searchParameter) {
-		return this.repository.findAll(OfficeSpecifications.buildSpecification(searchParameter), searchParameter.getPageable());
+		return this.repository.findAll(OfficeRepositorySpec.buildSpecification(searchParameter), searchParameter.getPageable());
 	}
 }
