@@ -3,9 +3,10 @@ package net.brilliance.controller.dmx;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,45 +22,42 @@ import com.google.gson.GsonBuilder;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.domain.entity.hc.Employee;
+import net.brilliance.domain.entity.dmx.InventoryEntry;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.manager.hc.EmployeeManager;
-import net.brilliance.manager.hc.EmployeeService;
+import net.brilliance.service.api.dmx.InventoryEntryService;
 
 @Controller
 @RequestMapping(ControllerConstants.URI_INVENTORY_ENTRY)
 public class InventoryEntryController extends BaseController {
-	private static final String PAGE_CONTEXT = ControllerConstants.CONTEXT_WEB_PAGES + "emp/";
+	private static final String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "dmx/inventoryEntry";
 
-	@Autowired
-	private EmployeeManager businessManager;
-
-	@Autowired
-	private EmployeeService employeeService;
+	@Inject
+	private InventoryEntryService businessService;
 
 	@RequestMapping(path="/", method=RequestMethod.GET)
-	public String goHome(){
-		return "pages/dmx/inventoryEntryBrowse";
+	public String viewHome(){
+		return PAGE_CONTEXT_PREFIX + PAGE_POSTFIX_BROWSE; 
 	}
 
-	@RequestMapping(path="/searchEmployee", method=RequestMethod.POST)
+	@RequestMapping(path="/search", method=RequestMethod.POST)
 	@ResponseBody
-	public String onSearchEmployees(@RequestBody(required = false) SearchParameter searchParams, Model model, Pageable pageable){
-		List<Employee> results = employeeService.getEmployees();
-		List<Employee> expectedResults = results.subList(0, 150);
+	public String search(@RequestBody(required = false) SearchParameter searchParams, Model model, Pageable pageable){
+		Page<InventoryEntry> searchResults = businessService.getObjects(searchParams);
+		List<InventoryEntry> expectedResults = searchResults.getContent().subList(0, 150);
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		String jsonBizObjects = gson.toJson(expectedResults);
 		return jsonBizObjects;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String onShow(@PathVariable("id") Long id, Model model) {
+	public String show(@PathVariable("id") Long id, Model model) {
 		cLog.info("Fetch employee object with id: " + id);
 
-		Employee fetchedObject = businessManager.get(id);
+		InventoryEntry fetchedObject = businessService.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
 		
-		return PAGE_CONTEXT + "employeeShow";
+		return PAGE_CONTEXT_PREFIX + PAGE_POSTFIX_SHOW;
 	}
 
 	/**
@@ -67,8 +65,8 @@ public class InventoryEntryController extends BaseController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String showCreateForm(Model model) {
-		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, new Employee());
-		return PAGE_CONTEXT + "employeeEdit";
+		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, InventoryEntry.builder().build());
+		return PAGE_CONTEXT_PREFIX + PAGE_POSTFIX_EDIT;
 	}
 
 	/**
@@ -79,7 +77,7 @@ public class InventoryEntryController extends BaseController {
 		InputStream inputStream = null;
 		try {
 			inputStream = CommonUtility.getClassPathResourceInputStream("/config/data/data-vpex-repaired.xlsx");
-			businessManager.importEmployees(inputStream, "chinh thuc", 1);
+			businessService.deploy(ExecutionContext.builder().build());//.importEmployees(inputStream, "chinh thuc", 1);
 		} catch (Exception e) {
 			cLog.error(CommonUtility.getStackTrace(e));
 		} finally{
@@ -89,16 +87,16 @@ public class InventoryEntryController extends BaseController {
 				cLog.error(CommonUtility.getStackTrace(e2));
 			}
 		}
-		return PAGE_CONTEXT + "employeeBrowse";
+		return PAGE_CONTEXT_PREFIX + PAGE_POSTFIX_BROWSE;
 	}
 
 	/**
 	 * Retrieve the book with the specified id for the update form.
 	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Long id, Model model) {
-		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, businessManager.get(id));
-		return PAGE_CONTEXT + "employeeEdit";
+	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, businessService.getObject(id));
+		return PAGE_CONTEXT_PREFIX + PAGE_POSTFIX_EDIT;
 	}
 
 	@Override

@@ -213,7 +213,7 @@ public class Contact extends ContactBase {
 	@Type(type = "org.hibernate.type.TextType")
 	private String description;
 
-	public String getEmail() {
+  public String getEmail() {
 		return email;
 	}
 
