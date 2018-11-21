@@ -80,6 +80,9 @@ public class ProjectAPIController {
 	}
 
 	private Project fetchDummyProject(){
-		return Project.instance("PROJ-XSWZAQ", "Dự án thử nghiệm nên chưa có trong hệ thống");
+		return Project.builder()
+				.code("PROJ-XSWZAQ")
+				.name("Dự án thử nghiệm nên chưa có trong hệ thống")
+				.build();
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.brilliance.model;
+package net.brilliance.domain.model;
 
 import lombok.Builder;
 

@@ -23,12 +23,12 @@ import lombok.Builder;
 import net.brilliance.domain.entity.contact.Contact;
 import net.brilliance.domain.entity.general.Category;
 import net.brilliance.domain.entity.general.Department;
+import net.brilliance.domain.model.BindingType;
+import net.brilliance.domain.model.DustJacketType;
+import net.brilliance.domain.model.InventoryEntryCodeType;
+import net.brilliance.domain.model.InventoryEntryConditionType;
 import net.brilliance.framework.entity.BaseObject;
 import net.brilliance.framework.global.GlobalConstants;
-import net.brilliance.model.BindingType;
-import net.brilliance.model.DustJacketType;
-import net.brilliance.model.InventoryEntryCodeType;
-import net.brilliance.model.InventoryEntryConditionType;
 
 /**
  * A Book.

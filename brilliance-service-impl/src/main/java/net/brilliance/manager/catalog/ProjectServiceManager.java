@@ -159,6 +159,7 @@ public class ProjectServiceManager extends AbstractServiceManager<Project, Long>
 							investmentModel = null;
 							//e.printStackTrace();
 						}
+						/*
 						projects.add(
 		  						Project.instance(
 		  								(rowData.get(IDX_LICENSE) instanceof String)?((String)rowData.get(IDX_LICENSE)).trim():rowData.get(IDX_LICENSE).toString().trim(), //License 
@@ -178,6 +179,7 @@ public class ProjectServiceManager extends AbstractServiceManager<Project, Long>
 		  								issueDate, //Date of license
 		  								null)//Description
 		  						);
+						*/
 
 					} catch (Exception e) {
 						this.logger.info(CommonUtility.getStackTrace(e));

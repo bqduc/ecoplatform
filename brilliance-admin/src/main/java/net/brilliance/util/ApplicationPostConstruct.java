@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import net.brilliance.async.DataConfigurationDispatcher;
 import net.brilliance.async.ResourcesDispatcher;
 import net.brilliance.deployment.InventoryDataDeployer;
-import net.brilliance.dispatch.GlobalDataRepositoryManager;
 import net.brilliance.framework.logging.CommonLoggingService;
 
 /**
@@ -35,8 +34,8 @@ public class ApplicationPostConstruct implements ApplicationListener<Application
 	@Inject 
 	private InventoryDataDeployer inventoryDataDeployer;
 
-	@Inject 
-	private GlobalDataRepositoryManager globalDataRepositoryManager;
+	/*@Inject 
+	private GlobalDataRepositoryManager globalDataRepositoryManager;*/
 
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {

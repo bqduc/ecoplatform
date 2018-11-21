@@ -13,12 +13,18 @@ import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import net.brilliance.domain.entity.contact.Contact;
 import net.brilliance.framework.entity.BaseObject;
 
 /**
  * A Contact.
  */
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "project")
 public class Project extends BaseObject {
@@ -76,16 +82,31 @@ public class Project extends BaseObject {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dateOfLicence;
 
+	@Column(name = "started_date")
+	private Date startedDate;
+
+	@Column(name = "closed_date")
+	private Date closedDate;
+
 	@Column(name = "description", columnDefinition = "TEXT")
 	@Type(type = "org.hibernate.type.TextType")
 	private String description;
 
 	@ManyToOne
+	@JoinColumn(name = "manager_id")
+	private Contact manager;
+
+	@ManyToOne
+	@JoinColumn(name = "assistant_manager_id")
+	private Contact assistantManager;
+
+	@ManyToOne
+	@JoinColumn(name = "sub_assistant_manager_id")
+	private Contact subAssistantManager;
+
+	@ManyToOne
 	@JoinColumn(name = "parent_id")
 	private Project parent;
-
-	public Project() {
-	}
 
 	public String getName() {
 		return name;
@@ -207,51 +228,6 @@ public class Project extends BaseObject {
 		this.parent = parent;
 	}
 
-	public static Project instance(String license, String name){
-		Project instance = new Project();
-		instance.setCode(license);
-		instance.setName(name);
-		return instance;
-	}
-
-	public static Project instance(
-			String license,
-			String name,
-			String investor,
-			Date issueDate,
-			String investmentModel,
-			String investorCountry,
-			String businessDomain,
-			BigDecimal investmentCapital,
-			BigDecimal charteredCapital,
-			String implementAddress,
-			int implementDuration,
-			Date implementDueDate,
-			String implementComments,
-			String contactAddress,
-			Date dateOfLicence,
-			String description){
-		Project instance = new Project();
-		instance.setCode(license);
-		instance.setName(name);
-		instance.setIssueDate(issueDate);
-		instance.setInvestor(investor);
-		instance.setInvestmentModel(investmentModel);
-		instance.setInvestorCountry(investorCountry);
-		instance.setBusinessDomain(businessDomain);
-		instance.setInvestmentCapital(investmentCapital);
-		instance.setCharteredCapital(charteredCapital);
-		instance.setImplementAddress(implementAddress);
-		instance.setImplementDuration(implementDuration);
-		instance.setImplementDueDate(implementDueDate);
-		instance.setImplementComments(implementComments);
-		instance.setContactAddress(contactAddress);
-		instance.setDateOfLicence(dateOfLicence);
-		instance.setDescription(description);
-
-		return instance;
-	}
-
 	public Date getImplementDueDate() {
 		return implementDueDate;
 	}
@@ -266,5 +242,45 @@ public class Project extends BaseObject {
 
 	public void setImplementComments(String implementComments) {
 		this.implementComments = implementComments;
+	}
+
+	public Date getClosedDate() {
+		return closedDate;
+	}
+
+	public void setClosedDate(Date closedDate) {
+		this.closedDate = closedDate;
+	}
+
+	public Date getStartedDate() {
+		return startedDate;
+	}
+
+	public void setStartedDate(Date startedDate) {
+		this.startedDate = startedDate;
+	}
+
+	public Contact getManager() {
+		return manager;
+	}
+
+	public void setManager(Contact manager) {
+		this.manager = manager;
+	}
+
+	public Contact getAssistantManager() {
+		return assistantManager;
+	}
+
+	public void setAssistantManager(Contact assistantManager) {
+		this.assistantManager = assistantManager;
+	}
+
+	public Contact getSubAssistantManager() {
+		return subAssistantManager;
+	}
+
+	public void setSubAssistantManager(Contact subAssistantManager) {
+		this.subAssistantManager = subAssistantManager;
 	}
 }
