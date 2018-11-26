@@ -73,5 +73,5 @@ public final class ControllerConstants implements CommonConstants{
 
 	public static final String REQ_MAPPING_ENTERPRISE = "/enterprise";
 
-	public static final String URI_INVENTORY_ENTRY = "/inventoryEntry";
+	public static final String URI_INVENTORY = "/inventory";
 }

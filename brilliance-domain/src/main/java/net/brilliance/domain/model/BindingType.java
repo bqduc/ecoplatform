@@ -8,7 +8,7 @@ package net.brilliance.domain.model;
  *
  */
 public enum BindingType {
-	unknown,
-	hardcover, 
-	paperback
+	Unknown,
+	Hardcover, 
+	Paperback
 }

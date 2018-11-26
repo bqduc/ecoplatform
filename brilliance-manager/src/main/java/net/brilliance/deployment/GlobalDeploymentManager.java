@@ -3,14 +3,13 @@
  */
 package net.brilliance.deployment;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonManagerConstants;
+import net.brilliance.common.CommonUtility;
+import net.brilliance.deplyment.DeploymentSpecification;
 import net.brilliance.exceptions.ExecutionContextException;
 import net.brilliance.framework.component.BaseComponent;
 import net.brilliance.framework.model.ExecutionContext;
@@ -38,18 +37,21 @@ public class GlobalDeploymentManager extends BaseComponent {
 			return executionContext;
 		}
 
-		List<String> deploymentParts = (List<String>)executionContext.getContextData(CommonManagerConstants.CONFIG_GROUP_DEPLOYMENT);
+		String deploymentServices = (String)executionContext.getContextData(CommonManagerConstants.CONFIG_GROUP_DEPLOYMENT);
+		if (CommonUtility.isEmpty(deploymentServices)){
+			cLog.info("There is no deployment services in execution context. ");
+			return executionContext;
+		}
+
+		deployProjects(executionContext);
 		return executionContext;
 	}
 
 	protected void deployProjects(ExecutionContext executionContext) throws ExecutionContextException {
-		final String DEPLOY_ENTRY = "project";
 		ExecutionContext projectExecutionContext = null;
-		String contextKey = null;
 		Object projectContextData = null;
 		try {
-			contextKey = new StringBuilder(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX).append(DEPLOY_ENTRY).toString();
-			if (!executionContext.containKey(contextKey)){
+			if (!executionContext.containKey(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX + DeploymentSpecification.CONTEXT_PROJECT)){
 				cLog.info("There is no configuration for deployment project in execution context. ");
 				return;
 			}
@@ -57,11 +59,11 @@ public class GlobalDeploymentManager extends BaseComponent {
 			projectExecutionContext = ExecutionContext.builder().build();
 			projectContextData = executionContext.getContextData(
 					new StringBuilder(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX)
-					.append(DEPLOY_ENTRY)
-					.append(CommonManagerConstants.CONTEXT_DEPLOYMENT_DATA)
+					.append(DeploymentSpecification.CONTEXT_PROJECT)
+					.append(DeploymentSpecification.CONTEXT_DATA)
 					.toString());
 
-			projectExecutionContext.putContextData(CommonConstants.DEPLOYMENT_DATA_KEY, projectContextData);
+			projectExecutionContext.putContextData(DeploymentSpecification.DEPLOYMENT_DATA_KEY, projectContextData);
 			projectService.deploy(projectExecutionContext);
 		} catch (Exception e) {
 			throw new ExecutionContextException(e);
@@ -87,7 +89,7 @@ public class GlobalDeploymentManager extends BaseComponent {
 					.append(CommonManagerConstants.CONTEXT_DEPLOYMENT_DATA)
 					.toString());
 
-			projectExecutionContext.putContextData(CommonConstants.DEPLOYMENT_DATA_KEY, projectContextData);
+			//projectExecutionContext.putContextData(DeploymentSpecification.DEPLOYMENT_DATA_KEY, projectContextData);
 			projectService.deploy(projectExecutionContext);
 		} catch (Exception e) {
 			throw new ExecutionContextException(e);

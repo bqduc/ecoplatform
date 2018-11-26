@@ -17,6 +17,7 @@ import net.brilliance.manager.contact.ClientProfileManager;
 import net.brilliance.manager.hc.EmployeeManager;
 import net.brilliance.manager.vbb.VbbForumManager;
 import net.brilliance.service.api.contact.ContactService;
+import net.brilliance.service.api.dashboard.DashletService;
 import net.brilliance.service.api.inventory.ProductService;
 
 /**

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.brilliance.common.CommonConstants;
+import net.brilliance.common.CommonManagerConstants;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
+import net.brilliance.deployment.GlobalDeploymentManager;
 import net.brilliance.domain.entity.general.Project;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.manager.catalog.ProjectServiceManager;
 import net.brilliance.model.SelectItem;
@@ -42,6 +46,9 @@ public class ProjectController extends BaseController {
 
 	@Autowired
 	private ProjectServiceManager businessServiceManager;
+
+	@Inject 
+	private GlobalDeploymentManager globalDeploymentManager;
 
 	/**
 	 * List all projects.
@@ -192,5 +199,16 @@ public class ProjectController extends BaseController {
 	protected String performSearch(SearchParameter params) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	protected void deployDefaultProjects(){
+		ExecutionContext executionContext = ExecutionContext.builder().build();
+		try {
+			executionContext.putContextData(CommonManagerConstants.CONFIG_GROUP_DEPLOYMENT, "yes");
+			executionContext.putContextData(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX + "project", "yes");
+			globalDeploymentManager.deploy(executionContext);
+		} catch (Exception e) {
+			cLog.error(e);
+		}
 	}
 }

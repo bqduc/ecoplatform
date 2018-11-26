@@ -15,6 +15,7 @@ public interface CommonConstants {
 	final static String PROPERTY_CODE = "code";
 	final static String PROPERTY_NAME = "name";
 
+	final static String SEPARATOR = ";";
 	final static String SEQUENCE_SEPARATOR = ".";
 	final static String ZERO_PATTERN = "000000000000000";
 
@@ -213,7 +214,4 @@ public interface CommonConstants {
 	final static String CONFIGURED_CONTROLLER = "configuredController";
 
 	final static String AUTHORITY_LIST = "authorityList";
-
-	final static String DEPLOYMENT_DATA_KEY = "deployedData";
-	final static String DEPLOYMENT_DATA_MODEL_KEY = "deployedDataModel";
 }

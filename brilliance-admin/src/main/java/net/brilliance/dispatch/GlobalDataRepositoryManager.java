@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 import net.brilliance.common.CommonConstants;
+import net.brilliance.common.CommonManagerConstants;
 import net.brilliance.deployment.GlobalDeploymentManager;
 import net.brilliance.domain.entity.config.Configuration;
 import net.brilliance.exceptions.EcosysException;
@@ -59,6 +60,7 @@ public class GlobalDataRepositoryManager extends BaseComponent {
 		Configuration mdxConfig = null;
 		ExecutionContext executionContext = ExecutionContext.builder().build();
 		try {
+			executionContext.putContextData(CommonManagerConstants.CONFIG_GROUP_DEPLOYMENT, "project");
 			globalDeploymentManager.deploy(executionContext);
 
 			mdxConfig = configurationService.getOne(GlobalAppConstants.GLOBAL_MASTER_DATA_INITIALIZE);

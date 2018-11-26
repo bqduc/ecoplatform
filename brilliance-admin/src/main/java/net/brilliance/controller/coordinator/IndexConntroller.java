@@ -32,10 +32,14 @@ import net.brilliance.common.logging.GlobalLoggerFactory;
 import net.brilliance.controller.auth.AuthenticationConntroller;
 import net.brilliance.domain.entity.sales.Account;
 import net.brilliance.manager.dashboard.DashboardManager;
+import net.brilliance.service.api.dashboard.DashletService;
 
 @Controller
 public class IndexConntroller {
 	private Logger log = GlobalLoggerFactory.getLogger(this.getClass());
+
+	@Inject 
+	private DashletService dashletService;
 
 	@Inject
 	private DashboardManager dashboardManager;
@@ -53,6 +57,8 @@ public class IndexConntroller {
 		model.addAttribute("totalForums", dashboardManager.getTotalForums());*/
 		dashboardManager.syncData();
 		model.addAttribute("dashboardManager", dashboardManager);
+		
+		model.addAttribute("dashlets", dashletService.getObjects());
 		log.info("Rendering index page...");
 		
 		log.info("Account: " + Account.createInstance());

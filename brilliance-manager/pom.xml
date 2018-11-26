@@ -23,6 +23,12 @@
 
 		<dependency>
 			<groupId>apa.ecosystem</groupId>
+			<artifactId>brilliance-bpm</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>apa.ecosystem</groupId>
 			<artifactId>brilliance-service-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>

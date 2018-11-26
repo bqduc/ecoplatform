@@ -33,6 +33,9 @@ public class ApplicationPostConstruct implements ApplicationListener<Application
 
 	@Inject 
 	private InventoryDataDeployer inventoryDataDeployer;
+	
+	/*@Inject
+	private BpmProcessEngine bpmProcessEngine;*/
 
 	/*@Inject 
 	private GlobalDataRepositoryManager globalDataRepositoryManager;*/

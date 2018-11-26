@@ -184,6 +184,22 @@
         </div>
         <!-- ./col -->
     </div>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6" sec:authorize="hasRole('ROLE_ADMIN')" th:each="dashlet: ${dashlets}">
+            <!-- small box -->
+            <div class="small-box bg-light-blue">
+                <div class="inner">
+                    <h3>5</h3>
+
+                    <p th:text="${dashlet.displayLink}">Data Administration</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-ribbon-b"></i>
+                </div>
+                <a th:href="${dashlet.accessURI}" class="small-box-footer" th:text="${dashlet.name}">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
     <!-- /.row -->
     <!-- Main row -->
     <div class="row">

@@ -8,10 +8,10 @@ package net.brilliance.domain.model;
  *
  */
 public enum DustJacketType {
-	unknown,
+	Unknown,
 	NoDustJacket,
-	Like_New,
-	Very_Good,
+	LikeNew,
+	VeryGood,
 	Good,
 	Acceptable
 }

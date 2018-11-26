@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
+import net.brilliance.deplyment.DeploymentSpecification;
 import net.brilliance.domain.entity.general.Project;
 import net.brilliance.domain.model.DataInterfaceModel;
 import net.brilliance.domain.model.DataSourceType;
@@ -64,16 +64,16 @@ public class ProjectServiceImpl extends GenericServiceImpl<Project, Long> implem
 		DataInterfaceModel dataInterfaceModel = null;
 		IDataContainer<String> dataContainer = null;
 		try {
-			if (!(executionContext.containKey(CommonConstants.DEPLOYMENT_DATA_KEY) || 
-					executionContext.containKey(CommonConstants.DEPLOYMENT_DATA_MODEL_KEY))){
+			if (!(executionContext.containKey(DeploymentSpecification.DEPLOYMENT_DATA_KEY) || 
+					executionContext.containKey(DeploymentSpecification.DEPLOYMENT_DATA_MODEL_KEY))){
 				executionContext.setExecutionStage("There is not enough deployment specification for project. ");
 				cLog.info(executionContext.getExecutionStage());
 				return executionContext;
 			}
 
 			globalDataServicesRepository = GlobalDataServicesRepository.builder().build();
-			projectContextData = executionContext.getContextData(CommonConstants.DEPLOYMENT_DATA_KEY);
-			dataInterfaceModel = (DataInterfaceModel)executionContext.getContextData(CommonConstants.DEPLOYMENT_DATA_MODEL_KEY);
+			projectContextData = executionContext.getContextData(DeploymentSpecification.DEPLOYMENT_DATA_KEY);
+			dataInterfaceModel = (DataInterfaceModel)executionContext.getContextData(DeploymentSpecification.DEPLOYMENT_DATA_MODEL_KEY);
 			if (DataSourceType.CSV.equals(dataInterfaceModel.getDataSourceType())){
 				dataContainer = globalDataServicesRepository.readCsvFile(
 						(InputStream)projectContextData, 

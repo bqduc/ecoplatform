@@ -42,7 +42,7 @@
 			<spring.social.facebook.version>1.1.0.BUILD-SNAPSHOT</spring.social.facebook.version>
 			<spring.social.twitter.version>1.1.0.BUILD-SNAPSHOT</spring.social.twitter.version>
 			
-			<activiti.version>5.19.0.2</activiti.version>
+			<!--<activiti.version>5.22.0</activiti.version>-->
     </properties>
 
     <modules>
@@ -52,6 +52,7 @@
 			<module>brilliance-domain-base</module>
       <module>brilliance-domain</module>
       <module>brilliance-domain-pos</module>
+			<module>brilliance-bpm</module>
       <module>brilliance-repository</module>
       <module>brilliance-service-api</module>
       <module>brilliance-service-impl</module>
