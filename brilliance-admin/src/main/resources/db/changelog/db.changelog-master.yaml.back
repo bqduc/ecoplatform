@@ -1,0 +1,200 @@
+###############################################################################
+# Copyright 2016, Julius Krah                                                 #
+# by the @authors tag. See the LICENCE in the distribution for a              #
+# full listing of individual contributors.                                    #
+#                                                                             #
+# Licensed under the Apache License, Version 2.0 (the "License");             #
+# you may not use this file except in compliance with the License.            #
+# You may obtain a copy of the License at                                     #
+# http://www.apache.org/licenses/LICENSE-2.0                                  #
+# Unless required by applicable law or agreed to in writing, software         #
+# distributed under the License is distributed on an "AS IS" BASIS,           #
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    #
+# See the License for the specific language governing permissions and         #
+# limitations under the License.                                              #
+###############################################################################
+
+
+databaseChangeLog:
+  # - preConditions:
+  #  - runningAs:
+  #      username: liquibase
+  - property:
+      name: now
+      value: now()
+      dbms: mysql,h2
+  - property:
+      name: now
+      value: current_timestamp
+      dbms: postgresql
+  - property:
+      name: now
+      value: sysdate
+      dbms: oracle
+  - property:
+      name: autoIncrement
+      value: true
+      dbms: mysql,h2,postgresql,oracle
+  - changeSet:
+      id: 0
+      author: Julius
+      dbms: postgresql,oracle
+      changes:
+        - createSequence:
+            sequenceName: hibernate_sequence
+            startValue: 1000
+            incrementBy: 1
+  - changeSet:
+      id: 1
+      author: Julius
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: char(36)
+                  # autoIncrement: ${autoIncrement}
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: varchar(60)
+              - column:
+                  name: first_name
+                  type: varchar(50)
+              - column:
+                  name: last_name
+                  type: varchar(50)
+              - column:
+                  name: email
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: activated
+                  type: boolean
+                  valueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activation_key
+                  type: varchar(20)
+              - column:
+                  name: reset_key
+                  type: varchar(20)
+              - column:
+                  name: created_by
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueDate: ${now}
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reset_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_modified_by
+                  type: varchar(50)
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+        - createIndex:
+            indexName: idx_account_login
+            tableName: account
+            unique: true
+            columns:
+              - column:
+                  name: login
+                  type: varchar(100)
+        - createIndex:
+            indexName: idx_account_email
+            tableName: account
+            unique: true
+            columns:
+              - column:
+                  name: email
+                  type: varchar(100)
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: account_id
+                  type: char(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: account_id, role_name
+            tableName: user_role
+        - addForeignKeyConstraint:
+            baseColumnNames: role_name
+            baseTableName: user_role
+            constraintName: fk_role_name
+            referencedColumnNames: name
+            referencedTableName: role
+        - addForeignKeyConstraint:
+            baseColumnNames: account_id
+            baseTableName: user_role
+            constraintName: fk_account_id
+            referencedColumnNames: id
+            referencedTableName: account
+            
+  - changeSet:
+      id: 2
+      author: Julius
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/data/account.csv
+            separator: ;
+            tableName: account
+            columns:
+              - column:
+                  name: activated
+                  type: boolean
+              - column:
+                  name: created_date
+                  type: timestamp
+        - dropDefaultValue:
+            tableName: account
+            columnName: created_date
+            columnDataType: datetime
+        - loadData:
+            encoding: UTF-8
+            file: db/data/role.csv
+            separator: ;
+            tableName: role
+        - loadData:
+            encoding: UTF-8
+            file: db/data/user_role.csv
+            separator: ;
+            tableName: user_role
+                    
