@@ -45,7 +45,7 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Long> implem
 
 	@Override
 	public String deployProducts(List<List<String>> dataStrings) {
-		cLog.info("Enter deploy contacts.");
+		logger.info("Enter deploy contacts.");
 		StringBuilder deployedObjects = new StringBuilder();
 		Product deployedObject = null;
 		Product currentObject = null;
@@ -57,10 +57,10 @@ public class ProductServiceImpl extends GenericServiceImpl<Product, Long> implem
 					deployedObjects.append(deployedObject.getCode()).append(";");
 				}
 			} catch (Exception e) {
-				cLog.error("Error at contact code: " + currentObject.getCode(), e);
+				logger.error("Error at contact code: " + currentObject.getCode(), e);
 			}
 		}
-		cLog.info("Leave deploy contacts.");
+		logger.info("Leave deploy contacts.");
 		return deployedObjects.toString();
 	}
 

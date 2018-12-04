@@ -19,8 +19,10 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.contact.ContactProfile;
 import net.brilliance.framework.entity.BaseObject;
 
@@ -28,6 +30,8 @@ import net.brilliance.framework.entity.BaseObject;
  * @author ducbq
  *
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "dmx_enterprise")
@@ -44,6 +48,9 @@ public class Enterprise extends BaseObject {
 	@Column(name = "name", nullable=false, length=200)
   private String name;
 
+	@Column(name = "name_local", nullable=false, length=200)
+  private String nameLocal;
+
 	@ManyToOne
 	@JoinColumn(name = "parent_id")
 	private Enterprise parent;
@@ -56,7 +63,7 @@ public class Enterprise extends BaseObject {
 	@Column(name = "issued_date")
 	private Date issuedDate;
 
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	/*@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	//@formatter:off
 	@JoinTable(
 			name = "dmx_enterprise_policy", 
@@ -64,8 +71,11 @@ public class Enterprise extends BaseObject {
 			joinColumns = {@JoinColumn(name = "enterprise_id")}
 	)
 	//@formatter:on
-	private Set<Policy> activities;
+	private Set<Policy> policies;*/
 
+	@Column(name = "description", columnDefinition="TEXT")
+	private String description;
+	
 	public String getCode() {
 		return code;
 	}
@@ -106,4 +116,27 @@ public class Enterprise extends BaseObject {
 		this.issuedDate = issuedDate;
 	}
 
+	public String getNameLocal() {
+		return nameLocal;
+	}
+
+	public void setNameLocal(String nameLocal) {
+		this.nameLocal = nameLocal;
+	}
+
+	/*public Set<Policy> getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(Set<Policy> policies) {
+		this.policies = policies;
+	}*/
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

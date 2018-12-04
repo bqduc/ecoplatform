@@ -11,6 +11,8 @@ public enum SequenceType {
 	DASHBOARD("DSB"),
 	DASHLET("DSL"),
 
+	ENTERPRISE("ENT"),
+
 	CATALOG_SUBTYPE("CST"),
 	TICKET("TCK"),
 	INCIDENT("INC"),

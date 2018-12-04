@@ -44,7 +44,7 @@ public class OfficeServiceImpl extends GenericServiceImpl<Office, Long> implemen
 
 	@Override
 	public String deployObjects(List<List<String>> dataStrings) {
-		cLog.info("Enter deploy contacts.");
+		logger.info("Enter deploy contacts.");
 		StringBuilder deployedObjects = new StringBuilder();
 		Office deployedObject = null;
 		Office currentObject = null;
@@ -56,10 +56,10 @@ public class OfficeServiceImpl extends GenericServiceImpl<Office, Long> implemen
 					deployedObjects.append(deployedObject.getCode()).append(";");
 				}
 			} catch (Exception e) {
-				cLog.error("Error at contact code: " + currentObject.getCode(), e);
+				logger.error("Error at contact code: " + currentObject.getCode(), e);
 			}
 		}
-		cLog.info("Leave deploy contacts.");
+		logger.info("Leave deploy contacts.");
 		return deployedObjects.toString();
 	}
 

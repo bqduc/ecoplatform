@@ -73,7 +73,7 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
 		try {
 			getRepository().delete(id);
 		} catch (EmptyResultDataAccessException e) {
-			cLog.error("Delete object by key", e);
+			logger.error("Delete object by key", e);
 		}
 	}
 
@@ -83,7 +83,7 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
 		try {
 			getRepository().delete(entity);
 		} catch (EmptyResultDataAccessException e) {
-			cLog.error("Delete object. ", e);
+			logger.error("Delete object. ", e);
 		}
 	}
 
@@ -93,7 +93,7 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
 		try {
 			getRepository().deleteAll();
 		} catch (EmptyResultDataAccessException e) {
-			cLog.error("Delete all objects. ", e);
+			logger.error("Delete all objects. ", e);
 		}
 	}
 
@@ -142,7 +142,7 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
   	if (null != respository){
   		respository.saveAndFlush(entity);
   	} else {
-  		cLog.info("There is no implemented repository for " + this.getClass().getSimpleName());
+  		logger.info("There is no implemented repository for " + this.getClass().getSimpleName());
     	if (null == entity.getId()){
     		this.em.persist(entity);
     	}else{
@@ -150,7 +150,7 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
     		this.em.refresh(mergedEntity);
     	}
     	this.em.flush();
-  		cLog.info("Use the persistence context entity manager object instead of repository. ");
+  		logger.info("Use the persistence context entity manager object instead of repository. ");
   	}
 
   	return entity;

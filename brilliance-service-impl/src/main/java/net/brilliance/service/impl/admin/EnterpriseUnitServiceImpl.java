@@ -44,7 +44,7 @@ public class EnterpriseUnitServiceImpl extends GenericServiceImpl<EnterpriseUnit
 
 	@Override
 	public String deployObjects(List<List<String>> dataStrings) {
-		cLog.info("Enter deploy contacts.");
+		logger.info("Enter deploy contacts.");
 		StringBuilder deployedObjects = new StringBuilder();
 		EnterpriseUnit deployedObject = null;
 		EnterpriseUnit currentObject = null;
@@ -56,10 +56,10 @@ public class EnterpriseUnitServiceImpl extends GenericServiceImpl<EnterpriseUnit
 					deployedObjects.append(deployedObject.getCode()).append(";");
 				}
 			} catch (Exception e) {
-				cLog.error("Error at contact code: " + currentObject.getCode(), e);
+				logger.error("Error at contact code: " + currentObject.getCode(), e);
 			}
 		}
-		cLog.info("Leave deploy contacts.");
+		logger.info("Leave deploy contacts.");
 		return deployedObjects.toString();
 	}
 

@@ -22,7 +22,7 @@ public interface ContactService extends GenericService<Contact, Long>{
 
 	String deployContacts(List<List<String>> dataStrings);
 
-  /**
+	/**
    * Get one contacts with the provided search parameters.
    * 
    * @param searchParameter The search parameter

@@ -48,23 +48,35 @@ public class ContactServiceImpl extends GenericServiceImpl<Contact, Long> implem
 
 	@Override
 	public String deployContacts(List<List<String>> dataStrings) {
-		cLog.info("Enter deploy contacts.");
+		logger.info("Enter deploy contacts.");
+		StringBuilder errorObjects = new StringBuilder();
 		StringBuilder deployedObjects = new StringBuilder();
 		Contact deployedObject = null;
 		Contact currentObject = null;
+		List<String> contactCodes = getContactCodes();
 		for (List<String> dataObjectParts :dataStrings){
 			try {
 				currentObject = this.parseEntity(dataObjectParts);
-				if (this.repository.countByCode(currentObject.getCode())<1){
+				if (!contactCodes.contains(currentObject.getCode())){
 					deployedObject = repository.saveAndFlush(currentObject);
+					contactCodes.add(deployedObject.getCode());
+
 					deployedObjects.append(deployedObject.getCode()).append(";");
 				}
 			} catch (Exception e) {
-				cLog.error("Error at contact code: " + currentObject.getCode(), e);
+				logger.error("Error at contact code: " + currentObject.getCode(), e);
+				errorObjects.append(currentObject.getCode()).append(";");
 			}
 		}
-		cLog.info("Leave deploy contacts.");
+		logger.info("Leave deploy contacts.");
+		if (errorObjects.length() > 0){
+			logger.info("Error objects: " + errorObjects.toString());
+		}
 		return deployedObjects.toString();
+	}
+
+	private List<String> getContactCodes(){
+		return this.repository.findCode();
 	}
 
 	private Contact parseEntity(List<String> data){

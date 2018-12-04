@@ -56,4 +56,12 @@ public class ExecutionContext implements Serializable{
 	public void setExecutionStage(String executionStage) {
 		this.executionStage = executionStage;
 	}
+
+	public boolean isEmpty(){
+		return context.isEmpty();
+	}
+
+	public void buildFromOther(ExecutionContext executionContext){
+		this.context.putAll(executionContext.getContext());
+	}
 }

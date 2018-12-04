@@ -214,7 +214,8 @@ public class Contact extends ContactBase {
 	private String description;
 
   public String getEmail() {
-		return email;
+  	email = email.trim();
+  	return email;
 	}
 
 	public Contact setEmail(String email) {

@@ -24,7 +24,7 @@ public abstract class BaseManager<T extends BaseObject, PK extends Serializable>
 	protected abstract BaseRepository<T, PK> getRepository();
 
 	@Inject 
-	protected CommonLoggingService cLog;
+	protected CommonLoggingService logger;
 	
 	protected Page<T> performSearch(String keyword, Pageable pageable){
 		return DUMMY_PAGEABLE;
@@ -64,7 +64,7 @@ public abstract class BaseManager<T extends BaseObject, PK extends Serializable>
 		try {
 			getRepository().delete(id);
 		} catch (EmptyResultDataAccessException e) {
-			cLog.error("Delete object by key", e);
+			logger.error("Delete object by key", e);
 		}
 	}
 
@@ -72,7 +72,7 @@ public abstract class BaseManager<T extends BaseObject, PK extends Serializable>
 		try {
 			getRepository().delete(entity);
 		} catch (EmptyResultDataAccessException e) {
-			cLog.error("Delete object. ", e);
+			logger.error("Delete object. ", e);
 		}
 	}
 
@@ -80,7 +80,7 @@ public abstract class BaseManager<T extends BaseObject, PK extends Serializable>
 		try {
 			getRepository().deleteAll();
 		} catch (EmptyResultDataAccessException e) {
-			cLog.error("Delete all objects. ", e);
+			logger.error("Delete all objects. ", e);
 		}
 	}
 
@@ -88,7 +88,7 @@ public abstract class BaseManager<T extends BaseObject, PK extends Serializable>
 	public T update(T entity) {
 		T getEntity = getRepository().findOne((PK) entity.getId());
 		getRepository().save(entity);
-		cLog.info("Merged entity: " + getEntity.getId());
+		logger.info("Merged entity: " + getEntity.getId());
 		return entity;
 	}
 

@@ -67,7 +67,7 @@ public class InventoryServiceImpl extends GenericServiceImpl<Inventory, Long> im
 			if (!(executionContext.containKey(DeploymentSpecification.DEPLOYMENT_DATA_KEY) || 
 					executionContext.containKey(DeploymentSpecification.DEPLOYMENT_DATA_MODEL_KEY))){
 				executionContext.setExecutionStage("There is not enough deployment specification for project. ");
-				cLog.info(executionContext.getExecutionStage());
+				logger.info(executionContext.getExecutionStage());
 				return executionContext;
 			}
 
@@ -85,17 +85,17 @@ public class InventoryServiceImpl extends GenericServiceImpl<Inventory, Long> im
 
 			if (CommonUtility.isEmpty(dataContainer)){
 				executionContext.setExecutionStage("The data container is empty. Please recheck data source. ");
-				cLog.info(executionContext.getExecutionStage());
+				logger.info(executionContext.getExecutionStage());
 				return executionContext;
 			}
-			cLog.info("Start to deploy project data ......");
+			logger.info("Start to deploy project data ......");
 			
 		} catch (Exception e) {
 			throw new ExecutionContextException(e);
 		}
 
 		executionContext.setExecutionStage("The data deployment for project is done. ");
-		cLog.info(executionContext.getExecutionStage());
+		logger.info(executionContext.getExecutionStage());
 		return executionContext;
 	}
 }

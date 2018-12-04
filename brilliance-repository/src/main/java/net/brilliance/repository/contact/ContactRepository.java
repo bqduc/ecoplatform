@@ -1,5 +1,6 @@
 package net.brilliance.repository.contact;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -20,6 +21,9 @@ public interface ContactRepository extends BaseRepository<Contact, Long>, JpaSpe
 
 	Contact findByCode(String code);
 	Long countByCode(String code);
+	
+  @Query(value = "SELECT entity.code FROM #{#entityName} entity ", nativeQuery = true)
+  List<String> findCode();
 
 	@Query("SELECT entity FROM #{#entityName} entity WHERE ("
 			+ " LOWER(entity.code) like LOWER(CONCAT('%',:keyword,'%')) or "
