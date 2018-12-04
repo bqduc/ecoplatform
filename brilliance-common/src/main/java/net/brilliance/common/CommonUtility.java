@@ -270,11 +270,12 @@ public class CommonUtility implements CommonConstants {
 			return ((Collection<?>)data).isEmpty();
 		}
 
-		if (data instanceof List) {
-			if (((List<?>) data).size() < 1)
-				return true;
+		if (data instanceof Map) {
+			return ((Map<?, ?>) data).isEmpty();
+		}
 
-			return false;
+		if (data instanceof List) {
+			return ((List<?>) data).isEmpty();
 		}
 
 		if (data instanceof byte[]) {

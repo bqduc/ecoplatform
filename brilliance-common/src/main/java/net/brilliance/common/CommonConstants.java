@@ -12,8 +12,10 @@ import java.math.BigDecimal;
 public interface CommonConstants {
 	final static int DUMMY_LARGE_COUNT = 5000000;
 	final static String TRUE_STRING = Boolean.TRUE.toString();
+	final static String PROPERTY_KEY = "id";
 	final static String PROPERTY_CODE = "code";
 	final static String PROPERTY_NAME = "name";
+	final static String PROPERTY_NAME_LOCAL = "nameLocal";
 
 	final static String SEPARATOR = ";";
 	final static String SEQUENCE_SEPARATOR = ".";

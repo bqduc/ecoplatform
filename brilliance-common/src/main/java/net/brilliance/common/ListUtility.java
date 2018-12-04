@@ -3,25 +3,32 @@
  */
 package net.brilliance.common;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import lombok.extern.slf4j.Slf4j;
 import net.brilliance.model.base.DataList;
+import net.brilliance.model.ui.UISelectItem;
 
 /**
  * @author ducbq
  *
  */
+@Slf4j
+@SuppressWarnings({ "unchecked"})
 public class ListUtility {
 	public static <T> DataList<T> createDataList(){
 		return new DataList<T>();
@@ -35,7 +42,6 @@ public class ListUtility {
 		return new HashMap<>();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <K, T> HashMap <K, T> createMap(Object ...keyValuePairs){
 		Map<K, T> retMap = new HashMap<>();
 		for (int i = 0; i < keyValuePairs.length; i+= 2) {
@@ -119,5 +125,33 @@ public class ListUtility {
 			results = new PageImpl<T>(list, pageable, list.size());
 		}
 		return results;
+	}
+
+	public static <T> Set<T> asSet(Collection<T> objects){
+		Set<T> results = new HashSet<>();
+		results.addAll(objects);
+		return results;
+	}
+
+	public static List<UISelectItem> createSelectItems(List<?> businessObjects, Map<String, String> mappedAttributes) {
+		List<UISelectItem> suggestedItems = new ArrayList<>();
+		Map<String, Object> objectAttributeMap = null;
+		for (Object businessObject : businessObjects) {
+			try {
+				objectAttributeMap = CommonBeanUtils.getObjectAttributes(businessObject, asSet(mappedAttributes.values()));
+			} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+				log.error(e.getMessage(), e); 
+			}
+
+			if (CommonUtility.isNotEmpty(objectAttributeMap)){
+				suggestedItems.add(UISelectItem.builder()
+						.id((Long)objectAttributeMap.get(mappedAttributes.get(CommonConstants.PROPERTY_KEY)))
+						.code((String)objectAttributeMap.get(mappedAttributes.get(CommonConstants.PROPERTY_CODE)))
+						.name((String)objectAttributeMap.get(mappedAttributes.get(CommonConstants.PROPERTY_NAME)))
+						.nameLocal((String)objectAttributeMap.get(mappedAttributes.get(CommonConstants.PROPERTY_NAME_LOCAL)))
+						.build());
+			}
+		}
+		return suggestedItems;
 	}
 }
