@@ -57,13 +57,13 @@ public class VbbTopicController extends BaseController {
 	 */
 	@RequestMapping(value = { "/list", "" }, method = RequestMethod.GET)
 	public String list(Model model) {
-		cLog.info("Listing topics ...");
+		logger.info("Listing topics ...");
 		return DEFAULT_PAGED_REDIRECT;
 	}
 
 	@RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
 	public String listByPage(@PathVariable Integer pageNumber, Model model) {
-		cLog.info("Listing topics for page: ", pageNumber, ". At: ", Calendar.getInstance().getTime());
+		logger.info("Listing topics for page: ", pageNumber, ". At: ", Calendar.getInstance().getTime());
 
 		Page<VbbTopic> page = serviceManager.getList(pageNumber);
 		int current = page.getNumber() + 1;
@@ -82,7 +82,7 @@ public class VbbTopicController extends BaseController {
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Getting topic with id: " + id);
+		logger.info("Getting topic with id: " + id);
 
 		VbbTopic topic = serviceManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, topic);
@@ -96,7 +96,7 @@ public class VbbTopicController extends BaseController {
 	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
-		cLog.info("Edit topic with id: " + id);
+		logger.info("Edit topic with id: " + id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, serviceManager.get(id));
 		loadDependencies(model);
 		return PAGE_CONTEXT + "Edit";
@@ -124,7 +124,7 @@ public class VbbTopicController extends BaseController {
 			return PAGE_CONTEXT + "Edit";
 		}
 
-		cLog.info("Creating/updating topic");
+		logger.info("Creating/updating topic");
 
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("topic_save_success", new Object[] {}, locale)));
@@ -133,9 +133,9 @@ public class VbbTopicController extends BaseController {
 		if (!file.isEmpty() && (file.getContentType().equals(MediaType.IMAGE_JPEG_VALUE) || file.getContentType().equals(MediaType.IMAGE_PNG_VALUE)
 				|| file.getContentType().equals(MediaType.IMAGE_GIF_VALUE))) {
 
-			cLog.info("File name: " + file.getName());
-			cLog.info("File size: " + file.getSize());
-			cLog.info("File content type: " + file.getContentType());
+			logger.info("File name: " + file.getName());
+			logger.info("File size: " + file.getSize());
+			logger.info("File content type: " + file.getContentType());
 
 			byte[] fileContent = null;
 			String imageString = null;
@@ -150,7 +150,7 @@ public class VbbTopicController extends BaseController {
 				fetchedDataObject.setPhoto(imageString);
 
 			} catch (IOException ex) {
-				cLog.error("Error saving uploaded file");
+				logger.error("Error saving uploaded file");
 				fetchedDataObject.setPhoto(ImageUtil.smallNoImage());
 			}
 		} else { // File is improper type or no file was uploaded.
@@ -191,7 +191,7 @@ public class VbbTopicController extends BaseController {
 		byte[] imageBytes = null;
 		VbbTopic topic = serviceManager.get(id);
 		if (CommonUtility.isNotEmpty(topic.getPhoto())){
-			cLog.info("Downloading photo for id: {} with size: {}", topic.getId(), topic.getPhoto().length());
+			logger.info("Downloading photo for id: {} with size: {}", topic.getId(), topic.getPhoto().length());
 
 			// Convert String image into byte[]
 			imageBytes = ImageUtil.decode(topic.getPhoto());
@@ -206,12 +206,12 @@ public class VbbTopicController extends BaseController {
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id, Model model, Locale locale) {
-		cLog.info("Deleting topic with id: " + id);
+		logger.info("Deleting topic with id: " + id);
 		VbbTopic topic = serviceManager.get(id);
 
 		if (topic != null) {
 			serviceManager.delete(topic);
-			cLog.info("Topic deleted successfully");
+			logger.info("Topic deleted successfully");
 
 			model.addAttribute("message", new Message("success", messageSource.getMessage("topic_delete_success", new Object[] {}, locale)));
 		}
@@ -228,7 +228,7 @@ public class VbbTopicController extends BaseController {
 
 	@RequestMapping(value = "/suggestCoordinator", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestCoordinator(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword for coordinator: " + keyword);
+		logger.info("Enter keyword for coordinator: " + keyword);
 		Page<ContactProfile> suggestedContacts = contactManager.search(keyword, null);
 		return buildCategorySelectedItems(suggestedContacts.getContent(), "id", "code", "fullName");
 	}
@@ -238,10 +238,10 @@ public class VbbTopicController extends BaseController {
    */
 	@RequestMapping(value={"/search/{searchPattern}", "/search"}, method = RequestMethod.GET)
 	public String search(@PathVariable Map<String, String> pathVariables, Model model) {
-		cLog.info("Searching topics ......");
+		logger.info("Searching topics ......");
 		Page<VbbTopic> pageContentData = null;
 		if (pathVariables.containsKey("searchPattern")){
-			cLog.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
+			logger.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
 			Short pageNumber = pathVariables.containsKey("pageNumber")?Short.valueOf(pathVariables.get("pageNumber")):(short)1;
 			pageContentData = serviceManager.search(WebServicingHelper.createSearchParameters(pathVariables.get("searchPattern"), pageNumber, null));
 		}else{

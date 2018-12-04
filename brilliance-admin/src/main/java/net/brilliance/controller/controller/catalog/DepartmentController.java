@@ -45,7 +45,7 @@ public class DepartmentController extends BaseController {
      */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request) {
-		cLog.info("Listing departments .....");
+		logger.info("Listing departments .....");
 
 		//List<Department> fetchedObjects = null;
 		if (businessServiceManager.count() < 1) {
@@ -79,10 +79,10 @@ public class DepartmentController extends BaseController {
    */
 	@RequestMapping(value={"/search/{searchPattern}", "/search"}, method = RequestMethod.GET)
 	public String search(@PathVariable Map<String, String> pathVariables, Model model) {
-		cLog.info("Searching all measure units");
+		logger.info("Searching all measure units");
 		Page<Department> pageContentData = null;
 		if (pathVariables.containsKey("searchPattern")){
-			cLog.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
+			logger.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
 			Short pageNumber = pathVariables.containsKey("pageNumber")?Short.valueOf(pathVariables.get("pageNumber")):(short)1;
 			pageContentData = businessServiceManager.search(WebServicingHelper.createSearchParameters(pathVariables.get("searchPattern"), pageNumber, null));
 		}else{
@@ -125,7 +125,7 @@ public class DepartmentController extends BaseController {
 			department.setParent(null);
 		}
 
-		cLog.info("Creating/updating department");
+		logger.info("Creating/updating department");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -146,7 +146,7 @@ public class DepartmentController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch department with id: " + id);
+		logger.info("Fetch department with id: " + id);
 
 		Department fetchedObject = businessServiceManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -158,7 +158,7 @@ public class DepartmentController extends BaseController {
 	@ResponseBody
 	public byte[] downloadAttachment(@PathVariable("id") Long id) {
 		Department fetchedObject = businessServiceManager.get(id);
-		cLog.info("Downloading attachment for id: {} with size: {}", fetchedObject.getId(), 0);
+		logger.info("Downloading attachment for id: {} with size: {}", fetchedObject.getId(), 0);
 
 		// Convert String image into byte[]
 		byte[] imageBytes = new byte[]{};
@@ -167,7 +167,7 @@ public class DepartmentController extends BaseController {
 
 	@RequestMapping(value="/refresh", method=RequestMethod.GET)
 	public String refreshDashboard(Model model) {
-		cLog.info("Refresh departments to get the latest department objects. ");
+		logger.info("Refresh departments to get the latest department objects. ");
 		return "redirect:/department/listDepartment/1";
 	}
 
@@ -215,7 +215,7 @@ public class DepartmentController extends BaseController {
 		// iterate a list and filter by tagName
 		for (Department dept : fetchedObjects) {
 			if (dept.getName().toLowerCase().contains(keyword.toLowerCase())||dept.getCode().toLowerCase().contains(keyword.toLowerCase())) {
-				suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getCode(), dept.getName()));
+				suggestedItems.add(SelectItem.builder().build().instance(dept.getId(), dept.getCode(), dept.getName()));
 			}
 		}
 		return suggestedItems;

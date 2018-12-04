@@ -62,7 +62,7 @@ public class JobDefinitionController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String onShow(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch office object with id: " + id);
+		logger.info("Fetch office object with id: " + id);
 
 		JobDefinition fetchedObject = businessService.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);

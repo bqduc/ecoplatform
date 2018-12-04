@@ -72,17 +72,17 @@ public class DashletController extends BaseController {
    */
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String exports(Model model, HttpServletRequest request) {
-		cLog.info("Exporting catalogue subtypes .....");
+		logger.info("Exporting catalogue subtypes .....");
 		return PAGE_CONTEXT_PREFIX + "Browse";
 	}
 
 	@RequestMapping(value = "/suggestDashboard", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestDashboard(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Dashboard keyword: " + keyword);
+		logger.info("Dashboard keyword: " + keyword);
 		List<SelectItem> suggestedItems = new ArrayList<>();
 		Page<DigitalDashboard> fetchedObjects = this.dashboardManager.searchObjects(keyword, null);
 		for (DigitalDashboard entity : fetchedObjects.getContent()) {
-			suggestedItems.add(new SelectItem(entity.getId(), entity.getName()));
+			suggestedItems.add(SelectItem.builder().id(entity.getId()).name(entity.getName()).build());
 		}
 		return suggestedItems;
 	}
@@ -121,7 +121,7 @@ public class DashletController extends BaseController {
 			uiBizObject.setParent(null);
 		}
 
-		cLog.info("Creating/updating catalogue subtype");
+		logger.info("Creating/updating catalogue subtype");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -167,7 +167,7 @@ public class DashletController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch business object of catalogue subtype with id: " + id);
+		logger.info("Fetch business object of catalogue subtype with id: " + id);
 
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, businessManager.getObject(id));
 		
@@ -179,7 +179,7 @@ public class DashletController extends BaseController {
 		List<SelectItem> suggestedItems = new ArrayList<>();
 		Page<DigitalDashlet> fetchedObjects = this.businessManager.searchObjects(keyword, null);
 		for (DigitalDashlet dept : fetchedObjects.getContent()) {
-			suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getName(), dept.getAccessURI()));
+			suggestedItems.add(SelectItem.builder().build().instance(dept.getId(), dept.getName(), dept.getAccessURI()));
 		}
 		return suggestedItems;
 	}

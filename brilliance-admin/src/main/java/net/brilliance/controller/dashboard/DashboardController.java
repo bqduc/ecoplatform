@@ -84,7 +84,7 @@ public class DashboardController extends BaseController {
 			uiBizObject.setParent(null);
 		}
 
-		cLog.info("Creating/updating dashboard");
+		logger.info("Creating/updating dashboard");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -110,7 +110,7 @@ public class DashboardController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch business object of catalogue subtype with id: " + id);
+		logger.info("Fetch business object of catalogue subtype with id: " + id);
 
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, businessManager.getObject(id));
 		
@@ -142,7 +142,7 @@ public class DashboardController extends BaseController {
 		List<SelectItem> suggestedItems = new ArrayList<>();
 		Page<DigitalDashboard> fetchedObjects = this.businessManager.searchObjects(keyword, null);
 		for (DigitalDashboard dept : fetchedObjects.getContent()) {
-			suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getSerial(), dept.getName()));
+			suggestedItems.add(SelectItem.builder().build().instance(dept.getId(), dept.getSerial(), dept.getName()));
 		}
 		return suggestedItems;
 	}

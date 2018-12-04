@@ -60,7 +60,7 @@ public class BusinessUnitController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String onShow(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch business unit object with id: " + id);
+		logger.info("Fetch business unit object with id: " + id);
 
 		BusinessUnit fetchedObject = businessServiceManager.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -89,12 +89,12 @@ public class BusinessUnitController extends BaseController {
 			params = ListUtility.createMap("dataStream", inputStream, "dataSheetName", "noname", "startedIndex", Integer.valueOf(1));
 			businessServiceManager.imports(params);
 		} catch (Exception e) {
-			cLog.error(CommonUtility.getStackTrace(e));
+			logger.error(CommonUtility.getStackTrace(e));
 		} finally{
 			try {
 				CommonUtility.closeInputStream(inputStream);
 			} catch (Exception e2) {
-				cLog.error(CommonUtility.getStackTrace(e2));
+				logger.error(CommonUtility.getStackTrace(e2));
 			}
 		}
 		return PAGE_CONTEXT_PREFIX + "Browse";

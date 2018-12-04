@@ -54,7 +54,7 @@ public class EmployeeController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String onShow(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch employee object with id: " + id);
+		logger.info("Fetch employee object with id: " + id);
 
 		Employee fetchedObject = businessManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -81,12 +81,12 @@ public class EmployeeController extends BaseController {
 			inputStream = CommonUtility.getClassPathResourceInputStream("/config/data/data-vpex-repaired.xlsx");
 			businessManager.importEmployees(inputStream, "chinh thuc", 1);
 		} catch (Exception e) {
-			cLog.error(CommonUtility.getStackTrace(e));
+			logger.error(CommonUtility.getStackTrace(e));
 		} finally{
 			try {
 				CommonUtility.closeInputStream(inputStream);
 			} catch (Exception e2) {
-				cLog.error(CommonUtility.getStackTrace(e2));
+				logger.error(CommonUtility.getStackTrace(e2));
 			}
 		}
 		return PAGE_CONTEXT + "employeeBrowse";

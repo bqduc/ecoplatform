@@ -55,7 +55,7 @@ public class ProjectController extends BaseController {
      */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request) {
-		cLog.info("Listing projects .....");
+		logger.info("Listing projects .....");
 
 		if (businessServiceManager.count() < 1) {
 			businessServiceManager.createDummyObjects();
@@ -114,7 +114,7 @@ public class ProjectController extends BaseController {
 			return PAGE_CONTEXT + "projectCreate";
 		}
 		
-		cLog.info("Creating/updating project");
+		logger.info("Creating/updating project");
 		String object = messageSource.getMessage("label.object.project", new Object[] {}, locale);
 		model.asMap().clear();
 		redirectAttributes.addFlashAttribute("message", new Message(
@@ -136,7 +136,7 @@ public class ProjectController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch project with id: " + id);
+		logger.info("Fetch project with id: " + id);
 
 		Project fetchedObject = businessServiceManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -148,7 +148,7 @@ public class ProjectController extends BaseController {
 	@ResponseBody
 	public byte[] downloadAttachment(@PathVariable("id") Long id) {
 		Project fetchedObject = businessServiceManager.get(id);
-		cLog.info("Downloading attachment for id: {} with size: {}", fetchedObject.getId(), 0);
+		logger.info("Downloading attachment for id: {} with size: {}", fetchedObject.getId(), 0);
 
 		// Convert String image into byte[]
 		byte[] imageBytes = new byte[]{};
@@ -157,7 +157,7 @@ public class ProjectController extends BaseController {
 
 	@RequestMapping(value="/refresh", method=RequestMethod.GET)
 	public String refreshDashboard(Model model) {
-		cLog.info("Refresh projects to get the latest project objects. ");
+		logger.info("Refresh projects to get the latest project objects. ");
 		return "redirect:/project/listProject/1";
 	}
 
@@ -208,7 +208,7 @@ public class ProjectController extends BaseController {
 			executionContext.putContextData(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX + "project", "yes");
 			globalDeploymentManager.deploy(executionContext);
 		} catch (Exception e) {
-			cLog.error(e);
+			logger.error(e);
 		}
 	}
 }

@@ -57,13 +57,13 @@ public class VbbPostController extends BaseController {
 	 */
 	@RequestMapping(value = { "/list", "" }, method = RequestMethod.GET)
 	public String list(Model model) {
-		cLog.info("Listing posts ...");
+		logger.info("Listing posts ...");
 		return DEFAULT_PAGED_REDIRECT;
 	}
 
 	@RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
 	public String listByPage(@PathVariable Integer pageNumber, Model model) {
-		cLog.info("Listing posts for page: ", pageNumber, ". At: ", Calendar.getInstance().getTime());
+		logger.info("Listing posts for page: ", pageNumber, ". At: ", Calendar.getInstance().getTime());
 
 		Page<VbbPost> page = serviceManager.getList(pageNumber);
 		int current = page.getNumber() + 1;
@@ -81,7 +81,7 @@ public class VbbPostController extends BaseController {
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Getting post with id: " + id);
+		logger.info("Getting post with id: " + id);
 
 		VbbPost post = serviceManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, post);
@@ -94,7 +94,7 @@ public class VbbPostController extends BaseController {
 	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
-		cLog.info("Edit post with id: " + id);
+		logger.info("Edit post with id: " + id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, serviceManager.get(id));
 		loadDependencies(model);
 		return PAGE_CONTEXT + "Edit";
@@ -122,7 +122,7 @@ public class VbbPostController extends BaseController {
 			return PAGE_CONTEXT + "Edit";
 		}
 
-		cLog.info("Creating/updating post");
+		logger.info("Creating/updating post");
 
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("post_save_success", new Object[] {}, locale)));
@@ -131,9 +131,9 @@ public class VbbPostController extends BaseController {
 		if (!file.isEmpty() && (file.getContentType().equals(MediaType.IMAGE_JPEG_VALUE) || file.getContentType().equals(MediaType.IMAGE_PNG_VALUE)
 				|| file.getContentType().equals(MediaType.IMAGE_GIF_VALUE))) {
 
-			cLog.info("File name: " + file.getName());
-			cLog.info("File size: " + file.getSize());
-			cLog.info("File content type: " + file.getContentType());
+			logger.info("File name: " + file.getName());
+			logger.info("File size: " + file.getSize());
+			logger.info("File content type: " + file.getContentType());
 
 			byte[] fileContent = null;
 			String imageString = null;
@@ -148,7 +148,7 @@ public class VbbPostController extends BaseController {
 				fetchedDataObject.setPhoto(imageString);
 
 			} catch (IOException ex) {
-				cLog.error("Error saving uploaded file");
+				logger.error("Error saving uploaded file");
 				fetchedDataObject.setPhoto(ImageUtil.smallNoImage());
 			}
 		} else { // File is improper type or no file was uploaded.
@@ -189,7 +189,7 @@ public class VbbPostController extends BaseController {
 		byte[] imageBytes = null;
 		VbbPost post = serviceManager.get(id);
 		if (CommonUtility.isNotEmpty(post.getPhoto())){
-			cLog.info("Downloading photo for id: {} with size: {}", post.getId(), post.getPhoto().length());
+			logger.info("Downloading photo for id: {} with size: {}", post.getId(), post.getPhoto().length());
 
 			// Convert String image into byte[]
 			imageBytes = ImageUtil.decode(post.getPhoto());
@@ -204,12 +204,12 @@ public class VbbPostController extends BaseController {
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id, Model model, Locale locale) {
-		cLog.info("Deleting post with id: " + id);
+		logger.info("Deleting post with id: " + id);
 		VbbPost post = serviceManager.get(id);
 
 		if (post != null) {
 			serviceManager.delete(post);
-			cLog.info("Post deleted successfully");
+			logger.info("Post deleted successfully");
 
 			model.addAttribute("message", new Message("success", messageSource.getMessage("post_delete_success", new Object[] {}, locale)));
 		}
@@ -226,7 +226,7 @@ public class VbbPostController extends BaseController {
 
 	@RequestMapping(value = "/suggestCoordinator", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestCoordinator(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword for coordinator: " + keyword);
+		logger.info("Enter keyword for coordinator: " + keyword);
 		Page<ContactProfile> suggestedContacts = contactManager.search(keyword, null);
 		return buildCategorySelectedItems(suggestedContacts.getContent(), "id", "code", "fullName");
 	}
@@ -236,10 +236,10 @@ public class VbbPostController extends BaseController {
    */
 	@RequestMapping(value={"/search/{searchPattern}", "/search"}, method = RequestMethod.GET)
 	public String search(@PathVariable Map<String, String> pathVariables, Model model) {
-		cLog.info("Searching posts ......");
+		logger.info("Searching posts ......");
 		Page<VbbPost> pageContentData = null;
 		if (pathVariables.containsKey("searchPattern")){
-			cLog.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
+			logger.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
 			Short pageNumber = pathVariables.containsKey("pageNumber")?Short.valueOf(pathVariables.get("pageNumber")):(short)1;
 			pageContentData = serviceManager.search(WebServicingHelper.createSearchParameters(pathVariables.get("searchPattern"), pageNumber, null));
 		}else{

@@ -1,7 +1,5 @@
 package net.brilliance.controller.contact;
 
-import java.io.InputStream;
-
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Page;
@@ -55,7 +53,7 @@ public class ContactController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String onShow(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch employee object with id: " + id);
+		logger.info("Fetch employee object with id: " + id);
 
 		Contact fetchedObject = businessServiceManager.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);

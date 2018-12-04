@@ -2,9 +2,6 @@ package net.brilliance.controller.controller.emp;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +16,12 @@ import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.manager.hc.EmployeeService;
 
 @RestController
-public class EmployeeRestController extends BaseRestController {
+public class EmployeeRestController extends BaseRestController<Employee> {
 	private final static String CACHED_EMPLOYEES = "cached.employees";
 	protected Logger logger = GlobalLoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private EmployeeService employeeService;
-
-  @Inject 
-  private HttpSession httpSession;
 
 	@RequestMapping(path = "/listEmployees", method = RequestMethod.GET)
 	public List<Employee> onListEmployees() {

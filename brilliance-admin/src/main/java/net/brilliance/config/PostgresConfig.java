@@ -1,5 +1,5 @@
 /*
-* Copyright 2017, Bui Quy Duc
+* Copyright 2018, Bui Quy Duc
 * by the @authors tag. See the LICENCE in the distribution for a
 * full listing of individual contributors.
 *

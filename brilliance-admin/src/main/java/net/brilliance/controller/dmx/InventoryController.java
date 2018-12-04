@@ -52,7 +52,7 @@ public class InventoryController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch employee object with id: " + id);
+		logger.info("Fetch employee object with id: " + id);
 
 		Inventory fetchedObject = businessService.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -79,12 +79,12 @@ public class InventoryController extends BaseController {
 			inputStream = CommonUtility.getClassPathResourceInputStream("/config/data/data-vpex-repaired.xlsx");
 			businessService.deploy(ExecutionContext.builder().build());//.importEmployees(inputStream, "chinh thuc", 1);
 		} catch (Exception e) {
-			cLog.error(CommonUtility.getStackTrace(e));
+			logger.error(CommonUtility.getStackTrace(e));
 		} finally{
 			try {
 				CommonUtility.closeInputStream(inputStream);
 			} catch (Exception e2) {
-				cLog.error(CommonUtility.getStackTrace(e2));
+				logger.error(CommonUtility.getStackTrace(e2));
 			}
 		}
 		return PAGE_CONTEXT_PREFIX + PAGE_POSTFIX_BROWSE;

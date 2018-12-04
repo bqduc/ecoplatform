@@ -48,9 +48,9 @@ public class CatalogueController extends BaseController {
    */
 	@Override
 	protected String performImport(Model model, HttpServletRequest request) {
-		cLog.info("Importing catalogs .....");
+		logger.info("Importing catalogs .....");
 		constructData();
-		cLog.info("Leave importing catalogs!");
+		logger.info("Leave importing catalogs!");
 		return "pages/general/catalog/catalogBrowse";
 	}
 
@@ -67,7 +67,7 @@ public class CatalogueController extends BaseController {
 
 	@Override
 	protected void constructData() {
-		cLog.info("Constructing catalogues data.....");
+		logger.info("Constructing catalogues data.....");
 
 		List<Catalogue> catalogues;
 		try {
@@ -78,9 +78,9 @@ public class CatalogueController extends BaseController {
 				}
 			}
 		} catch (EcosysException e) {
-			cLog.error("Import catalogues", e);
+			logger.error("Import catalogues", e);
 		}
-		cLog.info("Leave constructing catalogues data!");
+		logger.info("Leave constructing catalogues data!");
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class CatalogueController extends BaseController {
    */
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String exports(Model model, HttpServletRequest request) {
-		cLog.info("Exporting catalogs .....");
+		logger.info("Exporting catalogs .....");
 		return "pages/general/catalog/catalogBrowse";
 	}
 
@@ -123,7 +123,7 @@ public class CatalogueController extends BaseController {
 			department.setParent(null);
 		}
 
-		cLog.info("Creating/updating department");
+		logger.info("Creating/updating department");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -144,7 +144,7 @@ public class CatalogueController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch department with id: " + id);
+		logger.info("Fetch department with id: " + id);
 
 		Catalogue fetchedObject = businessManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -157,7 +157,7 @@ public class CatalogueController extends BaseController {
 		List<SelectItem> suggestedItems = new ArrayList<>();
 		List<Catalogue> fetchedObjects = this.businessManager.search(keyword);
 		for (Catalogue dept : fetchedObjects) {
-			suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getCode(), dept.getName()));
+			suggestedItems.add(SelectItem.builder().id(dept.getId()).code(dept.getCode()).name(dept.getName()).build());
 		}
 		return suggestedItems;
 	}

@@ -46,10 +46,10 @@ public class MeasureUnitController extends BaseController {
    */
 	@RequestMapping(value={"/searchUnits/{searchPattern}", "/searchUnits"}, method = RequestMethod.GET)
 	public String search(@PathVariable Map<String, String> pathVariables, Model model) {
-		cLog.info("Searching all measure units");
+		logger.info("Searching all measure units");
 		Page<MeasureUnit> pageContentData = null;
 		if (pathVariables.containsKey("searchPattern")){
-			cLog.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
+			logger.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
 			Short pageNumber = pathVariables.containsKey("pageNumber")?Short.valueOf(pathVariables.get("pageNumber")):(short)1;
 			pageContentData = businessService.search(WebServicingHelper.createSearchParameters(pathVariables.get("searchPattern"), pageNumber, null));
 		}else{
@@ -71,7 +71,7 @@ public class MeasureUnitController extends BaseController {
    */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request) {
-		cLog.info("Listing measure units .....");
+		logger.info("Listing measure units .....");
 
 		if (businessService.count() < 1) {
 			businessService.setupMasterData();;
@@ -82,7 +82,7 @@ public class MeasureUnitController extends BaseController {
 
 	@RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
 	public String list(@PathVariable Integer pageNumber, Model model) {
-		cLog.info("Listing measure units at: " + Calendar.getInstance().getTime());
+		logger.info("Listing measure units at: " + Calendar.getInstance().getTime());
 		
 		Page<MeasureUnit> page = businessService.getList(pageNumber);
 		int current = page.getNumber() + 1; 
@@ -119,7 +119,7 @@ public class MeasureUnitController extends BaseController {
 			measureUnit.setParent(null);
 		}
 
-		cLog.info("Creating/updating measure unit");
+		logger.info("Creating/updating measure unit");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -140,7 +140,7 @@ public class MeasureUnitController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch measureUnit with id: " + id);
+		logger.info("Fetch measureUnit with id: " + id);
 
 		MeasureUnit fetchedObject = businessService.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -152,7 +152,7 @@ public class MeasureUnitController extends BaseController {
 	@ResponseBody
 	public byte[] downloadAttachment(@PathVariable("id") Long id) {
 		MeasureUnit fetchedObject = businessService.get(id);
-		cLog.info("Downloading attachment for id: {} with size: {}", fetchedObject.getId(), 0);
+		logger.info("Downloading attachment for id: {} with size: {}", fetchedObject.getId(), 0);
 
 		// Convert String image into byte[]
 		byte[] imageBytes = new byte[]{};
@@ -161,14 +161,14 @@ public class MeasureUnitController extends BaseController {
 
 	@RequestMapping(value="/refresh", method=RequestMethod.GET)
 	public String refreshDashboard(Model model) {
-		cLog.info("Refresh measureUnits to get the latest measureUnit objects. ");
+		logger.info("Refresh measureUnits to get the latest measureUnit objects. ");
 		return "redirect:/measureUnit/list/1";
 	}
 
 	@RequestMapping(value = "/getParents", method = RequestMethod.GET)
 	@ResponseBody
 	public List<MeasureUnit> getParents(@RequestParam("term") String contextSearch, HttpServletRequest request) {
-		cLog.info("Enter the search !!!");
+		logger.info("Enter the search !!!");
 		return simulateSearchResult(request, contextSearch);
 	}
 
@@ -181,13 +181,13 @@ public class MeasureUnitController extends BaseController {
 				result.add(dept);
 			}
 		}
-		cLog.info("Result: " + result);
+		logger.info("Result: " + result);
 		return result;
 	}
 
 	@RequestMapping(value = "/get_tag_list", method = RequestMethod.GET)
 	public @ResponseBody List<Tag> getTagList(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter: " + keyword);
+		logger.info("Enter: " + keyword);
 		List<Tag> tagList = new ArrayList<>();
 		List<MeasureUnit> fetchedObjects = (List<MeasureUnit>)request.getSession().getAttribute(ControllerConstants.FETCHED_OBJECTS);
 		// iterate a list and filter by tagName
@@ -197,7 +197,7 @@ public class MeasureUnitController extends BaseController {
 			}
 		}
 
-		cLog.info("Leave: " + tagList.size());
+		logger.info("Leave: " + tagList.size());
 		return tagList;
 	}
 
@@ -209,7 +209,7 @@ public class MeasureUnitController extends BaseController {
 		// iterate a list and filter by tagName
 		for (MeasureUnit dept : fetchedObjects) {
 			if (dept.getName().toLowerCase().contains(keyword.toLowerCase())||dept.getCode().toLowerCase().contains(keyword.toLowerCase())) {
-				suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getCode(), dept.getName()));
+				suggestedItems.add(SelectItem.builder().build().instance(dept.getId(), dept.getCode(), dept.getName()));
 			}
 		}
 		return suggestedItems;

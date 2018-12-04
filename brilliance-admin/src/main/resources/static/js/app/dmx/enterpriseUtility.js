@@ -1,7 +1,7 @@
 var vnLanguageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json";
 var enLanguageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
 
-var contextPrefix = '/enterprise/';
+var contextPrefix = '/rapi/enterprise/';
 var currentLanguageUrl = vnLanguageUrl;
 var dataTableObject;
 var objectTableId = '#enterprisesTable';
@@ -90,9 +90,9 @@ $(document).ready( function () {
 				  } 
 	          }, 
 	          {"mData": "name"},
-	          {"mData": "translatedName"},
+	          {"mData": "nameLocal"},
 	          {"mData": "parent"},
-	          {"mData": "level"},
+	          {"mData": "issuedDate"},
 	          {"mData": "activated"},
 	          {"mData": "visible"}
 		],
@@ -102,7 +102,7 @@ $(document).ready( function () {
 		            { "width": "30%" },//Name
 		            { "width": "30%" },//Translated name
 		            { "width": "15%" },//Parent
-		            { "width": "5%" },//Level
+		            { "width": "5%" },//Issue date
 		            { "width": "5%" },//Activated
 		            { "width": "5%" } //Visible
 		          ]	

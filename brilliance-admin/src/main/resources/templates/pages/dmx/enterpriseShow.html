@@ -19,7 +19,7 @@
 	<section layout:fragment="header">
     <ol class="breadcrumb">
       <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
-      <li><a href="/catalogSubtype/"><i class="fa fa-dashboard"></i><span th:text="#{label.catalog.definitions}"></span></a></li>
+      <li><a href="/enterprise/"><i class="fa fa-dashboard"></i><span th:text="#{label.catalog.definitions}"></span></a></li>
       <li class="active" th:text="#{label.catalog.definition}"></li>
     </ol>
 	</section>
@@ -43,7 +43,7 @@
 			</tr>
 			<tr>
 				<td th:text="#{label.general.translatedName}"></td>
-				<td th:text="${fetchedObject.translatedName}"></td>
+				<td th:text="${fetchedObject.nameLocal}"></td>
 			</tr>
 			<tr>
 				<td th:text="#{label.general.parent}"></td>
@@ -56,13 +56,13 @@
 		</table>
 
 		<div>
-			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnEdit" th:href="@{/catalogSubtype/update/{id}(id=${fetchedObject.id})}"
+			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnEdit" th:href="@{/enterprise/update/{id}(id=${fetchedObject.id})}"
 				class="btn btn-primary" th:text="#{label.general.edit}"></a> 
 			
-			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnDelete" th:href="@{/catalogSubtype/delete/{id}(id=${fetchedObject.id})}"
+			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnDelete" th:href="@{/enterprise/delete/{id}(id=${fetchedObject.id})}"
 				class="btn btn-danger" th:text="#{label.general.delete}"></a>
 
-			<a id="btnCancel" th:href="@{/catalogSubtype/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
+			<a id="btnCancel" th:href="@{/enterprise/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
 		</div>
 	</div>
 </body>

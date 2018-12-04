@@ -67,7 +67,7 @@ public class VbbThreadController extends BaseController {
 	 */
 	@RequestMapping(value = { "/listTopicThreads/{topicId}"}, method = RequestMethod.GET)
 	public String listThreadsOfTopic(@PathVariable Long topicId, Model model) {
-		cLog.info("Listing threads of topics: " + topicId);
+		logger.info("Listing threads of topics: " + topicId);
 		//return DEFAULT_PAGED_REDIRECT;
 		return "redirect:/thread/list/" + topicId +"/1";
 	}
@@ -77,13 +77,13 @@ public class VbbThreadController extends BaseController {
 	 */
 	@RequestMapping(value = { "/list", "" }, method = RequestMethod.GET)
 	public String list(Model model) {
-		cLog.info("Listing threads ...");
+		logger.info("Listing threads ...");
 		return DEFAULT_PAGED_REDIRECT;
 	}
 
 	@RequestMapping(value = "/list/{topicId}/{pageNumber}", method = RequestMethod.GET)
 	public String listByPage(@PathVariable Long topicId, @PathVariable Integer pageNumber, Model model) {
-		cLog.info("Listing threads for page: ", pageNumber, ". At: ", Calendar.getInstance().getTime());
+		logger.info("Listing threads for page: ", pageNumber, ". At: ", Calendar.getInstance().getTime());
 
 		VbbTopic topic = topicManager.get(topicId);
 		model.addAttribute(CommonConstants.FETCHED_MASTER_OBJECT, topic);
@@ -104,7 +104,7 @@ public class VbbThreadController extends BaseController {
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Getting thread with id: " + id);
+		logger.info("Getting thread with id: " + id);
 
 		VbbThread thread = serviceManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, thread);
@@ -117,7 +117,7 @@ public class VbbThreadController extends BaseController {
 	 */
 	@RequestMapping(value = "/postOfThread{threadId}", method = RequestMethod.GET)
 	public String showPostsOfThread(@PathVariable("threadId") Long threadId, Model model) {
-		cLog.info("Getting posts of thread id: " + threadId);
+		logger.info("Getting posts of thread id: " + threadId);
 
 		VbbThread thread = serviceManager.get(threadId);
 		model.addAttribute(ControllerConstants.FETCHED_MASTER_OBJECT, thread);
@@ -138,7 +138,7 @@ public class VbbThreadController extends BaseController {
 	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
-		cLog.info("Edit thread with id: " + id);
+		logger.info("Edit thread with id: " + id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, serviceManager.get(id));
 		loadDependencies(model);
 		return PAGE_CONTEXT + "Edit";
@@ -166,7 +166,7 @@ public class VbbThreadController extends BaseController {
 			return PAGE_CONTEXT + "Edit";
 		}
 
-		cLog.info("Creating/updating thread");
+		logger.info("Creating/updating thread");
 
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("thread_save_success", new Object[] {}, locale)));
@@ -175,9 +175,9 @@ public class VbbThreadController extends BaseController {
 		if (!file.isEmpty() && (file.getContentType().equals(MediaType.IMAGE_JPEG_VALUE) || file.getContentType().equals(MediaType.IMAGE_PNG_VALUE)
 				|| file.getContentType().equals(MediaType.IMAGE_GIF_VALUE))) {
 
-			cLog.info("File name: " + file.getName());
-			cLog.info("File size: " + file.getSize());
-			cLog.info("File content type: " + file.getContentType());
+			logger.info("File name: " + file.getName());
+			logger.info("File size: " + file.getSize());
+			logger.info("File content type: " + file.getContentType());
 
 			byte[] fileContent = null;
 			String imageString = null;
@@ -192,7 +192,7 @@ public class VbbThreadController extends BaseController {
 				fetchedDataObject.setPhoto(imageString);
 
 			} catch (IOException ex) {
-				cLog.error("Error saving uploaded file");
+				logger.error("Error saving uploaded file");
 				fetchedDataObject.setPhoto(ImageUtil.smallNoImage());
 			}
 		} else { // File is improper type or no file was uploaded.
@@ -227,7 +227,7 @@ public class VbbThreadController extends BaseController {
 		byte[] imageBytes = null;
 		VbbThread thread = serviceManager.get(id);
 		if (CommonUtility.isNotEmpty(thread.getPhoto())){
-			cLog.info("Downloading photo for id: {} with size: {}", thread.getId(), thread.getPhoto().length());
+			logger.info("Downloading photo for id: {} with size: {}", thread.getId(), thread.getPhoto().length());
 
 			// Convert String image into byte[]
 			imageBytes = ImageUtil.decode(thread.getPhoto());
@@ -242,12 +242,12 @@ public class VbbThreadController extends BaseController {
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id, Model model, Locale locale) {
-		cLog.info("Deleting thread with id: " + id);
+		logger.info("Deleting thread with id: " + id);
 		VbbThread thread = serviceManager.get(id);
 
 		if (thread != null) {
 			serviceManager.delete(thread);
-			cLog.info("Thread deleted successfully");
+			logger.info("Thread deleted successfully");
 
 			model.addAttribute("message", new Message("success", messageSource.getMessage("thread_delete_success", new Object[] {}, locale)));
 		}
@@ -264,7 +264,7 @@ public class VbbThreadController extends BaseController {
 
 	@RequestMapping(value = "/suggestCoordinator", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestCoordinator(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword for coordinator: " + keyword);
+		logger.info("Enter keyword for coordinator: " + keyword);
 		Page<ContactProfile> suggestedContacts = contactManager.search(keyword, null);
 		return buildCategorySelectedItems(suggestedContacts.getContent(), "id", "code", "fullName");
 	}
@@ -274,10 +274,10 @@ public class VbbThreadController extends BaseController {
    */
 	@RequestMapping(value={"/search/{searchPattern}", "/search"}, method = RequestMethod.GET)
 	public String search(@PathVariable Map<String, String> pathVariables, Model model) {
-		cLog.info("Searching threads ......");
+		logger.info("Searching threads ......");
 		Page<VbbThread> pageContentData = null;
 		if (pathVariables.containsKey("searchPattern")){
-			cLog.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
+			logger.info("Searching measure units with keyword: " + pathVariables.containsKey("searchPattern"));
 			Short pageNumber = pathVariables.containsKey("pageNumber")?Short.valueOf(pathVariables.get("pageNumber")):(short)1;
 			pageContentData = serviceManager.search(WebServicingHelper.createSearchParameters(pathVariables.get("searchPattern"), pageNumber, null));
 		}else{

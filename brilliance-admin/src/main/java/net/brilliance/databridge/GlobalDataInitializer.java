@@ -16,12 +16,15 @@ import net.brilliance.common.CommonUtility;
 import net.brilliance.domain.entity.admin.BusinessUnit;
 import net.brilliance.domain.entity.admin.Office;
 import net.brilliance.domain.entity.common.Address;
+import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.domain.entity.general.CatalogueSubtype;
 import net.brilliance.domain.entity.schedule.JobCategory;
 import net.brilliance.domain.entity.schedule.JobDefinition;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.service.api.admin.BusinessUnitService;
 import net.brilliance.service.api.admin.OfficeService;
 import net.brilliance.service.api.admin.quartz.JobCategoryService;
+import net.brilliance.service.api.dmx.EnterpriseService;
 import net.brilliance.service.api.inventory.CatalogueSubtypeService;
 
 /**
@@ -36,6 +39,9 @@ public class GlobalDataInitializer {
 
 	@Inject
 	private BusinessUnitService bizUnitServiceManager;
+
+	@Inject
+	private EnterpriseService enterpriseService;
 
 	@Inject
 	private CatalogueSubtypeService catalogueSubtypeService;
@@ -144,5 +150,28 @@ public class GlobalDataInitializer {
 		};
 
 		return null;
+	}
+
+	public void buildFakeEnterprises(ExecutionContext excecutionContext){
+		Enterprise currentObject = null;
+		if (excecutionContext.isEmpty()){
+			//Build the fake enterprise objects
+			Faker faker = new Faker();
+			for (int i = 0; i < DataInitializerRepo.NUMBER_TO_GENERATE; i++) {
+				try {
+					currentObject = Enterprise.builder()
+							.code(faker.code().ean13())
+							.name(CommonUtility.stringTruncate(faker.company().name(), 200))
+							.nameLocal(CommonUtility.stringTruncate(faker.company().name(), 200))
+							.description(faker.company().industry() + "\n" + faker.commerce().department() + "\n" + faker.company().profession())
+							.build();
+					enterpriseService.saveOrUpdate(currentObject);
+				} catch (Exception e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		} else {
+			//Inquiry information from execution context parameter, parse and persist. 
+		}
 	}
 }

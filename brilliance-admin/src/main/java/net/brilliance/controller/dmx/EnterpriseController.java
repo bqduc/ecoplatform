@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Page;
@@ -20,23 +19,32 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.common.GUUISequenceGenerator;
+import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
+import net.brilliance.databridge.GlobalDataInitializer;
+import net.brilliance.domain.entity.contact.Contact;
 import net.brilliance.domain.entity.dmx.Enterprise;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.model.SequenceType;
 import net.brilliance.model.SelectItem;
+import net.brilliance.model.ui.UISelectItem;
 import net.brilliance.runnable.UpdateSystemSequenceThread;
+import net.brilliance.service.api.contact.ContactService;
 import net.brilliance.service.api.dmx.EnterpriseService;
 
 @Controller
-@RequestMapping("/" + ControllerConstants.REQ_MAPPING_ENTERPRISE)
+@RequestMapping(ControllerConstants.REQ_MAPPING_ENTERPRISE)
 public class EnterpriseController extends BaseController { 
 	private static final String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "dmx/enterprise";
 
@@ -46,24 +54,29 @@ public class EnterpriseController extends BaseController {
 	@Inject
 	private ApplicationContext applicationContext;
 
-	@Autowired
+	@Inject
 	private EnterpriseService businessManager;
 
+	@Inject
+	private ContactService contactService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) {
-		return PAGE_CONTEXT_PREFIX + "Browse";
+	@Inject 
+	private GlobalDataInitializer globalDataInitializer;
+
+	@RequestMapping(path={"/", ""}, method=RequestMethod.GET)
+	public String viewDefaultPage(){
+		return getDefaultPage();
 	}
+
+	/*@RequestMapping(method = RequestMethod.GET)
+	public String list(Model model, HttpServletRequest request) {
+		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
+	}*/
 
 	@Override
 	protected String performListing(Model model, HttpServletRequest request) {
 		System.out.println("catalogue subtypes performListing");
-		return PAGE_CONTEXT_PREFIX + "Browse";
-	}
-
-	@Override
-	protected void onPostConstruct() {
-		super.postConstructData("Setup catalogue subtypes");
+		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
 	}
 
 	/**
@@ -71,8 +84,8 @@ public class EnterpriseController extends BaseController {
    */
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String exports(Model model, HttpServletRequest request) {
-		cLog.info("Exporting catalogue subtypes .....");
-		return PAGE_CONTEXT_PREFIX + "Browse";
+		logger.info("Exporting catalogue subtypes .....");
+		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
 	}
 
 	/**
@@ -80,14 +93,14 @@ public class EnterpriseController extends BaseController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		String guuId = GUUISequenceGenerator.getInstance().nextGUUIdString(SequenceType.CATALOG_SUBTYPE.getType());
+		String guuId = GUUISequenceGenerator.getInstance().nextGUUIdString(SequenceType.ENTERPRISE.getType());
 
 		Enterprise newEnterprise = Enterprise
 		.builder()
 		.code(guuId)
 		.build();
 		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, newEnterprise);
-		return PAGE_CONTEXT_PREFIX + "Edit";
+		return PAGE_CONTEXT_PREFIX + ControllerConstants.EDIT;
 	}
 
 	/**
@@ -100,14 +113,14 @@ public class EnterpriseController extends BaseController {
 		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, uiBizObject);
-			return PAGE_CONTEXT_PREFIX + "Edit";
+			return PAGE_CONTEXT_PREFIX + ControllerConstants.EDIT;
 		}
 
 		if (!CommonUtility.isNull(uiBizObject.getParent()) && CommonUtility.isNull(uiBizObject.getParent().getId())){
 			uiBizObject.setParent(null);
 		}
 
-		cLog.info("Creating/updating catalogue subtype");
+		logger.info("Creating/updating catalogue subtype");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -128,24 +141,24 @@ public class EnterpriseController extends BaseController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model model) {
 			model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, businessManager.getObject(id));
-			return PAGE_CONTEXT_PREFIX + "Edit";
+			return PAGE_CONTEXT_PREFIX + ControllerConstants.EDIT;
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch business object of catalogue subtype with id: " + id);
+		logger.info("Fetch business object of catalogue subtype with id: " + id);
 
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, businessManager.getObject(id));
 		
-		return PAGE_CONTEXT_PREFIX + "Show";
+		return PAGE_CONTEXT_PREFIX + ControllerConstants.VIEW;
 	}
 
 	@Override
 	protected List<SelectItem> suggestItems(String keyword) {
 		List<SelectItem> suggestedItems = new ArrayList<>();
 		Page<Enterprise> fetchedObjects = this.businessManager.searchObjects(keyword, null);
-		for (Enterprise dept : fetchedObjects.getContent()) {
-			suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getCode(), dept.getName()));
+		for (Enterprise bizObject :fetchedObjects.getContent()) {
+			suggestedItems.add(SelectItem.builder().build().instance(bizObject.getId(), bizObject.getCode(), bizObject.getName()));
 		}
 		return suggestedItems;
 	}
@@ -168,4 +181,29 @@ public class EnterpriseController extends BaseController {
 		params.getModel().addAttribute("catalogues", pageContentData);
 		return pageContentData.getContent();
 	}*/
+
+	private String getDefaultPage(){
+		if (1 > this.businessManager.count()){
+			this.globalDataInitializer.buildFakeEnterprises(ExecutionContext.builder().build());
+		}
+		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
+	}
+
+	@RequestMapping(value = "/suggestCoordinator", method = RequestMethod.GET)
+	public @ResponseBody List<UISelectItem> suggestObject(HttpServletRequest request, @RequestParam("keyword") String keyword) {
+		logger.info("Enter keyword: " + keyword);
+		Page<Contact> contacts = contactService.searchObjects(keyword, null);
+		System.out.println(contacts.getContent());
+		List<UISelectItem> uiSelectItems = ListUtility.createSelectItems(contacts.getContent(), 
+				ListUtility.createMap(
+  				CommonConstants.PROPERTY_KEY, "id", 
+  				CommonConstants.PROPERTY_CODE, "code", 
+  				CommonConstants.PROPERTY_NAME, "name", 
+  				CommonConstants.PROPERTY_NAME_LOCAL, "nameLocal")
+				);
+		if (CommonUtility.isNull(uiSelectItems)){
+			uiSelectItems = ListUtility.createArrayList();
+		}
+		return uiSelectItems;
+	}
 }

@@ -55,7 +55,7 @@ public class ProductController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String onShow(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch employee object with id: " + id);
+		logger.info("Fetch employee object with id: " + id);
 
 		Product fetchedObject = businessServiceManager.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);

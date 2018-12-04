@@ -44,7 +44,7 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
-		cLog.info("Listing categories ....");
+		logger.info("Listing categories ....");
 		if (businessManager.count() < 1) {
 			businessManager.createDummyObjects();
 		}
@@ -94,7 +94,7 @@ public class CategoryController extends BaseController {
 			return PAGE_CONTEXT + "categoryEdit";
 		}
 
-		cLog.info("Creating/updating category");
+		logger.info("Creating/updating category");
 
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -115,7 +115,7 @@ public class CategoryController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch project with id: " + id);
+		logger.info("Fetch project with id: " + id);
 
 		Category fetchedObject = businessManager.getById(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -127,7 +127,7 @@ public class CategoryController extends BaseController {
 	@ResponseBody
 	public byte[] downloadAttachment(@PathVariable("id") Long id) {
 		Category currentEntity = businessManager.getById(id);
-		cLog.info("Downloading attachment for id: {} with size: {}", currentEntity.getId(), 0);
+		logger.info("Downloading attachment for id: {} with size: {}", currentEntity.getId(), 0);
 
 		// Convert String image into byte[]
 		byte[] imageBytes = new byte[] {};
@@ -136,7 +136,7 @@ public class CategoryController extends BaseController {
 
 	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	public String refreshDashboard(Model model) {
-		cLog.info("Refresh category to get the latest category objects. ");
+		logger.info("Refresh category to get the latest category objects. ");
 
 		List<Category> fetchedObject = businessManager.getAll();
 		model.addAttribute("fetchedObjects", fetchedObject);
@@ -152,7 +152,7 @@ public class CategoryController extends BaseController {
 		// iterate a list and filter by tagName
 		for (Category category : fetchedObjects) {
 			if (category.getName().toLowerCase().contains(keyword.toLowerCase()) || category.getCode().toLowerCase().contains(keyword.toLowerCase())) {
-				suggestedItems.add(new SelectItem(category.getId().intValue(), category.getCode(), category.getName()));
+				suggestedItems.add(SelectItem.builder().id(category.getId()).code(category.getCode()).name(category.getName()).build());
 			}
 		}
 		return suggestedItems;

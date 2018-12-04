@@ -10,6 +10,10 @@ import net.brilliance.common.CommonConstants;
  *
  */
 public final class ControllerConstants implements CommonConstants{
+	public static final String BROWSE = "Browse";
+	public static final String VIEW = "Show";
+	public static final String EDIT = "Edit";
+
 	public static final String DEAULT_PAGE_CONTEXT_PREFIX = "/";
 
 	public static final String PARAM_CREATE_OTHER = "continuedCreateOther";

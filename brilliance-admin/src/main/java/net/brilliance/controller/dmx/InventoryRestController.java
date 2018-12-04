@@ -3,7 +3,6 @@ package net.brilliance.controller.dmx;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +24,6 @@ public class InventoryRestController extends BaseRestController {
 
 	@Inject
 	private InventoryService businessService;
-
-  @Inject 
-  private HttpSession httpSession;
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/list", method = RequestMethod.GET)

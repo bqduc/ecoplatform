@@ -41,7 +41,7 @@ public class AuthorityController extends BaseController {
 	 */
 	@RequestMapping(value = { "/list", "" }, method = RequestMethod.GET)
 	public String list(Model model) {
-		cLog.info("Listing all objects");
+		logger.info("Listing all objects");
 
 		if (serviceManager.count() < 1) {
 			// serviceManager.createDummyObjects();
@@ -51,7 +51,7 @@ public class AuthorityController extends BaseController {
 
 	@RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
 	public String listByPage(@PathVariable Integer pageNumber, Model model) {
-		cLog.info("Listing objects at: " + Calendar.getInstance().getTime());
+		logger.info("Listing objects at: " + Calendar.getInstance().getTime());
 
 		Page<Authority> pageContent = serviceManager.getList(pageNumber);
 		int current = pageContent.getNumber() + 1;
@@ -69,7 +69,7 @@ public class AuthorityController extends BaseController {
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Getting object with id: " + id);
+		logger.info("Getting object with id: " + id);
 
 		Authority fetchedObject = serviceManager.get(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -82,7 +82,7 @@ public class AuthorityController extends BaseController {
 	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
-		cLog.info("Edit object with id: " + id);
+		logger.info("Edit object with id: " + id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, serviceManager.get(id));
 		loadDependencies(model);
 		return PAGE_CONTEXT + "Edit";
@@ -110,7 +110,7 @@ public class AuthorityController extends BaseController {
 			return PAGE_CONTEXT + "Edit";
 		}
 
-		cLog.info("Creating/updating module");
+		logger.info("Creating/updating module");
 
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("product_save_success", new Object[] {}, locale)));
@@ -130,12 +130,12 @@ public class AuthorityController extends BaseController {
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id, Model model, Locale locale) {
-		cLog.info("Deleting module with id: " + id);
+		logger.info("Deleting module with id: " + id);
 		Authority module = serviceManager.get(id);
 
 		if (module != null) {
 			serviceManager.delete(module);
-			cLog.info("Authority deleted successfully");
+			logger.info("Authority deleted successfully");
 
 			//model.addAttribute("message", new Message("success", messageSource.getMessage("product_delete_success", new Object[] {}, locale)));
 		}
@@ -155,10 +155,11 @@ public class AuthorityController extends BaseController {
 			return null;
 
 		Authority module = (Authority)beanObject;
-		return new SelectItem()
-				.setId(module.getId())
-				.setCode(module.getName())
-				.setName(module.getName());
+		return SelectItem.builder()
+				.id(module.getId())
+				.code(module.getName())
+				.name(module.getName())
+				.build();
 	}
 
 	@Override

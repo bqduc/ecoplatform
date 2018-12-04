@@ -72,7 +72,7 @@ public class JobCategoryController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String onShow(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch office object with id: " + id);
+		logger.info("Fetch office object with id: " + id);
 
 		JobCategory fetchedObject = businessService.getObject(id);
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, fetchedObject);
@@ -101,7 +101,7 @@ public class JobCategoryController extends BaseController {
 			return PAGE_CONTEXT_PREFIX + "Edit";
 		}
 
-		cLog.info("Creating/updating project");
+		logger.info("Creating/updating project");
 		String object = messageSource.getMessage("label.object.project", new Object[] {}, locale);
 		model.asMap().clear();
 		redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("label.general.saveSuccess", new Object[] { object }, locale)));

@@ -64,9 +64,9 @@ public class CatalogueSubtypeController extends BaseController {
    */
 	@Override
 	protected String performImport(Model model, HttpServletRequest request) {
-		cLog.info("Importing catalogue subtypes .....");
+		logger.info("Importing catalogue subtypes .....");
 		constructData();
-		cLog.info("Leave importing catalog-subtypes!");
+		logger.info("Leave importing catalog-subtypes!");
 		return PAGE_CONTEXT_PREFIX + "Browse";
 	}
 
@@ -83,7 +83,7 @@ public class CatalogueSubtypeController extends BaseController {
 
 	@Override
 	protected void constructData() {
-		cLog.info("Constructing catalogue subtypes data.....");
+		logger.info("Constructing catalogue subtypes data.....");
 
 		//List<CatalogueSubtype> catalogues;
 		try {
@@ -94,9 +94,9 @@ public class CatalogueSubtypeController extends BaseController {
 				}
 			}*/
 		} catch (Exception e) {
-			cLog.error("Import catalogues", e);
+			logger.error("Import catalogues", e);
 		}
-		cLog.info("Leave constructing catalogue subtypes data!");
+		logger.info("Leave constructing catalogue subtypes data!");
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class CatalogueSubtypeController extends BaseController {
    */
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String exports(Model model, HttpServletRequest request) {
-		cLog.info("Exporting catalogue subtypes .....");
+		logger.info("Exporting catalogue subtypes .....");
 		return PAGE_CONTEXT_PREFIX + "Browse";
 	}
 
@@ -145,7 +145,7 @@ public class CatalogueSubtypeController extends BaseController {
 			uiBizObject.setParent(null);
 		}
 
-		cLog.info("Creating/updating catalogue subtype");
+		logger.info("Creating/updating catalogue subtype");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
@@ -171,7 +171,7 @@ public class CatalogueSubtypeController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model model) {
-		cLog.info("Fetch business object of catalogue subtype with id: " + id);
+		logger.info("Fetch business object of catalogue subtype with id: " + id);
 
 		model.addAttribute(ControllerConstants.FETCHED_OBJECT, businessManager.getObject(id));
 		
@@ -183,7 +183,7 @@ public class CatalogueSubtypeController extends BaseController {
 		List<SelectItem> suggestedItems = new ArrayList<>();
 		Page<CatalogueSubtype> fetchedObjects = this.businessManager.searchObjects(keyword, null);
 		for (CatalogueSubtype dept : fetchedObjects.getContent()) {
-			suggestedItems.add(new SelectItem(dept.getId().intValue(), dept.getCode(), dept.getName()));
+			suggestedItems.add(SelectItem.builder().id(dept.getId()).code(dept.getCode()).name(dept.getName()).build());
 		}
 		return suggestedItems;
 	}

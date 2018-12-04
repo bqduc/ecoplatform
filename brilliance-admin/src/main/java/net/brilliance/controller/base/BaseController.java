@@ -84,7 +84,7 @@ public abstract class BaseController {
 	private GlobalDataServiceHelper globalDataServiceHelper;
 
 	@Inject 
-	protected CommonLoggingService cLog;
+	protected CommonLoggingService logger;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -101,14 +101,14 @@ public abstract class BaseController {
   //@PostConstruct
   protected void init() {
   	String className = this.getClass().getName();
-  	cLog.info("Enter post construction of " + className);
+  	logger.info("Enter post construction of " + className);
   	onPostConstruct();
-  	cLog.info("Leave post construction of " + className);
+  	logger.info("Leave post construction of " + className);
   }
 
 	@PostMapping(value = "/search/query", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String search(@RequestBody(required = false) SearchParameter params, Model model, Pageable pageable) {
-		cLog.info("Enter search/query");
+		logger.info("Enter search/query");
 		return performSearch(
 				params
 				.setPageable(pageable)
@@ -117,7 +117,7 @@ public abstract class BaseController {
 
 	@RequestMapping(path="/searchex/query", method=RequestMethod.GET)
 	public List query(@RequestBody(required = false) SearchParameter params, Model model, Pageable pageable) {
-		cLog.info("Enter search/query");
+		logger.info("Enter search/query");
 		return performSearchObjects(
 				params
 				.setPageable(pageable)
@@ -139,7 +139,7 @@ public abstract class BaseController {
 
 	@RequestMapping(value = "/suggest", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggest(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword: " + keyword);
+		logger.info("Enter keyword: " + keyword);
 		List<SelectItem> suggestedItems = suggestItems(keyword);
 		if (CommonUtility.isNull(suggestedItems)){
 			suggestedItems = new ArrayList<>();
@@ -153,14 +153,14 @@ public abstract class BaseController {
 
 	@RequestMapping(value = "/suggestDepartment", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestDepartment(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword for category: " + keyword);
+		logger.info("Enter keyword for category: " + keyword);
 		Page<Department> suggestedCategories = departmentServiceManager.search(WebServicingHelper.createSearchParameters(keyword, null, null));
 		return buildCategorySelectedItems(suggestedCategories.getContent());
 	}
 
 	@RequestMapping(value = "/suggestCategory", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestCategory(@RequestParam("term") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword for category: " + keyword);
+		logger.info("Enter keyword for category: " + keyword);
 		Page<Category> suggestedCategories = categoryServiceManager.search(WebServicingHelper.createSearchParameters(keyword, null, null));
 		return buildCategorySelectedItems(suggestedCategories.getContent());
 	}
@@ -173,7 +173,7 @@ public abstract class BaseController {
 			objectId = (Long)BeanUtils.getBeanProperty(object, "id");
 			objectCode = (String)BeanUtils.getBeanProperty(object, "code");
 			objectName = (String)BeanUtils.getBeanProperty(object, "name");
-			selectItems.add(new SelectItem(objectId, objectCode, objectName));
+			selectItems.add(SelectItem.builder().id(objectId).code(objectCode).name(objectName).build());
 		}
 		return selectItems;
 	}
@@ -186,7 +186,7 @@ public abstract class BaseController {
 			objectId = (Long)BeanUtils.getBeanProperty(object, idProperty);
 			objectCode = (String)BeanUtils.getBeanProperty(object, displayCodeProperty);
 			objectName = (String)BeanUtils.getBeanProperty(object, displayNameProperty);
-			selectItems.add(new SelectItem(objectId, objectCode, objectName));
+			selectItems.add(SelectItem.builder().id(objectId).code(objectCode).name(objectName).build());
 		}
 		return selectItems;
 	}
@@ -199,7 +199,7 @@ public abstract class BaseController {
 			objectId = (Long)BeanUtils.getBeanProperty(object, "id");
 			objectCode = (String)BeanUtils.getBeanProperty(object, "code");
 			objectName = (String)BeanUtils.getBeanProperty(object, "name");
-			selectItems.add(new SelectItem(objectId, objectCode, objectName));
+			selectItems.add(SelectItem.builder().id(objectId).code(objectCode).name(objectName).build());
 		}
 		return selectItems;
 	}
@@ -214,14 +214,14 @@ public abstract class BaseController {
 				displayValueMap.put(displayProperty, BeanUtils.getBeanProperty(object, displayProperty));
 			}
 
-			selectItems.add(SelectItem.buildInstance(objectId, displayValueMap));
+			selectItems.add(SelectItem.builder().build().instance(objectId, displayValueMap));
 		}
 		return selectItems;
 	}
 
 	@RequestMapping(value = "/suggestObjects", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestObject(@RequestParam("keyword") String keyword, HttpServletRequest request) {
-		cLog.info("Enter keyword: " + keyword);
+		logger.info("Enter keyword: " + keyword);
 		List<SelectItem> suggestedItems = suggestItems(keyword);
 		if (CommonUtility.isNull(suggestedItems)){
 			suggestedItems = new ArrayList<>();
@@ -288,7 +288,7 @@ public abstract class BaseController {
         return request;
     }
 
-    cLog.debug("Not called in the context of an HTTP request");
+    logger.debug("Not called in the context of an HTTP request");
     return null;
 	}	
 
@@ -325,9 +325,9 @@ public abstract class BaseController {
    */
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
 	public String imports(Model model, HttpServletRequest request) {
-		cLog.info("Importing business objects .....");
+		logger.info("Importing business objects .....");
 		String importResults = performImport(model, request);
-		cLog.info("Leave importing business objects!");
+		logger.info("Leave importing business objects!");
 		return importResults;
 	}
 
@@ -340,9 +340,9 @@ public abstract class BaseController {
    */
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String exports(Model model, HttpServletRequest request) {
-		cLog.info("Exporting business objects .....");
+		logger.info("Exporting business objects .....");
 		String exportResults = performExport(model, request);
-		cLog.info("Leaving exporting business objects .....");
+		logger.info("Leaving exporting business objects .....");
 		return exportResults;
 	}
 

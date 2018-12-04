@@ -64,7 +64,7 @@ public class ClientController extends BaseController{
    */
 	@RequestMapping(value={"/search/{searchPattern}", "/search"}, method = RequestMethod.GET)
 	public String search(@PathVariable Map<String, String> pathVariables, Model model, @PageableDefault Pageable pageable) {
-		cLog.info("Searching all measure units");
+		logger.info("Searching all measure units");
 		Page<ClientProfile> pageContentData = null;
 		if (pathVariables.containsKey("searchPattern")){
 			SearchCondition searchCondition = SearchCondition.getInstance(pageable, pathVariables);
