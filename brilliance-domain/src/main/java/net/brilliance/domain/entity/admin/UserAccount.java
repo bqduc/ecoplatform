@@ -91,6 +91,10 @@ public class UserAccount extends BaseObject implements AuthAccount {
 	@Column(name = "locked")
 	private Boolean locked = false;
 
+	@Builder.Default
+	@Column(name = "system_admin")
+	private Boolean systemAdmin = false;
+
 	@Size(max = 50)
 	@Column(name = "first_name")
 	private String firstName;
@@ -278,5 +282,13 @@ public class UserAccount extends BaseObject implements AuthAccount {
 
 	public void setLocked(Boolean locked) {
 		this.locked = locked;
+	}
+
+	public Boolean getSystemAdmin() {
+		return systemAdmin;
+	}
+
+	public void setSystemAdmin(Boolean systemAdmin) {
+		this.systemAdmin = systemAdmin;
 	}
 }

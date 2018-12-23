@@ -68,6 +68,9 @@ var skinsLabelYellowLight = 'Yellow Light';
     <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"/>
 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+		<!-- Menu -->
+		<link rel="stylesheet" href="/css/menu/menu.min.css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -100,6 +103,18 @@ var skinsLabelYellowLight = 'Yellow Light';
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+	<!-- Smart Menu -->
+	<!-- SmartMenus core CSS (required) -->
+    <link href="/css/smartmenu/sm-core-css.css" rel="stylesheet" type="text/css" />
+    <link href="/css/smartmenu/sm-core-mega.css" rel="stylesheet" type="text/css" />
+
+    <!-- "sm-blue" menu theme (optional, you can use your own CSS, too) -->
+    <link href="/css/smartmenu/sm-blue/sm-blue.css" rel="stylesheet" type="text/css" />
+
+    <!-- YOU DO NOT NEED THIS - demo page content styles -->
+    <!-- <link href="/css/smartmenu/libs/demo-assets/demo.css" rel="stylesheet" type="text/css" /> -->
+	<!-- End of Smart Menu -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
@@ -203,5 +218,47 @@ var skinsLabelYellowLight = 'Yellow Light';
 	toggleRightSidebarSkinInfo = '[(#{label.control.toggleRightSidebarSkinInfo})]';
 </script>
 <script src="/dist/js/demo.js"></script>
+
+<!-- Smart Menu -->
+    <!-- jQuery -->
+    <!-- <script type="text/javascript" src="/css/smartmenu/libs/jquery/jquery.js"></script> -->
+
+    <!-- SmartMenus jQuery plugin -->
+    <script type="text/javascript" src="/css/smartmenu/jquery.smartmenus.js"></script>
+
+    <!-- SmartMenus jQuery init -->
+    <script type="text/javascript">
+    	$(function() {
+    		$('#main-menu').smartmenus({
+    			subMenusSubOffsetX: 1,
+    			subMenusSubOffsetY: -8
+    		});
+    	});
+    	
+    	// SmartMenus mobile menu toggle button
+    	$(function() {
+    	  var $mainMenuState = $('#main-menu-state');
+    	  if ($mainMenuState.length) {
+    	    // animate mobile menu
+    	    $mainMenuState.change(function(e) {
+    	      var $menu = $('#main-menu');
+    	      if (this.checked) {
+    	        $menu.hide().slideDown(250, function() { $menu.css('display', ''); });
+    	      } else {
+    	        $menu.show().slideUp(250, function() { $menu.css('display', ''); });
+    	      }
+    	    });
+    	    // hide mobile menu beforeunload
+    	    $(window).bind('beforeunload unload', function() {
+    	      if ($mainMenuState[0].checked) {
+    	        $mainMenuState[0].click();
+    	      }
+    	    });
+    	  }
+    	});    	
+    </script>
+    <!-- YOU DO NOT NEED THIS - demo page themes switcher -->
+    <!-- <script type="text/javascript" src="/css/smartmenu/libs/demo-assets/themes-switcher.js"></script> -->
+<!-- End of smart menu -->
 </body>
 </html>

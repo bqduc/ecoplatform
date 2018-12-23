@@ -30,7 +30,7 @@ import net.brilliance.service.api.admin.OfficeService;
 @Controller
 @RequestMapping(ControllerConstants.REQUEST_URI_OFFICE)
 public class OfficeController extends BaseController {
-	private static final String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "admin/org/office";
+	private static final String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "admin/office";
 
 	@Inject
 	private OfficeService businessServiceManager;

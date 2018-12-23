@@ -34,7 +34,7 @@ import net.brilliance.domain.model.StakeholderType;
 import net.brilliance.framework.entity.BaseObject;
 
 /**
- * A localized item.
+ * A project shareholder definition.
  * 
  * @author ducbq
  */
@@ -69,6 +69,9 @@ public class ProjectStakeholder extends BaseObject {
 
 	@Column(name = "closed_date")
 	private Date closedDate;
+
+	@Column(name = "shareholder_ratio")
+	private Float shareholderRatio;
 
 	@Lob
 	@Column(name = "description", columnDefinition = "TEXT")
@@ -129,6 +132,14 @@ public class ProjectStakeholder extends BaseObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Float getShareholderRatio() {
+		return shareholderRatio;
+	}
+
+	public void setShareholderRatio(Float shareholderRatio) {
+		this.shareholderRatio = shareholderRatio;
 	}
 
 }

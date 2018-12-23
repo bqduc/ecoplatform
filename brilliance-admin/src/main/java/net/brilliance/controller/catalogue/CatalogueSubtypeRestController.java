@@ -28,12 +28,12 @@ public class CatalogueSubtypeRestController extends BaseRestController{
 
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public List<CatalogueSubtype> onListCatalogueSubtypes(HttpServletRequest request, HttpServletResponse response, Model model) {
-		cLog.info("Rest::Come to catalogue subtype data listing ...>>>>>>");
+		logger.info("Rest::Come to catalogue subtype data listing ...>>>>>>");
 		PageRequest pageRequest = new PageRequest(0, 500, Sort.Direction.ASC, "id");
 		SearchParameter searchParameter = SearchParameter.getInstance()
 				.setPageable(pageRequest);
 		Page<CatalogueSubtype> objects = businessManager.getObjects(searchParameter);
-		cLog.info("Catalogue subtype data is loaded. >>>>>>");
+		logger.info("Catalogue subtype data is loaded. >>>>>>");
 		return objects.getContent();
 	}
 }

@@ -11,6 +11,7 @@ public enum SequenceType {
 	DASHBOARD("DSB"),
 	DASHLET("DSL"),
 
+	CLIENT_USER_ACCOUNT("CUA"),
 	ENTERPRISE("ENT"),
 
 	CATALOG_SUBTYPE("CST"),

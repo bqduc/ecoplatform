@@ -57,6 +57,12 @@ public class GUUISequenceGenerator {
 		return sbGuuId.toString();
 	}
 
+	public String nextGUUIdString(String sequence, GeneratorAlgorithm generatorAlgorithm){
+		StringBuilder sbGuuId = new StringBuilder(sequence)
+				.append(this.getNextGloballyUnique(sequence));
+		return sbGuuId.toString();
+	}
+
 	/**
 	 * Returns a globally unique long integer.
 	 */

@@ -4,15 +4,10 @@
 package net.brilliance.domain.entity.dmx;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -62,16 +57,6 @@ public class Enterprise extends BaseObject {
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "issued_date")
 	private Date issuedDate;
-
-	/*@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	//@formatter:off
-	@JoinTable(
-			name = "dmx_enterprise_policy", 
-			inverseJoinColumns = {@JoinColumn(name = "policy_id")},
-			joinColumns = {@JoinColumn(name = "enterprise_id")}
-	)
-	//@formatter:on
-	private Set<Policy> policies;*/
 
 	@Column(name = "description", columnDefinition="TEXT")
 	private String description;

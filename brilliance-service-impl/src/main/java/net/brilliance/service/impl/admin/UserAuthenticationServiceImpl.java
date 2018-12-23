@@ -30,7 +30,7 @@ import net.brilliance.framework.repository.BrillianceRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.manager.auth.AuthorityManager;
 import net.brilliance.manager.security.SimpleEncryptionManager;
-import net.brilliance.repository.admin.UserProfileRepository;
+import net.brilliance.repository.admin.UserAccountRepository;
 import net.brilliance.service.api.ObjectNotFoundException;
 import net.brilliance.service.api.admin.UserAuthenticationService;
 import net.brilliance.service.helper.ClientServicesHelper;
@@ -47,7 +47,7 @@ public class UserAuthenticationServiceImpl extends GenericServiceImpl<UserAccoun
 	private AuthorityManager authorityServiceManager;
 
 	@Autowired
-  private UserProfileRepository repository;
+  private UserAccountRepository repository;
 
 	@Inject
 	private ClientServicesHelper clientServicesHelper;

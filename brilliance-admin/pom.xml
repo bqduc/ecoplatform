@@ -24,7 +24,7 @@
 		<hibernate.version>5.2.5.Final</hibernate.version>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+		<thymeleaf.version>3.0.7.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.1.2</thymeleaf-layout-dialect.version>
 		<thymeleaf-extras-springsecurity4.version>3.0.1.RELEASE</thymeleaf-extras-springsecurity4.version>
 
@@ -35,7 +35,7 @@
 		<jodatime-thymeleaf.version>1.3</jodatime-thymeleaf.version>
 		<thymeleaf-extras.version>2.1.2.RELEASE</thymeleaf-extras.version>
 
-		<start-class>net.brilliance.config.WebSpringApplication</start-class>
+		<start-class>net.brilliance.config.WebApplicationStarter</start-class>
 
 		<spring.social.version>1.1.0.BUILD-SNAPSHOT</spring.social.version>
 		<spring.social.facebook.version>1.1.0.BUILD-SNAPSHOT</spring.social.facebook.version>

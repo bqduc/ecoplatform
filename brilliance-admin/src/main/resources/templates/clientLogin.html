@@ -36,7 +36,7 @@
 
         <div th:if="${param.error}">
             <div class="callout callout-danger">
-                <p th:utext="#{label.loginError}">Login failed, please try again./Usuário ou senha estão inválidos.</p>
+                <p th:utext="#{login.error}">Login failed, please try again./Usuário ou senha estão inválidos.</p>
             </div>
         </div>
 
@@ -64,9 +64,9 @@
               <a class="btn btn-block btn-social btn-facebook">
                 <i class="fa fa-facebook"></i><span th:text="#{label.socialSignUp('Facebook')}"></span>
               </a>
-              <a class="btn btn-block btn-social btn-flickr">
+              <!-- <a class="btn btn-block btn-social btn-flickr">
                 <i class="fa fa-flickr"></i><span th:text="#{label.socialSignUp('Flickr')}"></span>
-              </a>
+              </a> -->
               <a class="btn btn-block btn-social btn-google">
                 <i class="fa fa-google-plus"></i><span th:text="#{label.socialSignUp('Google')}"></span>
               </a>

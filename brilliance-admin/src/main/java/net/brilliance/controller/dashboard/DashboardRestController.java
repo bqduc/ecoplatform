@@ -28,12 +28,12 @@ public class DashboardRestController extends BaseRestController{
 
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public List<DigitalDashboard> onListBizObjects(HttpServletRequest request, HttpServletResponse response, Model model) {
-		cLog.info("DashboardRestController::onListBizObjects: Loading data ...>>>>>>");
+		logger.info("DashboardRestController::onListBizObjects: Loading data ...>>>>>>");
 		PageRequest pageRequest = new PageRequest(0, 500, Sort.Direction.ASC, "id");
 		SearchParameter searchParameter = SearchParameter.getInstance()
 				.setPageable(pageRequest);
 		Page<DigitalDashboard> objects = businessManager.getObjects(searchParameter);
-		cLog.info("DashboardRestController::onListBizObjects: Data is loaded >>>>>>");
+		logger.info("DashboardRestController::onListBizObjects: Data is loaded >>>>>>");
 		return objects.getContent();
 	}
 }

@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.contact.Contact;
-import net.brilliance.framework.entity.BaseObject;
 
 /**
  * A Contact.
@@ -27,7 +26,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Builder
 @Entity
 @Table(name = "project")
-public class Project extends BaseObject {
+public class Project extends ProjectBase {
 	private static final long serialVersionUID = 3428052362186176103L;
 
 	@Column(name = "license", length = 20, nullable = false)

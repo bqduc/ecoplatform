@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import net.brilliance.common.logging.GlobalLoggerFactory;
 import net.brilliance.framework.logging.CommonLoggingService;
 
 /**
@@ -33,12 +31,12 @@ public abstract class BaseRestController<T> {
   protected static final String DEFAULT_PAGE_NUM = "0";
 
   @Inject
-	protected CommonLoggingService cLog;
+	protected CommonLoggingService logger;
 
 	@Inject
 	protected HttpSession httpSession;
 
-	protected Logger logger = GlobalLoggerFactory.getLogger(this.getClass());
+	//protected Logger logger = GlobalLoggerFactory.getLogger(this.getClass());
 
 	protected void cachePut(String key, Object data){
 		this.httpSession.setAttribute(key, data);

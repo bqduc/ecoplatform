@@ -60,6 +60,9 @@ public class UserDTO extends BaseDto {
 	@NotNull
 	private boolean activated = false;
 
+	@NotNull
+	private boolean systemAdmin = false;
+
 	public String getLogin() {
 		return login;
 	}
@@ -121,5 +124,13 @@ public class UserDTO extends BaseDto {
 		user.setAuthorities(Stream.of(Authority.builder().name("ROLE_USER").displayName("Role User").build()).collect(Collectors.toSet()));
 
 		return user;
+	}
+
+	public boolean isSystemAdmin() {
+		return systemAdmin;
+	}
+
+	public void setSystemAdmin(boolean systemAdmin) {
+		this.systemAdmin = systemAdmin;
 	}
 }

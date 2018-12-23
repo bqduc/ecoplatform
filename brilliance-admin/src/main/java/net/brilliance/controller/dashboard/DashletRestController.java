@@ -28,12 +28,12 @@ public class DashletRestController extends BaseRestController{
 
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public List<DigitalDashlet> listBizObjects(HttpServletRequest request, HttpServletResponse response, Model model) {
-		cLog.info("DashletRestController::listBizObjects enter...>>>>>>");
+		logger.info("DashletRestController::listBizObjects enter...>>>>>>");
 		PageRequest pageRequest = new PageRequest(0, 500, Sort.Direction.ASC, "id");
 		SearchParameter searchParameter = SearchParameter.getInstance()
 				.setPageable(pageRequest);
 		Page<DigitalDashlet> objects = businessManager.getObjects(searchParameter);
-		cLog.info("DashletRestController::listBizObjects leave...>>>>>>");
+		logger.info("DashletRestController::listBizObjects leave...>>>>>>");
 		return objects.getContent();
 	}
 }

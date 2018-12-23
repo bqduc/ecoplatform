@@ -89,8 +89,8 @@ import net.brilliance.manager.mail.freemarker.FreeMarkerEmailConfiguration;
 		ThymeleafMailConfig.class, 
 		FreeMarkerEmailConfiguration.class})
 @EnableAsync
-public class WebSpringApplication extends WebMvcConfigurerAdapter {
-	private static Logger logger = GlobalLoggerFactory.getLogger(WebSpringApplication.class);
+public class WebApplicationStarter extends WebMvcConfigurerAdapter {
+	private static Logger logger = GlobalLoggerFactory.getLogger(WebApplicationStarter.class);
 
 	@Inject
 	private CategoryManager categoryService;
@@ -102,7 +102,7 @@ public class WebSpringApplication extends WebMvcConfigurerAdapter {
 	 *            The arguments passed in from the command line
 	 */
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(WebSpringApplication.class);
+		SpringApplication app = new SpringApplication(WebApplicationStarter.class);
 		ConfigurableApplicationContext  configAppContext = app.run(args);
 
 		GlobalDataRepositoryManager globalDataRepositoryManager = null;
@@ -119,7 +119,7 @@ public class WebSpringApplication extends WebMvcConfigurerAdapter {
 	/**
 	 * i18n support bean. The locale resolver being used is Cookie.<br />
 	 * When locale is changed and intercepted by the
-	 * {@link WebSpringApplication#localeChangeInterceptor localeChangeInterceptor}.
+	 * {@link WebApplicationStarter#localeChangeInterceptor localeChangeInterceptor}.
 	 * <br />
 	 * The new locale is stored in a Cookie and remains active even after
 	 * session timeout<br />
@@ -130,7 +130,7 @@ public class WebSpringApplication extends WebMvcConfigurerAdapter {
 	 * </p>
 	 * 
 	 * @return {@code LocaleResolver}
-	 * @see WebSpringApplication#localeChangeInterceptor
+	 * @see WebApplicationStarter#localeChangeInterceptor
 	 */
 	@Bean
 	public LocaleResolver localeResolver() {

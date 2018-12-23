@@ -8,7 +8,7 @@ package net.brilliance.domain.model;
  *
  */
 public enum StakeholderType {
-	unknown,
+	Unknown,
 	MainContractor,
 	SubContractor,
 	ExtraContractor,
@@ -22,5 +22,9 @@ public enum StakeholderType {
 	SubRequester,
 	MainOwner,
 	SubOwner,
-	ExtraOwner
+	ExtraOwner, 
+	
+	Shareholder,
+	CorporateShareholder,
+	IndividualShareholder
 }

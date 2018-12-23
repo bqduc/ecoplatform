@@ -32,7 +32,7 @@ public class WebServletInitializer extends SpringBootServletInitializer {
 	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(WebSpringApplication.class);
+		return application.sources(WebApplicationStarter.class);
 	}
 
 }

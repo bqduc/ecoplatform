@@ -3,7 +3,7 @@
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini" th:utext="#{label.app.shortTitle}">PE</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg" th:utext="#{label.app.title}"><b>P</b>latformaaaaa <b>E</b>cosystemsaaaa</span>
+    <span class="logo-lg" th:utext="#{label.app.title}"></span>
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top">
@@ -11,8 +11,313 @@
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
     </a>
-
     <div class="navbar-custom-menu">
+    	<ul id="main-menu" class="sm sm-blue">
+	    	<!-- <li><a href="#">Home</a></li> -->
+	    	<!-- 
+	    	<li><a href="#">Mega menu</a>
+          <ul class="mega-menu">
+          <li>
+          <div class="column-1-3">
+            <h2>Heading 1</h2>
+            <div class="mega-menu-sample-image">Image</div>
+            <ul>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+            </ul>
+          </div>
+          <div class="column-1-3">
+            <h2>Heading 2</h2>
+            <ul>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+            </ul>
+            <h2>Heading 3</h2>
+            <ul>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+            </ul>
+          </div>
+          <div class="column-1-3">
+            <h2>Heading 4</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum elit velit, ultricies eget porta ac.</p>
+            <ul>
+              <li><a href="#">Regular link</a></li>
+              <li><a href="#">Regular link</a></li>
+            </ul>
+          </div>
+        </li>
+            <li>
+              <div style="width:400px;max-width:100%;">
+                <div style="padding:5px 24px;">
+                  <p>This is a mega drop down test. Just set the "mega-menu" class to the parent UL element to inform the SmartMenus script. It can contain <strong>any HTML</strong>.</p>
+                  <p>Just style the contents as you like (you may need to reset some SmartMenus inherited styles - e.g. for lists, links, etc.)</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li> 
+        -->
+        <li><a href="#"><span th:text="#{label.menu.about}"></span></a>
+          <ul>
+            <li><a href="#"><span th:text="#{label.menu.ourGrowthStory}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.aboutEP}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.ourTeam}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.ourCodeofConduct}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.faqs}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.policy}"></span></a>
+              <ul>
+                <li><a href="#"><span th:text="#{label.menu.antiCorruptionPolicy}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.privacyPolicy}"></span></a></li>
+              </ul>
+            </li>
+            <li><a href="#"><span th:text="#{label.menu.whyUs}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.news}"></span></a>
+              <ul>
+                <li><a href="#"><span th:text="#{label.menu.upcomingEvents}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.newsInformation}"></span></a></li>
+		            <li><a href="#"><span th:text="#{label.menu.blog}"></span></a>
+		              <ul>
+		                <li><a href="#"><span th:text="#{label.menu.viewAllBlogs}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.kiosk}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.mobilePOS}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.nightclubAndBar}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.payments}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.restaurant}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.retail}"></span></a></li>
+		                <li><a href="#"><span th:text="#{label.menu.technology}"></span></a></li>
+		              </ul>
+		            </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#"><span th:text="#{label.menu.solutions}"></span></a>
+          <ul>
+            <li><a href="#"><span th:text="#{label.menu.enterpriseServersStorageSolutions}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.dataCenterSolutions}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.applicationDeliveryInfrastructure}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.enterpriseBusinessSolutions}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.networkIntegrationSecuritySolutions}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.bringYourOwnDeviceSolutions}"></span></a></li>
+          </ul>
+        </li>
+        <li><a href="#"><span th:text="#{label.menu.services}"></span></a>
+          <ul>
+            <li><a href="#"><span th:text="#{label.menu.iTInfrastructureManagementandServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.facilitiesManagementServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.consultancyandProfessionalServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.managedPrintServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.cloudServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.connectivityServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.orientHostedManagedServices}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.staffAugmentation}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.customApplicationDevelopment}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.testingServices}"></span></a>
+              <ul>
+                <li><a href="#"><span th:text="#{label.menu.specializedTestingServices}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.qaTestingEngineeringServices}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.mobilityTesting}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.cloudTesting}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.qaConsultingServices}"></span></a></li>
+              </ul>
+            </li>
+            <li><a href="#"><span th:text="#{label.menu.projectManagement}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.product}"></span></a>
+              <ul>
+                <li><a href="#"><span th:text="#{label.menu.eMS}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.eRM}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.pOS}"></span></a></li>
+              </ul>
+            </li>
+            <li><a href="#"><span th:text="#{label.menu.quizform}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.connectedServices}"></span></a>
+              <ul>
+                <li><a href="#"><span th:text="#{label.menu.microsoftSurfacePro}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.allInOne}"></span></a></li>
+                <li><a href="#"><span th:text="#{label.menu.posx}"></span></a>
+									<ul>
+		                <li><a href="#"><span th:text="#{label.menu.barcodeScanners}"></span></a>
+				              <ul>
+				                <li><a href="#"><span th:text="#{label.menu.wirelessBarcodeScanners}"></span></a></li>
+				                <li><a href="#"><span th:text="#{label.menu.wiredBarcodeScanners}"></span></a></li>
+				                <li><a href="#"><span th:text="#{label.menu.loyaltyBarcodeScanners}"></span></a>
+						              <ul>
+						                <li><a href="#"><span th:text="#{label.menu.EVOOmni}"></span></a></li>
+						                <li><a href="#"><span th:text="#{label.menu.blinkLoyaltyScanner}"></span></a></li>
+						                <li><a href="#"><span th:text="#{label.menu.EVOLaser}"></span></a></li>
+						                <li><a href="#"><span th:text="#{label.menu.IONLinear}"></span></a></li>
+						                <li><a href="#"><span th:text="#{label.menu.IONShortRange}"></span></a></li>
+						              </ul>
+				                </li>
+				              </ul>
+		                </li>
+		                <li><a href="#"><span th:text="#{label.menu.cashDrawers}"></span></a>
+				              <ul>
+				                <li><a href="#"><span th:text="#{label.menu.EVOPro}"></span></a></li>
+				                <li><a href="#"><span th:text="#{label.menu.IONSide}"></span></a></li>
+				                <li><a href="#"><span th:text="#{label.menu.IONCashDrawer}"></span></a></li>
+				              </ul>
+		                </li>
+									</ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#"><span th:text="#{label.menu.industries}"></span></a>
+          <ul>
+            <li><a href="#"><span th:text="#{label.menu.retail}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.healthcare}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.manufacturing}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.insurance}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.finance}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.financeBanking}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.mortgage}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.travelAirlines}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.telecom}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.cinema}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.schoolCafeteria}"></span></a></li>
+          </ul>
+        </li>
+        <li><a href="#"><span th:text="#{label.menu.careers}"></span></a>
+          <ul>
+            <li><a href="#"><span th:text="#{label.menu.lifeAtEP}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.currentOpennings}"></span></a></li>
+          </ul>
+        </li>
+                <li><a href="http://www.smartmenus.org/download/">Download</a></li>
+        <li><a href="http://www.smartmenus.org/support/">Support</a>
+          <ul>
+            <li><a href="http://www.smartmenus.org/support/premium-support/">Premium support</a></li>
+            <li><a href="http://www.smartmenus.org/support/forums/">Forums</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Sub test</a>
+          <ul>
+            <li><a href="#">Dummy item</a></li>
+            <li><a href="#">Dummy item</a></li>
+            <li><a href="#" class="disabled">Disabled menu item</a></li>
+            <li><a href="#">Dummy item</a></li>
+            <li><a href="#">more...</a>
+              <ul>
+                <li><a href="#">A pretty long text to test the default subMenusMaxWidth:20em setting for the sub menus</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">more...</a>
+                  <ul>
+                    <li><a href="#">Dummy item</a></li>
+                    <li><a href="#" class="current">A 'current' class item</a></li>
+                    <li><a href="#">Dummy item</a></li>
+                    <li><a href="#">more...</a>
+                      <ul>
+                        <li><a href="#">subMenusMinWidth</a></li>
+                        <li><a href="#">10em</a></li>
+                        <li><a href="#">forced.</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Dummy item</a></li>
+                    <li><a href="#">Dummy item</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">A pretty long text to test the default subMenusMaxWidth:20em setting for the sub menus</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">A pretty long text to test the default subMenusMaxWidth:20em setting for the sub menus</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">A pretty long text to test the default subMenusMaxWidth:20em setting for the sub menus</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">A pretty long text to test the default subMenusMaxWidth:20em setting for the sub menus</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">A pretty long text to test the default subMenusMaxWidth:20em setting for the sub menus</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+                <li><a href="#">Dummy item</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+    	</ul>
+    	<!--
+			<ul class="nav navbar-nav">
+                <li class="dropdown" id="accountmenu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account Settings<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Login</a></li>
+                      	<li class="dropdown-submenu">
+                          <a tabindex="-1" href="#">More options</a>
+                          <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">Second level</a></li>
+                            <li class="dropdown-submenu">
+                              <a href="#">More..</a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="#">3rd level</a></li>
+                                  <li><a href="#">3rd level</a></li>
+                              </ul>
+                            </li>
+                            <li><a href="#">Second level</a></li>
+                            <li><a href="#">Second level</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#">Register</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+			</ul>
+			-->
         <ul class="nav navbar-nav">
         	<!-- Localization part -->
 					<li class="dropdown messages-menu">

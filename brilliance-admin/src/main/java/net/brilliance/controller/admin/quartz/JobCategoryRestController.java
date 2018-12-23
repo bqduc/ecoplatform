@@ -28,12 +28,12 @@ public class JobCategoryRestController extends BaseRestController{
 
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public List<JobCategory> onListCatalogueSubtypes(HttpServletRequest request, HttpServletResponse response, Model model) {
-		cLog.info("Rest::Come to job category data listing ...>>>>>>");
+		logger.info("Rest::Come to job category data listing ...>>>>>>");
 		PageRequest pageRequest = new PageRequest(0, 500, Sort.Direction.ASC, "id");
 		SearchParameter searchParameter = SearchParameter.getInstance()
 				.setPageable(pageRequest);
 		Page<JobCategory> objects = businessService.getObjects(searchParameter);
-		cLog.info("Rest::Leave from job category data loading. >>>>>>");
+		logger.info("Rest::Leave from job category data loading. >>>>>>");
 		return objects.getContent();
 	}
 }

@@ -19,7 +19,7 @@ import net.brilliance.service.api.dmx.InventoryService;
 
 @RestController
 @RequestMapping(CommonConstants.REST_API + ControllerConstants.URI_INVENTORY)
-public class InventoryRestController extends BaseRestController {
+public class InventoryRestController extends BaseRestController<Inventory> {
 	private final static String CACHED_BUSINESS_OBJECTS = "cachedInventoryEntries";
 
 	@Inject
@@ -37,15 +37,43 @@ public class InventoryRestController extends BaseRestController {
 		return businessObjects;
 	}
 
-	@RequestMapping(path="/searchEmployees", method=RequestMethod.POST)
+	@RequestMapping(path="/search", method=RequestMethod.POST)
 	public List<Inventory> getEmployees(SearchParameter searchParams){
 		Page<Inventory> results = businessService.getObjects(searchParams);
 		List<Inventory> expectedResults = results.getContent().subList(0, 150);
 		return expectedResults;
 	}
 
-	/*@RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
-	public InventoryEntry getEmployeeById(@PathVariable("id") long id) {
-		return employeeService.getEmployeeById(id);
-	}*/
+	@Override
+	protected void doUpdateBusinessObject(Inventory updatedClientObject) {
+		super.doUpdateBusinessObject(updatedClientObject);
+	}
+
+	@Override
+	protected Page<Inventory> doFetchBusinessObjects(Integer page, Integer size) {
+		Page<Inventory> fetchedBusinessObjects = businessService.getObjects(page, size);
+		logger.info("Inventory Rest::FetchBusinessObjects: " + fetchedBusinessObjects.getTotalElements());
+		return fetchedBusinessObjects;
+	}
+
+	@Override
+	protected Inventory doFetchBusinessObject(Long id) {
+		Inventory fetchedBusinessObject = businessService.getObject(id);
+		logger.info("Inventory Rest::FetchBusinessObject: " + fetchedBusinessObject.getCode());
+		return fetchedBusinessObject;
+	}
+
+	@Override
+	protected void doDeleteBusinessObject(Long id) {
+		logger.info("Inventory Rest::DeleteBusinessObject: " + id);
+		businessService.remove(id);
+		logger.info("Inventory Rest::DeleteBusinessObject is done");
+	}
+
+	@Override
+	protected void doCreateBusinessObject(Inventory businessObject) {
+		logger.info("Inventory Rest::CreateBusinessObject: " + businessObject.getCode());
+		businessService.saveOrUpdate((Inventory)businessObject);
+		logger.info("Inventory Rest::CreateBusinessObject is done");
+	}
 }

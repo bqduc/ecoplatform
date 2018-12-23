@@ -28,17 +28,17 @@ import net.brilliance.framework.repository.BrillianceRepository;
  *
  */
 @Repository
-public interface UserProfileRepository extends BrillianceRepository<UserAccount, Long> {
+public interface UserAccountRepository extends BrillianceRepository<UserAccount, Long> {
 	/**
 	 * Retrieves a {@link UserAccount} entity from the underlying data store by its
 	 * ResetKey
 	 * 
-	 * @param login
+	 * @param ssoId
 	 *            the login
 	 * @return a User entity
 	 * @see UserAccount#getResetKey()
 	 */
-	UserAccount findBySsoId(String login);
+	UserAccount findBySsoId(String ssoId);
 
 	/**
 	 * Retrieves a {@link UserAccount} entity from the underlying datastore by its

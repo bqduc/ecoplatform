@@ -37,4 +37,7 @@ public interface AuthAccount extends BaseEntity {
 
 	Boolean getLocked();
 	void setLocked(Boolean locked);
+
+	Boolean getSystemAdmin();
+	void setSystemAdmin(Boolean systemAdmin);
 }

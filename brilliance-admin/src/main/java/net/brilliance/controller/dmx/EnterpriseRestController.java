@@ -14,25 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
-import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseRestController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.service.api.dmx.EnterpriseService;
 
-@RestController
 @RequestMapping(ControllerConstants.REST_API + ControllerConstants.REQ_MAPPING_ENTERPRISE)
+@RestController
 public class EnterpriseRestController extends BaseRestController<Enterprise>{
 	private final static String CACHE_OBJECTS_KEY = "cache.enterprises";
 	@Inject 
 	private EnterpriseService businessService;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public List<Enterprise> onListEnterprises(HttpServletRequest request, HttpServletResponse response, Model model) {
-		cLog.info("RestController::Come to enterprise data listing ...>>>>>>");
+		logger.info("RestController::Come to enterprise data listing ...>>>>>>");
 		List<Enterprise> results = null;
 		Object cachedValue = super.cacheGet(CACHE_OBJECTS_KEY);
 		PageRequest pageRequest = null;
@@ -49,7 +48,7 @@ public class EnterpriseRestController extends BaseRestController<Enterprise>{
 			results = objects.getContent();
 			super.cachePut(CACHE_OBJECTS_KEY, results);
 		}
-		cLog.info("Enterprise data is loaded. >>>>>>");
+		logger.info("Enterprise data is loaded. >>>>>>");
 
 		return results;
 	}
@@ -61,32 +60,29 @@ public class EnterpriseRestController extends BaseRestController<Enterprise>{
 
 	@Override
 	protected Page<Enterprise> doFetchBusinessObjects(Integer page, Integer size) {
-		return businessService.getObjects(page, size);
+		Page<Enterprise> fetchedBusinessObjects = businessService.getObjects(page, size);
+		logger.info("Enterprise Rest::FetchBusinessObjects: " + fetchedBusinessObjects.getTotalElements());
+		return fetchedBusinessObjects;
 	}
 
 	@Override
 	protected Enterprise doFetchBusinessObject(Long id) {
-		return businessService.getObject(id);
+		Enterprise fetchedBusinessObject = businessService.getObject(id);
+		logger.info("Enterprise Rest::FetchBusinessObject: " + fetchedBusinessObject.getCode());
+		return fetchedBusinessObject;
 	}
 
 	@Override
 	protected void doDeleteBusinessObject(Long id) {
+		logger.info("Enterprise Rest::DeleteBusinessObject: " + id);
 		businessService.remove(id);
+		logger.info("Enterprise Rest::DeleteBusinessObject is done");
 	}
 
 	@Override
 	protected void doCreateBusinessObject(Enterprise businessObject) {
+		logger.info("Enterprise Rest::CreateBusinessObject: " + businessObject.getCode());
 		businessService.saveOrUpdate((Enterprise)businessObject);
+		logger.info("Enterprise Rest::CreateBusinessObject is done");
 	}
-
-	/*@Override
-	protected BaseObject fetchBusinessObjectByCode(String code) {
-		return this.businessManager.getOne(code);
-	}
-
-	@Override
-	protected BaseObject addBusinessObject(BaseObject businessObject) {
-		return this.businessManager.saveOrUpdate((Enterprise)businessObject);
-	}*/
-	
 }

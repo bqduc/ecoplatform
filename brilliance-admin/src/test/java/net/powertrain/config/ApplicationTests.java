@@ -21,10 +21,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import net.brilliance.config.WebSpringApplication;
+import net.brilliance.config.WebApplicationStarter;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = WebSpringApplication.class, webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = WebApplicationStarter.class, webEnvironment = WebEnvironment.NONE)
 public class ApplicationTests {
 
 	@Test

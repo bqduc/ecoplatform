@@ -32,6 +32,11 @@ public class GlobalErrorController implements ErrorController {
 			request.getSession().setAttribute(parameter, request.getParameterMap().get(parameter));
 		}
 
+		if (PATH.equalsIgnoreCase(request.getRequestURI())){
+			response.sendRedirect("/login?error");
+			return;
+		}
+
 		switch (status) {
 		case 404:
 			response.sendRedirect("/404");
