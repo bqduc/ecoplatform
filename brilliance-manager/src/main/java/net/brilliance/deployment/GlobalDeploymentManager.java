@@ -13,6 +13,7 @@ import net.brilliance.deplyment.DeploymentSpecification;
 import net.brilliance.exceptions.ExecutionContextException;
 import net.brilliance.framework.component.BaseComponent;
 import net.brilliance.framework.model.ExecutionContext;
+import net.brilliance.service.api.dmx.EnterpriseService;
 import net.brilliance.service.api.dmx.ProjectService;
 
 /**
@@ -30,6 +31,9 @@ public class GlobalDeploymentManager extends BaseComponent {
 
 	@Inject 
 	private ProjectService projectService;
+
+	@Inject 
+	private EnterpriseService enterpriseService;
 
 	public ExecutionContext deploy(ExecutionContext executionContext) throws ExecutionContextException {
 		if (!executionContext.containKey(CommonManagerConstants.CONFIG_GROUP_DEPLOYMENT)){
@@ -95,4 +99,31 @@ public class GlobalDeploymentManager extends BaseComponent {
 			throw new ExecutionContextException(e);
 		}
 	}
+
+	public void deployEnterprises(ExecutionContext executionContext) throws ExecutionContextException {
+		ExecutionContext projectExecutionContext = null;
+		Object projectContextData = null;
+		try {
+			if (null==executionContext || executionContext.isEmpty())
+				throw new ExecutionContextException("Execution context is empty. Please check, setup the necessary data and perform again. ");
+
+			if (!executionContext.containKey(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX + DeploymentSpecification.CONTEXT_ENTERPRISE)){
+				cLog.info("There is no configuration for deployment project in execution context. ");
+				return;
+			}
+
+			projectExecutionContext = ExecutionContext.builder().build();
+			projectContextData = executionContext.getContextData(
+					new StringBuilder(CommonManagerConstants.CONTEXT_DEPLOYMENT_PREFIX)
+					.append(DeploymentSpecification.CONTEXT_ENTERPRISE)
+					.append(DeploymentSpecification.CONTEXT_DATA)
+					.toString());
+
+			projectExecutionContext.putContextData(DeploymentSpecification.DEPLOYMENT_DATA_KEY, projectContextData);
+			enterpriseService.deploy(projectExecutionContext);
+		} catch (Exception e) {
+			throw new ExecutionContextException(e);
+		}
+	}
+	
 }

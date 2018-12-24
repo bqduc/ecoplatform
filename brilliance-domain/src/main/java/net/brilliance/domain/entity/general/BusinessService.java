@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.domain.model.BusinessLevel;
+import net.brilliance.domain.model.BusinessClass;
 import net.brilliance.domain.model.BusinessStatus;
 import net.brilliance.framework.entity.BaseObject;
 import net.brilliance.framework.global.GlobalConstants;
@@ -60,7 +60,7 @@ public class BusinessService extends BaseObject {
 
 	@Column(name="business_class")
 	@Enumerated(EnumType.ORDINAL)
-	private BusinessLevel businessClass;
+	private BusinessClass businessClass;
 	
 	@ManyToOne
 	@JoinColumn(name = "package_id")
@@ -98,11 +98,11 @@ public class BusinessService extends BaseObject {
 		this.businessPackage = businessPackage;
 	}
 
-	public BusinessLevel getBusinessClass() {
+	public BusinessClass getBusinessClass() {
 		return businessClass;
 	}
 
-	public void setBusinessClass(BusinessLevel businessClass) {
+	public void setBusinessClass(BusinessClass businessClass) {
 		this.businessClass = businessClass;
 	}
 

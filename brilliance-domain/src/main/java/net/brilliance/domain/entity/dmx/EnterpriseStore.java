@@ -54,8 +54,8 @@ public class EnterpriseStore extends BaseObject {
 	private static final long serialVersionUID = -3943460791194289252L;
 
 	@ManyToOne(targetEntity=Enterprise.class, fetch=FetchType.EAGER)
-	@JoinColumn(name = "enterprise_id")
-	private Enterprise enterprise;
+	@JoinColumn(name = "enterprise_detail_id")
+	private EnterpriseDetail enterpriseDetail;
 
 	@ManyToOne(targetEntity=Store.class, fetch=FetchType.EAGER)
 	@JoinColumn(name = "store_id")
@@ -68,14 +68,6 @@ public class EnterpriseStore extends BaseObject {
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "commencement_date")
 	private Date commencementDate;
-
-	public Enterprise getEnterprise() {
-		return enterprise;
-	}
-
-	public void setEnterprise(Enterprise enterprise) {
-		this.enterprise = enterprise;
-	}
 
 	public Store getStore() {
 		return store;
@@ -99,6 +91,14 @@ public class EnterpriseStore extends BaseObject {
 
 	public void setCommencementDate(Date commencementDate) {
 		this.commencementDate = commencementDate;
+	}
+
+	public EnterpriseDetail getEnterpriseDetail() {
+		return enterpriseDetail;
+	}
+
+	public void setEnterpriseDetail(EnterpriseDetail enterpriseDetail) {
+		this.enterpriseDetail = enterpriseDetail;
 	}
 
 }

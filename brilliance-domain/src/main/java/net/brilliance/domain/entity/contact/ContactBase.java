@@ -25,7 +25,7 @@ import net.brilliance.domain.entity.common.Address;
 import net.brilliance.framework.entity.BaseObject;
 
 /**
- * A user.
+ * A contact base abstract class.
  * 
  * @author Bui Quy Duc
  */

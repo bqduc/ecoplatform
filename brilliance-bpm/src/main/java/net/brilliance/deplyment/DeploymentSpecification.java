@@ -19,4 +19,5 @@ public interface DeploymentSpecification {
 	
 	final static String CONTEXT_DATA = "data";
 	final static String CONTEXT_PROJECT = "project";
+	final static String CONTEXT_ENTERPRISE = "enterprise";
 }

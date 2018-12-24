@@ -7,7 +7,7 @@ package net.brilliance.domain.model;
  * @author BDQ1HC
  *
  */
-public enum BusinessLevel {
+public enum BusinessClass {
 	SuperSaverClass,
 	SaverClass, 
 	EconomicClass,

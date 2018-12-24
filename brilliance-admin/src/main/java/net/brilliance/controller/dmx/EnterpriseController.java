@@ -68,14 +68,8 @@ public class EnterpriseController extends BaseController {
 		return getDefaultPage();
 	}
 
-	/*@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model, HttpServletRequest request) {
-		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
-	}*/
-
 	@Override
 	protected String performListing(Model model, HttpServletRequest request) {
-		System.out.println("catalogue subtypes performListing");
 		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
 	}
 
@@ -84,7 +78,7 @@ public class EnterpriseController extends BaseController {
    */
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String exports(Model model, HttpServletRequest request) {
-		logger.info("Exporting catalogue subtypes .....");
+		logger.info("Exporting enterprise .....");
 		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
 	}
 
@@ -174,13 +168,6 @@ public class EnterpriseController extends BaseController {
 		//return gson.toJson(pageContentData.getContent());
 		return PAGE_CONTEXT_PREFIX + "Browse :: result-teable " + gson.toJson(pageContentData.getContent());
 	}
-
-	/*protected List performSearchObjects(SearchParameter params){
-		Map<String, Object> parameters = new HashMap<>();
-		Page<Catalog> pageContentData = businessManager.search(parameters);
-		params.getModel().addAttribute("catalogues", pageContentData);
-		return pageContentData.getContent();
-	}*/
 
 	private String getDefaultPage(){
 		if (1 > this.businessManager.count()){

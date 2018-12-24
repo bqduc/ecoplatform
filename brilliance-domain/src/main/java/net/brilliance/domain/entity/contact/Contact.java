@@ -33,7 +33,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
@@ -50,7 +49,7 @@ import net.brilliance.domain.entity.general.Activity;
 import net.brilliance.model.GenderType;
 
 /**
- * A user.
+ * A contact.
  * 
  * @author Bui Quy Duc
  */

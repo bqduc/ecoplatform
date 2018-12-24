@@ -58,6 +58,12 @@ public class Enterprise extends BaseObject {
 	@Column(name = "issued_date")
 	private Date issuedDate;
 
+	@Column(name = "main_specialized", columnDefinition="TEXT")
+	private String mainSpecialized;
+
+	@Column(name = "sub_specialized", columnDefinition="TEXT")
+	private String subSpecialized;
+
 	@Column(name = "description", columnDefinition="TEXT")
 	private String description;
 	
