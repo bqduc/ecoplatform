@@ -80,7 +80,6 @@ public class EnterpriseServiceImpl extends GenericServiceImpl<Enterprise, Long> 
 						dataInterfaceModel.isProcessColumnHeaders(), 
 						dataInterfaceModel.getComponentSeparator());
 			} else if (DataSourceType.EXCEL.equals(dataInterfaceModel.getDataSourceType())) {
-				globalDataServicesRepository.
 			}
 
 			if (CommonUtility.isEmpty(dataContainer)){
