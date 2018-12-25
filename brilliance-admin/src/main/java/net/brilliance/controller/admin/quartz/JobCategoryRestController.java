@@ -22,7 +22,7 @@ import net.brilliance.service.api.admin.quartz.JobCategoryService;
 
 @RestController
 @RequestMapping("/" + ControllerConstants.REQUEST_URI_JOB_CATEGORY)
-public class JobCategoryRestController extends BaseRestController{
+public class JobCategoryRestController extends BaseRestController<JobCategory>{
 	@Inject 
 	private JobCategoryService businessService;
 

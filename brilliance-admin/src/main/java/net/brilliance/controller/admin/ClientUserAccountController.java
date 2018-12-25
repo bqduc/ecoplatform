@@ -31,10 +31,8 @@ import net.brilliance.common.GUUISequenceGenerator;
 import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.databridge.GlobalDataInitializer;
 import net.brilliance.domain.entity.admin.ClientUserAccount;
 import net.brilliance.domain.entity.contact.Contact;
-import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.model.SequenceType;
 import net.brilliance.model.SelectItem;
@@ -60,18 +58,13 @@ public class ClientUserAccountController extends BaseController {
 	@Inject
 	private ContactService contactService;
 
-	@Inject
-	private GlobalDataInitializer globalDataInitializer;
+	/*@Inject
+	private GlobalDataInitializer globalDataInitializer;*/
 
 	@RequestMapping(path = { "/", "" }, method = RequestMethod.GET)
 	public String viewDefaultPage() {
 		return getDefaultPage();
 	}
-
-	/*
-	 * @RequestMapping(method = RequestMethod.GET) public String list(Model model, HttpServletRequest request) { return
-	 * PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE; }
-	 */
 
 	@Override
 	protected String performListing(Model model, HttpServletRequest request) {

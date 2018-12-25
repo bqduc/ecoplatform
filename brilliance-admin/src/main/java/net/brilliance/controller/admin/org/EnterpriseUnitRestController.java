@@ -22,7 +22,7 @@ import net.brilliance.service.api.admin.EnterpriseUnitService;
 
 @RestController
 @RequestMapping(ControllerConstants.URI_ENTERPRISE_UNIT)
-public class EnterpriseUnitRestController extends BaseRestController {
+public class EnterpriseUnitRestController extends BaseRestController<EnterpriseUnit> {
 	@Inject
 	private EnterpriseUnitService businessService;
 

@@ -139,7 +139,7 @@ public class GlobalDataInitializer {
 	}
 
 	public List<JobDefinition> constructJobDefinitions(){
-		final String[] scheduledExpressions = new String[]{
+		/*final String[] scheduledExpressions = new String[]{
 				"0/5 * * * * ?", //Day end job schedule
 				"0/6 * * * * ?", //Month end job schedule
 				"0/7 * * * * ?", //Year end job schedule
@@ -148,7 +148,7 @@ public class GlobalDataInitializer {
 				"0/11 * * * * ?", //Food synchronization job schedule
 				"0/12 * * * * ?" //Day end job schedule
 		};
-
+*/
 		return null;
 	}
 
