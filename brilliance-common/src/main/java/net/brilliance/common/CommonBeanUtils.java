@@ -13,11 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
 import org.apache.commons.beanutils.BeanUtils;
-
-import com.sun.javafx.fxml.PropertyNotFoundException;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -101,7 +97,7 @@ public class CommonBeanUtils {
       Object result = bean;
 
       StringTokenizer propertyTokenizer = new StringTokenizer(propertyNames, PROPERTY_SEPARATOR);
-      Class resultClass = null;
+      Class<?> resultClass = null;
       String currentPropertyName = null;
 
       PropertyDescriptor propertyDescriptor = null;
@@ -259,7 +255,7 @@ public class CommonBeanUtils {
           result = getObjectAttribute(result, embeddedProperties);
       }
 
-      Class resultClass = result.getClass();
+      Class<?> resultClass = result.getClass();
 
       PropertyDescriptor propertyDescriptor =
           getPropertyDescriptor(propertyName, resultClass);
