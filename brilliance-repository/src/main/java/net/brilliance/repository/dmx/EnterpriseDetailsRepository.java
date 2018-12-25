@@ -3,6 +3,8 @@
  */
 package net.brilliance.repository.dmx;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +21,7 @@ import net.brilliance.framework.repository.BaseRepository;
  */
 @Repository
 public interface EnterpriseDetailsRepository extends BaseRepository<EnterpriseDetail, Long> {
-	Page<EnterpriseDetail> findByEnterprise(Enterprise enterprise);
+	List<EnterpriseDetail> findByEnterprise(Enterprise enterprise);
 
 	@Query("SELECT entity FROM #{#entityName} entity WHERE ("
 			+ " LOWER(entity.name) like LOWER(CONCAT('%',:keyword,'%'))"

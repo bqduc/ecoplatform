@@ -1,9 +1,13 @@
 package net.brilliance.service.dmx;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.domain.entity.dmx.EnterpriseDetail;
 import net.brilliance.framework.model.SearchParameter;
@@ -29,7 +33,7 @@ public class EnterpriseServiceDetailsImpl extends GenericServiceImpl<EnterpriseD
 	}
 
 	@Override
-	public Page<EnterpriseDetail> getByEnterprise(Enterprise enterprise) {
+	public List<EnterpriseDetail> getByEnterprise(Enterprise enterprise) {
 		return repository.findByEnterprise(enterprise);
 	}
 

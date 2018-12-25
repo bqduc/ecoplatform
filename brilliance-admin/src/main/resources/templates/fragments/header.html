@@ -93,6 +93,12 @@
 		            </li>
               </ul>
             </li>
+		        <li><a href="#"><span th:text="#{label.menu.careers}"></span></a>
+		          <ul>
+		            <li><a href="#"><span th:text="#{label.menu.lifeAtEP}"></span></a></li>
+		            <li><a href="#"><span th:text="#{label.menu.currentOpennings}"></span></a></li>
+		          </ul>
+		        </li>
           </ul>
         </li>
         <li><a href="#"><span th:text="#{label.menu.solutions}"></span></a>
@@ -183,19 +189,52 @@
             <li><a href="#"><span th:text="#{label.menu.schoolCafeteria}"></span></a></li>
           </ul>
         </li>
-        <li><a href="#"><span th:text="#{label.menu.careers}"></span></a>
+        <li><a href="#"><span th:text="#{label.menu.resources}"></span></a>
           <ul>
-            <li><a href="#"><span th:text="#{label.menu.lifeAtEP}"></span></a></li>
-            <li><a href="#"><span th:text="#{label.menu.currentOpennings}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.productManuals}"></span></a></li>
+            <li><a href="/book/list"><span th:text="#{nav.menu.books}">Books</span></a></li>
+            <li><a href="/measureUnit/"><span th:text="#{nav.menu.measureUnits}">Measure Units</span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.configurationTool}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.photoGallery}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.specificationSheets}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.caseStudies}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.touchDynamicMAPP}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.documentationAndDownloads}"></span></a></li>
           </ul>
         </li>
-                <li><a href="http://www.smartmenus.org/download/">Download</a></li>
-        <li><a href="http://www.smartmenus.org/support/">Support</a>
+        <li><a href="#"><span th:text="#{label.menu.support}"></span></a>
           <ul>
-            <li><a href="http://www.smartmenus.org/support/premium-support/">Premium support</a></li>
-            <li><a href="http://www.smartmenus.org/support/forums/">Forums</a></li>
+            <li><a href="#"><span th:text="#{label.menu.supportOnline}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.supportCollaborate}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.supportPremium}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.supportPlans}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.techSupport}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.requestRMA}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.requestRMAStatus}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.imageSubmission}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.remoteSupport}"></span></a></li>
+            <li><a href="#"><span th:text="#{label.menu.fAQs}"></span></a>
+		          <ul>
+		            <li><a href="#"><span th:text="#{label.menu.replacement}"></span></a></li>
+		            <li><a href="#"><span th:text="#{label.menu.levelWarranty}"></span></a></li>
+            		<li><a href="#"><span th:text="#{label.menu.renewal}"></span></a></li>
+		          </ul>
+		        </li>
           </ul>
         </li>
+        <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.businessGate}"></span></a>
+          <ul>
+            <li sec:authorize="isAuthenticated()"><a href="/store/"><span th:text="#{nav.menu.stores}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/client/"><span th:text="#{nav.menu.contacts}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/client/"><span th:text="#{nav.menu.clients}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/catalog/"><span th:text="#{nav.menu.catalogs}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/department/"><span th:text="#{nav.menu.departments}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/category/"><span th:text="#{nav.menu.categories}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/product/"><span th:text="#{nav.menu.products}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/project/"><span th:text="#{nav.menu.project}"></span></a></li>
+          </ul>
+        </li>
+        <!-- 
         <li><a href="#">Sub test</a>
           <ul>
             <li><a href="#">Dummy item</a></li>
@@ -289,6 +328,7 @@
             </li>
           </ul>
         </li>
+        -->
     	</ul>
     	<!--
 			<ul class="nav navbar-nav">
@@ -319,50 +359,6 @@
 			</ul>
 			-->
         <ul class="nav navbar-nav">
-        	<!-- Localization part -->
-					<li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-language"></i>
-                    <span class="label label-success">3</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header"><span th:text="#{label.haveLaguages(3)}">You can touch in 3 languages</span></li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li><!-- start message -->
-                                <a href="?lang=vi">
-                                    <div class="pull-left">
-                                        <img src="/dist/img/Vietnam.png" class="img-circle" alt="User Image" />
-                                    </div>
-                                    <h4 th:text="#{lang.vi}" id="app-locale-vietnamese">Vietnamese</h4>
-                                    <p th:text="#{label.language.vietnamese}" id="app-locale-vietnamese-info">Display all literals, text, notifications in Vietnamese language</p>
-                                </a>
-                            </li>
-                            <!-- end message -->
-                            <li>
-                                <a href="?lang=en">
-                                    <div class="pull-left">
-                                        <img src="/dist/img/United-States.png" class="img-circle" alt="User Image" />
-                                    </div>
-                                    <h4 th:text="#{lang.en}" id="app-locale-english">English</h4>
-                                    <p th:text="#{label.language.english}" id="app-locale-english-info">Display all literals, text, notifications in English language</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="?lang=fr">
-                                    <div class="pull-left">
-                                        <img src="/dist/img/France.png" class="img-circle" alt="User Image" />
-                                    </div>
-                                    <h4 th:text="#{lang.fr}" id="app-locale-french">French</h4>
-                                    <p th:text="#{label.language.french}" id="app-locale-french-info">Display all literals, text, notifications in French language</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!-- End of localization -->
             <!-- Messages: style can be found in dropdown.less-->
             <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -556,6 +552,50 @@
                     </li>
                 </ul>
             </li>
+        	<!-- Localization part -->
+					<li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-language"></i>
+                    <span class="label label-success">3</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header"><span th:text="#{label.haveLaguages(3)}">You can touch in 3 languages</span></li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <li><!-- start message -->
+                                <a href="?lang=vi">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/Vietnam.png" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{lang.vi}" id="app-locale-vietnamese">Vietnamese</h4>
+                                    <p th:text="#{label.language.vietnamese}" id="app-locale-vietnamese-info">Display all literals, text, notifications in Vietnamese language</p>
+                                </a>
+                            </li>
+                            <!-- end message -->
+                            <li>
+                                <a href="?lang=en">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/United-States.png" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{lang.en}" id="app-locale-english">English</h4>
+                                    <p th:text="#{label.language.english}" id="app-locale-english-info">Display all literals, text, notifications in English language</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?lang=fr">
+                                    <div class="pull-left">
+                                        <img src="/dist/img/France.png" class="img-circle" alt="User Image" />
+                                    </div>
+                                    <h4 th:text="#{lang.fr}" id="app-locale-french">French</h4>
+                                    <p th:text="#{label.language.french}" id="app-locale-french-info">Display all literals, text, notifications in French language</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <!-- End of localization -->            
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
