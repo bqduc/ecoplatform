@@ -7,7 +7,7 @@ package net.brilliance.framework.model.specifications;
  * @author ducbq
  *
  */
-public class DefaultSearchRequest extends SearchSpecRequestBase{
+public class DefaultSearchRequest extends SearchRequest{
 	public final static String fieldCode = "code";
 
 	private String code;

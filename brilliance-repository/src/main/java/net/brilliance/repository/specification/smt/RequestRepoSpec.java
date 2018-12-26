@@ -20,7 +20,7 @@ import net.brilliance.common.DateTimeUtility;
 import net.brilliance.common.ListUtility;
 import net.brilliance.domain.entity.smt.Request;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.framework.model.specifications.SearchSpecRequestBase;
+import net.brilliance.framework.model.specifications.SearchRequest;
 import net.brilliance.framework.specifications.BrillianceSpecifications;
 
 /**
@@ -29,7 +29,7 @@ import net.brilliance.framework.specifications.BrillianceSpecifications;
  */
 @Slf4j
 @Builder
-public class RequestRepoSpec extends BrillianceSpecifications<Request, SearchSpecRequestBase>{
+public class RequestRepoSpec extends BrillianceSpecifications<Request, SearchRequest>{
 	//public static String PROP_VISIBLE = "visible"; 
 	private final static String fieldFirstName = "firstName";
 	private final static String fieldLastName = "lastName";

@@ -3,13 +3,13 @@
  */
 package net.brilliance.repository.specification.model;
 
-import net.brilliance.framework.model.specifications.SearchSpecRequestBase;
+import net.brilliance.framework.model.specifications.SearchRequest;
 
 /**
  * @author ducbq
  *
  */
-public class ContactListRequest extends SearchSpecRequestBase{
+public class ContactListRequest extends SearchRequest{
 	public final static String fieldCode = "code";
 	public final static String fieldFirstName = "firstName";
 	public final static String fieldLastName = "lastName";

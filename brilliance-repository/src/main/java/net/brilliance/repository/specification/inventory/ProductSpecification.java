@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import lombok.Builder;
 import net.brilliance.domain.entity.stock.Product;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.framework.model.specifications.SearchSpecRequestBase;
+import net.brilliance.framework.model.specifications.SearchRequest;
 import net.brilliance.framework.specifications.BrillianceSpecifications;
 
 /**
@@ -16,7 +16,7 @@ import net.brilliance.framework.specifications.BrillianceSpecifications;
  *
  */
 @Builder
-public class ProductSpecification extends BrillianceSpecifications<Product, SearchSpecRequestBase>{
+public class ProductSpecification extends BrillianceSpecifications<Product, SearchRequest>{
 	public static Specification<Product> buildSpecification(final SearchParameter searchParameter) {
 		return ProductSpecification
 				.builder()

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import lombok.Builder;
 import net.brilliance.domain.entity.system.DigitalDashlet;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.framework.model.specifications.SearchSpecRequestBase;
+import net.brilliance.framework.model.specifications.SearchRequest;
 import net.brilliance.framework.specifications.BrillianceSpecifications;
 
 /**
@@ -16,7 +16,7 @@ import net.brilliance.framework.specifications.BrillianceSpecifications;
  *
  */
 @Builder
-public class DashletSpecifications extends BrillianceSpecifications<DigitalDashlet, SearchSpecRequestBase>{
+public class DashletSpecifications extends BrillianceSpecifications<DigitalDashlet, SearchRequest>{
 	public static Specification<DigitalDashlet> buildSpecification(final SearchParameter searchParameter) {
 		return DashletSpecifications
 				.builder()

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import lombok.Builder;
 import net.brilliance.domain.entity.bpm.BpmProcess;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.framework.model.specifications.SearchSpecRequestBase;
+import net.brilliance.framework.model.specifications.SearchRequest;
 import net.brilliance.framework.specifications.BrillianceSpecifications;
 
 /**
@@ -16,7 +16,7 @@ import net.brilliance.framework.specifications.BrillianceSpecifications;
  *
  */
 @Builder
-public class BpmProcessRepoSpecification extends BrillianceSpecifications<BpmProcess, SearchSpecRequestBase>{
+public class BpmProcessRepoSpecification extends BrillianceSpecifications<BpmProcess, SearchRequest>{
 	public static Specification<BpmProcess> buildSpecification(final SearchParameter searchParameter) {
 		return BpmProcessRepoSpecification
 				.builder()

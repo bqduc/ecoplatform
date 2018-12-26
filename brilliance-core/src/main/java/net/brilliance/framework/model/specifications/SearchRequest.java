@@ -7,5 +7,5 @@ package net.brilliance.framework.model.specifications;
  * @author ducbq
  *
  */
-public abstract class SearchSpecRequestBase {
+public abstract class SearchRequest {
 }

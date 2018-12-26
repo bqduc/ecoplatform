@@ -14,9 +14,6 @@ import org.springframework.data.jpa.domain.Specification;
 
 import net.brilliance.common.CommonUtility;
 import net.brilliance.common.ListUtility;
-import net.brilliance.framework.model.SearchCriteria;
-import net.brilliance.framework.model.SearchCriterion;
-import net.brilliance.framework.model.SearchOperand;
 import net.brilliance.framework.model.SearchParameter;
 
 /**
@@ -59,7 +56,7 @@ public abstract class BrillianceSpecifications<CustomUserType, CustomUserRequest
 		};
 	}
 
-	private List<Predicate> buildPredicates(final SearchCriteria searchCriteria, Root<CustomUserType> root, CriteriaBuilder builder){
+	/*private List<Predicate> buildPredicates(final SearchCriteria searchCriteria, Root<CustomUserType> root, CriteriaBuilder builder){
 		List<Predicate> predicates = ListUtility.createArrayList();
 		for(SearchCriterion searchCriterion :searchCriteria.getSearchParameters()){
 			if (SearchOperand.equal.equals(searchCriterion.getOperand())){
@@ -71,7 +68,7 @@ public abstract class BrillianceSpecifications<CustomUserType, CustomUserRequest
 			}
 		}
 		return predicates;
-	}
+	}*/
 
 	public Specification<CustomUserType> buildRepoSpecification(final SearchParameter searchParameter) {
 		return this.buildSpecifications(searchParameter);
