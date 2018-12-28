@@ -29,7 +29,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.model.BusinessClass;
 import net.brilliance.domain.model.BusinessStatus;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -42,7 +42,7 @@ import net.brilliance.framework.global.GlobalConstants;
 //@Document(collection = "biz_service")
 @Table(name = "biz_service")
 @EqualsAndHashCode(callSuper = true)
-public class BusinessService extends BaseObject {
+public class BusinessService extends BizObjectBase {
 	private static final long serialVersionUID = -3004508967466746861L;
 
 	@NotNull

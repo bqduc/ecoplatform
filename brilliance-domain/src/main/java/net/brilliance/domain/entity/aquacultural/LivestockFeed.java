@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import net.brilliance.domain.entity.general.Category;
 import net.brilliance.domain.entity.general.MeasureUnit;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * Food of shrimp
@@ -21,7 +21,7 @@ import net.brilliance.framework.entity.BaseObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "livestock_feed")
-public class LivestockFeed extends BaseObject {
+public class LivestockFeed extends BizObjectBase {
 	@Column(name = "code", unique = true)
 	private String code;
 

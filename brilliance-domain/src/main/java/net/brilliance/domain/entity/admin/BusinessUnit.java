@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.general.Catalogue;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -25,7 +25,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @AllArgsConstructor
 @Entity
 @Table(name = "business_unit")
-public class BusinessUnit extends BaseObject{
+public class BusinessUnit extends BizObjectBase{
 	/**
 	 * 
 	 */

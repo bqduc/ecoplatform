@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.model.SearchCondition;
 import net.brilliance.framework.repository.AdvancedSearchRepository;
 import net.brilliance.framework.repository.JBaseRepository;
@@ -23,7 +23,7 @@ import net.brilliance.framework.repository.SearchRepository;
 import net.brilliance.framework.repository.SearchableRepository;
 import net.brilliance.helper.WebServicingHelper;
 
-public abstract class AbstractServiceManager<T extends BaseObject, PK extends Serializable> extends RootService<T, PK>{
+public abstract class AbstractServiceManager<T extends BizObjectBase, PK extends Serializable> extends RootService<T, PK>{
 	private static final long serialVersionUID = -4604863496974502182L;
 
 	protected abstract JBaseRepository<T, PK> getRepository();

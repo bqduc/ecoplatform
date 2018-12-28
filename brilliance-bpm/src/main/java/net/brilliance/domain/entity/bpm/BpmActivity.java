@@ -31,7 +31,7 @@ import org.hibernate.annotations.Type;
 
 import lombok.Builder;
 import net.brilliance.domain.entity.admin.UserAccount;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A user.
@@ -41,7 +41,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Builder
 @Entity
 @Table(name = "bpm_activity")
-public class BpmActivity extends BaseObject {
+public class BpmActivity extends BizObjectBase {
 
 	/**
 	 * 

@@ -23,7 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.Shift;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -35,7 +35,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="MENU_ITEM_SHIFT"
  */
 @MappedSuperclass
-public abstract class BaseMenuItemShift extends BaseObject {
+public abstract class BaseMenuItemShift extends BizObjectBase {
 
 	/**
 	 * 

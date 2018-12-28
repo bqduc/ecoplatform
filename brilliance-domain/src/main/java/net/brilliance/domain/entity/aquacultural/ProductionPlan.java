@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -18,7 +18,7 @@ import net.brilliance.framework.entity.BaseObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "production_plan")
-public class ProductionPlan extends BaseObject {
+public class ProductionPlan extends BizObjectBase {
 	@Column(name = "code", unique = true)
 	private String code;
 

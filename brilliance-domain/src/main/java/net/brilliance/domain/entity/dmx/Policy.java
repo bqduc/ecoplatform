@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.EqualsAndHashCode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -22,7 +22,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "dmx_policy")
 @EqualsAndHashCode(callSuper = true)
-public class Policy extends BaseObject {
+public class Policy extends BizObjectBase {
 	/**
 	 * 
 	 */

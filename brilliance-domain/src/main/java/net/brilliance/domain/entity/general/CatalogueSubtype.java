@@ -35,7 +35,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.audit.AuditLog;
 import net.brilliance.domain.entity.config.Item;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -50,7 +50,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Table(name = "catalogue_subtype")
 @EqualsAndHashCode(callSuper = true)
-public class CatalogueSubtype extends BaseObject {
+public class CatalogueSubtype extends BizObjectBase {
 	/**
 	 * 
 	 */

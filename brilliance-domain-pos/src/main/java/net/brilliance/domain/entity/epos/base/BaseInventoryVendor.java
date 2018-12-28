@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -17,7 +17,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 
 @MappedSuperclass
-public abstract class BaseInventoryVendor extends BaseObject/*extends RepositoryEntity */{
+public abstract class BaseInventoryVendor extends BizObjectBase/*extends RepositoryEntity */{
 
 	/**
 	 * 

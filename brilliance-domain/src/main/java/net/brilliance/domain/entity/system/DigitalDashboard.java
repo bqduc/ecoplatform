@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -24,7 +24,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Builder
 @Table(name = "dmx_dashboard")
-public class DigitalDashboard extends BaseObject{
+public class DigitalDashboard extends BizObjectBase{
 	/**
 	 * 
 	 */

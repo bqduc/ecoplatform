@@ -10,8 +10,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
 
-import net.brilliance.domain.entity.common.Address;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.common.AddressPart;
+import net.brilliance.domain.entity.contact.ContactClass;
 import net.brilliance.framework.specifications.BrillianceSpecifications;
 import net.brilliance.repository.specification.model.ContactListRequest;
 
@@ -20,13 +20,13 @@ import net.brilliance.repository.specification.model.ContactListRequest;
  *
  */
 @Component
-public class ContactListSpecification extends BrillianceSpecifications<Contact, ContactListRequest> {
-	private Specification<Contact> firstNameContains(String firstName) {
+public class ContactListSpecification extends BrillianceSpecifications<ContactClass, ContactListRequest> {
+	private Specification<ContactClass> firstNameContains(String firstName) {
 		return userAttributeContains(ContactListRequest.fieldFirstName, firstName);
 	}
 
 	@Override
-	public Specification<Contact> getFilter(ContactListRequest userRequest) {
+	public Specification<ContactClass> getFilter(ContactListRequest userRequest) {
 		return (root, query, cb) -> {
 			query.distinct(true); // Important because of the join in the addressAttribute specifications
 			return Specifications.where(
@@ -36,15 +36,15 @@ public class ContactListSpecification extends BrillianceSpecifications<Contact, 
 		};
 	}
 
-	private Specification<Contact> lastNameContains(String lastName) {
+	private Specification<ContactClass> lastNameContains(String lastName) {
 		return userAttributeContains(ContactListRequest.fieldLastName, lastName);
 	}
 
-	private Specification<Contact> emailContains(String email) {
+	private Specification<ContactClass> emailContains(String email) {
 		return userAttributeContains(ContactListRequest.fieldEmail, email);
 	}
 
-	private Specification<Contact> userAttributeContains(String attribute, String value) {
+	private Specification<ContactClass> userAttributeContains(String attribute, String value) {
 		return (root, query, cb) -> {
 			if (value == null) {
 				return null;
@@ -54,21 +54,21 @@ public class ContactListSpecification extends BrillianceSpecifications<Contact, 
 		};
 	}
 
-	private Specification<Contact> cityContains(String city) {
+	private Specification<ContactClass> cityContains(String city) {
 		return addressAttributeContains("city", city);
 	}
 
-	private Specification<Contact> streetContains(String street) {
+	private Specification<ContactClass> streetContains(String street) {
 		return addressAttributeContains("street", street);
 	}
 
-	private Specification<Contact> addressAttributeContains(String attribute, String value) {
+	private Specification<ContactClass> addressAttributeContains(String attribute, String value) {
 		return (root, query, cb) -> {
 			if (value == null) {
 				return null;
 			}
 
-			ListJoin<Contact, Address> addresses = root.joinList("addresses", JoinType.INNER);
+			ListJoin<ContactClass, AddressPart> addresses = root.joinList("addresses", JoinType.INNER);
 
 			return cb.like(cb.lower(addresses.get(attribute)), containsLowerCase(value));
 		};

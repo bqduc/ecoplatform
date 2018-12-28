@@ -24,7 +24,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.general.Catalogue;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A user.
@@ -35,7 +35,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "product_catalog")
 @EqualsAndHashCode(callSuper = true)
-public class ProductCatalog extends BaseObject {
+public class ProductCatalog extends BizObjectBase {
 	/**
 	 * 
 	 */

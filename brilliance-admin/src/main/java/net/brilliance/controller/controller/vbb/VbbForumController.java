@@ -29,7 +29,7 @@ import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.domain.entity.contact.ContactProfile;
+import net.brilliance.domain.entity.contact.ContactProc;
 import net.brilliance.domain.entity.stock.Store;
 import net.brilliance.domain.entity.vbb.VbbForum;
 import net.brilliance.framework.model.SearchParameter;
@@ -286,7 +286,7 @@ public class VbbForumController extends BaseController {
 	@RequestMapping(value = "/suggestCoordinator", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestCoordinator(@RequestParam("term") String keyword, HttpServletRequest request) {
 		logger.info("Enter keyword for coordinator: " + keyword);
-		Page<ContactProfile> suggestedContacts = contactManager.search(keyword, null);
+		Page<ContactProc> suggestedContacts = contactManager.search(keyword, null);
 		return buildCategorySelectedItems(suggestedContacts.getContent(), "id", "code", "fullName");
 	}
 

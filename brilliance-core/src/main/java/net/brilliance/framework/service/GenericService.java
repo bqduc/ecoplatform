@@ -8,11 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import net.brilliance.exceptions.ExecutionContextException;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.ObjectBase;
 import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
 
-public interface GenericService<T extends BaseObject, K extends Serializable>{
+public interface GenericService<T extends ObjectBase, K extends Serializable>{
 	T saveOrUpdate(T entity);
 
 	void remove(K id);

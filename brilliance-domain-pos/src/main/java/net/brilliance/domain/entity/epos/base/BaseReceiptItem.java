@@ -22,7 +22,7 @@ import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.InventoryItemPos;
 import net.brilliance.domain.entity.epos.Receipt;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the RECEPIE_ITEM table. Do not modify this class because it will be overwritten if the configuration file related to this class
@@ -31,7 +31,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="RECEPIE_ITEM"
  */
 @MappedSuperclass
-public abstract class BaseReceiptItem extends BaseObject {
+public abstract class BaseReceiptItem extends BizObjectBase {
 
 	/**
 	 * 

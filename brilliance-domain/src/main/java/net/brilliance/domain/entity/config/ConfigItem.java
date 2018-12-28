@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -39,7 +39,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Table(name = "config_item")
 @EqualsAndHashCode(callSuper = true)
-public class ConfigItem extends BaseObject {
+public class ConfigItem extends BizObjectBase {
 	/**
 	 * 
 	 */

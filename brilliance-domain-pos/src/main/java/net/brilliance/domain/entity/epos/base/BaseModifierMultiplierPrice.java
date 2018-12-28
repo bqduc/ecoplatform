@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 import net.brilliance.domain.entity.epos.MenuModifier;
 import net.brilliance.domain.entity.epos.Multiplier;
 import net.brilliance.domain.entity.epos.PizzaModifierPrice;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the MODIFIER_MULTIPLIER_PRICE
@@ -18,7 +18,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="MODIFIER_MULTIPLIER_PRICE"
  */
 @MappedSuperclass
-public abstract class BaseModifierMultiplierPrice extends BaseObject {
+public abstract class BaseModifierMultiplierPrice extends BizObjectBase {
 
 	/**
 	 * 

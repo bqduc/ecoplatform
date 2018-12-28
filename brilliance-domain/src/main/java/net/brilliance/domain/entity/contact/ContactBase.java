@@ -21,8 +21,8 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.domain.entity.common.Address;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.domain.entity.common.AddressPart;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A contact base abstract class.
@@ -30,7 +30,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @author Bui Quy Duc
  */
 @MappedSuperclass
-public abstract class ContactBase extends BaseObject {
+public abstract class ContactBase extends BizObjectBase {
   /**
 	 * 
 	 */
@@ -48,7 +48,7 @@ public abstract class ContactBase extends BaseObject {
     @AttributeOverride(name="postalCode", column=@Column(name="billing_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="billing_country")),
   })
-  private Address billingAddress;
+  private AddressPart billingAddress;
 
   @Embedded
   @AttributeOverrides({
@@ -62,7 +62,7 @@ public abstract class ContactBase extends BaseObject {
     @AttributeOverride(name="postalCode", column=@Column(name="shipping_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="shipping_country")),
   })
-  private Address shippingAddress;
+  private AddressPart shippingAddress;
 
   @Embedded
   @AttributeOverrides({
@@ -76,7 +76,7 @@ public abstract class ContactBase extends BaseObject {
     @AttributeOverride(name="postalCode", column=@Column(name="current_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="current_country")),
   })
-  private Address currentAddress;
+  private AddressPart currentAddress;
 
   @Embedded
   @AttributeOverrides({
@@ -90,40 +90,40 @@ public abstract class ContactBase extends BaseObject {
     @AttributeOverride(name="postalCode", column=@Column(name="permanent_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="permanent_country")),
   })
-  private Address permanentAddress;
+  private AddressPart permanentAddress;
 
-	public Address getBillingAddress() {
+	public AddressPart getBillingAddress() {
 		return billingAddress;
 	}
 
-	public ContactBase setBillingAddress(Address billingAddress) {
+	public ContactBase setBillingAddress(AddressPart billingAddress) {
 		this.billingAddress = billingAddress;
 		return this;
 	}
 
-	public Address getShippingAddress() {
+	public AddressPart getShippingAddress() {
 		return shippingAddress;
 	}
 
-	public ContactBase setShippingAddress(Address shippingAddress) {
+	public ContactBase setShippingAddress(AddressPart shippingAddress) {
 		this.shippingAddress = shippingAddress;
 		return this;
 	}
 
-	public Address getPermanentAddress() {
+	public AddressPart getPermanentAddress() {
 		return permanentAddress;
 	}
 
-	public ContactBase setPermanentAddress(Address permanentAddress) {
+	public ContactBase setPermanentAddress(AddressPart permanentAddress) {
 		this.permanentAddress = permanentAddress;
 		return this;
 	}
 
-	public Address getCurrentAddress() {
+	public AddressPart getCurrentAddress() {
 		return currentAddress;
 	}
 
-	public ContactBase setCurrentAddress(Address currentAddress) {
+	public ContactBase setCurrentAddress(AddressPart currentAddress) {
 		this.currentAddress = currentAddress;
 		return this;
 	}

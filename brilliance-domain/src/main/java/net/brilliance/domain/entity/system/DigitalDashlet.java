@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.admin.Authority;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -31,7 +31,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Builder
 @Table(name = "dmx_dashlet")
-public class DigitalDashlet extends BaseObject{
+public class DigitalDashlet extends BizObjectBase{
 	/**
 	 * 
 	 */

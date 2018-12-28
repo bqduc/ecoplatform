@@ -28,7 +28,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import net.brilliance.domain.entity.admin.UserAccount;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A forum.
@@ -36,7 +36,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @author ducbq
  */
 @MappedSuperclass
-public abstract class VirtualBulletinBoard extends BaseObject{
+public abstract class VirtualBulletinBoard extends BizObjectBase{
 	private static final long serialVersionUID = 1996007596596684474L;
 
 	@Column(name = "description", columnDefinition="TEXT")

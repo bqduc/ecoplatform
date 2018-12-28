@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.contact.ContactClass;
 
 /**
  * A Contact.
@@ -93,15 +93,15 @@ public class Project extends ProjectBase {
 
 	@ManyToOne
 	@JoinColumn(name = "manager_id")
-	private Contact manager;
+	private ContactClass manager;
 
 	@ManyToOne
 	@JoinColumn(name = "assistant_manager_id")
-	private Contact assistantManager;
+	private ContactClass assistantManager;
 
 	@ManyToOne
 	@JoinColumn(name = "sub_assistant_manager_id")
-	private Contact subAssistantManager;
+	private ContactClass subAssistantManager;
 
 	@ManyToOne
 	@JoinColumn(name = "parent_id")
@@ -259,27 +259,27 @@ public class Project extends ProjectBase {
 		this.startedDate = startedDate;
 	}
 
-	public Contact getManager() {
+	public ContactClass getManager() {
 		return manager;
 	}
 
-	public void setManager(Contact manager) {
+	public void setManager(ContactClass manager) {
 		this.manager = manager;
 	}
 
-	public Contact getAssistantManager() {
+	public ContactClass getAssistantManager() {
 		return assistantManager;
 	}
 
-	public void setAssistantManager(Contact assistantManager) {
+	public void setAssistantManager(ContactClass assistantManager) {
 		this.assistantManager = assistantManager;
 	}
 
-	public Contact getSubAssistantManager() {
+	public ContactClass getSubAssistantManager() {
 		return subAssistantManager;
 	}
 
-	public void setSubAssistantManager(Contact subAssistantManager) {
+	public void setSubAssistantManager(ContactClass subAssistantManager) {
 		this.subAssistantManager = subAssistantManager;
 	}
 }

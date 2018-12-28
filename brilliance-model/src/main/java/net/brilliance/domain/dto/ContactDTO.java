@@ -4,7 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.domain.entity.contact.ContactProfile;
+import net.brilliance.domain.entity.contact.ContactProc;
 
 /**
  * Data Transfer Object for Contact. It is bound to the UI for validation
@@ -31,8 +31,8 @@ public class ContactDTO extends BaseDto {
 
 	private Boolean activated = Boolean.FALSE;
 
-	public ContactProfile createContact(PasswordEncoder encoder) {
-		ContactProfile retObject = new ContactProfile();
+	public ContactProc createContact(PasswordEncoder encoder) {
+		ContactProc retObject = new ContactProc();
 		/*retObject.setLogin(login);
 		retObject.setPassword(encoder.encode(password));*/
 		retObject.setFullName(firstName);

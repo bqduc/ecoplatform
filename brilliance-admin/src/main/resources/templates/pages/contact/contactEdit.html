@@ -328,8 +328,8 @@ $(function() {
 										<label for="dateOfBirth" class="col-sm-2 control-label" th:text="#{label.contact.dateOfBirth}"></label>
 				
 					          <div class="col-sm-2">
-					          	<input type="text" class="form-control"  id="dateOfBirth" th:field="*{dateOfBirth}" th:placeholder="#{label.contact.dateOfBirth}" />
-					           	<div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Date of birth error</div>
+					          	<input type="text" class="form-control"  id="dateOfBirth" th:field="*{birthdate}" th:placeholder="#{label.contact.dateOfBirth}" />
+					           	<div th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">Date of birth error</div>
 					        	</div>
 				         	</div>
 				        </div>
@@ -338,8 +338,8 @@ $(function() {
 										<label for="dateOfIssued" class="col-sm-2 control-label" th:text="#{label.general.issueDate}"></label>
 				
 					          <div class="col-sm-2">
-					          	<input type="text" class="form-control"  id="dateOfIssued" th:field="*{issuedDate}" th:placeholder="#{label.general.issueDate}" />
-					           	<div th:if="${#fields.hasErrors('issuedDate')}" th:errors="*{issuedDate}">Date of issue error</div>
+					          	<input type="text" class="form-control"  id="dateOfIssued" th:field="*{issueDate}" th:placeholder="#{label.general.issueDate}" />
+					           	<div th:if="${#fields.hasErrors('issueDate')}" th:errors="*{issueDate}">Date of issue error</div>
 					        	</div>
 				         	</div>
 				        </div>

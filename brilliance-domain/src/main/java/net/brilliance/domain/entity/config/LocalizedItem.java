@@ -27,7 +27,7 @@ import org.hibernate.annotations.Type;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A localized item.
@@ -38,7 +38,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "sys_localized_item")
 @EqualsAndHashCode(callSuper = true)
-public class LocalizedItem extends BaseObject {
+public class LocalizedItem extends BizObjectBase {
 	/**
 	 * 
 	 */

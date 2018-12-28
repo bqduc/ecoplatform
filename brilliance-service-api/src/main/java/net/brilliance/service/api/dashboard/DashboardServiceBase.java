@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import org.springframework.data.domain.Page;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.service.GenericService;
 import net.brilliance.service.api.ObjectNotFoundException;
 
-public interface DashboardServiceBase<T extends BaseObject, K extends Serializable> extends GenericService<T, K> {
+public interface DashboardServiceBase<T extends BizObjectBase, K extends Serializable> extends GenericService<T, K> {
 
 	/**
 	 * Get one T with the provided code.

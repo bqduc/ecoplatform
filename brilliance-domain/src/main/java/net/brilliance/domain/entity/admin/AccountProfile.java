@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import net.brilliance.common.DateTimeUtility;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.entity.auth.AuthAccount;
 import net.brilliance.model.DateTimePatterns;
 
@@ -48,7 +48,7 @@ import net.brilliance.model.DateTimePatterns;
  * @author ducbq
  */
 @MappedSuperclass
-public abstract class AccountProfile extends BaseObject implements AuthAccount {
+public abstract class AccountProfile extends BizObjectBase implements AuthAccount {
 
 	/**
 	 * 

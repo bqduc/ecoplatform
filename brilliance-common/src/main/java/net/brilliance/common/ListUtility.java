@@ -53,6 +53,10 @@ public class ListUtility {
 		return new HashMap<>();
 	}
 
+	public static <T> HashSet <T> newHashSet(){
+		return new HashSet<>();
+	}
+
 	public static <T> List<T> arraysAsList(T [] objects){
 		return Arrays.asList(objects);
 	}

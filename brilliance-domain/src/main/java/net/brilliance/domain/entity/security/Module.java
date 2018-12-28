@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * Module.
@@ -32,7 +32,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 @Entity
 @Table(name = "auth_module")
-public class Module extends BaseObject {
+public class Module extends BizObjectBase {
 	private static final long serialVersionUID = 5474725952032953164L;
 
 	@NotNull

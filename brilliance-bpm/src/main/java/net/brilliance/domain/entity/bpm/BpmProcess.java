@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 import net.brilliance.domain.entity.admin.UserAccount;
 import net.brilliance.domain.model.bpm.BpmActionMode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A Book.
@@ -23,7 +23,7 @@ import net.brilliance.framework.entity.BaseObject;
 
 @Entity
 @Table(name = "bpm_process")
-public class BpmProcess extends BaseObject{
+public class BpmProcess extends BizObjectBase{
 
 	/**
 	 * 

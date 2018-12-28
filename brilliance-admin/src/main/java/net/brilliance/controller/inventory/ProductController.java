@@ -19,7 +19,7 @@ import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.contact.ContactClass;
 import net.brilliance.domain.entity.stock.Product;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.service.api.inventory.ProductService;

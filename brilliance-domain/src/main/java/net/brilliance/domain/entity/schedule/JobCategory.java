@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -23,7 +23,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Builder
 @Entity
 @Table(name = "sys_job_category")
-public class JobCategory extends BaseObject {
+public class JobCategory extends BizObjectBase {
 
 	/**
 	 * 

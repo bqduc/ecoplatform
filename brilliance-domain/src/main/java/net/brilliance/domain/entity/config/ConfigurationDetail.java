@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -17,7 +17,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 @Entity
 @Table(name = "configuration_detail")
-public class ConfigurationDetail extends BaseObject {
+public class ConfigurationDetail extends BizObjectBase {
 	private static final long serialVersionUID = -6404039963892756706L;
 
 	@Column(name = "name", length=50, nullable=false)

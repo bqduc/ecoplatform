@@ -8,12 +8,12 @@ import javax.persistence.Table;
 
 import net.brilliance.domain.entity.general.Category;
 import net.brilliance.domain.entity.general.MeasureUnit;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "equipment")
-public class Equipment extends BaseObject{
+public class Equipment extends BizObjectBase{
 	@Column(name = "code", nullable = false, unique = true)
 	private String code;
 

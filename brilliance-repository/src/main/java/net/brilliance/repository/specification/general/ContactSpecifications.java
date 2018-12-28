@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.common.DateTimeUtility;
 import net.brilliance.common.ListUtility;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.contact.ContactClass;
 import net.brilliance.framework.model.SearchParameter;
 
 /**
@@ -54,10 +54,10 @@ public class ContactSpecifications {
 	 *          Contact's name (must be not null to be taken for the query)
 	 * @return Specification to use with JpaSpecificationExecutor
 	 */
-	public static Specification<Contact> buildSpecification(final SearchParameter searchParameter) {
-		return new Specification<Contact>() {
+	public static Specification<ContactClass> buildSpecification(final SearchParameter searchParameter) {
+		return new Specification<ContactClass>() {
 			@Override
-			public Predicate toPredicate(Root<Contact> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+			public Predicate toPredicate(Root<ContactClass> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
 				/*if (CommonUtility.isEmpty(searchParameter.getParameterMap())) {
 					throw new IllegalStateException("At least one parameter should be provided to construct complex query");
 				}*/

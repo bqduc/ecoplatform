@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -20,7 +20,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 @Entity
 @Table(name = "configuration")
-public class Configuration extends BaseObject {
+public class Configuration extends BizObjectBase {
 	/**
 	 * 
 	 */

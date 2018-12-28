@@ -37,7 +37,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -52,7 +52,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Catalogue extends BaseObject {
+public class Catalogue extends BizObjectBase {
 	private static final long serialVersionUID = -2698272402571269128L;
 
 	@NotNull

@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -28,7 +28,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "client_user_account")
 @EqualsAndHashCode(callSuper = true)
-public class ClientUserAccount extends BaseObject {
+public class ClientUserAccount extends BizObjectBase {
 	/**
 	 * 
 	 */

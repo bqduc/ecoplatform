@@ -43,7 +43,7 @@ import net.brilliance.model.GenderType;
 @Entity
 @Table(name = "contact_profile")
 @EqualsAndHashCode(callSuper = true)
-public class ContactProfile extends ContactBase {
+public class ContactProc extends ContactBase {
 	private static final long serialVersionUID = -5019226095410649159L;
 
 	@Size(max = 15)
@@ -223,8 +223,8 @@ public class ContactProfile extends ContactBase {
 		this.birthPlace = birthPlace;
 	}
 
-	public static ContactProfile getInstance(String login, String firstName, String lastName, String email){
-		ContactProfile fetchedObject = new ContactProfile();
+	public static ContactProc getInstance(String login, String firstName, String lastName, String email){
+		ContactProc fetchedObject = new ContactProc();
 		/*fetchedObject.setLogin(login);
 		fetchedObject.setPassword("pxd" + login+"@123");*/
 		fetchedObject.setFullName(firstName);

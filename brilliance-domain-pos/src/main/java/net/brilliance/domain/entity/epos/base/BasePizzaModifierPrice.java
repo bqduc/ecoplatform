@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.MenuItemSize;
 import net.brilliance.domain.entity.epos.ModifierMultiplierPrice;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -20,7 +20,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="PIZZA_MODIFIER_PRICE"
  */
 @MappedSuperclass
-public abstract class BasePizzaModifierPrice extends BaseObject {
+public abstract class BasePizzaModifierPrice extends BizObjectBase {
 	private static final long serialVersionUID = -4909096607129297097L;
 	public static String REF = "PizzaModifierPrice"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$

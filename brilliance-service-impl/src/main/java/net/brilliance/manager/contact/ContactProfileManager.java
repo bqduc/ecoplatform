@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.brilliance.common.logging.GlobalLoggerFactory;
-import net.brilliance.domain.entity.contact.ContactProfile;
+import net.brilliance.domain.entity.contact.ContactProc;
 import net.brilliance.framework.manager.BaseManager;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.repository.contact.ContactProfileRepository;
 
 @Service
 @Transactional
-public class ContactProfileManager extends BaseManager<ContactProfile, Long>{
+public class ContactProfileManager extends BaseManager<ContactProc, Long>{
 	private static final long serialVersionUID = -3874412554298276460L;
 
 	final Logger logger = GlobalLoggerFactory.getLogger(ContactProfileManager.class);
@@ -67,21 +67,21 @@ public class ContactProfileManager extends BaseManager<ContactProfile, Long>{
 		}
 	}*/
 
-	public ContactProfile getByName(String name) {
+	public ContactProc getByName(String name) {
 		return contactRepository.findByFullName(name);
 	}
 
-	public ContactProfile getByCode(String code) {
+	public ContactProc getByCode(String code) {
 		return contactRepository.findByCode(code);
 	}
 
 	@Override
-	protected BaseRepository<ContactProfile, Long> getRepository() {
+	protected BaseRepository<ContactProc, Long> getRepository() {
 		return this.contactRepository;
 	}
 
 	@Override
-	protected Page<ContactProfile> performSearch(String keyword, Pageable pageable) {
+	protected Page<ContactProc> performSearch(String keyword, Pageable pageable) {
 		return this.contactRepository.search(keyword, pageable);
 	}
 }

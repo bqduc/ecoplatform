@@ -12,7 +12,7 @@ import net.brilliance.domain.entity.epos.MenuModifierGroup;
 import net.brilliance.domain.entity.epos.ModifierMultiplierPrice;
 import net.brilliance.domain.entity.epos.PizzaModifierPrice;
 import net.brilliance.domain.entity.epos.Tax;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the MENU_MODIFIER table.
@@ -23,7 +23,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="MENU_MODIFIER"
  */
 @MappedSuperclass
-public abstract class BaseMenuModifier extends BaseObject {
+public abstract class BaseMenuModifier extends BizObjectBase {
 
 	/**
 	 * 

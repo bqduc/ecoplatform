@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import net.brilliance.domain.entity.epos.MenuItemSize;
 import net.brilliance.domain.entity.epos.OrderType;
 import net.brilliance.domain.entity.epos.PizzaCrust;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the PIZZA_PRICE table. Do not modify this class because it will be overwritten if the configuration file related to this class is
@@ -16,7 +16,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="PIZZA_PRICE"
  */
 @MappedSuperclass
-public abstract class BasePizzaPrice extends BaseObject {
+public abstract class BasePizzaPrice extends BizObjectBase {
 
 	/**
 	 * 

@@ -3,7 +3,7 @@ package net.brilliance.domain.entity.epos.base;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -15,7 +15,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="ORDER_TYPE"
  */
 @MappedSuperclass
-public abstract class BaseOrderType extends BaseObject {
+public abstract class BaseOrderType extends BizObjectBase {
 	private static final long serialVersionUID = -2884167748594440520L;
 	public static String REF = "OrderType"; //$NON-NLS-1$
 	public static String PROP_CLOSE_ON_PAID = "closeOnPaid"; //$NON-NLS-1$

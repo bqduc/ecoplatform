@@ -21,7 +21,7 @@ import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.MenuItem;
 import net.brilliance.domain.entity.epos.ReceiptItem;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -33,7 +33,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="RECEPIE"
  */
 @MappedSuperclass
-public abstract class BaseReceipt extends BaseObject {
+public abstract class BaseReceipt extends BizObjectBase {
 
 	/**
 	 * 

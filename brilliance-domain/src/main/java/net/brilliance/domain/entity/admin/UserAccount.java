@@ -44,7 +44,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.brilliance.common.DateTimeUtility;
 import net.brilliance.domain.model.CryptoAlgorithm;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.entity.auth.AuthAccount;
 import net.brilliance.model.DateTimePatterns;
 
@@ -60,7 +60,7 @@ import net.brilliance.model.DateTimePatterns;
 @Table(name = "auth_user_account")
 @ToString(exclude = { "authorities" })
 @EqualsAndHashCode(callSuper = true)
-public class UserAccount extends BaseObject implements AuthAccount {
+public class UserAccount extends BizObjectBase implements AuthAccount {
 	/**
 	 * 
 	 */

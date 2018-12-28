@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -21,7 +21,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Builder
 @Table(name = "sys_sequence")
-public class SystemSequence extends BaseObject{
+public class SystemSequence extends BizObjectBase{
 	/**
 	 * 
 	 */

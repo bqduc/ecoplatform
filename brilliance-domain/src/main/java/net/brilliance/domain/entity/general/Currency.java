@@ -26,7 +26,7 @@ import org.hibernate.annotations.Type;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -38,7 +38,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Table(name = "currency")
 @EqualsAndHashCode(callSuper = true)
-public class Currency extends BaseObject {
+public class Currency extends BizObjectBase {
 
 	/**
 	 * 

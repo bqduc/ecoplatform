@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * Access right .
@@ -30,7 +30,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 @Entity
 @Table(name = "auth_access_right")
-public class AccessRight extends BaseObject {
+public class AccessRight extends BizObjectBase {
 	private static final long serialVersionUID = 5474725952032953164L;
 
 	@NotNull

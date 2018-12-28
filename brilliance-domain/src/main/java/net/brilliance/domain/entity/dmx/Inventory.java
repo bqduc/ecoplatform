@@ -20,7 +20,7 @@ import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
 import lombok.Builder;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.contact.ContactClass;
 import net.brilliance.domain.entity.general.Category;
 import net.brilliance.domain.entity.general.Department;
 import net.brilliance.domain.model.BindingType;
@@ -28,7 +28,7 @@ import net.brilliance.domain.model.DustJacketType;
 import net.brilliance.domain.model.InventoryCodeType;
 import net.brilliance.domain.model.InventoryConditionType;
 import net.brilliance.domain.model.InventoryType;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -37,7 +37,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Builder
 @Entity
 @Table(name = "inventory_item")
-public class Inventory extends BaseObject {
+public class Inventory extends BizObjectBase {
 	/**
 	 * 
 	 */
@@ -210,11 +210,11 @@ public class Inventory extends BaseObject {
 			inverseJoinColumns = {@JoinColumn(name = "vendor_id")},
 			joinColumns = {@JoinColumn(name = "inventory_entry_id")}
 	)
-	private Set<Contact> vendors;
+	private Set<ContactClass> vendors;
 
 	@ManyToOne
 	@JoinColumn(name = "imprint_contact_id")
-	private Contact imprint;
+	private ContactClass imprint;
 
 	public Integer getVersion() {
 		return version;
@@ -438,11 +438,11 @@ public class Inventory extends BaseObject {
 		this.parent = parent;
 	}
 
-	public Set<Contact> getVendors() {
+	public Set<ContactClass> getVendors() {
 		return vendors;
 	}
 
-	public void setVendors(Set<Contact> vendors) {
+	public void setVendors(Set<ContactClass> vendors) {
 		this.vendors = vendors;
 	}
 
@@ -582,11 +582,11 @@ public class Inventory extends BaseObject {
 		this.eIsbn13 = eIsbn13;
 	}
 
-	public Contact getImprint() {
+	public ContactClass getImprint() {
 		return imprint;
 	}
 
-	public void setImprint(Contact imprint) {
+	public void setImprint(ContactClass imprint) {
 		this.imprint = imprint;
 	}
 

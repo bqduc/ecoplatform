@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -20,7 +20,7 @@ import net.brilliance.framework.global.GlobalConstants;
 
 @Entity
 @Table(name = "reference_book")
-public class Book extends BaseObject{
+public class Book extends BizObjectBase{
 	private static final long serialVersionUID = 1L;
 
 	@Version

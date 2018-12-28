@@ -22,7 +22,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the PRINTER_GROUP table. Do not modify this class because it will be overwritten if the configuration file related to this class
@@ -31,7 +31,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="PRINTER_GROUP"
  */
 @MappedSuperclass
-public abstract class BasePrinterGroup extends BaseObject {
+public abstract class BasePrinterGroup extends BizObjectBase {
 
 	/**
 	 * 

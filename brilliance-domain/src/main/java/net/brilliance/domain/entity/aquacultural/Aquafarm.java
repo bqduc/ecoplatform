@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.brilliance.domain.entity.contact.ClientProfile;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -19,7 +19,7 @@ import net.brilliance.framework.entity.BaseObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "aquafarm")
-public class Aquafarm extends BaseObject {
+public class Aquafarm extends BizObjectBase {
 	@Column(name = "code", unique = true)
 	private String code;
 

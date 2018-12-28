@@ -18,8 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.domain.entity.contact.ContactProfile;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.domain.entity.contact.ContactProc;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -29,7 +29,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "stk_store")
 @EqualsAndHashCode(callSuper = true)
-public class Store extends BaseObject {
+public class Store extends BizObjectBase {
 	private static final long serialVersionUID = 4967658673292624286L;
 
 	@Column(name = "code", nullable=false, unique=true, length=15)
@@ -53,7 +53,7 @@ public class Store extends BaseObject {
 
 	@ManyToOne
 	@JoinColumn(name = "coordinator_id")
-	private ContactProfile coordinator;
+	private ContactProc coordinator;
 
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "photo", columnDefinition="TEXT")
@@ -119,11 +119,11 @@ public class Store extends BaseObject {
 		this.issueDate = issueDate;
 	}
 
-	public ContactProfile getCoordinator() {
+	public ContactProc getCoordinator() {
 		return coordinator;
 	}
 
-	public void setCoordinator(ContactProfile coordinator) {
+	public void setCoordinator(ContactProc coordinator) {
 		this.coordinator = coordinator;
 	}
 

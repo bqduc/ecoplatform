@@ -23,7 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.MenuModifierGroup;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the MENUITEM_MODIFIERGROUP table. Do not modify this class because it will be overwritten if the configuration file related to
@@ -32,7 +32,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="MENUITEM_MODIFIERGROUP"
  */
 @MappedSuperclass
-public abstract class BaseMenuItemModifierGroup extends BaseObject {
+public abstract class BaseMenuItemModifierGroup extends BizObjectBase {
 
 	/**
 	 * 

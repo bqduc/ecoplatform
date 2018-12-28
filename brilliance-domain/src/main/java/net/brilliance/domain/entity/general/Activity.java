@@ -37,7 +37,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.admin.UserAccount;
 import net.brilliance.domain.entity.config.Item;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A user.
@@ -48,7 +48,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "activity")
 @EqualsAndHashCode(callSuper = true)
-public class Activity extends BaseObject {
+public class Activity extends BizObjectBase {
 
 	/**
 	 * 

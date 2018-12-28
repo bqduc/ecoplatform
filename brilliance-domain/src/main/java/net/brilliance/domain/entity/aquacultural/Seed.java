@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * Prawn seed (category)
@@ -17,7 +17,7 @@ import net.brilliance.framework.entity.BaseObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "seed")
-public class Seed extends BaseObject {
+public class Seed extends BizObjectBase {
 	@Column(name = "name")
 	private String name;
 

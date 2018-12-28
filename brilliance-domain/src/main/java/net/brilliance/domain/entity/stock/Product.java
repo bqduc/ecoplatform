@@ -42,7 +42,7 @@ import lombok.EqualsAndHashCode;
 import net.brilliance.common.ListUtility;
 import net.brilliance.domain.entity.general.Catalogue;
 import net.brilliance.domain.entity.general.MeasureUnit;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -54,7 +54,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Table(name = "product")
 @EqualsAndHashCode(callSuper = true)
-public class Product extends BaseObject {
+public class Product extends BizObjectBase {
 	private static final long serialVersionUID = -2698272402571269128L;
 
 	@NotNull

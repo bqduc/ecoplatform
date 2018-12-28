@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import net.brilliance.domain.entity.general.Category;
 import net.brilliance.domain.entity.general.MeasureUnit;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * Aquafeed. Food for aquafarming
@@ -21,7 +21,7 @@ import net.brilliance.framework.entity.BaseObject;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "aquafeed")
-public class Aquafeed extends BaseObject {
+public class Aquafeed extends BizObjectBase {
 	@Column(name = "code", unique = true)
 	private String code;
 

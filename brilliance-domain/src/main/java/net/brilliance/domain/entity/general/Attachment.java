@@ -2,14 +2,12 @@ package net.brilliance.domain.entity.general;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import lombok.Builder;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.ObjectBase;
 
 /**
  * A Book.
@@ -17,26 +15,26 @@ import net.brilliance.framework.entity.BaseObject;
 @Builder
 @Entity
 @Table(name = "attachment")
-public class Attachment extends BaseObject{
+public class Attachment extends ObjectBase {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5803112544828198887L;
 
-	@Size(min = 3, max = 200)
+	/*@Size(min = 3, max = 200)
 	@Column(name = "name", nullable = false)
-	private String name;
+	private String name;*/
 
 	@Lob
   private byte[] data;
 
-	public String getName() {
+	/*public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 
 	public boolean equals(Object o) {
 		if (this == o) {

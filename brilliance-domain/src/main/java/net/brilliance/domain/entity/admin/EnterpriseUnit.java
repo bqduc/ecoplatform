@@ -22,9 +22,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.common.Address;
+import net.brilliance.domain.entity.common.AddressPart;
 import net.brilliance.domain.entity.dmx.Enterprise;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -37,7 +37,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Table(name = "enterprise_unit")
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class EnterpriseUnit extends BaseObject{
+public class EnterpriseUnit extends BizObjectBase{
 
 	/**
 	 * 
@@ -94,7 +94,7 @@ public class EnterpriseUnit extends BaseObject{
 		@AttributeOverride(name="postalCode", column=@Column(name="address_postal_code")),
 		@AttributeOverride(name="country", column=@Column(name="address_country"))
 	})
-	private Address address;
+	private AddressPart address;
 	
 	@JsonIgnore
 	@Basic(fetch = FetchType.LAZY)

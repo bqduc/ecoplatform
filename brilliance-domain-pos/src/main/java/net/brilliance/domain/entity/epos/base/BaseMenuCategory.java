@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.Discount;
 import net.brilliance.domain.entity.epos.MenuGroup;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the MENU_CATEGORY table. Do not modify this class because it will be overwritten if the configuration file related to this class
@@ -16,7 +16,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="MENU_CATEGORY"
  */
 @MappedSuperclass
-public abstract class BaseMenuCategory extends BaseObject {
+public abstract class BaseMenuCategory extends BizObjectBase {
 
 	/**
 	 * 

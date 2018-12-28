@@ -31,9 +31,8 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.brilliance.domain.entity.admin.UserAccount;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -43,7 +42,6 @@ import net.brilliance.framework.global.GlobalConstants;
  */
 @Entity
 @Table(name = "client_profile")
-@ToString(exclude = { "password"})
 @EqualsAndHashCode(callSuper = true)
 @NamedQueries({
   @NamedQuery(name="ClientProfile.searchObjects",
@@ -51,7 +49,7 @@ import net.brilliance.framework.global.GlobalConstants;
                     "FROM ClientProfile profile " +
                     "WHERE profile.code LIKE CONCAT('%', :keyword, '%') OR profile.fullName LIKE CONCAT('%', :keyword, '%') ")
 })
-public class ClientProfile extends BaseObject {
+public class ClientProfile extends BizObjectBase {
 	/**
 	 * 
 	 */

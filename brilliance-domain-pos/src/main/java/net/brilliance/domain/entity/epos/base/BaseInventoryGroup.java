@@ -21,7 +21,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the INVENTORY_GROUP table. Do not modify this class because it will be overwritten if the configuration file related to this
@@ -31,7 +31,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 
 @MappedSuperclass
-public abstract class BaseInventoryGroup extends BaseObject/*extends RepositoryEntity */ {
+public abstract class BaseInventoryGroup extends BizObjectBase/*extends RepositoryEntity */ {
 
 	/**
 	 * 

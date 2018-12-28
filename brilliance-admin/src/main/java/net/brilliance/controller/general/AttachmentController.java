@@ -1,6 +1,5 @@
 package net.brilliance.controller.general;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -27,18 +26,14 @@ import com.google.gson.Gson;
 
 import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
-import net.brilliance.common.GUUISequenceGenerator;
 import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.databridge.GlobalDataInitializer;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.crm.Contact;
 import net.brilliance.domain.entity.general.Attachment;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.framework.model.SequenceType;
-import net.brilliance.model.SelectItem;
 import net.brilliance.model.ui.UISelectItem;
-import net.brilliance.runnable.UpdateSystemSequenceThread;
 import net.brilliance.service.api.contact.ContactService;
 import net.brilliance.service.api.general.AttachmentService;
 

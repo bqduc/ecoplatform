@@ -15,14 +15,14 @@
 */
 package net.brilliance.framework.entity.auth;
 
-import net.brilliance.framework.entity.BaseEntity;
+import net.brilliance.framework.entity.BizEntity;
 
 /**
  * An abstract authentication account entity.
  * 
  * @author ducbq
  */
-public interface AuthAccount extends BaseEntity {
+public interface AuthAccount extends BizEntity {
 	String getSsoId();
 	void setSsoId(String ssoId);
 

@@ -58,13 +58,20 @@
 			</tr>
 			<tr>
 				<td th:text="#{label.general.issueDate}"></td>
-				<td th:text="${fetchedObject.issuedDate}?${#dates.format(fetchedObject.issuedDate, 'MM/dd/yyyy')}:'N/A'"></td>
+				<td th:text="${fetchedObject.birthdate}?${#dates.format(fetchedObject.birthdate, 'MM/dd/yyyy')}:'N/A'"></td>
 			</tr>
-			<!-- <tr>
+			<tr>
 				<td th:text="#{label.general.parent}"></td>
-				<td th:text="${fetchedObject.parent != null} ? ${fetchedObject.parent.name} : ''"></td>
+				<td th:text="${fetchedObject.reportsTo != null} ? ${fetchedObject.reportsTo.firstName} : ''"></td>
 			</tr>
-			-->
+			<tr>
+				<td th:text="#{label.general.parent}"></td>
+				<td th:text="${fetchedObject.assistant != null} ? ${fetchedObject.assistant.firstName} : ''"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.parent}"></td>
+				<td th:text="${fetchedObject.ownerUserAccount != null} ? ${fetchedObject.ownerUserAccount.ssoId} : ''"></td>
+			</tr>
 			<tr>
 				<td th:text="#{label.general.description}"></td>
 				<td th:utext="${fetchedObject.description}"></td>

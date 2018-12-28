@@ -2,7 +2,7 @@ package net.brilliance.domain.entity.epos.base;
 
 import javax.persistence.Column;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the PIZZA_CRUST table. Do not modify this class because it will be overwritten if the configuration file related to this class is
@@ -11,7 +11,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="PIZZA_CRUST"
  */
 
-public abstract class BasePizzaCrust extends BaseObject {
+public abstract class BasePizzaCrust extends BizObjectBase {
 
 	/**
 	 * 

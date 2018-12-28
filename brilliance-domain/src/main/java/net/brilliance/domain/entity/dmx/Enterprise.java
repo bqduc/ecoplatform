@@ -18,8 +18,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.contact.ContactProfile;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.domain.entity.contact.ContactProc;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -31,7 +31,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "dmx_enterprise")
 @EqualsAndHashCode(callSuper = true)
-public class Enterprise extends BaseObject {
+public class Enterprise extends BizObjectBase {
 	/**
 	 * 
 	 */
@@ -52,7 +52,7 @@ public class Enterprise extends BaseObject {
 
 	@ManyToOne
 	@JoinColumn(name = "coordinator_id")
-	private ContactProfile coordinator;
+	private ContactProc coordinator;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "issued_date")
@@ -91,11 +91,11 @@ public class Enterprise extends BaseObject {
 		this.parent = parent;
 	}
 
-	public ContactProfile getCoordinator() {
+	public ContactProc getCoordinator() {
 		return coordinator;
 	}
 
-	public void setCoordinator(ContactProfile coordinator) {
+	public void setCoordinator(ContactProc coordinator) {
 		this.coordinator = coordinator;
 	}
 

@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * An item.
@@ -36,7 +36,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "sys_item")
 @EqualsAndHashCode(callSuper = true)
-public class Item extends BaseObject {
+public class Item extends BizObjectBase {
 	/**
 	 * 
 	 */

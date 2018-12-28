@@ -33,7 +33,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 /**
@@ -45,7 +45,7 @@ import net.brilliance.framework.global.GlobalConstants;
 @Entity
 @Table(name = "department")
 @EqualsAndHashCode(callSuper = true)
-public class Department extends BaseObject {
+public class Department extends BizObjectBase {
 	private static final long serialVersionUID = -2698272402571269128L;
 
 	@NotNull

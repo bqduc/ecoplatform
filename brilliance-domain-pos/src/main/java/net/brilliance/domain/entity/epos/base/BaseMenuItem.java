@@ -14,7 +14,7 @@ import net.brilliance.domain.entity.epos.PizzaPrice;
 import net.brilliance.domain.entity.epos.PrinterGroup;
 import net.brilliance.domain.entity.epos.Receipt;
 import net.brilliance.domain.entity.epos.TaxGroup;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -26,7 +26,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="MENU_ITEM"
  */
 @MappedSuperclass
-public abstract class BaseMenuItem extends BaseObject {
+public abstract class BaseMenuItem extends BizObjectBase {
 
 	/**
 	 * 

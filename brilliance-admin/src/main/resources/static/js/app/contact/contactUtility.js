@@ -94,7 +94,12 @@ $(document).ready( function () {
 	          { "mData": "firstName" },
 			  { "mData": "lastName" },
 			  { "mData": "email" },
-			  { "mData": "phones" },
+	          { "mData": "phone",
+		    	  "width": "5%",
+				  "render": function (data, type, row, meta){
+					  return '<a href="'+row.id+'">' + data.mobile +'</a>'; 
+				  } 
+	          },
 			  { "mData": "activated"}
 		],
 		"columns": [

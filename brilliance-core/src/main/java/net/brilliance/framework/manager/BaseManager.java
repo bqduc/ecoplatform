@@ -14,11 +14,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.brilliance.common.CommonConstants;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.ObjectBase;
 import net.brilliance.framework.logging.CommonLoggingService;
 import net.brilliance.framework.repository.BaseRepository;
 
-public abstract class BaseManager<T extends BaseObject, PK extends Serializable> extends RootService <T, PK>{
+public abstract class BaseManager<T extends ObjectBase, PK extends Serializable> extends RootService <T, PK>{
 	private static final long serialVersionUID = -1326030262778654331L;
 
 	protected abstract BaseRepository<T, PK> getRepository();

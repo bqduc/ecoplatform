@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import lombok.Builder;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
 @Builder
 @Entity
 @Table(name = "dmx_audit_object")
-public class AuditObject extends BaseObject {
+public class AuditObject extends BizObjectBase {
 	/**
 	 * 
 	 */

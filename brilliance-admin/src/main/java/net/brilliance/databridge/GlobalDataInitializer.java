@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.domain.entity.admin.BusinessUnit;
 import net.brilliance.domain.entity.admin.Office;
-import net.brilliance.domain.entity.common.Address;
+import net.brilliance.domain.entity.common.AddressPart;
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.domain.entity.general.CatalogueSubtype;
 import net.brilliance.domain.entity.schedule.JobCategory;
@@ -53,7 +53,7 @@ public class GlobalDataInitializer {
 		log.info("Generating {} random offices", DataInitializerRepo.NUMBER_TO_GENERATE);
 		Office currentObject = null;
 		Faker faker = new Faker();
-		Address[] addresses = DataInitializerRepo.buildAddresses();
+		AddressPart[] addresses = DataInitializerRepo.buildAddresses();
 		for (int i = 0; i < DataInitializerRepo.NUMBER_TO_GENERATE; i++) {
 			try {
 				currentObject = Office.builder()

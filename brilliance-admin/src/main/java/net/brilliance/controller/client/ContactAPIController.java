@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import net.brilliance.common.CommonConstants;
 import net.brilliance.common.logging.GlobalLoggerFactory;
-import net.brilliance.domain.entity.contact.ContactProfile;
+import net.brilliance.domain.entity.contact.ContactProc;
 import net.brilliance.manager.contact.ContactProfileManager;
 
 @RequestMapping(CommonConstants.REST_API + "contact")
@@ -30,12 +30,12 @@ public class ContactAPIController {
 	private ContactProfileManager serviceManager;
 
 	@RequestMapping(value = "/get/{name}", method = RequestMethod.GET)
-	public @ResponseBody ContactProfile get(HttpServletRequest request, @PathVariable("name") String name) {
-		ContactProfile fetchedObject = null;
+	public @ResponseBody ContactProc get(HttpServletRequest request, @PathVariable("name") String name) {
+		ContactProc fetchedObject = null;
     	try {
 			fetchedObject = this.serviceManager.getByName(name);
 			if (null==fetchedObject){
-				fetchedObject = new ContactProfile();
+				fetchedObject = new ContactProc();
 				fetchedObject.setFullName("Trần Trừng Trị");
 				//fetchedObject.setLogin("CTA-01");
 			}
@@ -47,7 +47,7 @@ public class ContactAPIController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ResponseEntity<?> add(HttpServletRequest request, @RequestBody ContactProfile contact){
+	public ResponseEntity<?> add(HttpServletRequest request, @RequestBody ContactProc contact){
 		ResponseEntity<?> responseEntity = null;
 		try {
     		this.serviceManager.save(contact);

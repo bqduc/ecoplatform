@@ -9,7 +9,7 @@ import net.brilliance.domain.entity.epos.InventoryGroup;
 import net.brilliance.domain.entity.epos.InventoryLocation;
 import net.brilliance.domain.entity.epos.InventoryVendor;
 import net.brilliance.domain.entity.general.PackagingUnit;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the INVENTORY_ITEM table. Do not modify this class because it will be overwritten if the configuration file related to this class
@@ -19,7 +19,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 
 @MappedSuperclass
-public abstract class BaseInventoryItem extends BaseObject/*extends RepositoryEntity */ {
+public abstract class BaseInventoryItem extends BizObjectBase/*extends RepositoryEntity */ {
 
 	/**
 	 * 

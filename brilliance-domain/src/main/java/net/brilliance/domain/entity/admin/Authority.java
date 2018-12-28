@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * An authority (a security role) used by Spring Security.
@@ -38,7 +38,7 @@ import net.brilliance.framework.entity.BaseObject;
 @NoArgsConstructor
 @Entity
 @Table(name = "auth_authority")
-public class Authority extends BaseObject {
+public class Authority extends BizObjectBase {
 	/**
 	 * 
 	 */

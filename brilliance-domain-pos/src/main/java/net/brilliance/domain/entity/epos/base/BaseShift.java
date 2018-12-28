@@ -20,7 +20,7 @@ package net.brilliance.domain.entity.epos.base;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -32,7 +32,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="SHIFT"
  */
 @MappedSuperclass
-public abstract class BaseShift extends BaseObject {
+public abstract class BaseShift extends BizObjectBase {
 
 	/**
 	 * 

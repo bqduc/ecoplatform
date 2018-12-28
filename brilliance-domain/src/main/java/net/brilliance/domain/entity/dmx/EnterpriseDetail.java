@@ -36,11 +36,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.common.Address;
-import net.brilliance.domain.entity.contact.ContactProfile;
+import net.brilliance.domain.entity.common.AddressPart;
+import net.brilliance.domain.entity.contact.ContactProc;
 import net.brilliance.domain.entity.stock.Store;
 import net.brilliance.domain.model.EnterpriseClassType;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * An enterprise base abstract class .
@@ -53,7 +53,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "dmx_enterprise_detail")
 @EqualsAndHashCode(callSuper = true)
-public class EnterpriseDetail extends BaseObject {
+public class EnterpriseDetail extends BizObjectBase {
 	/**
 	 * 
 	 */
@@ -68,11 +68,11 @@ public class EnterpriseDetail extends BaseObject {
 
 	@ManyToOne(targetEntity=Store.class, fetch=FetchType.EAGER)
 	@JoinColumn(name = "main_officer_id")
-	private ContactProfile mainOfficer;
+	private ContactProc mainOfficer;
 
 	@ManyToOne(targetEntity=Store.class, fetch=FetchType.EAGER)
 	@JoinColumn(name = "sub_officer_id")
-	private ContactProfile subOfficer;
+	private ContactProc subOfficer;
 	
 	@Column(name = "constitution_activities", columnDefinition="TEXT")
 	private String constitutionAndActivities;
@@ -97,7 +97,7 @@ public class EnterpriseDetail extends BaseObject {
     @AttributeOverride(name="postalCode", column=@Column(name="postal_code")),
     @AttributeOverride(name="country", column=@Column(name="country")),
   })
-  private Address registeredAddress;
+  private AddressPart registeredAddress;
 
 	public String getName() {
 		return name;
@@ -115,19 +115,19 @@ public class EnterpriseDetail extends BaseObject {
 		this.enterprise = enterprise;
 	}
 
-	public ContactProfile getMainOfficer() {
+	public ContactProc getMainOfficer() {
 		return mainOfficer;
 	}
 
-	public void setMainOfficer(ContactProfile mainOfficer) {
+	public void setMainOfficer(ContactProc mainOfficer) {
 		this.mainOfficer = mainOfficer;
 	}
 
-	public ContactProfile getSubOfficer() {
+	public ContactProc getSubOfficer() {
 		return subOfficer;
 	}
 
-	public void setSubOfficer(ContactProfile subOfficer) {
+	public void setSubOfficer(ContactProc subOfficer) {
 		this.subOfficer = subOfficer;
 	}
 
@@ -147,11 +147,11 @@ public class EnterpriseDetail extends BaseObject {
 		this.classType = classType;
 	}
 
-	public Address getRegisteredAddress() {
+	public AddressPart getRegisteredAddress() {
 		return registeredAddress;
 	}
 
-	public void setRegisteredAddress(Address registeredAddress) {
+	public void setRegisteredAddress(AddressPart registeredAddress) {
 		this.registeredAddress = registeredAddress;
 	}
 

@@ -21,7 +21,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * This is an object that contains data related to the PACKAGING_UNIT table. Do not modify this class because it will be overwritten if the configuration file related to this class
@@ -30,7 +30,7 @@ import net.brilliance.framework.entity.BaseObject;
  * @hibernate.class table="PACKAGING_UNIT"
  */
 @MappedSuperclass
-public abstract class BasePackagingUnit extends BaseObject {
+public abstract class BasePackagingUnit extends BizObjectBase {
 
 	/**
 	 * 

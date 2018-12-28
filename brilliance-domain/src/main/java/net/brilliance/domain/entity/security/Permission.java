@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.admin.Authority;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A user.
@@ -35,7 +35,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "auth_permission")
 @EqualsAndHashCode(callSuper = true)
-public class Permission extends BaseObject{
+public class Permission extends BizObjectBase{
 	private static final long serialVersionUID = 3067524972341936718L;
 
 	@ManyToOne

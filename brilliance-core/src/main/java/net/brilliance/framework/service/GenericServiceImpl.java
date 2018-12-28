@@ -21,15 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 import net.brilliance.common.CommonConstants;
 import net.brilliance.common.ListUtility;
 import net.brilliance.exceptions.ExecutionContextException;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.ObjectBase;
 import net.brilliance.framework.manager.BaseManager;
 import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
+import net.brilliance.framework.model.specifications.SearchRequest;
 import net.brilliance.framework.repository.BaseRepository;
+import net.brilliance.framework.specifications.DefaultSpecification;
 import net.brilliance.framework.specifications.predicator.BrilliancePredicator;
 
 @Service
-public abstract class GenericServiceImpl<EntityType extends BaseObject, Key extends Serializable> extends BaseManager /*RootService*/ <EntityType, Key> implements GenericService<EntityType, Key>{
+public abstract class GenericServiceImpl<EntityType extends ObjectBase, Key extends Serializable> extends BaseManager /*RootService*/ <EntityType, Key> implements GenericService<EntityType, Key>{
 	private static final long serialVersionUID = 7066816485194481124L;
 
 	protected abstract BaseRepository<EntityType, Key> getRepository();
@@ -174,12 +176,19 @@ public abstract class GenericServiceImpl<EntityType extends BaseObject, Key exte
 
 	@Override
 	public Page<EntityType> getObjects(SearchParameter searchParameter) {
-		Page<EntityType> pagedEntities = doGetObjects(searchParameter);
+		//Page<EntityType> pagedEntities = doGetObjects(searchParameter);
+		Page<EntityType> pagedEntities = performGetObjects(searchParameter);
 		//Perform additional operations here
 		return pagedEntities;
 	}
 
 	public ExecutionContext deploy(ExecutionContext executionContext) throws ExecutionContextException {
 		return executionContext;
+	}
+
+	protected Page<EntityType> performGetObjects(SearchParameter searchParameter) {
+		return getRepository().findAll(
+				DefaultSpecification.<EntityType, SearchRequest>builder().build().buildRepoSpecification(searchParameter),
+				searchParameter.getPageable());
 	}
 }

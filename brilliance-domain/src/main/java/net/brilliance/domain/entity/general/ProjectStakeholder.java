@@ -29,9 +29,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import lombok.Builder;
-import net.brilliance.domain.entity.contact.Contact;
+import net.brilliance.domain.entity.contact.ContactClass;
 import net.brilliance.domain.model.StakeholderType;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A project shareholder definition.
@@ -41,7 +41,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Builder
 @Entity
 @Table(name = "project_stakeholder")
-public class ProjectStakeholder extends BaseObject {
+public class ProjectStakeholder extends BizObjectBase {
 
 	/**
 	 * 
@@ -54,11 +54,11 @@ public class ProjectStakeholder extends BaseObject {
 
 	@ManyToOne
 	@JoinColumn(name = "stakeholder_id")
-	private Contact stakeholder;
+	private ContactClass stakeholder;
 
 	@ManyToOne
 	@JoinColumn(name = "main_contact_id")
-	private Contact mainContact;
+	private ContactClass mainContact;
 
 	@Column(name="stakeholder_type")
   @Enumerated(EnumType.ORDINAL)
@@ -86,19 +86,19 @@ public class ProjectStakeholder extends BaseObject {
 		this.project = project;
 	}
 
-	public Contact getStakeholder() {
+	public ContactClass getStakeholder() {
 		return stakeholder;
 	}
 
-	public void setStakeholder(Contact stakeholder) {
+	public void setStakeholder(ContactClass stakeholder) {
 		this.stakeholder = stakeholder;
 	}
 
-	public Contact getMainContact() {
+	public ContactClass getMainContact() {
 		return mainContact;
 	}
 
-	public void setMainContact(Contact mainContact) {
+	public void setMainContact(ContactClass mainContact) {
 		this.mainContact = mainContact;
 	}
 

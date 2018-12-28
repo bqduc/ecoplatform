@@ -30,7 +30,7 @@ import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.domain.entity.contact.ContactProfile;
+import net.brilliance.domain.entity.contact.ContactProc;
 import net.brilliance.domain.entity.stock.Store;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.helper.WebServicingHelper;
@@ -171,7 +171,7 @@ public class StoreController extends BaseController {
 		}
 
 		if (null != store.getCoordinator() && null != store.getCoordinator().getCode() && null==store.getCoordinator().getId()){
-			ContactProfile coordinator = this.contactManager.getByCode(store.getCoordinator().getCode());
+			ContactProc coordinator = this.contactManager.getByCode(store.getCoordinator().getCode());
 			store.setCoordinator(coordinator);
 		}
 
@@ -228,7 +228,7 @@ public class StoreController extends BaseController {
 	@RequestMapping(value = "/suggestCoordinator", method = RequestMethod.GET)
 	public @ResponseBody List<SelectItem> suggestCoordinator(@RequestParam("term") String keyword, HttpServletRequest request) {
 		logger.info("Enter keyword for coordinator: " + keyword);
-		Page<ContactProfile> suggestedContacts = contactManager.search(keyword, null);
+		Page<ContactProc> suggestedContacts = contactManager.search(keyword, null);
 		return buildCategorySelectedItems(suggestedContacts.getContent(), "id", "code", "fullName");
 	}
 

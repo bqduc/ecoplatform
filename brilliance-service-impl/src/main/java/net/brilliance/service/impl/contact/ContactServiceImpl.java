@@ -8,16 +8,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import net.brilliance.common.CommonUtility;
 import net.brilliance.common.DateTimeUtility;
 import net.brilliance.common.GenderTypeUtility;
 import net.brilliance.common.ListUtility;
-import net.brilliance.domain.entity.contact.Contact;
-import net.brilliance.framework.model.SearchParameter;
+import net.brilliance.domain.entity.crm.Contact;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.contact.ContactRepository;
-import net.brilliance.repository.specification.general.ContactSpecifications;
 import net.brilliance.service.api.ObjectNotFoundException;
 import net.brilliance.service.api.contact.ContactService;
 
@@ -80,12 +77,26 @@ public class ContactServiceImpl extends GenericServiceImpl<Contact, Long> implem
 	}
 
 	private Contact parseEntity(List<String> data){
-		return Contact.getInstance(
-				ListUtility.getEntry(data, 0), //Code
-				ListUtility.getEntry(data, 2), //First name
-				ListUtility.getEntry(data, 1)) //Last name
-				.setDateOfBirth(DateTimeUtility.createFreeDate((String)ListUtility.getEntry(data, 4)))
-				.setPlaceOfBirth((String)ListUtility.getEntry(data, 5))
+		return Contact.builder()
+				.code(ListUtility.getEntry(data, 0)) 
+				.firstName(ListUtility.getEntry(data, 2))
+				.lastName(ListUtility.getEntry(data, 1))
+				.birthdate(DateTimeUtility.createFreeDate((String)ListUtility.getEntry(data, 4)))
+				.birthplace((String)ListUtility.getEntry(data, 5))
+				.gender(GenderTypeUtility.getGenderType((String)ListUtility.getEntry(data, 21)))
+				.email((String)ListUtility.getEntry(data, 20))
+				.description((String)ListUtility.getEntry(data, 29))
+				.build();
+				
+		/*return Contact.builder()
+				.code(ListUtility.getEntry(data, 0)) 
+				.personalInfo(PersonalInfo.builder()
+						.firstName(ListUtility.getEntry(data, 2))
+						.lastName(ListUtility.getEntry(data, 1))
+						.build())
+				.birthdate(DateTimeUtility.createFreeDate((String)ListUtility.getEntry(data, 4)))
+				.birthplace((String)ListUtility.getEntry(data, 5))
+				.documents(documents)
 				.setNationalId((String)ListUtility.getEntry(data, 6))
 				.setNationalIdIssuedDate(DateTimeUtility.createFreeDate((String)ListUtility.getEntry(data, 7)))
 				.setNationalIdIssuedPlace((String)ListUtility.getEntry(data, 8))
@@ -99,11 +110,6 @@ public class ContactServiceImpl extends GenericServiceImpl<Contact, Long> implem
 				.setOverallExperience((String)ListUtility.getEntry(data, 27))
 				.setEmail((String)ListUtility.getEntry(data, 20))
 				.setNotes((String)ListUtility.getEntry(data, 29))
-			;
-	}
-
-	@Override
-	public Page<Contact> getObjects(SearchParameter searchParameter) {
-		return this.repository.findAll(ContactSpecifications.buildSpecification(searchParameter), searchParameter.getPageable());
+			;*/
 	}
 }

@@ -6,7 +6,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.MappedSuperclass;
 
 import net.brilliance.domain.entity.epos.Tax;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -18,7 +18,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="TAX_GROUP"
  */
 @MappedSuperclass
-public abstract class BaseTaxGroup extends BaseObject {
+public abstract class BaseTaxGroup extends BizObjectBase {
 
 	/**
 	 * 

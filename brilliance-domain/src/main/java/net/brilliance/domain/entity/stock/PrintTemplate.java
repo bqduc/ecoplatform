@@ -20,7 +20,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.domain.model.doc.DocumentType;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -30,7 +30,7 @@ import net.brilliance.framework.entity.BaseObject;
 @Entity
 @Table(name = "print_template")
 @EqualsAndHashCode(callSuper = true)
-public class PrintTemplate extends BaseObject {
+public class PrintTemplate extends BizObjectBase {
 	/**
 	 * 
 	 */

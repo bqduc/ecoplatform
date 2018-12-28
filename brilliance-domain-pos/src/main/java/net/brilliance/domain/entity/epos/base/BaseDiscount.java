@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 import net.brilliance.domain.entity.epos.MenuCategory;
 import net.brilliance.domain.entity.epos.MenuGroup;
 import net.brilliance.domain.entity.epos.MenuItem;
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 
 /**
@@ -20,7 +20,7 @@ import net.brilliance.framework.entity.BaseObject;
  *  table="COUPON_AND_DISCOUNT"
  */
 @MappedSuperclass
-public abstract class BaseDiscount extends BaseObject{
+public abstract class BaseDiscount extends BizObjectBase{
 	/**
 	 * 
 	 */

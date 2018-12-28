@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * @author ducbq
@@ -17,7 +17,7 @@ import net.brilliance.framework.entity.BaseObject;
  */
 @Entity
 @Table(name = "sys_job_definition")
-public class JobDefinition extends BaseObject {
+public class JobDefinition extends BizObjectBase {
 	/**
 	 * 
 	 */

@@ -44,8 +44,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.admin.UserAccount;
 import net.brilliance.domain.entity.common.Address;
+import net.brilliance.domain.entity.common.AddressPart;
 import net.brilliance.domain.entity.config.Item;
 import net.brilliance.domain.entity.general.Activity;
+import net.brilliance.framework.global.GlobalConstants;
 import net.brilliance.model.GenderType;
 
 /**
@@ -54,17 +56,17 @@ import net.brilliance.model.GenderType;
  * @author Bui Quy Duc
  */
 @Entity
-@Table(name = "contact")
+@Table(name = "contact_class")
 @EqualsAndHashCode(callSuper = true)
 @NamedQuery(
     name="findContactByCode",
     query="SELECT c FROM Contact c WHERE c.code = :code"
 )
-public class Contact extends ContactBase {
+public class ContactClass extends ContactBase {
 	private static final long serialVersionUID = -5019226095410649159L;
 
-	@Size(max = 15)
-	@Column(name="code", length=15, unique=true)
+	@Size(max = GlobalConstants.SIZE_SERIAL)
+	@Column(name="code", length=GlobalConstants.SIZE_SERIAL, unique=true)
 	private String code;
 
 	@Size(max = 50)
@@ -217,7 +219,7 @@ public class Contact extends ContactBase {
   	return email;
 	}
 
-	public Contact setEmail(String email) {
+	public ContactClass setEmail(String email) {
 		this.email = email;
 		return this;
 	}
@@ -226,7 +228,7 @@ public class Contact extends ContactBase {
 		return phones;
 	}
 
-	public Contact setPhones(String phones) {
+	public ContactClass setPhones(String phones) {
 		this.phones = phones;
 		return this;
 	}
@@ -235,7 +237,7 @@ public class Contact extends ContactBase {
 		return cellPhones;
 	}
 
-	public Contact setCellPhones(String cellPhones) {
+	public ContactClass setCellPhones(String cellPhones) {
 		this.cellPhones = cellPhones;
 		return this;
 	}
@@ -244,23 +246,23 @@ public class Contact extends ContactBase {
 		return address;
 	}
 
-	public Contact setAddress(String address) {
+	public ContactClass setAddress(String address) {
 		this.address = address;
 		return this;
 	}
 
-	public Contact setPresentAddress(String address, String country) {
-		super.setCurrentAddress(Address.instance(address, country));
+	public ContactClass setPresentAddress(String address, String country) {
+		super.setCurrentAddress(AddressPart.builder().primary(address).country(country).build());
 		return this;
 	}
 
-	public Contact setBillingAddress(String address, String country) {
-		super.setBillingAddress(Address.instance(address, country));
+	public ContactClass setBillingAddress(String address, String country) {
+		super.setBillingAddress(AddressPart.builder().primary(address).country(country).build());
 		return this;
 	}
 
-	public Contact setResidentAddress(String address, String country) {
-		super.setPermanentAddress(Address.instance(address, country));
+	public ContactClass setResidentAddress(String address, String country) {
+		super.setPermanentAddress(AddressPart.builder().primary(address).country(country).build());
 		return this;
 	}
 
@@ -268,7 +270,7 @@ public class Contact extends ContactBase {
 		return activationKey;
 	}
 
-	public Contact setActivationKey(String activationKey) {
+	public ContactClass setActivationKey(String activationKey) {
 		this.activationKey = activationKey;
 		return this;
 	}
@@ -277,7 +279,7 @@ public class Contact extends ContactBase {
 		return resetKey;
 	}
 
-	public Contact setResetKey(String resetKey) {
+	public ContactClass setResetKey(String resetKey) {
 		this.resetKey = resetKey;
 		return this;
 	}
@@ -286,7 +288,7 @@ public class Contact extends ContactBase {
 		return resetDate;
 	}
 
-	public Contact setResetDate(ZonedDateTime resetDate) {
+	public ContactClass setResetDate(ZonedDateTime resetDate) {
 		this.resetDate = resetDate;
 		return this;
 	}
@@ -295,7 +297,7 @@ public class Contact extends ContactBase {
 		return code;
 	}
 
-	public Contact setCode(String code) {
+	public ContactClass setCode(String code) {
 		this.code = code;
 		return this;
 	}
@@ -304,7 +306,7 @@ public class Contact extends ContactBase {
 		return taxId;
 	}
 
-	public Contact setTaxId(String taxId) {
+	public ContactClass setTaxId(String taxId) {
 		this.taxId = taxId;
 		return this;
 	}
@@ -313,7 +315,7 @@ public class Contact extends ContactBase {
 		return taxOffice;
 	}
 
-	public Contact setTaxOffice(String taxOffice) {
+	public ContactClass setTaxOffice(String taxOffice) {
 		this.taxOffice = taxOffice;
 		return this;
 	}
@@ -322,7 +324,7 @@ public class Contact extends ContactBase {
 		return debitLimit;
 	}
 
-	public Contact setDebitLimit(BigDecimal debitLimit) {
+	public ContactClass setDebitLimit(BigDecimal debitLimit) {
 		this.debitLimit = debitLimit;
 		return this;
 	}
@@ -331,7 +333,7 @@ public class Contact extends ContactBase {
 		return riskLimit;
 	}
 
-	public Contact setRiskLimit(BigDecimal riskLimit) {
+	public ContactClass setRiskLimit(BigDecimal riskLimit) {
 		this.riskLimit = riskLimit;
 		return this;
 	}
@@ -340,7 +342,7 @@ public class Contact extends ContactBase {
 		return gender;
 	}
 
-	public Contact setGender(GenderType gender) {
+	public ContactClass setGender(GenderType gender) {
 		this.gender = gender;
 		return this;
 	}
@@ -349,7 +351,7 @@ public class Contact extends ContactBase {
 		return firstName;
 	}
 
-	public Contact setFirstName(String firstName) {
+	public ContactClass setFirstName(String firstName) {
 		this.firstName = firstName;
 		return this;
 	}
@@ -358,7 +360,7 @@ public class Contact extends ContactBase {
 		return lastName;
 	}
 
-	public Contact setLastName(String lastName) {
+	public ContactClass setLastName(String lastName) {
 		this.lastName = lastName;
 		return this;
 	}
@@ -367,7 +369,7 @@ public class Contact extends ContactBase {
 		return nationalId;
 	}
 
-	public Contact setNationalId(String nationalId) {
+	public ContactClass setNationalId(String nationalId) {
 		this.nationalId = nationalId;
 		return this;
 	}
@@ -376,7 +378,7 @@ public class Contact extends ContactBase {
 		return nationalIdIssuedDate;
 	}
 
-	public Contact setNationalIdIssuedDate(Date nationalIdIssuedDate) {
+	public ContactClass setNationalIdIssuedDate(Date nationalIdIssuedDate) {
 		this.nationalIdIssuedDate = nationalIdIssuedDate;
 		return this;
 	}
@@ -385,7 +387,7 @@ public class Contact extends ContactBase {
 		return nationalIdExpiredDate;
 	}
 
-	public Contact setNationalIdExpiredDate(Date nationalIdExpiredDate) {
+	public ContactClass setNationalIdExpiredDate(Date nationalIdExpiredDate) {
 		this.nationalIdExpiredDate = nationalIdExpiredDate;
 		return this;
 	}
@@ -394,7 +396,7 @@ public class Contact extends ContactBase {
 		return nationalIdIssuedPlace;
 	}
 
-	public Contact setNationalIdIssuedPlace(String nationalIdIssuedPlace) {
+	public ContactClass setNationalIdIssuedPlace(String nationalIdIssuedPlace) {
 		this.nationalIdIssuedPlace = nationalIdIssuedPlace;
 		return this;
 	}
@@ -403,7 +405,7 @@ public class Contact extends ContactBase {
 		return passportNo;
 	}
 
-	public Contact setPassportNo(String passportNo) {
+	public ContactClass setPassportNo(String passportNo) {
 		this.passportNo = passportNo;
 		return this;
 	}
@@ -412,7 +414,7 @@ public class Contact extends ContactBase {
 		return passportIssuedDate;
 	}
 
-	public Contact setPassportIssuedDate(Date passportIssuedDate) {
+	public ContactClass setPassportIssuedDate(Date passportIssuedDate) {
 		this.passportIssuedDate = passportIssuedDate;
 		return this;
 	}
@@ -421,7 +423,7 @@ public class Contact extends ContactBase {
 		return passportExpiredDate;
 	}
 
-	public Contact setPassportExpiredDate(Date passportExpiredDate) {
+	public ContactClass setPassportExpiredDate(Date passportExpiredDate) {
 		this.passportExpiredDate = passportExpiredDate;
 		return this;
 	}
@@ -430,7 +432,7 @@ public class Contact extends ContactBase {
 		return passportIssuedPlace;
 	}
 
-	public Contact setPassportIssuedPlace(String passportIssuedPlace) {
+	public ContactClass setPassportIssuedPlace(String passportIssuedPlace) {
 		this.passportIssuedPlace = passportIssuedPlace;
 		return this;
 	}
@@ -439,7 +441,7 @@ public class Contact extends ContactBase {
 		return dateOfBirth;
 	}
 
-	public Contact setDateOfBirth(Date dateOfBirth) {
+	public ContactClass setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 		return this;
 	}
@@ -448,7 +450,7 @@ public class Contact extends ContactBase {
 		return placeOfBirth;
 	}
 
-	public Contact setPlaceOfBirth(String placeOfBirth) {
+	public ContactClass setPlaceOfBirth(String placeOfBirth) {
 		this.placeOfBirth = placeOfBirth;
 		return this;
 	}
@@ -457,7 +459,7 @@ public class Contact extends ContactBase {
 		return overallExperience;
 	}
 
-	public Contact setOverallExperience(String overallExperience) {
+	public ContactClass setOverallExperience(String overallExperience) {
 		this.overallExperience = overallExperience;
 		return this;
 	}
@@ -466,7 +468,7 @@ public class Contact extends ContactBase {
 		return overallExpectation;
 	}
 
-	public Contact setOverallExpectation(String overallExpectation) {
+	public ContactClass setOverallExpectation(String overallExpectation) {
 		this.overallExpectation = overallExpectation;
 		return this;
 	}
@@ -475,7 +477,7 @@ public class Contact extends ContactBase {
 		return maritalStatus;
 	}
 
-	public Contact setMaritalStatus(Item maritalStatus) {
+	public ContactClass setMaritalStatus(Item maritalStatus) {
 		this.maritalStatus = maritalStatus;
 		return this;
 	}
@@ -484,12 +486,12 @@ public class Contact extends ContactBase {
 		return qualifications;
 	}
 
-	public Contact setQualifications(Set<Item> qualifications) {
+	public ContactClass setQualifications(Set<Item> qualifications) {
 		this.qualifications = qualifications;
 		return this;
 	}
 
-	public Contact addQualification(Item qualification) {
+	public ContactClass addQualification(Item qualification) {
 		this.qualifications.add(qualification);
 		return this;
 	}
@@ -498,7 +500,7 @@ public class Contact extends ContactBase {
 		return nationality;
 	}
 
-	public Contact setNationality(String nationality) {
+	public ContactClass setNationality(String nationality) {
 		this.nationality = nationality;
 		return this;
 	}
@@ -507,7 +509,7 @@ public class Contact extends ContactBase {
 		return ethnicGroup;
 	}
 
-	public Contact setEthnicGroup(String ethnicGroup) {
+	public ContactClass setEthnicGroup(String ethnicGroup) {
 		this.ethnicGroup = ethnicGroup;
 		return this;
 	}
@@ -516,7 +518,7 @@ public class Contact extends ContactBase {
 		return notes;
 	}
 
-	public Contact setNotes(String notes) {
+	public ContactClass setNotes(String notes) {
 		this.notes = notes;
 		return this;
 	}
@@ -525,7 +527,7 @@ public class Contact extends ContactBase {
 		return issuedDate;
 	}
 
-	public Contact setIssuedDate(Date issuedDate) {
+	public ContactClass setIssuedDate(Date issuedDate) {
 		this.issuedDate = issuedDate;
 		return this;
 	}
@@ -534,7 +536,7 @@ public class Contact extends ContactBase {
 		return issuedUser;
 	}
 
-	public Contact setIssuedUser(UserAccount issuedUser) {
+	public ContactClass setIssuedUser(UserAccount issuedUser) {
 		this.issuedUser = issuedUser;
 		return this;
 	}
@@ -555,10 +557,10 @@ public class Contact extends ContactBase {
 		this.activities = activities;
 	}
 
-	public static Contact getInstance(String code, String firstName, String lastName){
+	public static ContactClass getInstance(String code, String firstName, String lastName){
 		/*fetchedObject.setLogin(login);
 		fetchedObject.setPassword("pxd" + login+"@123");*/
-		return new Contact()
+		return new ContactClass()
 				.setCode(code)
 				.setFirstName(firstName)
 				.setLastName(lastName)

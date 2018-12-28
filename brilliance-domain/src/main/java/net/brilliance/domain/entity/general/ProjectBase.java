@@ -10,13 +10,13 @@ import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import net.brilliance.framework.entity.BaseObject;
+import net.brilliance.framework.entity.BizObjectBase;
 
 /**
  * A Project base.
  */
 @Entity
-public abstract class ProjectBase extends BaseObject {
+public abstract class ProjectBase extends BizObjectBase {
 
 	/**
 	 * 
