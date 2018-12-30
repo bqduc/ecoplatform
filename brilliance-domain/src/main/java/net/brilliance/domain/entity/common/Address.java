@@ -5,12 +5,16 @@ package net.brilliance.domain.entity.common;
 
 import javax.persistence.Embeddable;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 /**
  * @author ducbq
  *
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Embeddable 
 public class Address {

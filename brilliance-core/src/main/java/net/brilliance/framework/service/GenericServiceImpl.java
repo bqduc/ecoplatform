@@ -62,6 +62,12 @@ public abstract class GenericServiceImpl<EntityType extends ObjectBase, Key exte
     return null;
 	}
 
+  /**
+   * Get entity with the provided key.
+   * 
+   * @param id The entity key
+   * @return The entity
+   */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public EntityType getObject(Key id) {

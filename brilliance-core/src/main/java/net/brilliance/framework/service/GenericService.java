@@ -20,6 +20,12 @@ public interface GenericService<T extends ObjectBase, K extends Serializable>{
 	void removeAll();
 
 	long count();
+  /**
+   * Get object with the provided key.
+   * 
+   * @param id The object key
+   * @return The Object
+   */
 	T getObject(K id);
 	List<T> getObjects();
 

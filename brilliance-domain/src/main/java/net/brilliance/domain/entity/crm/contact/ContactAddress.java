@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package net.brilliance.domain.entity.contact;
+package net.brilliance.domain.entity.crm.contact;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,7 +29,6 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.common.Address;
-import net.brilliance.domain.entity.crm.Contact;
 import net.brilliance.framework.entity.BizObjectBase;
 
 /**

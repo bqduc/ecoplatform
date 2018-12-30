@@ -88,6 +88,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     .formLogin()
     .failureUrl("/login?error")
     .loginPage("/login")
+    .failureHandler(loginFailureHandler)
+    .successHandler(loginSuccessfulHandler)
+    
     .defaultSuccessUrl("/")
     .permitAll()
     .and()
@@ -98,10 +101,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 ;
 
     loginSuccessfulHandler.setUseReferer(true);
-    http.formLogin()
+    /*http.formLogin()
     .successHandler(loginSuccessfulHandler)
     .failureHandler(loginFailureHandler)
-    ;
+    ;*/
  	
 		http
     //.csrf().disable()

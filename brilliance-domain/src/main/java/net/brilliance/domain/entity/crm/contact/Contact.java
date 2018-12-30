@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package net.brilliance.domain.entity.crm;
+package net.brilliance.domain.entity.crm.contact;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -33,8 +33,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -46,11 +46,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import net.brilliance.common.CommonUtility;
 import net.brilliance.common.ListUtility;
 import net.brilliance.domain.entity.admin.UserAccount;
 import net.brilliance.domain.entity.common.Phone;
 import net.brilliance.domain.entity.config.Item;
-import net.brilliance.domain.entity.contact.ContactAddress;
 import net.brilliance.domain.entity.contact.ContactTeam;
 import net.brilliance.domain.entity.general.Document;
 import net.brilliance.domain.model.ContactType;
@@ -185,12 +185,22 @@ public class Contact extends BizObjectBase {
 	@Column(name = "do_not_call")
 	private java.lang.Boolean doNotCall = false;
 
-	@Builder.Default
+	/*@Builder.Default
+	@Lazy
 	@OneToMany(mappedBy="contact", cascade = CascadeType.ALL)
 	private Set<ContactAddress> contactAddresses = ListUtility.newHashSet();
 
 	@Builder.Default
+	@Lazy
 	@OneToMany(mappedBy="contact", cascade = CascadeType.ALL)
+	private Set<ContactTeam> contactTeams = ListUtility.newHashSet();*/
+
+	@Transient
+	@Builder.Default
+	private Set<ContactAddress> contactAddresses = ListUtility.newHashSet();
+
+	@Builder.Default
+	@Transient
 	private Set<ContactTeam> contactTeams = ListUtility.newHashSet();
 
 	@Builder.Default
@@ -388,12 +398,30 @@ public class Contact extends BizObjectBase {
 		return contactAddresses;
 	}
 
+	public void setContactAddresses(List<ContactAddress> contactAddresses) {
+		if (null==this.contactAddresses)
+			this.contactAddresses = ListUtility.newHashSet();
+
+		if (CommonUtility.isNotEmpty(contactAddresses)){
+			this.contactAddresses.addAll(contactAddresses);
+		}
+	}
+
 	public void setContactAddresses(Set<ContactAddress> contactAddresses) {
 		this.contactAddresses = contactAddresses;
 	}
 
 	public Set<ContactTeam> getContactTeams() {
 		return contactTeams;
+	}
+
+	public void setContactTeams(List<ContactTeam> contactTeams) {
+		if (null==this.contactTeams)
+			this.contactTeams = ListUtility.newHashSet();
+
+		if (CommonUtility.isNotEmpty(contactTeams)){
+			this.contactTeams.addAll(contactTeams);
+		}
 	}
 
 	public void setContactTeams(Set<ContactTeam> contactTeams) {

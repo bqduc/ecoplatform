@@ -32,7 +32,7 @@ import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.databridge.GlobalDataInitializer;
-import net.brilliance.domain.entity.crm.Contact;
+import net.brilliance.domain.entity.crm.contact.Contact;
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;

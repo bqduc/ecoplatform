@@ -26,6 +26,8 @@ import net.brilliance.domain.model.AuthorityGroup;
 import net.brilliance.domain.model.MasterUserGroup;
 import net.brilliance.exceptions.AccountNotActivatedException;
 import net.brilliance.exceptions.AuthenticationException;
+import net.brilliance.exceptions.UserAuthenticationException;
+import net.brilliance.exceptions.UserAuthenticationException.AuthenticationCode;
 import net.brilliance.framework.repository.BrillianceRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.manager.auth.AuthorityManager;
@@ -72,7 +74,7 @@ public class UserAuthenticationServiceImpl extends GenericServiceImpl<UserAccoun
 		UserAccount userFromDatabase = repository.findBySsoId(login);
 
 		if (null==userFromDatabase)
-			throw new UsernameNotFoundException(String.format("User %s was not found in the database", lowercaseLogin));
+			throw new UserAuthenticationException(AuthenticationCode.INVALID_USER, String.format("User %s was not found in the database", lowercaseLogin));
 
 		if (Boolean.FALSE.equals(userFromDatabase.isActivated()))
 			throw new AccountNotActivatedException(String.format("User %s is not activated", lowercaseLogin));

@@ -1,6 +1,6 @@
-package net.brilliance.controller.general;
+package net.brilliance.controller.dxp;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -10,9 +10,9 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,33 +21,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
 import net.brilliance.common.CommonConstants;
 import net.brilliance.common.CommonUtility;
+import net.brilliance.common.GUUISequenceGenerator;
 import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
+import net.brilliance.databridge.GlobalDataInitializer;
 import net.brilliance.domain.entity.crm.contact.Contact;
-import net.brilliance.domain.entity.general.Attachment;
+import net.brilliance.domain.entity.dmx.Enterprise;
+import net.brilliance.framework.model.ExecutionContext;
 import net.brilliance.framework.model.SearchParameter;
+import net.brilliance.framework.model.SequenceType;
+import net.brilliance.model.SelectItem;
 import net.brilliance.model.ui.UISelectItem;
+import net.brilliance.runnable.UpdateSystemSequenceThread;
 import net.brilliance.service.api.contact.ContactService;
-import net.brilliance.service.api.general.AttachmentService;
+import net.brilliance.service.api.dmx.EnterpriseService;
+import net.brilliance.service.api.invt.ItemService;
 
 @Controller
-@RequestMapping(ControllerConstants.URI_ATTACHMENT)
-public class AttachmentController extends BaseController { 
-	private static final String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "general/storage/attachment";
+@RequestMapping(ControllerConstants.URI_DXP_ITEM)
+public class ItemController extends BaseController { 
+	String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "dxp/item";
 
 	@Inject
-	private AttachmentService businessManager;
+  private TaskExecutor taskExecutor;
+	
+	@Inject
+	private ApplicationContext applicationContext;
+
+	@Inject
+	private ItemService businessManager;
+
+	@Inject
+	private EnterpriseService enterpriseManager;
 
 	@Inject
 	private ContactService contactService;
+
+	@Inject 
+	private GlobalDataInitializer globalDataInitializer;
 
 	@RequestMapping(path={"/", ""}, method=RequestMethod.GET)
 	public String viewDefaultPage(){
@@ -73,10 +91,13 @@ public class AttachmentController extends BaseController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		Attachment newAttachment = Attachment
+		String guuId = GUUISequenceGenerator.getInstance().nextGUUIdString(SequenceType.ENTERPRISE.getType());
+
+		Enterprise newEnterprise = Enterprise
 		.builder()
+		.code(guuId)
 		.build();
-		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, newAttachment);
+		model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, newEnterprise);
 		return PAGE_CONTEXT_PREFIX + ControllerConstants.EDIT;
 	}
 
@@ -84,41 +105,32 @@ public class AttachmentController extends BaseController {
 	 * Create/update a contact.
 	*/
 	@RequestMapping(value="/create", method = RequestMethod.POST)
-	public String create(@Valid Attachment uiBizObject, BindingResult bindingResult,
+	public String create(@Valid Enterprise uiBizObject, BindingResult bindingResult,
 			Model model, HttpServletRequest httpServletRequest,
-			RedirectAttributes redirectAttributes, Locale locale, @RequestParam(value = "file", required = false) MultipartFile file) {
+			RedirectAttributes redirectAttributes, Locale locale) {
 		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, uiBizObject);
 			return PAGE_CONTEXT_PREFIX + ControllerConstants.EDIT;
 		}
 
-		logger.info("Creating/updating an attachment");
+		if (!CommonUtility.isNull(uiBizObject.getParent()) && CommonUtility.isNull(uiBizObject.getParent().getId())){
+			uiBizObject.setParent(null);
+		}
+
+		logger.info("Creating/updating catalogue subtype");
 		
 		model.asMap().clear();
 		//redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("general_save_success", new Object[] {}, locale)));
 
-		try {
-			uiBizObject.setName(file.getOriginalFilename());
-			uiBizObject.setMimetype(file.getContentType());
-			uiBizObject.setData(file.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		businessManager.saveOrUpdate(uiBizObject);
+		enterpriseManager.saveOrUpdate(uiBizObject);
 		//systemSequenceManager.registerSequence(uiBizObject.getCode());
 
+		UpdateSystemSequenceThread updateSystemSequenceThread = applicationContext.getBean(UpdateSystemSequenceThread.class, uiBizObject.getCode());
+		taskExecutor.execute(updateSystemSequenceThread);
 		//TODO: Pay attention please
-		String ret = "redirect:/attachment/";
-		return ret;
-	}
-
-	@RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> downloadAttachment(@PathVariable("id") Long id) {
-		Attachment attachment = businessManager.getObject(id);
-		return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + attachment.getName() + "\"")
-					.body(attachment.getData());	
+		String ret = "redirect:/catalogSubtype/"+uiBizObject.getId().toString();
+		return ret;//"redirect:/department/" + UrlUtil.encodeUrlPathSegment(department.getId().toString(), httpServletRequest);
 	}
 
 	/**
@@ -126,7 +138,7 @@ public class AttachmentController extends BaseController {
 	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model model) {
-			model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, businessManager.getObject(id));
+			model.addAttribute(net.brilliance.common.CommonConstants.FETCHED_OBJECT, enterpriseManager.getObject(id));
 			return PAGE_CONTEXT_PREFIX + ControllerConstants.EDIT;
     }
 
@@ -134,15 +146,25 @@ public class AttachmentController extends BaseController {
 	public String show(@PathVariable("id") Long id, Model model) {
 		logger.info("Fetch business object of catalogue subtype with id: " + id);
 
-		model.addAttribute(ControllerConstants.FETCHED_OBJECT, businessManager.getObject(id));
+		model.addAttribute(ControllerConstants.FETCHED_OBJECT, enterpriseManager.getObject(id));
 		
 		return PAGE_CONTEXT_PREFIX + ControllerConstants.VIEW;
 	}
 
 	@Override
+	protected List<SelectItem> suggestItems(String keyword) {
+		List<SelectItem> suggestedItems = new ArrayList<>();
+		Page<Enterprise> fetchedObjects = this.enterpriseManager.searchObjects(keyword, null);
+		for (Enterprise bizObject :fetchedObjects.getContent()) {
+			suggestedItems.add(SelectItem.builder().build().instance(bizObject.getId(), bizObject.getCode(), bizObject.getName()));
+		}
+		return suggestedItems;
+	}
+
+	@Override
 	protected String performSearch(SearchParameter params) {
 		Map<String, Object> parameters = new HashMap<>();
-		Page<Attachment> pageContentData = businessManager.search(parameters);
+		Page<Enterprise> pageContentData = enterpriseManager.search(parameters);
 		params.getModel().addAttribute(ControllerConstants.FETCHED_OBJECT, pageContentData);
 		/*HttpSession session = super.getSession();
 		session.setAttribute(CommonConstants.CACHED_PAGE_MODEL, params.getModel());*/
@@ -152,6 +174,9 @@ public class AttachmentController extends BaseController {
 	}
 
 	private String getDefaultPage(){
+		if (1 > this.enterpriseManager.count()){
+			this.globalDataInitializer.buildFakeEnterprises(ExecutionContext.builder().build());
+		}
 		return PAGE_CONTEXT_PREFIX + ControllerConstants.BROWSE;
 	}
 

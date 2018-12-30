@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.brilliance.controller.base.BaseRestController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.domain.entity.crm.Contact;
+import net.brilliance.domain.entity.crm.contact.Contact;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.service.api.contact.ContactService;
 

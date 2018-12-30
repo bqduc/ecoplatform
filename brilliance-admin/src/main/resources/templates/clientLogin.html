@@ -36,7 +36,8 @@
 
         <div th:if="${param.error}">
             <div class="callout callout-danger">
-                <p th:utext="#{login.error}">Login failed, please try again./Usuário ou senha estão inválidos.</p>
+            	<p th:utext="#{${#httpServletRequest.getParameter('message')}}"></p>
+              <!-- <p th:utext="#{login.error} + ${param.error} + ${#httpServletRequest.getParameter('message')}">Login failed, please try again./Usuário ou senha estão inválidos.</p> -->
             </div>
         </div>
 

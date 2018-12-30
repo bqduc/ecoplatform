@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import net.brilliance.domain.entity.crm.Contact;
+import net.brilliance.domain.entity.crm.contact.Contact;
 import net.brilliance.framework.repository.BaseRepository;
 
 @Repository

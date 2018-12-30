@@ -82,7 +82,7 @@ import net.brilliance.manager.mail.freemarker.FreeMarkerEmailConfiguration;
 @EnableConfigurationProperties({  MailProperties.class})
 @EnableAspectJAutoProxy
 @Import(value = { 
-		//H2Config.class, 
+		JpaAuditingConfig.class,
 		PostgresConfig.class, 
 		AspectConfig.class, 
 		WebSecurityConfiguration.class, 

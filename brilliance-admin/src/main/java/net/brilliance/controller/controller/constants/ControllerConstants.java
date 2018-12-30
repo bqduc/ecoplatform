@@ -82,4 +82,5 @@ public final class ControllerConstants implements CommonConstants{
 	public static final String REQ_URI_CLIENT_USER_ACCOUNT = "/clientUserAccount";
 
 	public static final String URI_ATTACHMENT = "/attachment";
+	public static final String URI_DXP_ITEM = "/item";
 }

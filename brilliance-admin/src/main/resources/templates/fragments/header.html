@@ -222,8 +222,106 @@
 		        </li>
           </ul>
         </li>
-        <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.businessGate}"></span></a>
+        <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.mekongBusinessGate}"></span></a>
           <ul>
+            <li sec:authorize="isAuthenticated()"><a href="/store/"><span th:text="#{label.menu.pos}"></span></a></li>
+            <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.ecoplatform}"></span></a>
+            	<ul>
+		            <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.training}"></span></a>
+		            	<ul>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.installation}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.security}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.productivity}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.customization}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.dataOperational}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.synchronization}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.reporting}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.workflow}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.offlineClients}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.businessProcesses}"></span></a></li>
+		            	</ul>
+		            </li>
+		            <li sec:authorize="isAuthenticated()"><a href="/catalog/"><span th:text="#{label.menu.administration}"></span></a>
+		            	<ul>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.system}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.userManagement}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.customization}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.emailManagement}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.incidentManagement}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.orderManagement}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.cloudServices}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.businessProcessManagement}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.bPMCaseStudies}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.businessProcessEngine}"></span></a></li>
+		            	</ul>
+		            </li>
+		            <li sec:authorize="isAuthenticated()"><a href="/department/"><span th:text="#{label.menu.dataManagement}"></span></a>
+		            	<ul>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.import}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.export}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.update}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.merge}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.backup}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.recovery}"></span></a></li>
+		            	</ul>
+		            </li>
+		            <li sec:authorize="isAuthenticated()"><a href="/category/"><span th:text="#{label.menu.businessModules}"></span></a>
+		            	<ul>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.homePage}"></span></a>
+											<ul>
+												<li sec:authorize="isAuthenticated()"><a href="/adminDashlet/"><span th:text="#{label.menu.dashlets}"></span></a></li>
+												<li sec:authorize="isAuthenticated()"><a href="/adminDashboard/"><span th:text="#{label.menu.dashboard}"></span></a></li>
+												<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.globalSearch}"></span></a></li>
+											</ul>
+										</li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.themes}"></span></a>
+											<ul>
+												<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.atlantic}"></span></a></li>
+												<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.six}"></span></a></li>
+												<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.sugar}"></span></a></li>
+											</ul>
+										</li>
+										<li sec:authorize="isAuthenticated()"><a href="/product/"><span th:text="#{label.menu.product}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/catalog/"><span th:text="#{label.menu.catalogues}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/catalogSubtype/"><span th:text="#{label.menu.cataloguesSubtypes}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.activities}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.accounts}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/contact/"><span th:text="#{label.menu.contacts}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/enterprise/"><span th:text="#{label.menu.enterprises}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.opportunities}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.leads}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.cases}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.documents}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.employees}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/project/"><span th:text="#{label.menu.projects}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.campaigns}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.knowledgeBase}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.contracts}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.quotes}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.orders}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.invoices}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.payments}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.creditCards}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.reports}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.charts}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.surveys}"></span></a></li>
+		            	</ul>
+		            </li>
+		            <li sec:authorize="isAuthenticated()"><a href="/product/"><span th:text="#{label.menu.userProfile}"></span></a>
+		            	<ul>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.mySignatures}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.googleAppsSync}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.iCloudSync}"></span></a></li>
+		            	</ul>
+		            </li>
+            	</ul>
+            </li>
+          </ul>
+          
+          <!-- 
+          <li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.}"></span></a></li>
+          -->
+          <!-- <ul>
             <li sec:authorize="isAuthenticated()"><a href="/store/"><span th:text="#{nav.menu.stores}"></span></a></li>
             <li sec:authorize="isAuthenticated()"><a href="/client/"><span th:text="#{nav.menu.contacts}"></span></a></li>
             <li sec:authorize="isAuthenticated()"><a href="/client/"><span th:text="#{nav.menu.clients}"></span></a></li>
@@ -232,7 +330,7 @@
             <li sec:authorize="isAuthenticated()"><a href="/category/"><span th:text="#{nav.menu.categories}"></span></a></li>
             <li sec:authorize="isAuthenticated()"><a href="/product/"><span th:text="#{nav.menu.products}"></span></a></li>
             <li sec:authorize="isAuthenticated()"><a href="/project/"><span th:text="#{nav.menu.project}"></span></a></li>
-          </ul>
+          </ul> -->
         </li>
         <!-- 
         <li><a href="#">Sub test</a>

@@ -1,10 +1,10 @@
 var vnLanguageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json";
 var enLanguageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
 
-var contextPrefix = '/rapi/attachment/';
+var contextPrefix = '/rapi/enterprise/';
 var currentLanguageUrl = vnLanguageUrl;
 var dataTableObject;
-var objectTableId = '#bizObjectsTable';
+var objectTableId = '#enterprisesTable';
 var searchContextUri = contextPrefix + 'search';
 var listObjectsAction = contextPrefix + 'list';
 function refreshTable(tableId, urlData){
@@ -17,10 +17,14 @@ function refreshTable(tableId, urlData){
 	dataParam.toDate = $('#to-date').val() || '';
 	
 	var searchParamMap = {};
+	/*searchParamMap["searchName"] = 'Trần văn';
+	searchParamMap["searchFromDate"] = $('#from-date').val();
+	searchParamMap["searchToDate"] = $('#to-date').val();*/
 	var data = {
 			   "firstName" : $('#search-first-name').val() || '', 
 			   "code" : $('#search-code').val() || '', 
 			   "lastName" : $('#search-last-name').val() || '', 
+			   //"phones" : "0",search-issue-date-from,search-issue-date-to
 			   "dateOfBirthFrom": $('#from-date').val(),
 			   "dateOfBirthTo": $('#to-date').val()
 			};
@@ -79,22 +83,28 @@ $(document).ready( function () {
 		"order": [[ 0, "asc" ]],
 		"aoColumns": [
 		      {"mData": "id", "width": "2%"},
-	          {"mData": "name",
+	          {"mData": "code",
 		    	  "width": "5%",
 				  "render": function (data, type, row, meta){
 					  return '<a href="'+row.id+'">' + data +'</a>'; 
 				  } 
 	          }, 
-	          {"mData": "minetype"},
-	          {"mData": "createdAt"},
-	          {"mData": "updatedAt"}
+	          {"mData": "name"},
+	          {"mData": "nameLocal"},
+	          {"mData": "parent"},
+	          {"mData": "issuedDate"},
+	          {"mData": "activated"},
+	          {"mData": "visible"}
 		],
 		"columns": [
 		            { "width": "2%" },//Id
+		            { "width": "8%" },//Code
 		            { "width": "30%" },//Name
-		            { "width": "30%" },//Mine type
-		            { "width": "15%" },//Created At
-		            { "width": "5%" }//Updated At
+		            { "width": "30%" },//Translated name
+		            { "width": "15%" },//Parent
+		            { "width": "5%" },//Issue date
+		            { "width": "5%" },//Activated
+		            { "width": "5%" } //Visible
 		          ]	
 	});
 	

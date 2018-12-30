@@ -11,10 +11,14 @@ import org.springframework.stereotype.Service;
 import net.brilliance.common.DateTimeUtility;
 import net.brilliance.common.GenderTypeUtility;
 import net.brilliance.common.ListUtility;
-import net.brilliance.domain.entity.crm.Contact;
+import net.brilliance.domain.entity.contact.ContactTeam;
+import net.brilliance.domain.entity.crm.contact.Contact;
+import net.brilliance.domain.entity.crm.contact.ContactAddress;
 import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
+import net.brilliance.repository.contact.ContactAddressRepository;
 import net.brilliance.repository.contact.ContactRepository;
+import net.brilliance.repository.contact.ContactTeamRepository;
 import net.brilliance.service.api.ObjectNotFoundException;
 import net.brilliance.service.api.contact.ContactService;
 
@@ -29,6 +33,12 @@ public class ContactServiceImpl extends GenericServiceImpl<Contact, Long> implem
 	@Inject 
 	private ContactRepository repository;
 	
+	@Inject 
+	private ContactAddressRepository contactAddressRepository;
+
+	@Inject 
+	private ContactTeamRepository contactTeamRepository;
+
 	protected BaseRepository<Contact, Long> getRepository() {
 		return this.repository;
 	}
@@ -36,6 +46,28 @@ public class ContactServiceImpl extends GenericServiceImpl<Contact, Long> implem
 	@Override
 	public Contact getOne(String code) throws ObjectNotFoundException {
 		return repository.findByCode(code);
+	}
+
+  /**
+   * Get one contact object with the provided id.
+   * 
+   * @param id The contact id
+   * @return The contact
+   * @throws ObjectNotFoundException If no such account exists.
+   */
+	@Override
+	public Contact getObject(Long id) throws ObjectNotFoundException {
+		Contact foundObject = repository.findOne(id);
+		if (null==foundObject)
+			throw new ObjectNotFoundException(String.valueOf(id));
+
+		List<ContactAddress> contactAddresses = contactAddressRepository.findByContact(foundObject);
+		foundObject.setContactAddresses(contactAddresses);
+
+		List<ContactTeam> contactTeams = contactTeamRepository.findByContact(foundObject);
+		foundObject.setContactTeams(contactTeams);
+
+		return foundObject;
 	}
 
 	@Override

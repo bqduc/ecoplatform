@@ -17,72 +17,70 @@ import org.springframework.web.bind.annotation.RestController;
 import net.brilliance.common.CommonUtility;
 import net.brilliance.controller.base.BaseRestController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
-import net.brilliance.domain.entity.dmx.Enterprise;
+import net.brilliance.domain.entity.general.Attachment;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.service.api.dmx.EnterpriseService;
+import net.brilliance.service.api.general.AttachmentService;
 
 @RequestMapping(ControllerConstants.REST_API + ControllerConstants.URI_ATTACHMENT)
 @RestController
-public class AttachmentRestController extends BaseRestController<Enterprise>{
+public class AttachmentRestController extends BaseRestController<Attachment>{
 	private final static String CACHE_OBJECTS_KEY = "cache.attachmens";
 	@Inject 
-	private EnterpriseService businessService;
+	private AttachmentService businessService;
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	public List<Enterprise> onListEnterprises(HttpServletRequest request, HttpServletResponse response, Model model) {
-		logger.info("RestController::Come to enterprise data listing ...>>>>>>");
-		List<Enterprise> results = null;
+	public List<Attachment> listBusinessObjects(HttpServletRequest request, HttpServletResponse response, Model model) {
+		logger.info("RestController::Come to list business objects ...>>>>>>");
+		List<Attachment> results = null;
 		Object cachedValue = super.cacheGet(CACHE_OBJECTS_KEY);
 		PageRequest pageRequest = null;
 		SearchParameter searchParameter = null;
-		Page<Enterprise> objects = null;
+		Page<Attachment> objects = null;
 		if (CommonUtility.isNotEmpty(cachedValue)){
-			results = (List<Enterprise>)cachedValue;
+			results = (List<Attachment>)cachedValue;
 		} else {
 			pageRequest = new PageRequest(0, 500, Sort.Direction.ASC, "id");
-			searchParameter = SearchParameter.builder()
-					.pageable(pageRequest)
-					.build();
+			searchParameter = SearchParameter.builder().pageable(pageRequest).build();
 			objects = businessService.getObjects(searchParameter);
 			results = objects.getContent();
 			super.cachePut(CACHE_OBJECTS_KEY, results);
 		}
-		logger.info("Enterprise data is loaded. >>>>>>");
+		logger.info("Attachment data is loaded. >>>>>>");
 
 		return results;
 	}
 
 	@Override
-	protected void doUpdateBusinessObject(Enterprise updatedClientObject) {
+	protected void doUpdateBusinessObject(Attachment updatedClientObject) {
 		super.doUpdateBusinessObject(updatedClientObject);
 	}
 
 	@Override
-	protected Page<Enterprise> doFetchBusinessObjects(Integer page, Integer size) {
-		Page<Enterprise> fetchedBusinessObjects = businessService.getObjects(page, size);
-		logger.info("Enterprise Rest::FetchBusinessObjects: " + fetchedBusinessObjects.getTotalElements());
+	protected Page<Attachment> doFetchBusinessObjects(Integer page, Integer size) {
+		Page<Attachment> fetchedBusinessObjects = businessService.getObjects(page, size);
+		logger.info("Attachment Rest::FetchBusinessObjects: " + fetchedBusinessObjects.getTotalElements());
 		return fetchedBusinessObjects;
 	}
 
 	@Override
-	protected Enterprise doFetchBusinessObject(Long id) {
-		Enterprise fetchedBusinessObject = businessService.getObject(id);
-		logger.info("Enterprise Rest::FetchBusinessObject: " + fetchedBusinessObject.getCode());
+	protected Attachment doFetchBusinessObject(Long id) {
+		Attachment fetchedBusinessObject = businessService.getObject(id);
+		logger.info("Attachment Rest::FetchBusinessObject: " + fetchedBusinessObject.getName());
 		return fetchedBusinessObject;
 	}
 
 	@Override
 	protected void doDeleteBusinessObject(Long id) {
-		logger.info("Enterprise Rest::DeleteBusinessObject: " + id);
+		logger.info("Attachment Rest::DeleteBusinessObject: " + id);
 		businessService.remove(id);
-		logger.info("Enterprise Rest::DeleteBusinessObject is done");
+		logger.info("Attachment Rest::DeleteBusinessObject is done");
 	}
 
 	@Override
-	protected void doCreateBusinessObject(Enterprise businessObject) {
-		logger.info("Enterprise Rest::CreateBusinessObject: " + businessObject.getCode());
-		businessService.saveOrUpdate((Enterprise)businessObject);
-		logger.info("Enterprise Rest::CreateBusinessObject is done");
+	protected void doCreateBusinessObject(Attachment businessObject) {
+		logger.info("Attachment Rest::CreateBusinessObject: " + businessObject.getName());
+		businessService.saveOrUpdate((Attachment)businessObject);
+		logger.info("Attachment Rest::CreateBusinessObject is done");
 	}
 }

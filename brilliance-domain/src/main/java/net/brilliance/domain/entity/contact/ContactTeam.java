@@ -28,8 +28,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.crm.Contact;
 import net.brilliance.domain.entity.crm.Team;
+import net.brilliance.domain.entity.crm.contact.Contact;
 import net.brilliance.framework.entity.BizObjectBase;
 
 /**
