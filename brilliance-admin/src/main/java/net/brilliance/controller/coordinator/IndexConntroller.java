@@ -16,6 +16,7 @@
 package net.brilliance.controller.coordinator;
 
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,35 @@ import net.brilliance.service.api.dashboard.DashletService;
 @Controller
 public class IndexConntroller {
 	private Logger log = GlobalLoggerFactory.getLogger(this.getClass());
+
+	private final static String DASHBOARD_DIR = "pages/public/dashboard/";
+
+	private final static String CACHE_OBJECTS_KEY = "cachedDashboardData";
+
+	public enum DashboardPages {
+		master(DASHBOARD_DIR + "master"),
+		crm(DASHBOARD_DIR + "crm"),
+		inventory(DASHBOARD_DIR + "inventory"),
+		distribution(DASHBOARD_DIR + "distribution"),
+		backOffice(DASHBOARD_DIR + "backOffice");
+
+		private DashboardPages(String page){
+			this.page = page;
+		}
+		public String getPage() {
+			return page;
+		}
+
+		public static DashboardPages findPage(String requestUri) {
+			int lastSeparator = requestUri.lastIndexOf("/");
+			if (-1 == lastSeparator)
+				return DashboardPages.master;
+
+			return DashboardPages.valueOf(requestUri.substring(lastSeparator+1));
+		}
+
+		private String page;
+	};
 
 	@Inject 
 	private DashletService dashletService;
@@ -62,8 +92,29 @@ public class IndexConntroller {
 		log.info("Rendering index page...");
 		
 		log.info("Account: " + Account.createInstance());
-		return "pages/public/dashboard";
-		//return "dashboard/index";
+		return DashboardPages.master.getPage();
+		//return "pages/public/dashboard";
+	}
+
+	private void prepareDashboardData(Model model, HttpServletRequest request){
+		Map<?, ?> syncData = (Map<?, ?>)request.getSession().getAttribute(CACHE_OBJECTS_KEY);
+		if (null==syncData){
+			syncData = dashboardManager.syncData();
+			request.getSession().setAttribute(CACHE_OBJECTS_KEY, syncData);
+		} 
+
+		model.addAttribute("dashboardManager", dashboardManager);
+		model.addAttribute(CACHE_OBJECTS_KEY, syncData);
+	}
+
+	@GetMapping({ "/dashboard/**"})
+	public String requestDashboardPage(Model model, HttpServletRequest request) {
+		String requestURI = request.getRequestURI();
+		log.debug("Request URI: " + requestURI);
+
+		prepareDashboardData(model, request);
+		DashboardPages dashboardPage = DashboardPages.findPage(requestURI);
+		return dashboardPage.getPage();
 	}
 
 	@GetMapping({ "/pages/**"})
@@ -72,14 +123,6 @@ public class IndexConntroller {
 		log.info("-----------------------view page uri: " + viewUri + "-----------------------");
 		return viewUri;
 	}
-
-	/*@GetMapping({ "/*"})
-	public String viewAll(HttpServletRequest request) {
-		log.info("-----------------------viewAll-----------------------");
-		String viewUri = getViewPage(request);
-		log.info("-----------------------viewAll: " + viewUri + "-----------------------");
-		return viewUri;
-	}*/
 
 	private String getViewPage(HttpServletRequest request) {
 		String encodedPwd = passwordEncoder.encode("vP3@x5");
