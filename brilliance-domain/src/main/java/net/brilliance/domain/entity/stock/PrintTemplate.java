@@ -16,8 +16,10 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.domain.model.doc.DocumentType;
 import net.brilliance.framework.entity.BizObjectBase;
@@ -26,6 +28,8 @@ import net.brilliance.framework.entity.BizObjectBase;
  * @author ducbq
  *
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "print_template")

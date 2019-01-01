@@ -36,6 +36,7 @@ import org.springframework.util.StringUtils;
 
 import net.brilliance.common.CommonUtility;
 import net.brilliance.domain.entity.epos.base.BaseMenuItem;
+import net.brilliance.domain.entity.general.Tax;
 
 /*@XmlRootElement(name = "menu-item")
 @Entity

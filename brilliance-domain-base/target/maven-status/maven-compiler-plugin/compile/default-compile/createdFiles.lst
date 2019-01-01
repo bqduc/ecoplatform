@@ -1,0 +1,9 @@
+net\brilliance\domain\model\enums\CRXGeneralStage.class
+net\brilliance\domain\entity\common\Phone.class
+net\brilliance\domain\entity\base\BaseTax.class
+net\brilliance\domain\model\enums\CRXGeneralType.class
+net\brilliance\domain\entity\base\BaseTaxGroup.class
+net\brilliance\domain\entity\common\Address$AddressBuilder.class
+net\brilliance\domain\entity\common\Address.class
+net\brilliance\domain\entity\general\Tax.class
+net\brilliance\domain\entity\general\TaxGroup.class

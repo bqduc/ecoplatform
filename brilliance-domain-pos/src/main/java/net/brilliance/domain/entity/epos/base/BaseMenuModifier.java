@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 import net.brilliance.domain.entity.epos.MenuModifierGroup;
 import net.brilliance.domain.entity.epos.ModifierMultiplierPrice;
 import net.brilliance.domain.entity.epos.PizzaModifierPrice;
-import net.brilliance.domain.entity.epos.Tax;
+import net.brilliance.domain.entity.general.Tax;
 import net.brilliance.framework.entity.BizObjectBase;
 
 /**

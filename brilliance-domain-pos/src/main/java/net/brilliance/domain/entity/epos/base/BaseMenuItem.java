@@ -13,7 +13,7 @@ import net.brilliance.domain.entity.epos.OrderType;
 import net.brilliance.domain.entity.epos.PizzaPrice;
 import net.brilliance.domain.entity.epos.PrinterGroup;
 import net.brilliance.domain.entity.epos.Receipt;
-import net.brilliance.domain.entity.epos.TaxGroup;
+import net.brilliance.domain.entity.general.TaxGroup;
 import net.brilliance.framework.entity.BizObjectBase;
 
 

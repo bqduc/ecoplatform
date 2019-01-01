@@ -19,8 +19,10 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import net.brilliance.domain.entity.contact.ContactClass;
+import lombok.NoArgsConstructor;
+import net.brilliance.domain.entity.crx.contact.Contact;
 import net.brilliance.domain.entity.general.Category;
 import net.brilliance.domain.entity.general.Department;
 import net.brilliance.domain.model.BindingType;
@@ -34,6 +36,8 @@ import net.brilliance.framework.global.GlobalConstants;
 /**
  * A Book.
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "inventory_item")
@@ -210,11 +214,11 @@ public class Inventory extends BizObjectBase {
 			inverseJoinColumns = {@JoinColumn(name = "vendor_id")},
 			joinColumns = {@JoinColumn(name = "inventory_entry_id")}
 	)
-	private Set<ContactClass> vendors;
+	private Set<Contact> vendors;
 
 	@ManyToOne
 	@JoinColumn(name = "imprint_contact_id")
-	private ContactClass imprint;
+	private Contact imprint;
 
 	public Integer getVersion() {
 		return version;
@@ -438,11 +442,11 @@ public class Inventory extends BizObjectBase {
 		this.parent = parent;
 	}
 
-	public Set<ContactClass> getVendors() {
+	public Set<Contact> getVendors() {
 		return vendors;
 	}
 
-	public void setVendors(Set<ContactClass> vendors) {
+	public void setVendors(Set<Contact> vendors) {
 		this.vendors = vendors;
 	}
 
@@ -582,11 +586,11 @@ public class Inventory extends BizObjectBase {
 		this.eIsbn13 = eIsbn13;
 	}
 
-	public ContactClass getImprint() {
+	public Contact getImprint() {
 		return imprint;
 	}
 
-	public void setImprint(ContactClass imprint) {
+	public void setImprint(Contact imprint) {
 		this.imprint = imprint;
 	}
 

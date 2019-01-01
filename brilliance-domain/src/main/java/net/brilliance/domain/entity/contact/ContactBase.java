@@ -21,7 +21,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.domain.entity.common.AddressPart;
+import net.brilliance.domain.entity.common.Address;
 import net.brilliance.framework.entity.BizObjectBase;
 
 /**
@@ -38,92 +38,76 @@ public abstract class ContactBase extends BizObjectBase {
 
 	@Embedded
   @AttributeOverrides({
-    @AttributeOverride(name="primary", column=@Column(name="billing_primary")),
-    @AttributeOverride(name="secondary", column=@Column(name="billing_secondary")),
-    @AttributeOverride(name="street", column=@Column(name="billing_street")),
-    @AttributeOverride(name="ward", column=@Column(name="billing_ward")),
-    @AttributeOverride(name="district", column=@Column(name="billing_district")),
+    @AttributeOverride(name="address", column=@Column(name="billing_primary")),
     @AttributeOverride(name="city", column=@Column(name="billing_city")),
-    @AttributeOverride(name="stateProvince", column=@Column(name="billing_state")),
+    @AttributeOverride(name="state", column=@Column(name="billing_state")),
     @AttributeOverride(name="postalCode", column=@Column(name="billing_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="billing_country")),
   })
-  private AddressPart billingAddress;
+  private Address billingAddress;
 
   @Embedded
   @AttributeOverrides({
-    @AttributeOverride(name="primary", column=@Column(name="shipping_primary")),
-    @AttributeOverride(name="secondary", column=@Column(name="shipping_secondary")),
-    @AttributeOverride(name="street", column=@Column(name="shipping_street")),
-    @AttributeOverride(name="ward", column=@Column(name="shipping_ward")),
-    @AttributeOverride(name="district", column=@Column(name="shipping_district")),
+    @AttributeOverride(name="address", column=@Column(name="shipping_primary")),
     @AttributeOverride(name="city", column=@Column(name="shipping_city")),
-    @AttributeOverride(name="stateProvince", column=@Column(name="shipping_state")),
+    @AttributeOverride(name="state", column=@Column(name="shipping_state")),
     @AttributeOverride(name="postalCode", column=@Column(name="shipping_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="shipping_country")),
   })
-  private AddressPart shippingAddress;
+  private Address shippingAddress;
 
   @Embedded
   @AttributeOverrides({
-    @AttributeOverride(name="primary", column=@Column(name="current_primary")),
-    @AttributeOverride(name="secondary", column=@Column(name="current_secondary")),
-    @AttributeOverride(name="street", column=@Column(name="current_street")),
-    @AttributeOverride(name="ward", column=@Column(name="current_ward")),
-    @AttributeOverride(name="district", column=@Column(name="current_district")),
+    @AttributeOverride(name="address", column=@Column(name="current_primary")),
     @AttributeOverride(name="city", column=@Column(name="current_city")),
-    @AttributeOverride(name="stateProvince", column=@Column(name="current_state")),
+    @AttributeOverride(name="state", column=@Column(name="current_state")),
     @AttributeOverride(name="postalCode", column=@Column(name="current_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="current_country")),
   })
-  private AddressPart currentAddress;
+  private Address currentAddress;
 
   @Embedded
   @AttributeOverrides({
-    @AttributeOverride(name="primary", column=@Column(name="permanent_primary")),
-    @AttributeOverride(name="secondary", column=@Column(name="permanent_secondary")),
-    @AttributeOverride(name="street", column=@Column(name="permanent_street")),
-    @AttributeOverride(name="ward", column=@Column(name="permanent_ward")),
-    @AttributeOverride(name="district", column=@Column(name="permanent_district")),
+    @AttributeOverride(name="address", column=@Column(name="permanent_primary")),
     @AttributeOverride(name="city", column=@Column(name="permanent_city")),
-    @AttributeOverride(name="stateProvince", column=@Column(name="permanent_state")),
+    @AttributeOverride(name="state", column=@Column(name="permanent_state")),
     @AttributeOverride(name="postalCode", column=@Column(name="permanent_postal_code")),
     @AttributeOverride(name="country", column=@Column(name="permanent_country")),
   })
-  private AddressPart permanentAddress;
+  private Address permanentAddress;
 
-	public AddressPart getBillingAddress() {
+	public Address getBillingAddress() {
 		return billingAddress;
 	}
 
-	public ContactBase setBillingAddress(AddressPart billingAddress) {
+	public ContactBase setBillingAddress(Address billingAddress) {
 		this.billingAddress = billingAddress;
 		return this;
 	}
 
-	public AddressPart getShippingAddress() {
+	public Address getShippingAddress() {
 		return shippingAddress;
 	}
 
-	public ContactBase setShippingAddress(AddressPart shippingAddress) {
+	public ContactBase setShippingAddress(Address shippingAddress) {
 		this.shippingAddress = shippingAddress;
 		return this;
 	}
 
-	public AddressPart getPermanentAddress() {
+	public Address getPermanentAddress() {
 		return permanentAddress;
 	}
 
-	public ContactBase setPermanentAddress(AddressPart permanentAddress) {
+	public ContactBase setPermanentAddress(Address permanentAddress) {
 		this.permanentAddress = permanentAddress;
 		return this;
 	}
 
-	public AddressPart getCurrentAddress() {
+	public Address getCurrentAddress() {
 		return currentAddress;
 	}
 
-	public ContactBase setCurrentAddress(AddressPart currentAddress) {
+	public ContactBase setCurrentAddress(Address currentAddress) {
 		this.currentAddress = currentAddress;
 		return this;
 	}

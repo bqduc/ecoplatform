@@ -316,6 +316,22 @@
 		            </li>
             	</ul>
             </li>
+            <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.agroforestryPlatform}"></span></a>
+	            	<ul>
+									<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaculture}"></span></a>
+										<ul>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.farms}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.ponds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.feeds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.livestockFeeds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.productionPlan}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.farmingPlan}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.medicine}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.seeds}"></span></a></li>
+										</ul>
+									</li>
+	            	</ul>
+            </li>            
           </ul>
           
           <!-- 

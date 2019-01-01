@@ -36,7 +36,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.common.AddressPart;
+import net.brilliance.domain.entity.common.Address;
 import net.brilliance.domain.entity.contact.ContactProc;
 import net.brilliance.domain.entity.stock.Store;
 import net.brilliance.domain.model.EnterpriseClassType;
@@ -97,7 +97,7 @@ public class EnterpriseDetail extends BizObjectBase {
     @AttributeOverride(name="postalCode", column=@Column(name="postal_code")),
     @AttributeOverride(name="country", column=@Column(name="country")),
   })
-  private AddressPart registeredAddress;
+  private Address registeredAddress;
 
 	public String getName() {
 		return name;
@@ -147,11 +147,11 @@ public class EnterpriseDetail extends BizObjectBase {
 		this.classType = classType;
 	}
 
-	public AddressPart getRegisteredAddress() {
+	public Address getRegisteredAddress() {
 		return registeredAddress;
 	}
 
-	public void setRegisteredAddress(AddressPart registeredAddress) {
+	public void setRegisteredAddress(Address registeredAddress) {
 		this.registeredAddress = registeredAddress;
 	}
 

@@ -32,7 +32,7 @@ import net.brilliance.common.ListUtility;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.domain.entity.admin.ClientUserAccount;
-import net.brilliance.domain.entity.crm.contact.Contact;
+import net.brilliance.domain.entity.crx.contact.Contact;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.model.SequenceType;
 import net.brilliance.model.SelectItem;

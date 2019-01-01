@@ -28,7 +28,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.model.BusinessClass;
-import net.brilliance.domain.model.BusinessStatus;
+import net.brilliance.domain.model.GeneralStatus;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
@@ -56,7 +56,7 @@ public class BusinessService extends BizObjectBase {
 
 	@Column(name="status")
 	@Enumerated(EnumType.ORDINAL)
-	private BusinessStatus status;
+	private GeneralStatus status;
 
 	@Column(name="business_class")
 	@Enumerated(EnumType.ORDINAL)
@@ -82,11 +82,11 @@ public class BusinessService extends BizObjectBase {
 		this.name = name;
 	}
 
-	public BusinessStatus getStatus() {
+	public GeneralStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(BusinessStatus status) {
+	public void setStatus(GeneralStatus status) {
 		this.status = status;
 	}
 

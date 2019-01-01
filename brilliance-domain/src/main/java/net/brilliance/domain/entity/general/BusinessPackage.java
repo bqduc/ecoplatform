@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.contact.ClientProfile;
-import net.brilliance.domain.model.BusinessStatus;
+import net.brilliance.domain.model.GeneralStatus;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
@@ -70,7 +70,7 @@ public class BusinessPackage extends BizObjectBase {
 
 	@Column(name="status")
 	@Enumerated(EnumType.ORDINAL)
-	private BusinessStatus status;
+	private GeneralStatus status;
 
 	@Column(name="reset_date")
 	private ZonedDateTime resetDate = null;
@@ -122,11 +122,11 @@ public class BusinessPackage extends BizObjectBase {
 		this.phones = phones;
 	}
 
-	public BusinessStatus getStatus() {
+	public GeneralStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(BusinessStatus status) {
+	public void setStatus(GeneralStatus status) {
 		this.status = status;
 	}
 

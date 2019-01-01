@@ -83,4 +83,7 @@ public final class ControllerConstants implements CommonConstants{
 
 	public static final String URI_ATTACHMENT = "/attachment";
 	public static final String URI_DXP_ITEM = "/item";
+
+	public static final String URI_ORDER = "/order";
+	public static final String URI_CAMPAIGN = "/campaign";
 }

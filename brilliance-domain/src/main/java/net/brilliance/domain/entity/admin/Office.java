@@ -22,7 +22,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import net.brilliance.domain.entity.common.AddressPart;
+import net.brilliance.domain.entity.common.Address;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
@@ -78,17 +78,13 @@ public class Office extends BizObjectBase{
 
   @Embedded
 	@AttributeOverrides({
-	  @AttributeOverride(name="primary", column=@Column(name="address_primary")),
-		@AttributeOverride(name="secondary", column=@Column(name="address_secondary")),
-		@AttributeOverride(name="street", column=@Column(name="address_street")),
-		@AttributeOverride(name="ward", column=@Column(name="address_ward")),
-		@AttributeOverride(name="district", column=@Column(name="address_district")),
+	  @AttributeOverride(name="address", column=@Column(name="address_primary")),
 		@AttributeOverride(name="city", column=@Column(name="address_city")),
 		@AttributeOverride(name="state", column=@Column(name="address_state")),
 		@AttributeOverride(name="postalCode", column=@Column(name="address_postal_code")),
 		@AttributeOverride(name="country", column=@Column(name="address_country"))
 	})
-	private AddressPart address;
+	private Address address;
 	
 	@JsonIgnore
 	@Basic(fetch = FetchType.LAZY)
@@ -117,43 +113,11 @@ public class Office extends BizObjectBase{
 	private String description;
 
 	public String getAddressPrimary() {
-		return this.address.getPrimary();
+		return this.address.getAddress();
 	}
 
 	public void setAddressPrimary(String primary) {
-		this.address.setPrimary(primary);
-	}
-
-	public String getSecondary() {
-		return address.getSecondary();
-	}
-
-	public void setSecondary(String secondary) {
-		this.address.setSecondary(secondary);
-	}
-
-	public String getStreet() {
-		return this.address.getStreet();
-	}
-
-	public void setStreet(String street) {
-		this.address.setStreet(street);
-	}
-
-	public String getWard() {
-		return this.address.getWard();
-	}
-
-	public void setWard(String ward) {
-		this.address.setWard(ward);
-	}
-
-	public String getDistrict() {
-		return this.address.getDistrict();
-	}
-
-	public void setDistrict(String district) {
-		this.address.setDistrict(district);
+		this.address.setAddress(primary);
 	}
 
 	public String getCity() {
@@ -164,12 +128,12 @@ public class Office extends BizObjectBase{
 		this.address.setCity(city);
 	}
 
-	public String getStateOrProvince() {
-		return this.address.getStateProvince();
+	public String getState() {
+		return this.address.getState();
 	}
 
-	public void setStateOrProvince(String stateOrProvince) {
-		this.address.setStateProvince(stateOrProvince);
+	public void setState(String state) {
+		this.address.setState(state);
 	}
 
 	public String getPostalCode() {

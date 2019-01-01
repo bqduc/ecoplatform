@@ -1,4 +1,4 @@
-package net.brilliance.domain.entity.epos.base;
+package net.brilliance.domain.entity.base;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -18,12 +18,11 @@ public abstract class BaseTax extends BizObjectBase {
 	 * 
 	 */
 	private static final long serialVersionUID = 6216186291755321219L;
-	public static String REF = "Tax"; //$NON-NLS-1$
-	public static String PROP_RATE = "rate"; //$NON-NLS-1$
-	public static String PROP_ID = "id"; //$NON-NLS-1$
-	public static String PROP_NAME = "name"; //$NON-NLS-1$
+	public static String REF = "Tax"; 
+	public static String PROP_RATE = "rate"; 
+	public static String PROP_ID = "id"; 
+	public static String PROP_NAME = "name"; 
 
-	// constructors
 	public BaseTax() {
 		initialize();
 	}

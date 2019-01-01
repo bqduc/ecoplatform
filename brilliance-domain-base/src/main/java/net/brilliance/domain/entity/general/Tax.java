@@ -15,14 +15,14 @@
  * * All Rights Reserved.
  * ************************************************************************
  */
-package net.brilliance.domain.entity.epos;
+package net.brilliance.domain.entity.general;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.EqualsAndHashCode;
-import net.brilliance.domain.entity.epos.base.BaseTax;
+import net.brilliance.domain.entity.base.BaseTax;
 
 @Entity
 @Table(name = "vpos_tax")
@@ -32,7 +32,6 @@ public class Tax extends BaseTax {
 	private static final long serialVersionUID = 1L;
 	private Boolean enable;
 
-	/* [CONSTRUCTOR MARKER BEGIN] */
 	public Tax() {
 		super();
 	}
@@ -52,15 +51,13 @@ public class Tax extends BaseTax {
 		super(id, name);
 	}
 
-	/* [CONSTRUCTOR MARKER END] */
-
 	public String getUniqueId() {
-		return ("tax_" + getName() + "_" + getId()).replaceAll("\\s+", "_"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		return ("tax_" + getName() + "_" + getId()).replaceAll("\\s+", "_");    
 	}
 
 	@Override
 	public String toString() {
-		return getName() + " (" + getRate() + "%)"; //$NON-NLS-1$ //$NON-NLS-2$
+		return getName() + " (" + getRate() + "%)";  
 	}
 
 	public Boolean isEnable() {

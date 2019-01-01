@@ -12,7 +12,7 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-*/
+
 package net.brilliance.domain.entity.contact;
 
 import java.math.BigDecimal;
@@ -44,17 +44,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import net.brilliance.domain.entity.admin.UserAccount;
 import net.brilliance.domain.entity.common.Address;
-import net.brilliance.domain.entity.common.AddressPart;
 import net.brilliance.domain.entity.config.Item;
 import net.brilliance.domain.entity.general.Activity;
 import net.brilliance.framework.global.GlobalConstants;
 import net.brilliance.model.GenderType;
 
-/**
+*//**
  * A contact.
  * 
  * @author Bui Quy Duc
- */
+ *//*
 @Entity
 @Table(name = "contact_class")
 @EqualsAndHashCode(callSuper = true)
@@ -252,17 +251,17 @@ public class ContactClass extends ContactBase {
 	}
 
 	public ContactClass setPresentAddress(String address, String country) {
-		super.setCurrentAddress(AddressPart.builder().primary(address).country(country).build());
+		super.setCurrentAddress(Address.builder().address(address).country(country).build());
 		return this;
 	}
 
 	public ContactClass setBillingAddress(String address, String country) {
-		super.setBillingAddress(AddressPart.builder().primary(address).country(country).build());
+		super.setBillingAddress(Address.builder().address(address).country(country).build());
 		return this;
 	}
 
 	public ContactClass setResidentAddress(String address, String country) {
-		super.setPermanentAddress(AddressPart.builder().primary(address).country(country).build());
+		super.setPermanentAddress(Address.builder().address(address).country(country).build());
 		return this;
 	}
 
@@ -558,8 +557,8 @@ public class ContactClass extends ContactBase {
 	}
 
 	public static ContactClass getInstance(String code, String firstName, String lastName){
-		/*fetchedObject.setLogin(login);
-		fetchedObject.setPassword("pxd" + login+"@123");*/
+		fetchedObject.setLogin(login);
+		fetchedObject.setPassword("pxd" + login+"@123");
 		return new ContactClass()
 				.setCode(code)
 				.setFirstName(firstName)
@@ -567,3 +566,4 @@ public class ContactClass extends ContactBase {
 		;
 	}
 }
+*/

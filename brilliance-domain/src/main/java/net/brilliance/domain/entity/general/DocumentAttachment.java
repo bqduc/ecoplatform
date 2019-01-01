@@ -20,7 +20,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import net.brilliance.framework.entity.BizObjectBase;
 
 /**
@@ -28,6 +30,8 @@ import net.brilliance.framework.entity.BizObjectBase;
  * 
  * @author ducbq
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "document_attachment")

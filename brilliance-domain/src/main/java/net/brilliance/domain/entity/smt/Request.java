@@ -34,7 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.brilliance.domain.entity.contact.ContactClass;
+import net.brilliance.domain.entity.crx.contact.Contact;
 import net.brilliance.domain.entity.general.Catalogue;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
@@ -63,15 +63,15 @@ public class Request extends BizObjectBase {
 
 	@ManyToOne
 	@JoinColumn(name = "company_id")
-	private ContactClass company;
+	private Contact company;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
-	private ContactClass customer;
+	private Contact customer;
 
 	@ManyToOne
 	@JoinColumn(name = "contact_id")
-	private ContactClass contact;
+	private Contact contact;
 
 	////////////
 	@Lob
@@ -123,15 +123,15 @@ public class Request extends BizObjectBase {
 	///////////////////////////////////////////////////////////////
 	@ManyToOne
 	@JoinColumn(name = "assigned_group_id")
-	private ContactClass assignedGroup;
+	private Contact assignedGroup;
 
 	@ManyToOne
 	@JoinColumn(name = "assignee_id")
-	private ContactClass assignee;
+	private Contact assignee;
 
 	@ManyToOne
 	@JoinColumn(name = "vendor_group_id")
-	private ContactClass vendorGroup;
+	private Contact vendorGroup;
 
 	@Size(max = 15)
 	@Column(name="vendor_request_number")

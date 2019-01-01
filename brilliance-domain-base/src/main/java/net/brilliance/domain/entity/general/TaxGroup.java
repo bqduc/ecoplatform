@@ -1,4 +1,4 @@
-package net.brilliance.domain.entity.epos;
+package net.brilliance.domain.entity.general;
 
 import java.util.Iterator;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
-import net.brilliance.domain.entity.epos.base.BaseTaxGroup;
+import net.brilliance.domain.entity.base.BaseTaxGroup;
 
 @Entity
 @Table(name = "vpos_tax_group")
@@ -15,7 +15,6 @@ import net.brilliance.domain.entity.epos.base.BaseTaxGroup;
 public class TaxGroup extends BaseTaxGroup {
 	private static final long serialVersionUID = 1L;
 
-	/* [CONSTRUCTOR MARKER BEGIN] */
 	public TaxGroup() {
 		super();
 	}
@@ -35,7 +34,6 @@ public class TaxGroup extends BaseTaxGroup {
 		super(id, name);
 	}
 
-	/* [CONSTRUCTOR MARKER END] */
 	@Override
 	public String toString() {
 		String name = super.getName();

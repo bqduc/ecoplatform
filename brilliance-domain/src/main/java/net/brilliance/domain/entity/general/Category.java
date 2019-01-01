@@ -40,7 +40,6 @@ import net.brilliance.framework.global.GlobalConstants;
  */
 @Data
 @Entity
-//@Document(collection = "category")
 @Table(name = "category")
 @EqualsAndHashCode(callSuper = true)
 public class Category extends BizObjectBase {

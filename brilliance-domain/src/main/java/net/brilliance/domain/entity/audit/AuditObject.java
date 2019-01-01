@@ -4,10 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "dmx_audit_object")

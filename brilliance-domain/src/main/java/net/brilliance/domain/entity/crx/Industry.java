@@ -1,11 +1,9 @@
-package net.brilliance.domain.entity.crm;
+package net.brilliance.domain.entity.crx;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,27 +12,25 @@ import lombok.NoArgsConstructor;
 import net.brilliance.framework.entity.BizObjectBase;
 
 /**
- * A team.
+ * An region or CRX.
  */
 @Builder
 @NoArgsConstructor 
 @AllArgsConstructor
 @Entity
-@Table(name = "team")
+@Table(name = "industry")
 @EqualsAndHashCode(callSuper=false)
-public class Team extends BizObjectBase {
-
+public class Industry extends BizObjectBase{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9076437919776946515L;
+	private static final long serialVersionUID = -7468751835306200560L;
 
-	@Column(name = "name", length=100)
+	@Size(min = 5, max = 200)
+	@Column(name = "name", nullable = false, unique=true)
 	private String name;
 
-	@Lob
-	@Column(name = "description", columnDefinition = "TEXT")
-	@Type(type = "org.hibernate.type.TextType")
+	@Column(name = "description", columnDefinition="TEXT")
 	private String description;
 
 	public String getName() {
@@ -52,4 +48,5 @@ public class Team extends BizObjectBase {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 }

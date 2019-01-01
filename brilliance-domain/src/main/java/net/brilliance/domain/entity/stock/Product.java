@@ -40,7 +40,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.brilliance.common.ListUtility;
+import net.brilliance.domain.entity.crx.contact.Contact;
 import net.brilliance.domain.entity.general.Catalogue;
+import net.brilliance.domain.entity.general.Currency;
 import net.brilliance.domain.entity.general.MeasureUnit;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.global.GlobalConstants;
@@ -137,22 +139,44 @@ public class Product extends BizObjectBase {
 	@Column(name="reset_date")
 	private ZonedDateTime resetDate = null;
 
-	/*@ManyToOne(targetEntity=Category.class, fetch=FetchType.EAGER)
-	@JoinColumn(name = "category_id")
-	private Category category;*/
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "available_date")
+	private Date availableDate;
+
+	@ManyToOne(targetEntity=Contact.class, fetch=FetchType.EAGER)
+	@JoinColumn(name = "vendor_id")
+	private Contact vendor;
+
+	@Column(name="vendor_part_number", length=GlobalConstants.SIZE_CODE)
+	private String vendorPartNumber;
+
+	@ManyToOne(targetEntity=Contact.class, fetch=FetchType.EAGER)
+	@JoinColumn(name = "manufacturer_id")
+	private Contact manufacturer;
+
+	@Column(name="manufacturer_part_number", length=GlobalConstants.SIZE_CODE)
+	private String manufacturerPartNumber;
 
 	@ManyToOne
 	@JoinColumn(name = "parent_id")
 	private Product parent;
 
+	@Column(name="minimum_options")
+	private Integer minimumOptions;
+
+	@Column(name="maximum_options")
+	private Integer maximumOptions;
+
 	@Transient
 	private Long categoryId;
 
-	/*@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "product")
-	private List<ProductCatalog> categories = ListUtility.createArrayList();
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Catalogue category;
 
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "product")
-	private List<ProductDepartment> departments = ListUtility.createArrayList();*/
+	@ManyToOne
+	@JoinColumn(name = "currency_id")
+	private Currency currency;
 
 	@ManyToOne(targetEntity=MeasureUnit.class, fetch=FetchType.EAGER)
 	@JoinColumn(name = "measure_unit_id")

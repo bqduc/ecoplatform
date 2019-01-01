@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package net.brilliance.domain.entity.crm.contact;
+package net.brilliance.domain.entity.crx.contact;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

@@ -1,11 +1,11 @@
-package net.brilliance.domain.entity.epos.base;
+package net.brilliance.domain.entity.base;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.MappedSuperclass;
 
-import net.brilliance.domain.entity.epos.Tax;
+import net.brilliance.domain.entity.general.Tax;
 import net.brilliance.framework.entity.BizObjectBase;
 
 
@@ -24,9 +24,9 @@ public abstract class BaseTaxGroup extends BizObjectBase {
 	 * 
 	 */
 	private static final long serialVersionUID = 2607451700515581301L;
-	public static String REF = "TaxGroup"; //$NON-NLS-1$
-	public static String PROP_ID = "id"; //$NON-NLS-1$
-	public static String PROP_NAME = "name"; //$NON-NLS-1$
+	public static String REF = "TaxGroup"; 
+	public static String PROP_ID = "id"; 
+	public static String PROP_NAME = "name"; 
 
 
 	// constructors
@@ -98,7 +98,9 @@ public abstract class BaseTaxGroup extends BizObjectBase {
 	}
 
 	public void addTotaxes (Tax tax) {
-		if (null == getTaxes()) setTaxes(new java.util.ArrayList<Tax>());
+		if (null == getTaxes()) 
+			setTaxes(new java.util.ArrayList<Tax>());
+
 		getTaxes().add(tax);
 	}
 

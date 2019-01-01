@@ -9,6 +9,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import net.brilliance.common.ListUtility;
+import net.brilliance.domain.model.GeneralStatus;
 import net.brilliance.framework.entity.ObjectBase;
 
 /**
@@ -45,9 +48,16 @@ public class Document extends ObjectBase{
 	@Column(name="expired_date")
 	private Date expiredDate;
 
+	@Column(name="status")
+  @Enumerated(EnumType.ORDINAL)
+	private GeneralStatus status;
+
 	@Builder.Default
 	@OneToMany(mappedBy="document", cascade = CascadeType.ALL)
 	private Set<DocumentAttachment> attachments = ListUtility.newHashSet();
+
+	@Column(name = "description", columnDefinition="TEXT")
+	private String description;
 
 	public Date getIssueDate() {
 		return issueDate;
@@ -87,5 +97,21 @@ public class Document extends ObjectBase{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public GeneralStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(GeneralStatus status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
