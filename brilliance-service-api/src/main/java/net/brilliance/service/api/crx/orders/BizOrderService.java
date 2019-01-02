@@ -7,7 +7,7 @@ import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.service.GenericService;
 import net.brilliance.service.api.ObjectNotFoundException;
 
-public interface OrderService extends GenericService<BizOrder, Long> {
+public interface BizOrderService extends GenericService<BizOrder, Long> {
 
 	/**
 	 * Get one Order with the provided code.

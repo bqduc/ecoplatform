@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- jQuery 2.2.0 -->
+<script src="/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+
+<!-- Main style sheet -->
+<link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" media="screen" />
+
+<!-- Bootstrap 3 -->
+<link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" media="screen" />
+
+</head>
+<body>
+	<section layout:fragment="header">
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+      <li><a href="/order/"><i class="fa fa-dashboard"></i><span th:text="#{label.catalog.definitions}"></span></a></li>
+      <li class="active" th:text="#{label.catalog.definition}"></li>
+    </ol>
+	</section>
+<div layout:fragment="content">
+
+		<div id="message" th:if="${message}" th:class="${message.type}" 
+			th:text="${message.message}">Message area</div>
+		
+		<table class="table table-striped table-bordered">
+			<tr>
+				<td th:text="#{label.general.id}"></td>
+				<td th:text="${fetchedObject.id}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.code}"></td>
+				<td th:text="${fetchedObject.code}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.name}"></td>
+				<td th:text="${fetchedObject.name}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.translatedName}"></td>
+				<td th:text="${fetchedObject.nameLocal}"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.parent}"></td>
+				<td th:text="${fetchedObject.parent != null} ? ${fetchedObject.parent.name} : ''"></td>
+			</tr>
+			<tr>
+				<td th:text="#{label.general.description}"></td>
+				<td th:utext="${fetchedObject.description}"></td>
+			</tr>
+		</table>
+
+		<div>
+			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnEdit" th:href="@{/order/update/{id}(id=${fetchedObject.id})}"
+				class="btn btn-primary" th:text="#{label.general.edit}"></a> 
+			
+			<a sec:authorize="hasRole('ROLE_ADMIN')" id="btnDelete" th:href="@{/order/delete/{id}(id=${fetchedObject.id})}"
+				class="btn btn-danger" th:text="#{label.general.delete}"></a>
+
+			<a id="btnCancel" th:href="@{/order/}" class="btn btn-primary" th:text="#{label.general.cancel}"></a> 
+		</div>
+	</div>
+</body>
+</html>
+
+

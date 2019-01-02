@@ -19,14 +19,14 @@ import net.brilliance.controller.base.BaseRestController;
 import net.brilliance.controller.controller.constants.ControllerConstants;
 import net.brilliance.domain.entity.crx.BizOrder;
 import net.brilliance.framework.model.SearchParameter;
-import net.brilliance.service.api.crx.orders.OrderService;
+import net.brilliance.service.api.crx.orders.BizOrderService;
 
 @RequestMapping(ControllerConstants.REST_API + ControllerConstants.URI_ORDER)
 @RestController
 public class OrderRestController extends BaseRestController<BizOrder>{
 	private final static String CACHE_OBJECTS_KEY = "cache.orders";
 	@Inject 
-	private OrderService businessService;
+	private BizOrderService businessService;
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/list", method = RequestMethod.GET)

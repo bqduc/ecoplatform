@@ -19,7 +19,7 @@ import net.brilliance.framework.repository.BaseRepository;
  *
  */
 @Repository
-public interface OrderRepository extends BaseRepository<BizOrder, Long> {
+public interface BizOrderRepository extends BaseRepository<BizOrder, Long> {
 	Page<BizOrder> findAll(Pageable pageable);
 	Page<BizOrder> findAllByOrderByIdAsc(Pageable pageable);
 	Optional<BizOrder> findByName(String name);

@@ -24,5 +24,6 @@ public enum CRXGeneralType {
   PaymentTypeWireTransfer, 
   PaymentTypeMoneyOrder, 
   
-  
+  OpportunityExistingBusiness, 
+  OpportunityNewBusiness
 }

@@ -45,7 +45,7 @@ import net.brilliance.service.api.dmx.EnterpriseService;
 
 @Controller
 @RequestMapping(ControllerConstants.URI_ORDER)
-public class OrderController extends BaseController { 
+public class BizOrderController extends BaseController { 
 	private static final String PAGE_CONTEXT_PREFIX = ControllerConstants.CONTEXT_WEB_PAGES + "dmx/enterprise";
 
 	@Inject

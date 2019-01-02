@@ -288,7 +288,7 @@
 										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.accounts}"></span></a></li>
 										<li sec:authorize="isAuthenticated()"><a href="/contact/"><span th:text="#{label.menu.contacts}"></span></a></li>
 										<li sec:authorize="isAuthenticated()"><a href="/enterprise/"><span th:text="#{label.menu.enterprises}"></span></a></li>
-										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.opportunities}"></span></a></li>
+										<li sec:authorize="isAuthenticated()"><a href="/opportunity"><span th:text="#{label.menu.opportunities}"></span></a></li>
 										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.leads}"></span></a></li>
 										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.cases}"></span></a></li>
 										<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.documents}"></span></a></li>
@@ -320,14 +320,17 @@
 	            	<ul>
 									<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaculture}"></span></a>
 										<ul>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.farms}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.ponds}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.feeds}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.livestockFeeds}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.productionPlan}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.farmingPlan}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.medicine}"></span></a></li>
-											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.seeds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaFarms}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaPonds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaMaterial}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaMedicine}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaLivestockFeeds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaProductionPlan}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaFarmingPlan}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaDiseaseNotification}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaSeeds}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaPondSummary}"></span></a></li>
+											<li sec:authorize="isAuthenticated()"><a href="/"><span th:text="#{label.menu.aquaCostAdmin}"></span></a></li>
 										</ul>
 									</li>
 	            	</ul>

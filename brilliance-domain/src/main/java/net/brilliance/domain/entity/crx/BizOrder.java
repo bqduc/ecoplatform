@@ -126,7 +126,7 @@ public class BizOrder extends BizObjectBase{
 
 	@Builder.Default
 	@OneToMany(mappedBy="bizOrder", cascade = CascadeType.ALL)
-	private Set<OrderDetail> orderDetails = new HashSet<>();
+	private Set<BizOrderDetail> orderDetails = new HashSet<>();
 	
 	@Column(name = "description", columnDefinition="TEXT")
 	private String description;
@@ -275,11 +275,11 @@ public class BizOrder extends BizObjectBase{
 		this.description = description;
 	}
 
-	public Set<OrderDetail> getOrderDetails() {
+	public Set<BizOrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+	public void setOrderDetails(Set<BizOrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 }

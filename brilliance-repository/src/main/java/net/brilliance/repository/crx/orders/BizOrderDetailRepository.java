@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import net.brilliance.domain.entity.crx.BizOrder;
-import net.brilliance.domain.entity.crx.OrderDetail;
+import net.brilliance.domain.entity.crx.BizOrderDetail;
 import net.brilliance.framework.repository.BaseRepository;
 
 /**
@@ -20,8 +20,8 @@ import net.brilliance.framework.repository.BaseRepository;
  *
  */
 @Repository
-public interface OrderDetailRepository extends BaseRepository<OrderDetail, Long> {
-	List<OrderDetail> findByBizOrder(BizOrder order);
+public interface BizOrderDetailRepository extends BaseRepository<BizOrderDetail, Long> {
+	List<BizOrderDetail> findByBizOrder(BizOrder order);
 
 	@Query("SELECT entity FROM #{#entityName} entity WHERE ("
 			+ " LOWER(entity.entry.code) like LOWER(CONCAT('%',:keyword,'%'))"
@@ -31,5 +31,5 @@ public interface OrderDetailRepository extends BaseRepository<OrderDetail, Long>
 			+ "or LOWER(entity.bizOrder.name) like LOWER(CONCAT('%',:keyword,'%')) "
 			+ ")"
 	)
-	Page<OrderDetail> search(@Param("keyword") String keyword, Pageable pageable);
+	Page<BizOrderDetail> search(@Param("keyword") String keyword, Pageable pageable);
 }

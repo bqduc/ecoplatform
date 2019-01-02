@@ -2,12 +2,12 @@ package net.brilliance.service.api.crx;
 
 import org.springframework.data.domain.Page;
 
-import net.brilliance.domain.entity.crx.Campaign;
+import net.brilliance.domain.entity.crx.Opportunity;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.service.GenericService;
 import net.brilliance.service.api.ObjectNotFoundException;
 
-public interface CampaignService extends GenericService<Campaign, Long> {
+public interface OpportunityService extends GenericService<Opportunity, Long> {
 
 	/**
 	 * Get one Order with the provided code.
@@ -18,7 +18,7 @@ public interface CampaignService extends GenericService<Campaign, Long> {
 	 * @throws ObjectNotFoundException
 	 *             If no such Order exists.
 	 */
-	Campaign getOne(String name) throws ObjectNotFoundException;
+	Opportunity getOne(String name) throws ObjectNotFoundException;
 
 	/**
 	 * Get one Enterprises with the provided search parameters.
@@ -27,5 +27,5 @@ public interface CampaignService extends GenericService<Campaign, Long> {
 	 *            The search parameter
 	 * @return The pageable Enterprises
 	 */
-	Page<Campaign> getObjects(SearchParameter searchParameter);
+	Page<Opportunity> getObjects(SearchParameter searchParameter);
 }

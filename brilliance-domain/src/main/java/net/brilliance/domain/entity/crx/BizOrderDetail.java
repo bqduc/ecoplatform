@@ -48,7 +48,7 @@ import net.brilliance.framework.entity.BizObjectBase;
 @Builder
 @NoArgsConstructor 
 @AllArgsConstructor
-public class OrderDetail extends BizObjectBase {
+public class BizOrderDetail extends BizObjectBase {
 
 	/**
 	 * 

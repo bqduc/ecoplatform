@@ -12,5 +12,9 @@ public enum CRXGeneralStage {
 	Pending, 
 	Confirmed, 
 	InManufacturing, 
-  
+
+	SalesStageProspecting, 
+	SalesStageQualification, 
+	SalesStageNeedsAnalysis, 
+	SalesStageValueProposition
 }

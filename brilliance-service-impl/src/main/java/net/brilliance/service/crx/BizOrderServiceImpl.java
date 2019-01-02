@@ -17,12 +17,12 @@ import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.helper.GlobalDataServicesRepository;
 import net.brilliance.model.base.IDataContainer;
-import net.brilliance.repository.crx.orders.OrderRepository;
+import net.brilliance.repository.crx.orders.BizOrderRepository;
 import net.brilliance.service.api.ObjectNotFoundException;
-import net.brilliance.service.api.crx.orders.OrderService;
+import net.brilliance.service.api.crx.orders.BizOrderService;
 
 @Service
-public class OrderServiceImpl extends GenericServiceImpl<BizOrder, Long> implements OrderService{
+public class BizOrderServiceImpl extends GenericServiceImpl<BizOrder, Long> implements BizOrderService{
 
 	/**
 	 * 
@@ -30,7 +30,7 @@ public class OrderServiceImpl extends GenericServiceImpl<BizOrder, Long> impleme
 	private static final long serialVersionUID = 65516993143758788L;
 
 	@Inject 
-	private OrderRepository repository;
+	private BizOrderRepository repository;
 	
 	protected BaseRepository<BizOrder, Long> getRepository() {
 		return this.repository;

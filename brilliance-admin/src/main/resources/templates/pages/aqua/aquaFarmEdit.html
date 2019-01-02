@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title th:text="#{label.catalog.definitions}"></title>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<!-- CKEditor JavaScript -->
+	<script src="/static/ckeditor/standard/ckeditor.js" th:src="@{/ckeditor/standard/ckeditor.js}"></script>
+	<script src="/static/ckeditor/standard/adapters/jquery.js" th:src="@{/ckeditor/standard/adapters/jquery.js}"></script>
+	
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
+
+<script>
+$(function() {
+	$("#dateOfIssued").datepicker({autoclose: true});
+	var bizUserUri = "/order/";
+    $("#parentCode").autocomplete({    	
+    	minLength: 3,
+    	delay: 500,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON(bizUserUri + "suggest", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.code,
+                        // following property gets entered in the textbox
+                        valueName: item.name,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.valueName);
+                $("#parentCode").blur();
+                return false; 
+            }
+    	}
+    	  	
+    });
+	
+    $("#parentName").autocomplete({    	
+    	minLength: 3,
+    	delay: 200,
+    	
+    	//define callback to format results 
+        source: function (request, response) {
+            $.getJSON(bizUserUri + "suggest", request, function(result) {                
+                response($.map(result, function(item) {                	
+                    return {
+                        // following property gets displayed in drop down
+                        label: item.name,
+                        // following property gets entered in the textbox
+                        valueName: item.name,
+                        valueId: item.id,
+                        valueCode: item.code
+                    }
+                	
+                }));
+        	}); 
+    	},
+        
+    	//define select handler
+    	select : function(event, ui) {
+            if (ui.item) {       
+            	//alert('Name: ' + ui.item.value + '. Id: ' + ui.item.valueId + ". Code: " + ui.item.valueCode);
+            	event.preventDefault();
+                $("#parentId").val(ui.item.valueId);
+                $("#parentCode").val(ui.item.valueCode);
+                $("#parentName").val(ui.item.valueName);
+                $("#parentCode").blur();
+                return false; 
+            }
+    	}
+    	  	
+    });
+});
+</script>
+</head>
+
+<body>
+	<section layout:fragment="header">
+    <ol class="breadcrumb">
+      <li><a href="/"><i class="fa fa-dashboard"></i><span th:text="#{label.homePage}"></span></a></li>
+      <li><a href="/order/"><i class="fa fa-dashboard"></i><span th:text="#{label.catalog.definitions}"></span></a></li>
+      <li class="active" th:text="#{label.catalog.definition}"></li>
+    </ol>
+	</section>
+	<div layout:fragment="content" sec:authorize="hasRole('ROLE_ADMIN')">
+			<!-- <h3 th:text="${fetchedObject.id == null}? #{label.department.definition(#{label.general.addNew}, #{label.object.department})}:#{label.department.definition(#{label.general.updateExisting}, #{label.object.department})}" ></h3> -->
+		<form action="#" th:object="${fetchedObject}" enctype="multipart/form-data" method="post" th:action="@{/order/create}">
+			<div th:if="${message}">
+				<div id="message" th:class="${message.type}" th:text="${message.message}">Message area</div>
+			</div>
+			<!-- 	
+			<div class="form-group" th:if="${fetchedObject.id}">
+			  <div class="row">
+			  <label for="inputId" class="col-sm-2 control-label" th:text="#{label.general.id}"></label>
+				
+			  <div class="col-sm-1">
+			    <input type="text" class="form-control" id="inputId" th:field="*{id}" disabled="disabled" size="15">
+			  </div>
+			  </div>
+			</div>
+			-->
+
+      <div class="form-group">
+			  <div class="row">
+           <label for="inputCode" class="col-sm-2 control-label" th:text="#{label.general.code} + '*'"></label>
+
+           <div class="col-sm-2">
+             <input type="text" class="form-control" readonly="readonly" id="inputName" th:placeholder="#{label.general.code}" th:field="*{code}" required="required">
+             <div th:if="${#fields.hasErrors('code')}" th:errors="*{code}" th:class="error"></div>
+           </div>
+           </div>
+         </div>
+         <div class="form-group">
+			  <div class="row">
+           <label for="inputEmail" class="col-sm-2 control-label" th:text="#{label.general.name} + '*'"></label>
+
+           <div class="col-sm-5">
+             <input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:placeholder="#{label.general.name}" />
+             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></div>
+           </div>
+           </div>
+         </div>
+         <div class="form-group">
+			  <div class="row">
+           <label for="inputName" class="col-sm-2 control-label" th:text="#{label.general.translatedName}"></label>
+
+           <div class="col-sm-5">
+             <input type="text" class="form-control" id="nameLocal" name="nameLocal" th:field="*{nameLocal}" th:placeholder="#{label.general.translatedName}">
+             <div th:if="${#fields.hasErrors('nameLocal')}" th:errors="*{nameLocal}" th:class="error"></div>
+           </div>
+           </div>
+         </div>
+        <div class="form-group">
+				  <div class="row">
+				    <label for="nom" class="col-sm-2 control-label" th:text="#{label.general.parent}"><span class="important">*</span></label>
+				    <div class="col-sm-2">
+				        <input type="text" name="parentCode" id="parentCode" class="form-control" th:placeholder="#{label.general.parentCode}" th:field="*{parent.code}" >
+				    </div>
+				    <div class="col-sm-5">
+				      <input type="text" name="parentName" id="parentName" class="form-control" th:placeholder="#{label.general.parentName}" th:field="*{parent.name}" dir="ltr">
+				    </div>
+			    </div>
+				</div>
+
+        <div class="form-group">
+			  	<div class="row">
+						<label for="dateOfIssued" class="col-sm-2 control-label" th:text="#{label.general.issueDate}"></label>
+
+	          <div class="col-sm-2">
+	          	<input type="text" class="form-control"  id="dateOfIssued" th:field="*{issuedDate}" th:placeholder="#{label.general.issueDate}" />
+	           	<div th:if="${#fields.hasErrors('issuedDate')}" th:errors="*{issuedDate}">Date of issue error</div>
+	        	</div>
+         	</div>
+        </div>
+        <div class="form-group">
+				  <div class="row">
+				    <label for="nom" class="col-sm-2 control-label" th:text="#{label.general.parent}"><span class="important">*</span></label>
+				    <div class="col-sm-2">
+				        <input type="text" name="parentCode" id="parentCode" class="form-control" th:placeholder="#{label.general.parentCode}" th:field="*{parent.code}" >
+				    </div>
+				    <div class="col-sm-5">
+				      <input type="text" name="parentName" id="parentName" class="form-control" th:placeholder="#{label.general.parentName}" th:field="*{parent.name}" dir="ltr">
+				    </div>
+			    </div>
+				</div>
+         
+        <div class="form-group">
+			  	<div class="row">
+	          <label for="inputSkills" class="col-sm-2 control-label" th:text="#{label.general.description}"></label>
+
+	          <div class="col-sm-10">
+	            <textarea class="ckeditor" cols="60" rows="8" id="objectDescription" th:field="*{description}"></textarea>
+							<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+	          </div>
+          </div>
+         </div>
+         <!-- <div class="form-group">
+           <div class="col-sm-offset-2 col-sm-10">
+             <div class="checkbox">
+               <label>
+                 <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+               </label>
+             </div>
+           </div>
+         </div> -->
+         <div class="form-group">
+         		<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-success " th:text="#{label.general.save}" style="width: 100px"></button>				
+							<button type="reset" class="btn btn-primary" th:text="#{label.general.reset}" style="width: 100px"></button>
+							<a id="btnCancel" href="browse.html" th:href="@{/order/}" class="btn btn-primary" th:text="#{label.general.cancel}" style="width: 100px"></a>
+         		</div>
+         </div>
+
+				<input type="hidden" th:field="*{id}" /> 
+			</form>
+	</div>
+</body>
+</html>
