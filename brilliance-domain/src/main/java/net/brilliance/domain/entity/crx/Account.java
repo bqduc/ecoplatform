@@ -275,4 +275,12 @@ public class Account extends BizObjectBase{
 	public void setBillingAddress(Address billingAddress) {
 		this.billingAddress = billingAddress;
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 }

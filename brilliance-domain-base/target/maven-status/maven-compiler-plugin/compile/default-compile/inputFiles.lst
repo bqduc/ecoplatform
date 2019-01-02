@@ -1,6 +1,7 @@
 D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\entity\base\BaseTaxGroup.java
 D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\entity\common\Address.java
 D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\entity\general\TaxGroup.java
+D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\model\enums\CRXLeadSource.java
 D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\entity\base\BaseTax.java
 D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\model\enums\CRXGeneralStage.java
 D:\workspace\eGit\ecoplatform\brilliance-domain-base\src\main\java\net\brilliance\domain\entity\common\Phone.java
