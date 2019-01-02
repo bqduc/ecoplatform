@@ -147,6 +147,17 @@ $(function() {
         <div class="form-group">
 				  <div class="row">
 				    <label for="nom" class="col-sm-2 control-label" th:text="#{label.general.parent}"><span class="important">*</span></label>
+				    <div class="col-sm-2">
+				        <input type="text" name="accountCode" id="accountCode" class="form-control" th:placeholder="#{label.general.parentCode}" th:field="*{account.code}" >
+				    </div>
+				    <div class="col-sm-5">
+				      <input type="text" name="accountName" id="accountName" class="form-control" th:placeholder="#{label.general.parentName}" th:field="*{account.name}" dir="ltr">
+				    </div>
+			    </div>
+				</div>
+        <div class="form-group">
+				  <div class="row">
+				    <label for="nom" class="col-sm-2 control-label" th:text="#{label.general.parent}"><span class="important">*</span></label>
 				    <div class="col-sm-5">
 				      <input type="text" name="parentName" id="parentName" class="form-control" th:placeholder="#{label.general.parentName}" th:field="*{parent.name}" dir="ltr">
 				    </div>
