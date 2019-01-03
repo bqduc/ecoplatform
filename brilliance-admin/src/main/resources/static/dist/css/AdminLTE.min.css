@@ -4863,6 +4863,15 @@ table.text-center, table.text-center td, table.text-center th {
 	background-color: #00c0ef !important
 }
 
+.bg-aqua, .callout.callout-info-ext, .alert-info, .label-info, .modal-info .modal-body
+	{
+	    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+	background-color: #00c0ef !important
+}
+
 .bg-blue {
 	background-color: #0073b7 !important
 }
