@@ -3,9 +3,9 @@ package net.brilliance.service.api.system;
 import org.springframework.data.domain.Page;
 
 import net.brilliance.domain.entity.system.SystemSequence;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.service.GenericService;
-import net.brilliance.service.api.ObjectNotFoundException;
 
 public interface SystemSequenceService extends GenericService<SystemSequence, Long> {
 

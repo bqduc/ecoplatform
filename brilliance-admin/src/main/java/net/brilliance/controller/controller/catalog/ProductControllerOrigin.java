@@ -28,7 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.brilliance.common.CommonConstants;
-import net.brilliance.common.CommonUtility;
 import net.brilliance.common.logging.GlobalLoggerFactory;
 import net.brilliance.controller.base.BaseController;
 import net.brilliance.controller.controller.constants.ControllerConstants;

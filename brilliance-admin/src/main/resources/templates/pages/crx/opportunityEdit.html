@@ -123,25 +123,12 @@ $(function() {
 			  </div>
 			</div>
 			-->
-		<div class="callout callout-info-ext" style="margin-bottom: 5!important;">
-          <label for="inputName" th:text="${#strings.toUpperCase(#messages.msg('label.general.name'))} + '@' + #{label.general.name} + '*'"></label>
+		<div class="callout callout-info-ext">
+    	<label for="inputName" th:text="${#strings.toUpperCase(#messages.msg('label.crx.basisInformation', #messages.msg('label.crx.opportunity')))}"></label>
 		</div>
-		<section class="invoice">
-			<div class="form-group">
-			  <div class="row">
-          <label for="inputName" class="col-sm-2 control-label" th:text="${#strings.toUpperCase(#messages.msg('label.general.name'))} + '@' + #{label.general.name} + '*'"></label>
-
-          <div class="col-sm-2">
-             <input type="text" class="form-control" readonly="readonly" id="inputName" th:placeholder="#{label.general.name}" th:field="*{name}" required="required">
-             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="error"></div>
-        	</div>
-      	</div>
-      </div>
-		</section>
-
       <div class="form-group">
 			  <div class="row">
-           <label for="inputName" class="col-sm-2 control-label" th:text="${#strings.toUpperCase(#messages.msg('label.general.name'))} + '@' + #{label.general.name} + '*'"></label>
+           <label for="inputName" class="col-sm-2 control-label" th:text="#{label.general.name} + '*'"></label>
 
            <div class="col-sm-2">
              <input type="text" class="form-control" readonly="readonly" id="inputName" th:placeholder="#{label.general.name}" th:field="*{name}" required="required">

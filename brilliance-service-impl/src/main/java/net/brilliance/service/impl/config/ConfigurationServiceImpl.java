@@ -15,7 +15,7 @@ import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.config.ConfigurationRepository;
 import net.brilliance.repository.specification.dmx.ConfigurationRepoSpecification;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.config.ConfigurationService;
 
 @Service

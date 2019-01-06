@@ -32,6 +32,7 @@ import net.brilliance.manager.catalog.impl.DepartmentManager;
 import net.brilliance.model.SelectItem;
 import net.brilliance.model.Tag;
 
+@SuppressWarnings("unchecked")
 @RequestMapping("/" + ControllerConstants.REQUEST_MAPPING_DEPARTMENT)
 @Controller
 public class DepartmentController extends BaseController { 

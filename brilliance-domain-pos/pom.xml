@@ -10,7 +10,7 @@
     </parent>
     <artifactId>brilliance-domain-pos</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Business Domain for POS</name>
+    <name>Brilliance - Business Domain for POS</name>
     <description>Module that contains all entities and Visual Objects to be used in the other projects.  
     </description>
 

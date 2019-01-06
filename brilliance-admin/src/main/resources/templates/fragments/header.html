@@ -225,6 +225,9 @@
         <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.mekongBusinessGate}"></span></a>
           <ul>
             <li sec:authorize="isAuthenticated()"><a href="/store/"><span th:text="#{label.menu.pos}"></span></a></li>
+            <li><a href="/store/"><span th:text="#{label.menu.brs}"></span></a>
+            	
+            </li>
             <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.ecoplatform}"></span></a>
             	<ul>
 		            <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.training}"></span></a>

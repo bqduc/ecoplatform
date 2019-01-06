@@ -16,7 +16,7 @@
 	<packaging>war</packaging>
 
 
-	<name>Asia Brilliance - Web Administration</name>
+	<name>Brilliance - Web Administration</name>
 	<description>Demo project for Spring Boot that utilizes profiles</description>
 
 	<properties>
@@ -45,32 +45,38 @@
 	<dependencies>
 		<!-- tag::business-modules-dependencies[] -->
 		<dependency>
-			<groupId>apa.ecosystem</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>brilliance-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>apa.ecosystem</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>brilliance-model</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>apa.ecosystem</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>brilliance-service-impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>apa.ecosystem</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>brilliance-manager</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>apa.ecosystem</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>brilliance-bpm</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>brx-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		

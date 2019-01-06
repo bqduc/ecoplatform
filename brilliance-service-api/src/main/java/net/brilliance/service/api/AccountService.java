@@ -1,6 +1,7 @@
 package net.brilliance.service.api;
 
 import net.brilliance.domain.entity.sales.Account;
+import net.brilliance.exceptions.ObjectNotFoundException;
 
 public interface AccountService {
 

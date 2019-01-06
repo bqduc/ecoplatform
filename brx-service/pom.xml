@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>apa.ecosystem</groupId>
+        <artifactId>net.virtualtrain</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+		<!--Business Reservation Experiences-->
+    <artifactId>brx-service</artifactId>
+    <packaging>jar</packaging>
+    <name>Brilliance - Business Reservation Experiences</name>
+    <description>Module that contains API of all project services. Depends of Model Module.</description>
+
+    <dependencies>
+
+    <dependency>
+      <groupId>apa.ecosystem</groupId>
+      <artifactId>brilliance-domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		</dependency>
+
+
+    </dependencies>
+    
+</project>

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import net.brilliance.domain.entity.dmx.Enterprise;
 import net.brilliance.framework.model.SearchParameter;
 import net.brilliance.framework.service.GenericService;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 
 public interface EnterpriseService extends GenericService<Enterprise, Long> {
 

@@ -33,7 +33,7 @@ import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.manager.auth.AuthorityManager;
 import net.brilliance.manager.security.SimpleEncryptionManager;
 import net.brilliance.repository.admin.UserAccountRepository;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.admin.UserAuthenticationService;
 import net.brilliance.service.helper.ClientServicesHelper;
 

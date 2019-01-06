@@ -14,7 +14,7 @@ import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.admin.OfficeRepository;
 import net.brilliance.repository.specification.admin.OfficeRepositorySpec;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.admin.OfficeService;
 
 @Service

@@ -87,4 +87,13 @@ public final class ControllerConstants implements CommonConstants{
 	public static final String URI_ORDER = "/bizOrder";
 	public static final String URI_CAMPAIGN = "/campaign";
 	public static final String URI_OPPORTUNITY = "/opportunity";
+
+	public static final String URI_BUSINESS_PACKAGE = "/businessPackage";
+	public static final String URI_BUSINESS_SUB_PACKAGE = "/businessSubPackage";
+	public static final String URI_BRX_SCHEDULE = "/brxSchedule";
+	public static final String URI_BRX_ROUTE = "/brxRoute";
+	public static final String URI_BRX_CLIENT_BOOKING = "/brxClientBooking";
+	public static final String URI_BRX_BOOKING = "/brxBooking";
+	public static final String URI_CITY = "/city";
+	public static final String URI_REGION = "/region";
 }

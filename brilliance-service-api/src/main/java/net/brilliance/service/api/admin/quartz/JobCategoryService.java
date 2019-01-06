@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import net.brilliance.domain.entity.schedule.JobCategory;
 import net.brilliance.framework.service.GenericService;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 
 public interface JobCategoryService extends GenericService<JobCategory, Long> {
 

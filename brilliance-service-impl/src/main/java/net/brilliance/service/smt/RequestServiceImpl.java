@@ -12,7 +12,7 @@ import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.smt.RequestRepository;
 import net.brilliance.repository.specification.smt.RequestRepoSpec;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.smt.RequestService;
 
 @Service

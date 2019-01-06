@@ -11,7 +11,7 @@
 
     <artifactId>brilliance-core</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Core</name>
+    <name>Brilliance - Core</name>
     <description>Module that contains all core entities to be used in the project. It doesn't have any dependencies. </description>
 
 	<dependencies>

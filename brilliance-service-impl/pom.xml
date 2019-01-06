@@ -11,7 +11,7 @@
 
     <artifactId>brilliance-service-impl</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Service Implementation</name>
+    <name>Brilliance - Service Implementation</name>
     <description>Module that contains services implementation defined on Service API module. Depends of Repository Module and Service API Module.</description>    
 
     <dependencies>

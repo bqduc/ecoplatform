@@ -9,6 +9,7 @@ package net.brilliance.config.base;
  */
 public interface ConfigurationConstants {
 	final static String PACKAGE_ROOT = "net.brilliance";
+	final static String PACKAGE_DOMAIN = PACKAGE_ROOT + ".domain";
 	final static String PACKAGE_ENTITY = PACKAGE_ROOT + ".domain.entity";
 	final static String PACKAGE_REPOSITORY = PACKAGE_ROOT + ".repository";
 

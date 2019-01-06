@@ -29,7 +29,7 @@ import net.brilliance.config.handler.listener.WebHttpSessionListener;
 })
 @EntityScan(
 		/*basePackageClasses = {AbstractAuditEntity.class}, */
-		basePackages={ConfigurationConstants.PACKAGE_ENTITY})
+		basePackages={ ConfigurationConstants.PACKAGE_ENTITY, ConfigurationConstants.PACKAGE_DOMAIN })
 @EnableJpaRepositories(ConfigurationConstants.PACKAGE_REPOSITORY)
 @EnableTransactionManagement
 public abstract class BaseConfiguration {

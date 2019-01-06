@@ -10,7 +10,7 @@
     </parent>
     <artifactId>brilliance-model</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Business Domain/Model</name>
+    <name>Brilliance - Business Domain/Model</name>
     <description>Module that contains all Entities and Visual Objects to be used in the project. It doesn't have any dependencies. 
     </description>
 

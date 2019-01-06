@@ -11,7 +11,7 @@
 
     <artifactId>brilliance-common</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Common Utility</name>
+    <name>Brilliance - Common Utility</name>
     <description>Module that contains all Entities and Visual Objects to be used in the project. It doesn't have any dependencies. </description>
 
 	<dependencies>

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import net.brilliance.domain.entity.sales.Account;
 import net.brilliance.repository.sales.AccountRepository;
 import net.brilliance.service.api.AccountService;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 
 @Service
 public class AccountServiceImpl implements AccountService {

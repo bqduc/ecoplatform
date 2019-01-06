@@ -14,7 +14,7 @@ import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.admin.ClientUserAccountRepository;
 import net.brilliance.repository.admin.UserAccountRepository;
 import net.brilliance.repository.specification.admin.ClientUserAccountSpecification;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.admin.ClientUserAccountService;
 
 @Service

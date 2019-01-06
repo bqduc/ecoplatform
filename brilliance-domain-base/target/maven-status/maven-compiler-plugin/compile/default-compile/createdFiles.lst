@@ -4,7 +4,9 @@ net\brilliance\domain\entity\base\BaseTax.class
 net\brilliance\domain\model\enums\CRXGeneralType.class
 net\brilliance\domain\entity\base\BaseTaxGroup.class
 net\brilliance\domain\model\enums\CRXLeadSource.class
+net\brilliance\domain\model\BusinessClass.class
 net\brilliance\domain\entity\common\Address$AddressBuilder.class
+net\brilliance\domain\model\GeneralStatus.class
 net\brilliance\domain\entity\common\Address.class
 net\brilliance\domain\entity\general\Tax.class
 net\brilliance\domain\entity\general\TaxGroup.class

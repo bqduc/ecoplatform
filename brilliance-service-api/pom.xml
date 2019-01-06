@@ -11,7 +11,7 @@
 
     <artifactId>brilliance-service-api</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Service API</name>
+    <name>Brilliance - Service API</name>
     <description>Module that contains API of all project services. Depends of Model Module.</description>
 
     <dependencies>

@@ -15,7 +15,7 @@ import net.brilliance.manager.catalog.CatalogManager;
 
 @RestController
 @RequestMapping("/" + ControllerConstants.REQUEST_MAPPING_CATALOG)
-public class CatalogueRestController extends BaseRestController{
+public class CatalogueRestController extends BaseRestController <Catalogue>{
 	@Inject 
 	private CatalogManager businessManager;
 

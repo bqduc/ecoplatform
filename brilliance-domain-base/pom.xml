@@ -10,7 +10,7 @@
     </parent>
     <artifactId>brilliance-domain-base</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Business Domain Base</name>
+    <name>Brilliance - Business Domain Base</name>
     <description>Module that contains all entities and Visual Objects to be used in the other projects.  
     </description>
 

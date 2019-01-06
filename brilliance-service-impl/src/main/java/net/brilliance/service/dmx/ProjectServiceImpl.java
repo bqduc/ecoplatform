@@ -22,7 +22,7 @@ import net.brilliance.helper.GlobalDataServicesRepository;
 import net.brilliance.model.base.IDataContainer;
 import net.brilliance.repository.general.catalog.ProjectRepository;
 import net.brilliance.repository.specification.dmx.ProjectRepositorySpec;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.dmx.ProjectService;
 
 @Service

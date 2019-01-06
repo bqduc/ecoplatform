@@ -11,7 +11,7 @@
 
     <artifactId>brilliance-repository</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Repository</name>
+    <name>Brilliance - Repository</name>
     <description>Module that contains all repositories to be used in the project. Depends of Model Module.</description>
 
     <dependencies>

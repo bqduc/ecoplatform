@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  * @author ducbq
  *
  */
+@SuppressWarnings("deprecation")
 //@Named("vpxEncoder")
 @Component
 public class BrillianceEncoder implements PasswordEncoder {

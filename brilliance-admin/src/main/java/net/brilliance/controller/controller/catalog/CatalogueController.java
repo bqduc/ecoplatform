@@ -174,7 +174,7 @@ public class CatalogueController extends BaseController {
 		return "pages/general/catalog/catalogBrowse :: result-teable " + gson.toJson(pageContentData.getContent());
 	}
 
-	protected List performSearchObjects(SearchParameter params){
+	protected List<?> performSearchObjects(SearchParameter params){
 		Map<String, Object> parameters = new HashMap<>();
 		Page<Catalogue> pageContentData = businessManager.search(parameters);
 		params.getModel().addAttribute("catalogues", pageContentData);

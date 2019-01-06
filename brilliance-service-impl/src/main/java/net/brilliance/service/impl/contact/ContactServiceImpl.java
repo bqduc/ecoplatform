@@ -19,7 +19,7 @@ import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.contact.ContactAddressRepository;
 import net.brilliance.repository.contact.ContactRepository;
 import net.brilliance.repository.contact.ContactTeamRepository;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.contact.ContactService;
 
 @Service

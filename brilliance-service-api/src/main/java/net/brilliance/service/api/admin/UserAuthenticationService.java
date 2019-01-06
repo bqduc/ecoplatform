@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import net.brilliance.domain.entity.admin.UserAccount;
 import net.brilliance.exceptions.AuthenticationException;
 import net.brilliance.framework.service.GenericService;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 
 public interface UserAuthenticationService extends GenericService<UserAccount, Long>, UserDetailsService{
     /**

@@ -10,7 +10,7 @@
     </parent>
     <artifactId>brilliance-manager</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - Business Manager</name>
+    <name>Brilliance - Business Manager</name>
     <description>Module that contains all managers and Visual Objects to be used in the other projects.  
     </description>
 

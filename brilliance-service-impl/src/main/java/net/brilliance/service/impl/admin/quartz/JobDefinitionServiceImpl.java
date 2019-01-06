@@ -12,7 +12,7 @@ import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.framework.specifications.predicator.BrilliancePredicator;
 import net.brilliance.repository.schedule.JobDefinitionRepository;
 import net.brilliance.repository.specification.quartz.JobDefinitionPredicator;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.admin.quartz.JobDefinitionService;
 
 @Service

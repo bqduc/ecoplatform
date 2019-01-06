@@ -16,7 +16,7 @@ import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.contact.ProductRepository;
 import net.brilliance.repository.specification.inventory.ProductSpecification;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.inventory.ProductService;
 
 @Service

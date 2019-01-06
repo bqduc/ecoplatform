@@ -11,7 +11,7 @@
 
     <artifactId>brilliance-bpm</artifactId>
     <packaging>jar</packaging>
-    <name>Asia Brilliance - BPM</name>
+    <name>Brilliance - BPM</name>
     <description>Module that contains all bpm entities to be used in the project. </description>
 
 	<dependencies>

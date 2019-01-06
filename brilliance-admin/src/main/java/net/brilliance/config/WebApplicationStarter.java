@@ -167,6 +167,7 @@ public class WebApplicationStarter extends WebMvcConfigurerAdapter {
     		"classpath:/i18n/messages-master",
     		"classpath:/i18n/messages-contact",
     		"classpath:/i18n/messages",
+    		"classpath:/i18n/messages-crx",
     		"classpath:/i18n/messages-admin"
     };
   	

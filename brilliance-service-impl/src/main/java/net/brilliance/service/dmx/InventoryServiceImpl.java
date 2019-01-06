@@ -22,7 +22,7 @@ import net.brilliance.helper.GlobalDataServicesRepository;
 import net.brilliance.model.base.IDataContainer;
 import net.brilliance.repository.dmx.InventoryRepository;
 import net.brilliance.repository.specification.dmx.InventoryEntryRepositorySpecification;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.dmx.InventoryService;
 
 @Service

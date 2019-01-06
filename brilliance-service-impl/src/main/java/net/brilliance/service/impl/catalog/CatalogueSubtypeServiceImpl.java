@@ -12,7 +12,7 @@ import net.brilliance.framework.repository.BaseRepository;
 import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.repository.general.catalog.CatalogSubtypeRepository;
 import net.brilliance.repository.specification.general.CatalogSubtypeSpecifications;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.inventory.CatalogueSubtypeService;
 
 @Service

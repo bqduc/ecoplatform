@@ -18,7 +18,7 @@ import net.brilliance.framework.service.GenericServiceImpl;
 import net.brilliance.helper.GlobalDataServicesRepository;
 import net.brilliance.model.base.IDataContainer;
 import net.brilliance.repository.crx.OpportunityRepository;
-import net.brilliance.service.api.ObjectNotFoundException;
+import net.brilliance.exceptions.ObjectNotFoundException;
 import net.brilliance.service.api.crx.OpportunityService;
 
 @Service

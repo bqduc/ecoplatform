@@ -33,6 +33,7 @@ import net.brilliance.manager.catalog.MeasureUnitManager;
 import net.brilliance.model.SelectItem;
 import net.brilliance.model.Tag;
 
+@SuppressWarnings("unchecked")
 @RequestMapping("/" + ControllerConstants.REQUEST_MAPPING_MEASURE_UNIT)
 @Controller
 public class MeasureUnitController extends BaseController { 
