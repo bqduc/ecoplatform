@@ -226,7 +226,17 @@
           <ul>
             <li sec:authorize="isAuthenticated()"><a href="/store/"><span th:text="#{label.menu.pos}"></span></a></li>
             <li><a href="/store/"><span th:text="#{label.menu.brs}"></span></a>
-            	
+            	<ul>
+								<li sec:authorize="isAuthenticated()"><a href="/brx"><img src="/image/brx/brx-dashboard.png" class="menuIcon" /><span th:text="#{label.menu.brsDashboard}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/brx-schedule.png" class="menuIcon" /><span th:text="#{label.menu.brsSchedule}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/bookings.png" class="menuIcon" /><span th:text="#{label.menu.brsBookings}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/modern-bus.png" class="menuIcon" /><span th:text="#{label.menu.brsBuses}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/bus-route.png" class="menuIcon" /><span th:text="#{label.menu.brsRoutes}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/bus-type.png" class="menuIcon" /><span th:text="#{label.menu.brsBusTypes}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/modern-bus.png" class="menuIcon" /><span th:text="#{label.menu.brsReports}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/modern-city-bus.jpg" class="menuIcon" /><span th:text="#{label.menu.brsSettings}"></span></a></li>
+								<li sec:authorize="isAuthenticated()"><a href="#"><img src="/image/brx/modern-bus.png" class="menuIcon" /><span th:text="#{label.menu.brsContacts}"></span></a></li>
+            	</ul>
             </li>
             <li sec:authorize="isAuthenticated()"><a href="#"><span th:text="#{label.menu.ecoplatform}"></span></a>
             	<ul>

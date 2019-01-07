@@ -33,3 +33,10 @@ margin-right: -10px;
 .dropdown-submenu:hover>a:after {
 border-left-color: #fff;
 }
+
+.menuIcon{
+	padding: 0px 0px 0px;
+  margin: 0px 5px 0px;
+  width: 17px;
+  height: 17px;
+}

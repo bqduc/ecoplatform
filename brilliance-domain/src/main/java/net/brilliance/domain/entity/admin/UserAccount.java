@@ -28,6 +28,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -43,6 +44,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.brilliance.common.DateTimeUtility;
+import net.brilliance.domain.entity.general.Attachment;
 import net.brilliance.domain.model.CryptoAlgorithm;
 import net.brilliance.framework.entity.BizObjectBase;
 import net.brilliance.framework.entity.auth.AuthAccount;
@@ -131,6 +133,10 @@ public class UserAccount extends BizObjectBase implements AuthAccount {
 	)
 	//@formatter:on
 	private Set<Authority> authorities;
+
+	@ManyToOne(targetEntity=Attachment.class, fetch=FetchType.EAGER)
+	@JoinColumn(name = "attachment_id")
+	private Attachment attachment;
 
 	@Transient
 	private UserDetails userDetails;
@@ -290,5 +296,13 @@ public class UserAccount extends BizObjectBase implements AuthAccount {
 
 	public void setSystemAdmin(Boolean systemAdmin) {
 		this.systemAdmin = systemAdmin;
+	}
+
+	public Attachment getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(Attachment attachment) {
+		this.attachment = attachment;
 	}
 }
